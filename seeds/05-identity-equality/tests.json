@@ -1,0 +1,126 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.identity_equality",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "identity-symmetry",
+      "premises": [
+        "a = b"
+      ],
+      "query": "b = a",
+      "expected": "YES",
+      "rule": "identity.symmetric"
+    },
+    {
+      "id": "identity-transitivity",
+      "premises": [
+        "a = b",
+        "b = c"
+      ],
+      "query": "a = c",
+      "expected": "YES",
+      "rule": "identity.transitive"
+    },
+    {
+      "id": "substitution",
+      "premises": [
+        "a = b",
+        "red(a)",
+        "EXTENSIONAL(red)"
+      ],
+      "query": "red(b)",
+      "expected": "YES",
+      "rule": "identity.substitution_extensional"
+    },
+    {
+      "id": "equal-values",
+      "premises": [
+        "VALUE(a)=5",
+        "VALUE(b)=5"
+      ],
+      "query": "a = b",
+      "expected": "UNKNOWN",
+      "guard": "guard.equal_value_not_identity"
+    },
+    {
+      "id": "same-properties",
+      "premises": [
+        "red(a)",
+        "red(b)",
+        "round(a)",
+        "round(b)"
+      ],
+      "query": "a = b",
+      "expected": "UNKNOWN",
+      "guard": "guard.same_properties_not_identity"
+    },
+    {
+      "id": "equivalent-not-identical",
+      "premises": [
+        "EQUIVALENT_UNDER(mod10,2,12)"
+      ],
+      "query": "2 = 12",
+      "expected": "NO_OR_UNKNOWN_NOT_YES",
+      "guard": "guard.equivalence_not_identity"
+    },
+    {
+      "id": "alias-coreference",
+      "premises": [
+        "ALIAS_OF(morning_star,venus)",
+        "ALIAS_OF(evening_star,venus)"
+      ],
+      "query": "COREFERS(morning_star,evening_star)",
+      "expected": "YES",
+      "rule": "identity.alias_coreference"
+    },
+    {
+      "id": "similar-name",
+      "premises": [
+        "SIMILAR_NAME(alex_smith_1,alex_smith_2)"
+      ],
+      "query": "COREFERS(alex_smith_1,alex_smith_2)",
+      "expected": "UNKNOWN",
+      "guard": "guard.alias_string_not_coreference"
+    },
+    {
+      "id": "same-claim-text",
+      "premises": [
+        "TEXT(c1)=TEXT(c2)",
+        "SOURCE(c1)=s1",
+        "SOURCE(c2)=s2"
+      ],
+      "query": "c1 = c2",
+      "expected": "UNKNOWN",
+      "guard": "guard.same_claim_text_not_record_identity"
+    },
+    {
+      "id": "hive-nodes",
+      "premises": [
+        "SHARES_MEMORY(prime,apk)"
+      ],
+      "query": "prime = apk",
+      "expected": "UNKNOWN",
+      "guard": "guard.shared_memory_not_node_identity"
+    },
+    {
+      "id": "belief-substitution",
+      "premises": [
+        "morning_star = evening_star",
+        "BELIEVES(alice,visible(morning_star))"
+      ],
+      "query": "BELIEVES(alice,visible(evening_star))",
+      "expected": "UNKNOWN",
+      "guard": "guard.substitution_intensional"
+    },
+    {
+      "id": "version-state",
+      "premises": [
+        "SUCCESSOR_VERSION(v2,v1)"
+      ],
+      "query": "STATE(v2)=STATE(v1)",
+      "expected": "UNKNOWN",
+      "guard": "guard.version_continuity_not_state_equality"
+    }
+  ]
+}
