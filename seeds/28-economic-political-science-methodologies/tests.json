@@ -1,0 +1,125 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.economic_political_science_methodologies",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "model",
+      "premises": [
+        "MODEL_PREDICTS(M,B)"
+      ],
+      "query": "ALL_ACTORS_ACTUALLY_REASON_AS_MODEL(M)",
+      "expected": "NO",
+      "guard": "guard_model_not_behavior_truth"
+    },
+    {
+      "id": "incentive",
+      "premises": [
+        "INCENTIVE_CHANGES(A)"
+      ],
+      "query": "ALL_ACTORS_RESPOND_IDENTICALLY(A)",
+      "expected": "NO",
+      "guard": "guard_incentive_not_determinism"
+    },
+    {
+      "id": "rational",
+      "premises": [
+        "RATIONAL_CHOICE_MODEL(A)"
+      ],
+      "query": "A SELF_INTERESTED_ONLY",
+      "expected": "NO",
+      "guard": "guard_rational_not_selfish"
+    },
+    {
+      "id": "equilibrium",
+      "premises": [
+        "MARKET_EQUILIBRIUM(E)"
+      ],
+      "query": "SOCIALLY_OPTIMAL(E)",
+      "expected": "UNKNOWN",
+      "guard": "guard_market_outcome_not_optimal"
+    },
+    {
+      "id": "efficiency",
+      "premises": [
+        "EFFICIENT_POLICY(P)"
+      ],
+      "query": "JUST_OR_DESIRABLE(P)",
+      "expected": "UNKNOWN",
+      "guard": "guard_efficiency_not_justice"
+    },
+    {
+      "id": "poll",
+      "premises": [
+        "POLL_ESTIMATE(P,0.52)"
+      ],
+      "query": "EXACT_POPULATION_VALUE(0.52)",
+      "expected": "NO",
+      "guard": "guard_poll_not_population_truth"
+    },
+    {
+      "id": "poll-vote",
+      "premises": [
+        "POLL_SUPPORT(candidate)=0.52"
+      ],
+      "query": "FINAL_ELECTION_RESULT(candidate)=0.52",
+      "expected": "UNKNOWN",
+      "guard": "guard_poll_not_vote"
+    },
+    {
+      "id": "majority",
+      "premises": [
+        "MAJORITY_PREFERS(P)"
+      ],
+      "query": "MORALLY_RIGHT(P)",
+      "expected": "UNKNOWN",
+      "guard": "guard_majority_not_normative_truth"
+    },
+    {
+      "id": "policy-correlation",
+      "premises": [
+        "POLICY_PRESENT(P)",
+        "OUTCOME_HIGH(Y)"
+      ],
+      "query": "POLICY_CAUSED(P,Y)",
+      "expected": "UNKNOWN",
+      "guard": "guard_correlation_policy"
+    },
+    {
+      "id": "iv",
+      "premises": [
+        "PROPOSED_INSTRUMENT(Z)"
+      ],
+      "query": "VALID_INSTRUMENT(Z)",
+      "expected": "UNKNOWN",
+      "guard": "guard_iv_label_not_valid"
+    },
+    {
+      "id": "did",
+      "premises": [
+        "DIFFERENCE_IN_DIFFERENCES(D)"
+      ],
+      "query": "EVALUATE_PARALLEL_TRENDS_AND_COMPOSITION(D)",
+      "expected": "YES",
+      "rule": "econpol.did_assumption"
+    },
+    {
+      "id": "choice",
+      "premises": [
+        "CHOSE(person,A,context)"
+      ],
+      "query": "A IS_PERSONS_UNCONSTRAINED_TOTAL_PREFERENCE",
+      "expected": "UNKNOWN",
+      "guard": "guard_revealed_not_total_preference"
+    },
+    {
+      "id": "distribution",
+      "premises": [
+        "AVERAGE_POLICY_EFFECT(P)=positive"
+      ],
+      "query": "EVERY_GROUP_BENEFITS(P)",
+      "expected": "UNKNOWN",
+      "guard": "guard_aggregate_not_distribution"
+    }
+  ]
+}
