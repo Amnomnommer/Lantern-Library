@@ -1,0 +1,61 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.ethical_normative_frameworks",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "guard-1",
+      "premises": [
+        "TRIGGER(is_not_ought)"
+      ],
+      "query": "INVALID_COLLAPSE(is_not_ought)",
+      "expected": "NO",
+      "guard": "guard.is_not_ought"
+    },
+    {
+      "id": "guard-2",
+      "premises": [
+        "TRIGGER(legality_not_morality)"
+      ],
+      "query": "INVALID_COLLAPSE(legality_not_morality)",
+      "expected": "NO",
+      "guard": "guard.legality_not_morality"
+    },
+    {
+      "id": "guard-3",
+      "premises": [
+        "TRIGGER(majority_not_morality)"
+      ],
+      "query": "INVALID_COLLAPSE(majority_not_morality)",
+      "expected": "NO",
+      "guard": "guard.majority_not_morality"
+    },
+    {
+      "id": "guard-4",
+      "premises": [
+        "TRIGGER(utility_not_only_value)"
+      ],
+      "query": "INVALID_COLLAPSE(utility_not_only_value)",
+      "expected": "NO",
+      "guard": "guard.utility_not_only_value"
+    },
+    {
+      "id": "guard-5",
+      "premises": [
+        "TRIGGER(owner_preference_not_universal_morality)"
+      ],
+      "query": "INVALID_COLLAPSE(owner_preference_not_universal_morality)",
+      "expected": "NO",
+      "guard": "guard.owner_preference_not_universal_morality"
+    },
+    {
+      "id": "guard-6",
+      "premises": [
+        "TRIGGER(framework_not_truth)"
+      ],
+      "query": "INVALID_COLLAPSE(framework_not_truth)",
+      "expected": "NO",
+      "guard": "guard.framework_not_truth"
+    }
+  ]
+}
