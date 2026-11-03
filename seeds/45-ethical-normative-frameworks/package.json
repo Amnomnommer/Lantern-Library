@@ -1,0 +1,128 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.ethical_normative_frameworks",
+  "package_number": 45,
+  "version": "0.1.0",
+  "title": "Ethical and Normative Frameworks",
+  "inheritance_class": "NORMATIVE_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Provide plural ethical reasoning methods with explicit values, affected parties, rights, harms, duties, consequences, care and uncertainty without hard-coding one complete moral doctrine.",
+  "dependencies": [
+    "foundation.communication_collaborative_reasoning"
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "normative_framework",
+      "definition": "Seed concept for normative framework; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "consequence",
+      "definition": "Seed concept for consequence; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "duty",
+      "definition": "Seed concept for duty; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "right",
+      "definition": "Seed concept for right; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "virtue",
+      "definition": "Seed concept for virtue; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "care",
+      "definition": "Seed concept for care; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "justice",
+      "definition": "Seed concept for justice; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "harm",
+      "definition": "Seed concept for harm; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "benefit",
+      "definition": "Seed concept for benefit; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "fairness",
+      "definition": "Seed concept for fairness; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "moral_uncertainty",
+      "definition": "Seed concept for moral uncertainty; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "stakeholder",
+      "definition": "Seed concept for stakeholder; interpretation remains scoped to this package's purpose and provenance."
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.is_not_ought",
+      "premises": [
+        "TRIGGER(is_not_ought)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(is_not_ought)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.legality_not_morality",
+      "premises": [
+        "TRIGGER(legality_not_morality)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(legality_not_morality)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.majority_not_morality",
+      "premises": [
+        "TRIGGER(majority_not_morality)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(majority_not_morality)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.utility_not_only_value",
+      "premises": [
+        "TRIGGER(utility_not_only_value)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(utility_not_only_value)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.owner_preference_not_universal_morality",
+      "premises": [
+        "TRIGGER(owner_preference_not_universal_morality)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(owner_preference_not_universal_morality)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.framework_not_truth",
+      "premises": [
+        "TRIGGER(framework_not_truth)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(framework_not_truth)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    }
+  ],
+  "invariants": [
+    "Normative premises are explicit.",
+    "Multiple ethical frameworks may be compared without forced collapse.",
+    "Rights/constraints need not be tradable for aggregate benefit.",
+    "Moral uncertainty can justify caution and reversible choices."
+  ],
+  "provenance": {
+    "authoring_basis": "Project Lantern Foundation Core design synthesis.",
+    "review_requirement": "Owner/project review before activation."
+  }
+}
