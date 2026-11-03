@@ -1,0 +1,115 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.psychological_methodologies",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "reliability",
+      "premises": [
+        "HIGH_RELIABILITY(M)"
+      ],
+      "query": "VALID_MEASURE_OF(M,C)",
+      "expected": "UNKNOWN",
+      "guard": "guard.reliability_not_validity"
+    },
+    {
+      "id": "score",
+      "premises": [
+        "SCORE(person,M)=42"
+      ],
+      "query": "CONSTRUCT(person,intelligence)=42",
+      "expected": "UNKNOWN",
+      "guard": "guard.score_not_construct"
+    },
+    {
+      "id": "self-report",
+      "premises": [
+        "SELF_REPORT(person,anxious)"
+      ],
+      "query": "DIRECT_OBSERVATION_OF_INTERNAL_STATE(anxious)",
+      "expected": "NO",
+      "guard": "guard.self_report_not_direct_mind"
+    },
+    {
+      "id": "physiology",
+      "premises": [
+        "PHYSIOLOGICAL_SIGNAL(person,cortisol)=high"
+      ],
+      "query": "PSYCHOLOGICAL_CONSTRUCT(person,stress)=high",
+      "expected": "UNKNOWN",
+      "guard": "guard.physiology_not_construct"
+    },
+    {
+      "id": "case",
+      "premises": [
+        "CASE_SUPPORTS(case1,H)"
+      ],
+      "query": "POPULATION_GENERALIZATION(H)",
+      "expected": "UNKNOWN",
+      "guard": "guard.case_not_population"
+    },
+    {
+      "id": "weird",
+      "premises": [
+        "SAMPLE_FROM(S,WEIRD_POPULATION)"
+      ],
+      "query": "UNIVERSAL_HUMAN_EFFECT(S)",
+      "expected": "UNKNOWN",
+      "guard": "guard.sample_not_humanity"
+    },
+    {
+      "id": "group",
+      "premises": [
+        "GROUP_MEAN_DIFFERENCE(G1,G2,C)"
+      ],
+      "query": "ESSENTIAL_INHERENT_DIFFERENCE(G1,G2,C)",
+      "expected": "NO_OR_UNKNOWN_NOT_YES",
+      "guard": "guard.group_difference_not_essence"
+    },
+    {
+      "id": "diagnosis",
+      "premises": [
+        "DIAGNOSIS(person,D)"
+      ],
+      "query": "COMPLETE_EXPLANATION_OF_PERSON(person,D)",
+      "expected": "NO",
+      "guard": "guard.diagnosis_not_person"
+    },
+    {
+      "id": "invariance",
+      "premises": [
+        "COMPARE_GROUPS_WITH(M,G1,G2)"
+      ],
+      "query": "EVALUATE_MEASUREMENT_INVARIANCE(M,G1,G2)",
+      "expected": "YES",
+      "rule": "psych.invariance_required"
+    },
+    {
+      "id": "demand",
+      "premises": [
+        "PARTICIPANT_CAN_INFER_EXPECTED_RESPONSE(S)"
+      ],
+      "query": "DEMAND_CHARACTERISTICS_RISK(S)",
+      "expected": "YES",
+      "rule": "psych.demand_flag"
+    },
+    {
+      "id": "school",
+      "premises": [
+        "HISTORICALLY_INFLUENTIAL_SCHOOL(psychoanalysis)"
+      ],
+      "query": "CLAIMS_OF(psychoanalysis)_TRUE_BY_INFLUENCE",
+      "expected": "NO",
+      "guard": "guard.school_not_truth"
+    },
+    {
+      "id": "task",
+      "premises": [
+        "TASK_SCORE(person,T)=70"
+      ],
+      "query": "FIXED_GLOBAL_CAPACITY(person)=70",
+      "expected": "UNKNOWN",
+      "guard": "guard.task_performance_not_capacity"
+    }
+  ]
+}
