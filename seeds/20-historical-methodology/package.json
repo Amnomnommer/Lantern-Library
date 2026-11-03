@@ -1,0 +1,331 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.historical_methodology",
+  "package_number": 20,
+  "version": "0.1.0",
+  "title": "Historical Methodology",
+  "inheritance_class": "METHOD_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed historical inquiry so Lantern can reconstruct and explain past events from incomplete surviving evidence using source criticism, chronology, contextualization, corroboration, historiography and competing explanations without treating archives as complete or present categories as timeless.",
+  "dependencies": [
+    {
+      "package_id": "foundation.identity_equality",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.epistemic_states",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.scope_context",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.evidence_inference_validity",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.source_provenance_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.contradiction_belief_revision",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.causal_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.replication_review_freshness",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "historical_source",
+      "definition": "A surviving artifact, record, testimony, image, object, dataset or other trace used as evidence about the past."
+    },
+    {
+      "id": "source_criticism",
+      "definition": "Evaluation of a historical source's provenance, authenticity, authorship, purpose, audience, access, context, transmission and limitations."
+    },
+    {
+      "id": "provenance_chain",
+      "definition": "History of a source/artifact from creation through custody, copying, editing, translation, preservation and present access."
+    },
+    {
+      "id": "chronology",
+      "definition": "Ordering events/claims in time while preserving uncertainty in dates and sequence where necessary."
+    },
+    {
+      "id": "contextualization",
+      "definition": "Interpreting actions, language and evidence within relevant historical social, cultural, political, technological and linguistic contexts."
+    },
+    {
+      "id": "corroboration",
+      "definition": "Comparison of independent or differently situated evidence to assess convergence, conflict and scope."
+    },
+    {
+      "id": "historiography",
+      "definition": "Study of how historians/interpreters have framed, explained and revised understanding of the past."
+    },
+    {
+      "id": "anachronism",
+      "definition": "Improperly projecting later concepts, categories, institutions, values or knowledge backward into an earlier context."
+    },
+    {
+      "id": "presentism",
+      "definition": "Interpreting/evaluating the past solely through present-day categories/assumptions without adequate historical contextualization; moral evaluation may still be made if its normative framework is explicit."
+    },
+    {
+      "id": "archival_silence",
+      "definition": "Absence or underrepresentation in surviving records, which may reflect power, preservation, literacy, collection practices or destruction rather than historical absence."
+    },
+    {
+      "id": "survivorship_bias_history",
+      "definition": "Distortion caused because surviving evidence is not a random sample of what once existed or occurred."
+    },
+    {
+      "id": "historical_claim",
+      "definition": "A proposition about past events, states, actors, chronology, meaning or causation with evidence/provenance and scope."
+    },
+    {
+      "id": "historical_explanation",
+      "definition": "An evidence-based account of why/how historical outcomes occurred, often involving multiple interacting causes rather than controlled intervention."
+    },
+    {
+      "id": "counterfactual_history",
+      "definition": "Structured consideration of alternative historical conditions/outcomes used to examine causal dependence; not evidence that the alternative occurred."
+    },
+    {
+      "id": "periodization",
+      "definition": "Analytic division of history into periods; useful for organization but constructed and potentially contested."
+    },
+    {
+      "id": "translation_interpretation",
+      "definition": "Mapping historical language into another language/modern vocabulary while preserving ambiguity, semantic change and translator choices."
+    },
+    {
+      "id": "material_evidence",
+      "definition": "Physical artifacts, built environments, remains or other material traces used to infer historical activity."
+    },
+    {
+      "id": "oral_history",
+      "definition": "Recorded recollection/testimony about lived experience, valuable evidence shaped by memory, perspective, interview context and later interpretation."
+    }
+  ],
+  "rules": [
+    {
+      "id": "history.source_criticism_required",
+      "variables": [
+        "S",
+        "C"
+      ],
+      "premises": [
+        "HISTORICAL_SOURCE(S)",
+        "USED_TO_SUPPORT(S,C)"
+      ],
+      "conclusion": "EVALUATE_SOURCE_CRITICISM(S,C)"
+    },
+    {
+      "id": "history.corroboration",
+      "variables": [
+        "S1",
+        "S2",
+        "C"
+      ],
+      "premises": [
+        "S1 SUPPORTS C",
+        "S2 SUPPORTS C",
+        "DIFFERENT_OR_INDEPENDENT_EVIDENCE_CHAINS(S1,S2)"
+      ],
+      "conclusion": "HISTORICAL_CORROBORATION(C,S1,S2)"
+    },
+    {
+      "id": "history.chronology_constraint",
+      "variables": [
+        "A",
+        "B"
+      ],
+      "premises": [
+        "A OCCURS_AFTER B"
+      ],
+      "conclusion": "B CANNOT_BE_CAUSED_BY A UNDER_ORDINARY_FORWARD_CAUSATION"
+    },
+    {
+      "id": "history.context_required",
+      "variables": [
+        "T",
+        "C"
+      ],
+      "premises": [
+        "HISTORICAL_TERM_OR_ACTION(T)",
+        "CONTEXT_SENSITIVE(T,C)"
+      ],
+      "conclusion": "INTERPRET_WITH_HISTORICAL_CONTEXT(T,C)"
+    },
+    {
+      "id": "history.archival_silence_flag",
+      "variables": [
+        "G",
+        "R"
+      ],
+      "premises": [
+        "GROUP_OR_EVENT(G) ABSENT_FROM RECORD_SET(R)",
+        "RECORD_CREATION_OR_SURVIVAL_BIASED(R)"
+      ],
+      "conclusion": "ARCHIVAL_SILENCE_POSSIBLE(G,R)"
+    },
+    {
+      "id": "history.competing_explanations",
+      "variables": [
+        "E",
+        "H1",
+        "H2"
+      ],
+      "premises": [
+        "HISTORICAL_OUTCOME(E)",
+        "PLAUSIBLE_EXPLANATION(H1,E)",
+        "PLAUSIBLE_EXPLANATION(H2,E)"
+      ],
+      "conclusion": "COMPARE_EXPLANATIONS_BY_EVIDENCE_SCOPE_AND_ASSUMPTIONS(H1,H2,E)"
+    },
+    {
+      "id": "history.historiographic_revision",
+      "variables": [
+        "Old",
+        "New",
+        "E"
+      ],
+      "premises": [
+        "INTERPRETATION(Old)",
+        "INTERPRETATION(New)",
+        "NEW_OR_REEVALUATED_EVIDENCE(E)",
+        "BETTER_ACCOUNTS_FOR(New,E,Old)"
+      ],
+      "conclusion": "HISTORIOGRAPHIC_REVISION_CANDIDATE(Old,New)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.primary_not_unmediated_truth",
+      "premises": [
+        "PRIMARY_HISTORICAL_SOURCE(S)"
+      ],
+      "forbidden_conclusion": "UNMEDIATED_TRUTH(S)",
+      "reason": "Primary sources reflect perspective, purpose, access, genre and context."
+    },
+    {
+      "id": "guard.archive_not_complete",
+      "premises": [
+        "NOT_FOUND_IN_ARCHIVE(C)"
+      ],
+      "forbidden_conclusion": "DID_NOT_EXIST_OR_HAPPEN(C)",
+      "reason": "Archives are incomplete and shaped by creation, preservation, collection and power."
+    },
+    {
+      "id": "guard.silence_not_absence",
+      "premises": [
+        "NO_SURVIVING_RECORD_OF(C)"
+      ],
+      "forbidden_conclusion": "FALSE(C)",
+      "reason": "Lack of surviving evidence may be archival silence rather than evidence of nonoccurrence."
+    },
+    {
+      "id": "guard.modern_term_not_same_meaning",
+      "premises": [
+        "SAME_WORD(term,t1,t2)"
+      ],
+      "forbidden_conclusion": "SAME_MEANING(term,t1,t2)",
+      "reason": "Language and concepts change over time."
+    },
+    {
+      "id": "guard.anachronism",
+      "premises": [
+        "MODERN_CATEGORY(C)"
+      ],
+      "forbidden_conclusion": "ACTORS_AT_t USED_OR_UNDERSTOOD C",
+      "reason": "Present categories cannot be projected backward without historical evidence."
+    },
+    {
+      "id": "guard.single_source_not_complete_event",
+      "premises": [
+        "SOURCE(S) DESCRIBES EVENT(E)"
+      ],
+      "forbidden_conclusion": "COMPLETE_ACCOUNT(S,E)",
+      "reason": "A source provides a situated trace/account, not necessarily exhaustive description."
+    },
+    {
+      "id": "guard.victor_record_not_only_perspective",
+      "premises": [
+        "DOMINANT_GROUP_SOURCE(S,E)"
+      ],
+      "forbidden_conclusion": "ONLY_VALID_PERSPECTIVE(S,E)",
+      "reason": "Power affects record creation/preservation; marginalized perspectives/material evidence may alter interpretation."
+    },
+    {
+      "id": "guard.historical_cause_not_single",
+      "premises": [
+        "EVIDENCE_FACTOR(X,E)"
+      ],
+      "forbidden_conclusion": "SOLE_CAUSE(X,E)",
+      "reason": "Historical outcomes often have multiple interacting causal conditions."
+    },
+    {
+      "id": "guard.counterfactual_not_fact",
+      "premises": [
+        "COUNTERFACTUAL_HISTORY(H)"
+      ],
+      "forbidden_conclusion": "H ACTUALLY_OCCURRED",
+      "reason": "Counterfactuals are analytic tools, not records of actual history."
+    },
+    {
+      "id": "guard.periodization_not_natural_kind",
+      "premises": [
+        "PERIOD_LABEL(P)"
+      ],
+      "forbidden_conclusion": "OBJECTIVE_NATURAL_BOUNDARY(P)",
+      "reason": "Periodization is an analytic construction whose boundaries can vary by question/place."
+    },
+    {
+      "id": "guard.translation_not_identity",
+      "premises": [
+        "TRANSLATION(original,translated)"
+      ],
+      "forbidden_conclusion": "SEMANTICALLY_IDENTICAL_IN_ALL_RESPECTS(original,translated)",
+      "reason": "Translation can preserve much meaning while introducing choices/loss/ambiguity."
+    },
+    {
+      "id": "guard.later_account_not_direct",
+      "premises": [
+        "ACCOUNT_WRITTEN_LONG_AFTER_EVENT(S,E)"
+      ],
+      "forbidden_conclusion": "DIRECT_CONTEMPORANEOUS_OBSERVATION(S,E)",
+      "reason": "Later accounts may rely on memory, sources or tradition and require provenance analysis."
+    }
+  ],
+  "invariants": [
+    "Historical evidence is surviving evidence, not a complete recording of the past.",
+    "Primary sources are privileged for proximity to some questions but are not automatically truthful, complete or unbiased.",
+    "Source criticism preserves authorship, purpose, audience, access, transmission and context.",
+    "Chronology constrains causal explanations.",
+    "Historical meanings/categories must be interpreted in period context before modern equivalence is assumed.",
+    "Archival absence and historical absence are distinct.",
+    "Independent/differently situated corroboration can strengthen historical claims.",
+    "Historical explanations may be multi-causal and probabilistic rather than experimentally isolated.",
+    "Historiography is evidence about changing interpretation, not merely noise to discard.",
+    "Counterfactual reasoning can examine causal dependence but never becomes evidence that the counterfactual occurred.",
+    "Moral/normative evaluation of history should make its normative lens explicit rather than disguise it as historical fact.",
+    "Historical claims preserve uncertainty, provenance and belief genealogy."
+  ],
+  "provenance": {
+    "authoring_basis": "Historical method, source criticism, historiography, archival studies and causal historical reasoning adapted to Lantern's provenance-first epistemic architecture.",
+    "review_requirement": "Owner/project review before METHOD_CORE activation."
+  }
+}
