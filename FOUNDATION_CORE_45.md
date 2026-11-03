@@ -27,7 +27,7 @@ Seeded means inherited, not unquestionable. FORMAL_CORE is protected from experi
 
 - [~] 14 Scientific Knowledge Types
 - [~] 15 Hypothesis, Testability and Operationalization
-- [ ] 16 Experimental Design
+- [~] 16 Experimental Design
 - [ ] 17 Observational Reasoning
 - [ ] 18 Replication, Review and Knowledge Freshness
 - [ ] 19 Statistical Methodology
