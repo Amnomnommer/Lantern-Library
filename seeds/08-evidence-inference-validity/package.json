@@ -1,0 +1,324 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.evidence_inference_validity",
+  "package_number": 8,
+  "version": "0.1.0",
+  "title": "Evidence Types and Inference Validity",
+  "inheritance_class": "CONCEPTUAL_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed typed evidence and evidence-to-claim validity so Lantern distinguishes what was observed, measured, reported, documented, experimentally manipulated, simulated or inferred, and asks whether an evidence item can actually support the claim being evaluated.",
+  "dependencies": [
+    {
+      "package_id": "foundation.formal_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.epistemic_states",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.scope_context",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "evidence",
+      "definition": "Information used to increase, decrease or constrain support for a claim under an explicit inferential relationship."
+    },
+    {
+      "id": "evidence_relevance",
+      "definition": "Evidence is relevant when its truth/quality would change rational support for the claim under consideration."
+    },
+    {
+      "id": "direct_observation",
+      "definition": "A recorded observation of an event/state by an observer or sensor, still subject to perspective, detection and recording limits."
+    },
+    {
+      "id": "measurement",
+      "definition": "An observation produced by an instrument/procedure mapping a property to a value under defined units and uncertainty."
+    },
+    {
+      "id": "testimony",
+      "definition": "A person's or agent's report about what they observed, remember, infer or believe."
+    },
+    {
+      "id": "documentary_evidence",
+      "definition": "A preserved record whose evidential value depends on provenance, authenticity, context and relation to the claim."
+    },
+    {
+      "id": "experimental_evidence",
+      "definition": "Evidence produced by a designed intervention/comparison intended to distinguish hypotheses under controlled assumptions."
+    },
+    {
+      "id": "observational_evidence",
+      "definition": "Evidence gathered without controlled assignment/intervention; useful for description/association but causal interpretation needs additional justification."
+    },
+    {
+      "id": "simulation_evidence",
+      "definition": "Results produced by a model/computation; evidence about consequences of the model and assumptions, not automatically direct evidence that reality matches them."
+    },
+    {
+      "id": "inferential_evidence",
+      "definition": "A conclusion derived from premises/evidence through a stated inference; its support depends on both inference validity and premise quality."
+    },
+    {
+      "id": "negative_evidence",
+      "definition": "An expected observation is absent or contrary evidence appears under conditions where detection was adequate."
+    },
+    {
+      "id": "anecdotal_evidence",
+      "definition": "A small or unsystematically selected set of individual observations/reports; potentially informative but weak for broad frequency/generalization claims."
+    },
+    {
+      "id": "convergent_evidence",
+      "definition": "Evidence from sufficiently independent methods/sources that bears on the same claim."
+    },
+    {
+      "id": "independence",
+      "definition": "Evidence items are independent to the degree they do not merely inherit the same underlying observation/source/error."
+    },
+    {
+      "id": "valid_inference",
+      "definition": "The conclusion follows from premises under the declared inference rule; validity is separate from premise truth/evidence quality."
+    },
+    {
+      "id": "evidence_chain",
+      "definition": "A provenance-linked sequence from source/observation through transformations/inferences to a claim."
+    }
+  ],
+  "rules": [
+    {
+      "id": "evidence.relevance_required",
+      "variables": [
+        "E",
+        "C"
+      ],
+      "premises": [
+        "EVIDENCE(E)",
+        "CLAIM(C)",
+        "BEARS_ON(E,C)"
+      ],
+      "conclusion": "RELEVANT(E,C)"
+    },
+    {
+      "id": "evidence.measurement_support",
+      "variables": [
+        "M",
+        "P",
+        "V"
+      ],
+      "premises": [
+        "MEASURES(M,P)",
+        "MEASUREMENT_RESULT(M,V)",
+        "MEASUREMENT_VALID_FOR(M,P)"
+      ],
+      "conclusion": "EVIDENCE_ABOUT(P,V)"
+    },
+    {
+      "id": "evidence.testimony_attribution",
+      "variables": [
+        "S",
+        "P"
+      ],
+      "premises": [
+        "TESTIFIES(S,P)"
+      ],
+      "conclusion": "EVIDENCE_THAT_SOURCE_REPORTS(S,P)"
+    },
+    {
+      "id": "evidence.simulation_conditional",
+      "variables": [
+        "M",
+        "A",
+        "R"
+      ],
+      "premises": [
+        "SIMULATION_MODEL(M)",
+        "ASSUMPTIONS(M,A)",
+        "SIMULATION_RESULT(M,R)"
+      ],
+      "conclusion": "MODEL_UNDER_ASSUMPTIONS_PREDICTS(M,A,R)"
+    },
+    {
+      "id": "evidence.inference_chain",
+      "variables": [
+        "E",
+        "P",
+        "C",
+        "R"
+      ],
+      "premises": [
+        "E SUPPORTS P",
+        "VALID_RULE(R,P,C)"
+      ],
+      "conclusion": "DERIVED_SUPPORT(E,C,R)"
+    },
+    {
+      "id": "evidence.convergence",
+      "variables": [
+        "E1",
+        "E2",
+        "C"
+      ],
+      "premises": [
+        "RELEVANT(E1,C)",
+        "RELEVANT(E2,C)",
+        "INDEPENDENT(E1,E2)",
+        "SUPPORTS(E1,C)",
+        "SUPPORTS(E2,C)"
+      ],
+      "conclusion": "CONVERGENT_SUPPORT(C)"
+    },
+    {
+      "id": "evidence.negative_detection",
+      "variables": [
+        "H",
+        "E",
+        "T"
+      ],
+      "premises": [
+        "H PREDICTS E",
+        "TEST(T,E)",
+        "ADEQUATE_DETECTION(T,E)",
+        "OBSERVED(T,NOT E)"
+      ],
+      "conclusion": "EVIDENCE_AGAINST(H)"
+    },
+    {
+      "id": "evidence.invalidity_blocks_derivation",
+      "variables": [
+        "R",
+        "P",
+        "C"
+      ],
+      "premises": [
+        "INFERENCE_ATTEMPT(R,P,C)",
+        "NOT VALID(R)"
+      ],
+      "conclusion": "DO_NOT_DERIVE(C)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.testimony_not_fact",
+      "premises": [
+        "TESTIFIES(S,P)"
+      ],
+      "forbidden_conclusion": "TRUE(P)",
+      "reason": "Testimony directly establishes that a source reported P, not that P is true."
+    },
+    {
+      "id": "guard.document_not_truth",
+      "premises": [
+        "DOCUMENT_CONTAINS(D,P)"
+      ],
+      "forbidden_conclusion": "TRUE(P)",
+      "reason": "A document preserves a claim; authenticity, provenance, context and reliability still matter."
+    },
+    {
+      "id": "guard.simulation_not_observation",
+      "premises": [
+        "SIMULATION_RESULT(M,R)"
+      ],
+      "forbidden_conclusion": "OBSERVED_IN_REALITY(R)",
+      "reason": "Simulation output is conditional on model structure/inputs and is not direct observation."
+    },
+    {
+      "id": "guard.measurement_not_property_without_validity",
+      "premises": [
+        "MEASUREMENT_RESULT(M,V)"
+      ],
+      "forbidden_conclusion": "PROPERTY_VALUE(P,V)",
+      "reason": "The instrument/procedure must validly measure the intended property."
+    },
+    {
+      "id": "guard.anecdote_not_population",
+      "premises": [
+        "ANECDOTE(E,P)"
+      ],
+      "forbidden_conclusion": "POPULATION_RATE(P)=GENERAL",
+      "reason": "An anecdote does not establish prevalence or broad generalization."
+    },
+    {
+      "id": "guard.citation_not_independence",
+      "premises": [
+        "SOURCE(S2) CITES SOURCE(S1)",
+        "SUPPORTS(S1,C)",
+        "SUPPORTS(S2,C)"
+      ],
+      "forbidden_conclusion": "INDEPENDENT(S1,S2)",
+      "reason": "Repetition through citation may be one evidence chain, not independent confirmation."
+    },
+    {
+      "id": "guard.copy_not_replication",
+      "premises": [
+        "REPORT2 COPIES REPORT1"
+      ],
+      "forbidden_conclusion": "REPLICATION(C)",
+      "reason": "Copied/repackaged evidence does not replicate the underlying observation."
+    },
+    {
+      "id": "guard.validity_not_soundness",
+      "premises": [
+        "VALID_ARGUMENT(PREMISES,C)"
+      ],
+      "forbidden_conclusion": "TRUE(C)",
+      "reason": "A valid argument can have false/unverified premises."
+    },
+    {
+      "id": "guard.relevance_not_strength",
+      "premises": [
+        "RELEVANT(E,C)"
+      ],
+      "forbidden_conclusion": "STRONG_SUPPORT(E,C)",
+      "reason": "Evidence can be relevant while weak, noisy, biased or ambiguous."
+    },
+    {
+      "id": "guard.quantity_not_quality",
+      "premises": [
+        "MANY_EVIDENCE_ITEMS(C)"
+      ],
+      "forbidden_conclusion": "HIGH_QUALITY_EVIDENCE(C)",
+      "reason": "Many dependent/low-quality items need not provide strong evidence."
+    },
+    {
+      "id": "guard.observational_not_causal",
+      "premises": [
+        "OBSERVATIONAL_ASSOCIATION(X,Y)"
+      ],
+      "forbidden_conclusion": "CAUSES(X,Y)",
+      "reason": "Causal inference requires additional design/assumptions beyond association."
+    },
+    {
+      "id": "guard.missing_expected_evidence_requires_detection",
+      "premises": [
+        "NOT OBSERVED(E)"
+      ],
+      "forbidden_conclusion": "EVIDENCE_AGAINST(H)",
+      "reason": "Missing evidence counts against H only if H predicted E and detection was adequate."
+    }
+  ],
+  "invariants": [
+    "Evidence type and evidence quality are separate.",
+    "Evidence must be relevant to the claim before its strength matters.",
+    "Observation records what was observed; interpretation/inference is represented separately.",
+    "Measurement requires a defined mapping between instrument/procedure and target property.",
+    "Testimony/documentation preserves attribution and provenance rather than becoming fact automatically.",
+    "Simulation output is conditional evidence about a model/assumptions, not direct reality observation.",
+    "Formal inference validity and premise evidential quality are separate dimensions.",
+    "Independent convergence can strengthen evidence; repeated copies of one source do not count as independent confirmation.",
+    "Anecdotes can motivate hypotheses or establish existence in a case but do not establish population prevalence by themselves.",
+    "Observational association does not by itself establish causation.",
+    "Every derived evidential claim should retain a chain back to its supporting evidence/provenance."
+  ],
+  "provenance": {
+    "authoring_basis": "General epistemology of evidence, scientific evidence distinctions and formal inference validity, adapted to Lantern's provenance-first architecture.",
+    "review_requirement": "Owner/project review before CONCEPTUAL_CORE activation."
+  }
+}
