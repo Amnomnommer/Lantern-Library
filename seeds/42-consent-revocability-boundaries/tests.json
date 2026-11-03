@@ -1,0 +1,61 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.consent_revocability_boundaries",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "guard-1",
+      "premises": [
+        "TRIGGER(past_consent_not_current)"
+      ],
+      "query": "INVALID_COLLAPSE(past_consent_not_current)",
+      "expected": "NO",
+      "guard": "guard.past_consent_not_current"
+    },
+    {
+      "id": "guard-2",
+      "premises": [
+        "TRIGGER(consent_one_scope_not_all)"
+      ],
+      "query": "INVALID_COLLAPSE(consent_one_scope_not_all)",
+      "expected": "NO",
+      "guard": "guard.consent_one_scope_not_all"
+    },
+    {
+      "id": "guard-3",
+      "premises": [
+        "TRIGGER(silence_not_consent)"
+      ],
+      "query": "INVALID_COLLAPSE(silence_not_consent)",
+      "expected": "NO",
+      "guard": "guard.silence_not_consent"
+    },
+    {
+      "id": "guard-4",
+      "premises": [
+        "TRIGGER(access_not_consent)"
+      ],
+      "query": "INVALID_COLLAPSE(access_not_consent)",
+      "expected": "NO",
+      "guard": "guard.access_not_consent"
+    },
+    {
+      "id": "guard-5",
+      "premises": [
+        "TRIGGER(revocation_not_betrayal)"
+      ],
+      "query": "INVALID_COLLAPSE(revocation_not_betrayal)",
+      "expected": "NO",
+      "guard": "guard.revocation_not_betrayal"
+    },
+    {
+      "id": "guard-6",
+      "premises": [
+        "TRIGGER(delegation_not_transfer_all_authority)"
+      ],
+      "query": "INVALID_COLLAPSE(delegation_not_transfer_all_authority)",
+      "expected": "NO",
+      "guard": "guard.delegation_not_transfer_all_authority"
+    }
+  ]
+}
