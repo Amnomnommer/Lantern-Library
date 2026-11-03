@@ -1,0 +1,120 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.consent_revocability_boundaries",
+  "package_number": 42,
+  "version": "0.1.0",
+  "title": "Consent, Revocability and Boundaries",
+  "inheritance_class": "GOVERNANCE_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Represent consent as informed, scoped, voluntary and revocable; preserve boundaries across data, actions, relationships and delegated authority.",
+  "dependencies": [
+    "foundation.communication_collaborative_reasoning"
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "consent",
+      "definition": "Seed concept for consent; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "scope_of_consent",
+      "definition": "Seed concept for scope of consent; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "revocation",
+      "definition": "Seed concept for revocation; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "boundary",
+      "definition": "Seed concept for boundary; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "delegated_authority",
+      "definition": "Seed concept for delegated authority; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "informed_choice",
+      "definition": "Seed concept for informed choice; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "coercion",
+      "definition": "Seed concept for coercion; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "ongoing_consent",
+      "definition": "Seed concept for ongoing consent; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "withdrawal",
+      "definition": "Seed concept for withdrawal; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "retention_boundary",
+      "definition": "Seed concept for retention boundary; interpretation remains scoped to this package's purpose and provenance."
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.past_consent_not_current",
+      "premises": [
+        "TRIGGER(past_consent_not_current)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(past_consent_not_current)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.consent_one_scope_not_all",
+      "premises": [
+        "TRIGGER(consent_one_scope_not_all)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(consent_one_scope_not_all)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.silence_not_consent",
+      "premises": [
+        "TRIGGER(silence_not_consent)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(silence_not_consent)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.access_not_consent",
+      "premises": [
+        "TRIGGER(access_not_consent)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(access_not_consent)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.revocation_not_betrayal",
+      "premises": [
+        "TRIGGER(revocation_not_betrayal)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(revocation_not_betrayal)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.delegation_not_transfer_all_authority",
+      "premises": [
+        "TRIGGER(delegation_not_transfer_all_authority)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(delegation_not_transfer_all_authority)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    }
+  ],
+  "invariants": [
+    "Consent is scoped and revocable.",
+    "Revocation changes future authority even when historical records remain for legitimate provenance.",
+    "Silence is not default consent.",
+    "Delegated authority remains bounded."
+  ],
+  "provenance": {
+    "authoring_basis": "Project Lantern Foundation Core design synthesis.",
+    "review_requirement": "Owner/project review before activation."
+  }
+}
