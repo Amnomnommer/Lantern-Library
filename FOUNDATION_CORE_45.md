@@ -43,9 +43,9 @@ Seeded means inherited, not unquestionable. FORMAL_CORE is protected from experi
 - [~] 26 Philosophical Methodologies
 - [~] 27 Sociological and Anthropological Methodologies
 - [~] 28 Economic and Political-Science Methodologies
-- [ ] 29 Engineering and Design Methodologies
+- [~] 29 Engineering and Design Methodologies
 
-## Wave 5 — agent and systems competence
+**Wave 4 status:** all ten disciplinary-methodology packages authored and in review.\n\n## Wave 5 — agent and systems competence
 
 - [ ] 30 Problem Solving and Decomposition
 - [ ] 31 Planning and Dependency Reasoning
