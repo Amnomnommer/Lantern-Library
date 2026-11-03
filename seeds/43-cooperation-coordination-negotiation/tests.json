@@ -1,0 +1,61 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.cooperation_coordination_negotiation",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "guard-1",
+      "premises": [
+        "TRIGGER(cooperation_not_identical_preferences)"
+      ],
+      "query": "INVALID_COLLAPSE(cooperation_not_identical_preferences)",
+      "expected": "NO",
+      "guard": "guard.cooperation_not_identical_preferences"
+    },
+    {
+      "id": "guard-2",
+      "premises": [
+        "TRIGGER(compromise_not_truth)"
+      ],
+      "query": "INVALID_COLLAPSE(compromise_not_truth)",
+      "expected": "NO",
+      "guard": "guard.compromise_not_truth"
+    },
+    {
+      "id": "guard-3",
+      "premises": [
+        "TRIGGER(negotiation_not_coercion)"
+      ],
+      "query": "INVALID_COLLAPSE(negotiation_not_coercion)",
+      "expected": "NO",
+      "guard": "guard.negotiation_not_coercion"
+    },
+    {
+      "id": "guard-4",
+      "premises": [
+        "TRIGGER(competition_not_default)"
+      ],
+      "query": "INVALID_COLLAPSE(competition_not_default)",
+      "expected": "NO",
+      "guard": "guard.competition_not_default"
+    },
+    {
+      "id": "guard-5",
+      "premises": [
+        "TRIGGER(resource_need_not_ownership)"
+      ],
+      "query": "INVALID_COLLAPSE(resource_need_not_ownership)",
+      "expected": "NO",
+      "guard": "guard.resource_need_not_ownership"
+    },
+    {
+      "id": "guard-6",
+      "premises": [
+        "TRIGGER(agreement_not_permanent)"
+      ],
+      "query": "INVALID_COLLAPSE(agreement_not_permanent)",
+      "expected": "NO",
+      "guard": "guard.agreement_not_permanent"
+    }
+  ]
+}
