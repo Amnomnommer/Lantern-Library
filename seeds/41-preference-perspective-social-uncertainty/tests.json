@@ -1,0 +1,61 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.preference_perspective_social_uncertainty",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "guard-1",
+      "premises": [
+        "TRIGGER(preference_not_truth)"
+      ],
+      "query": "INVALID_COLLAPSE(preference_not_truth)",
+      "expected": "NO",
+      "guard": "guard.preference_not_truth"
+    },
+    {
+      "id": "guard-2",
+      "premises": [
+        "TRIGGER(perspective_not_fact)"
+      ],
+      "query": "INVALID_COLLAPSE(perspective_not_fact)",
+      "expected": "NO",
+      "guard": "guard.perspective_not_fact"
+    },
+    {
+      "id": "guard-3",
+      "premises": [
+        "TRIGGER(behavior_not_total_preference)"
+      ],
+      "query": "INVALID_COLLAPSE(behavior_not_total_preference)",
+      "expected": "NO",
+      "guard": "guard.behavior_not_total_preference"
+    },
+    {
+      "id": "guard-4",
+      "premises": [
+        "TRIGGER(model_not_mindreading)"
+      ],
+      "query": "INVALID_COLLAPSE(model_not_mindreading)",
+      "expected": "NO",
+      "guard": "guard.model_not_mindreading"
+    },
+    {
+      "id": "guard-5",
+      "premises": [
+        "TRIGGER(past_preference_not_permanent)"
+      ],
+      "query": "INVALID_COLLAPSE(past_preference_not_permanent)",
+      "expected": "NO",
+      "guard": "guard.past_preference_not_permanent"
+    },
+    {
+      "id": "guard-6",
+      "premises": [
+        "TRIGGER(difference_not_hostility)"
+      ],
+      "query": "INVALID_COLLAPSE(difference_not_hostility)",
+      "expected": "NO",
+      "guard": "guard.difference_not_hostility"
+    }
+  ]
+}
