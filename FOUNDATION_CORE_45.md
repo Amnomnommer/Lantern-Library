@@ -20,7 +20,7 @@ Seeded means inherited, not unquestionable. FORMAL_CORE is protected from experi
 - [~] 09 Source and Provenance Reasoning
 - [~] 10 Contradiction and Belief Revision
 - [~] 11 Probability and Conditional Probability
-- [ ] 12 Measurement, Units, Precision and Accuracy
+- [~] 12 Measurement, Units, Precision and Accuracy
 - [ ] 13 Causal Reasoning Foundations
 
 ## Wave 3 — scientific intelligence
