@@ -1,0 +1,119 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.linguistic_methodologies",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "prestige",
+      "premises": [
+        "PRESTIGE_VARIETY(V)"
+      ],
+      "query": "LINGUISTICALLY_SUPERIOR(V)",
+      "expected": "NO",
+      "guard": "guard.prestige_not_correctness"
+    },
+    {
+      "id": "nonstandard",
+      "premises": [
+        "NONSTANDARD_FORM(F)"
+      ],
+      "query": "UNGRAMMATICAL(F)",
+      "expected": "UNKNOWN",
+      "guard": "guard.nonstandard_not_ungrammatical"
+    },
+    {
+      "id": "prescription",
+      "premises": [
+        "STYLE_GUIDE_REQUIRES(R)"
+      ],
+      "query": "ALL_SPEAKERS_NATURALLY_USE(R)",
+      "expected": "UNKNOWN",
+      "guard": "guard.prescription_not_description"
+    },
+    {
+      "id": "corpus-rare",
+      "premises": [
+        "RARE_IN_CORPUS(F)"
+      ],
+      "query": "UNGRAMMATICAL(F)",
+      "expected": "UNKNOWN",
+      "guard": "guard.corpus_frequency_not_grammar"
+    },
+    {
+      "id": "cooccur",
+      "premises": [
+        "COOCCURS_FREQUENTLY(A,B)"
+      ],
+      "query": "A MEANS B",
+      "expected": "UNKNOWN",
+      "guard": "guard.frequency_not_meaning"
+    },
+    {
+      "id": "speaker",
+      "premises": [
+        "SPEAKER_ACCEPTS(s,F)"
+      ],
+      "query": "ALL_SPEAKERS_ACCEPT(F)",
+      "expected": "UNKNOWN",
+      "guard": "guard.acceptability_not_universal"
+    },
+    {
+      "id": "change",
+      "premises": [
+        "LANGUAGE_CHANGED(L,t1,t2)"
+      ],
+      "query": "LANGUAGE_DEGRADED(L)",
+      "expected": "NO",
+      "guard": "guard.language_change_not_decay"
+    },
+    {
+      "id": "translation",
+      "premises": [
+        "TRANSLATION(A,B)"
+      ],
+      "query": "A AND B IDENTICAL_IN_ALL_SEMANTIC_PRAGMATIC_PROPERTIES",
+      "expected": "NO",
+      "guard": "guard.translation_not_equivalence"
+    },
+    {
+      "id": "pragmatics",
+      "premises": [
+        "UTTERANCE(U)",
+        "DISCOURSE_CONTEXT(C)",
+        "CONTEXT_SUPPORTS_INTERPRETATION(C,U,I)"
+      ],
+      "query": "PRAGMATIC_INTERPRETATION_CANDIDATE(U,I,C)",
+      "expected": "YES",
+      "rule": "linguistics.pragmatic_interpretation"
+    },
+    {
+      "id": "minimal-pair",
+      "premises": [
+        "MINIMAL_PAIR(A,B,F)",
+        "DIFFERENT_INTERPRETATION_OR_FUNCTION(A,B)",
+        "CONTROLLED_DOMAIN(D)"
+      ],
+      "query": "EVIDENCE_FEATURE_CONTRAST_FUNCTIONAL(F,D)",
+      "expected": "YES",
+      "rule": "linguistics.minimal_pair"
+    },
+    {
+      "id": "annotation",
+      "premises": [
+        "ANNOTATED_AS(item,label)"
+      ],
+      "query": "OBJECTIVE_GROUND_TRUTH_LABEL(item,label)",
+      "expected": "UNKNOWN",
+      "guard": "guard.annotation_not_ground_truth"
+    },
+    {
+      "id": "family",
+      "premises": [
+        "RELATED_LANGUAGES(A,B)"
+      ],
+      "query": "SAME_LANGUAGE(A,B)",
+      "expected": "NO_OR_UNKNOWN_NOT_YES",
+      "guard": "guard.language_family_not_identity"
+    }
+  ]
+}
