@@ -1,0 +1,130 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.computer_science_methodologies",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "tests",
+      "premises": [
+        "ALL_EXECUTED_TESTS_PASS(I)"
+      ],
+      "query": "CORRECT_FOR_ALL_INPUTS(I)",
+      "expected": "UNKNOWN",
+      "guard": "guard.tests_not_proof"
+    },
+    {
+      "id": "proof",
+      "premises": [
+        "FORMALLY_VERIFIED(I,S,A)"
+      ],
+      "query": "CORRECT_RELATIVE_TO(I,S,A)",
+      "expected": "YES",
+      "rule": "cs.proof_conditional"
+    },
+    {
+      "id": "spec",
+      "premises": [
+        "CORRECT_RELATIVE_TO(I,S,A)"
+      ],
+      "query": "S MATCHES_REAL_INTENT_PERFECTLY",
+      "expected": "UNKNOWN",
+      "guard": "guard.proof_not_spec_correct"
+    },
+    {
+      "id": "bugs",
+      "premises": [
+        "NO_FAILURE_OBSERVED(I)"
+      ],
+      "query": "BUG_FREE(I)",
+      "expected": "UNKNOWN",
+      "guard": "guard.no_failures_not_no_bugs"
+    },
+    {
+      "id": "benchmark",
+      "premises": [
+        "OUTPERFORMS_ON_BENCHMARK(A,B,M)"
+      ],
+      "query": "A BETTER_FOR_ALL_PURPOSES_THAN B",
+      "expected": "NO",
+      "guard": "guard_benchmark_not_purpose"
+    },
+    {
+      "id": "complexity",
+      "premises": [
+        "ASYMPTOTICALLY_BETTER(A,B)"
+      ],
+      "query": "FASTER_ON_CURRENT_WORKLOAD_HARDWARE(A,B)",
+      "expected": "UNKNOWN",
+      "guard": "guard_asymptotic_not_runtime"
+    },
+    {
+      "id": "profile",
+      "premises": [
+        "FAST_ON_WORKLOAD(I,W1)"
+      ],
+      "query": "FAST_ON_ALL_WORKLOADS(I)",
+      "expected": "UNKNOWN",
+      "guard": "guard_profile_not_general"
+    },
+    {
+      "id": "reference",
+      "premises": [
+        "REFERENCE_IMPLEMENTATION(R)"
+      ],
+      "query": "R ALWAYS_CORRECT",
+      "expected": "UNKNOWN",
+      "guard": "guard_reference_not_truth"
+    },
+    {
+      "id": "regression",
+      "premises": [
+        "TEST_PASSED(old,T)",
+        "TEST_FAILED(new,T)",
+        "COMPARABLE_TEST_ENVIRONMENT(T)"
+      ],
+      "query": "REGRESSION_CANDIDATE(new,T)",
+      "expected": "YES",
+      "rule": "cs.regression"
+    },
+    {
+      "id": "ablation",
+      "premises": [
+        "ABLATION_CHANGES_SCORE(C,M)"
+      ],
+      "query": "C SOLE_CAUSE_OF M",
+      "expected": "UNKNOWN",
+      "guard": "guard_ablation_not_full_causality"
+    },
+    {
+      "id": "reproduce",
+      "premises": [
+        "CODE_PRESERVED(R)",
+        "DATA_PRESERVED(R)",
+        "CONFIG_ENV_PRESERVED(R)",
+        "PROCEDURE_PRESERVED(R)",
+        "RESULT_REPRODUCED(R)"
+      ],
+      "query": "COMPUTATIONAL_REPRODUCIBILITY(R)",
+      "expected": "YES",
+      "rule": "cs.reproducibility"
+    },
+    {
+      "id": "reproduce-valid",
+      "premises": [
+        "COMPUTATIONALLY_REPRODUCIBLE(R)"
+      ],
+      "query": "SCIENTIFICALLY_VALID(R)",
+      "expected": "UNKNOWN",
+      "guard": "guard_reproducible_not_valid"
+    },
+    {
+      "id": "compute",
+      "premises": [
+        "LOWER_COMPUTE_COST(A,B)"
+      ],
+      "query": "MORE_INTELLIGENT_OR_CAPABLE(A,B)",
+      "expected": "UNKNOWN",
+      "guard": "guard_complexity_not_capability"
+    }
+  ]
+}
