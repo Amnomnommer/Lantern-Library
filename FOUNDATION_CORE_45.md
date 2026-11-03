@@ -8,7 +8,7 @@ Seeded means inherited, not unquestionable. FORMAL_CORE is protected from experi
 
 - [~] 01 Formal Logic — propositions, connectives, implication, equivalence, core inference and fallacy guards. Initial package in this PR.
 - [~] 02 Predicate and Quantifier Logic — predicates, variables, universal/existential quantification.
-- [ ] 03 Relation Logic — direction, inverse, symmetry, transitivity, reflexivity and composition constraints.
+- [~] 03 Relation Logic — direction, inverse, symmetry, transitivity, reflexivity and composition constraints.
 - [ ] 04 Set Reasoning — membership, subset, union, intersection, exclusion.
 - [ ] 05 Identity and Equality — identity, equivalence, substitution and non-identity.
 - [ ] 06 Epistemic States — true, false, unknown, conflict, possible and their distinctions.
