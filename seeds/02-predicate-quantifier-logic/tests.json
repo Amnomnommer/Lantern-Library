@@ -1,0 +1,132 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.predicate_quantifier_logic",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "ui-1",
+      "premises": [
+        "FOR_ALL x IN birds: has_feathers(x)",
+        "sparrow IN birds"
+      ],
+      "query": "has_feathers(sparrow)",
+      "expected": "YES",
+      "rule": "predicate.universal_instantiation"
+    },
+    {
+      "id": "ump-1",
+      "premises": [
+        "FOR_ALL x IN birds: bird(x) -> has_feathers(x)",
+        "sparrow IN birds",
+        "bird(sparrow)"
+      ],
+      "query": "has_feathers(sparrow)",
+      "expected": "YES",
+      "rule": "predicate.universal_modus_ponens"
+    },
+    {
+      "id": "eg-1",
+      "premises": [
+        "sparrow IN birds",
+        "has_feathers(sparrow)"
+      ],
+      "query": "EXISTS x IN birds: has_feathers(x)",
+      "expected": "YES",
+      "rule": "predicate.existential_generalization"
+    },
+    {
+      "id": "no-existential-import",
+      "premises": [
+        "FOR_ALL x IN unicorns: blue(x)"
+      ],
+      "query": "EXISTS x IN unicorns: blue(x)",
+      "expected": "UNKNOWN",
+      "guard": "guard.universal_existential_import"
+    },
+    {
+      "id": "some-not-all",
+      "premises": [
+        "EXISTS x IN boxes: red(x)"
+      ],
+      "query": "FOR_ALL x IN boxes: red(x)",
+      "expected": "UNKNOWN",
+      "guard": "guard.existential_to_universal"
+    },
+    {
+      "id": "unknown-witness",
+      "premises": [
+        "EXISTS x IN boxes: red(x)",
+        "box_a IN boxes"
+      ],
+      "query": "red(box_a)",
+      "expected": "UNKNOWN",
+      "guard": "guard.existential_witness_identity"
+    },
+    {
+      "id": "counterexample",
+      "premises": [
+        "FOR_ALL x IN birds: flies(x)",
+        "penguin IN birds",
+        "NOT flies(penguin)"
+      ],
+      "query": "FOR_ALL x IN birds: flies(x)",
+      "expected": "CONFLICT",
+      "rule": "predicate.universal_counterexample"
+    },
+    {
+      "id": "quantifier-order",
+      "premises": [
+        "FOR_ALL child: EXISTS parent: parent_of(parent,child)"
+      ],
+      "query": "EXISTS parent: FOR_ALL child: parent_of(parent,child)",
+      "expected": "UNKNOWN",
+      "guard": "guard.quantifier_reversal"
+    },
+    {
+      "id": "domain-boundary",
+      "premises": [
+        "FOR_ALL x IN mammals: warm_blooded(x)",
+        "oak IN plants"
+      ],
+      "query": "warm_blooded(oak)",
+      "expected": "UNKNOWN",
+      "guard": "guard.domain_leakage"
+    },
+    {
+      "id": "none",
+      "premises": [
+        "NO x IN empty_boxes: contains_item(x)",
+        "box_a IN empty_boxes"
+      ],
+      "query": "NOT contains_item(box_a)",
+      "expected": "YES",
+      "rules": [
+        "predicate.none_as_universal_negative",
+        "predicate.universal_instantiation"
+      ]
+    },
+    {
+      "id": "not-exists",
+      "premises": [
+        "NOT (EXISTS x IN room: glowing(x))",
+        "lamp IN room"
+      ],
+      "query": "NOT glowing(lamp)",
+      "expected": "YES",
+      "rules": [
+        "predicate.negated_existential",
+        "predicate.universal_instantiation"
+      ]
+    },
+    {
+      "id": "not-all",
+      "premises": [
+        "room NONEMPTY",
+        "NOT (FOR_ALL x IN room: quiet(x))"
+      ],
+      "query": "EXISTS x IN room: NOT quiet(x)",
+      "expected": "YES",
+      "rule": "predicate.negated_universal"
+    }
+  ]
+}
