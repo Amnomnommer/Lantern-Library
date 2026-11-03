@@ -21,9 +21,9 @@ Seeded means inherited, not unquestionable. FORMAL_CORE is protected from experi
 - [~] 10 Contradiction and Belief Revision
 - [~] 11 Probability and Conditional Probability
 - [~] 12 Measurement, Units, Precision and Accuracy
-- [ ] 13 Causal Reasoning Foundations
+- [~] 13 Causal Reasoning Foundations
 
-## Wave 3 — scientific intelligence
+**Wave 2 status:** all six packages authored and in review; activation waits for loader/Schema-v3 validation.\n\n## Wave 3 — scientific intelligence
 
 - [ ] 14 Scientific Knowledge Types
 - [ ] 15 Hypothesis, Testability and Operationalization
