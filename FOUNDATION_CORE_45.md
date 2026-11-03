@@ -26,7 +26,7 @@ Seeded means inherited, not unquestionable. FORMAL_CORE is protected from experi
 **Wave 2 status:** all six packages authored and in review; activation waits for loader/Schema-v3 validation.\n\n## Wave 3 — scientific intelligence
 
 - [~] 14 Scientific Knowledge Types
-- [ ] 15 Hypothesis, Testability and Operationalization
+- [~] 15 Hypothesis, Testability and Operationalization
 - [ ] 16 Experimental Design
 - [ ] 17 Observational Reasoning
 - [ ] 18 Replication, Review and Knowledge Freshness
