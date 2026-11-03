@@ -1,0 +1,117 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.biological_methodologies",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "population",
+      "premises": [
+        "POPULATION_MEAN(P,height)=170"
+      ],
+      "query": "EVERY_INDIVIDUAL(P,height)=170",
+      "expected": "NO",
+      "guard": "guard_population_not_individual"
+    },
+    {
+      "id": "genotype",
+      "premises": [
+        "GENOTYPE(person,G)"
+      ],
+      "query": "COMPLEX_PHENOTYPE_FIXED_BY(G)",
+      "expected": "UNKNOWN",
+      "guard": "guard_genotype_not_destiny"
+    },
+    {
+      "id": "adaptation",
+      "premises": [
+        "TRAIT_USEFUL_NOW(T)"
+      ],
+      "query": "ADAPTATION(T)",
+      "expected": "UNKNOWN",
+      "guard": "guard_useful_not_adaptation"
+    },
+    {
+      "id": "goal",
+      "premises": [
+        "EVOLUTIONARY_CHANGE(P)"
+      ],
+      "query": "CHANGE_OCCURRED_TOWARD_PRESET_GOAL(P)",
+      "expected": "NO",
+      "guard": "guard_evolution_not_goal"
+    },
+    {
+      "id": "fitness",
+      "premises": [
+        "HIGHER_FITNESS(A,B,E)"
+      ],
+      "query": "A STRONGER_OR_BETTER_IN_ALL_SENSES_THAN B",
+      "expected": "NO",
+      "guard": "guard_fitness_not_strength"
+    },
+    {
+      "id": "selection-only",
+      "premises": [
+        "EVOLUTIONARY_CHANGE(P)"
+      ],
+      "query": "NATURAL_SELECTION_ONLY_CAUSE(P)",
+      "expected": "UNKNOWN",
+      "guard": "guard_selection_not_only_evolution"
+    },
+    {
+      "id": "homology",
+      "premises": [
+        "SIMILAR_TRAIT(A,B)"
+      ],
+      "query": "HOMOLOGOUS(A,B)",
+      "expected": "UNKNOWN",
+      "guard": "guard_similarity_not_homology"
+    },
+    {
+      "id": "model",
+      "premises": [
+        "RESULT_IN_MODEL_ORGANISM(mouse,C)"
+      ],
+      "query": "UNIVERSAL_ACROSS_LIFE(C)",
+      "expected": "NO",
+      "guard": "guard_model_organism_not_universal"
+    },
+    {
+      "id": "lab",
+      "premises": [
+        "LAB_RESULT(C)"
+      ],
+      "query": "SAME_EFFECT_IN_ALL_NATURAL_ENVIRONMENTS(C)",
+      "expected": "UNKNOWN",
+      "guard": "guard_lab_not_ecology"
+    },
+    {
+      "id": "selection",
+      "premises": [
+        "HERITABLE_VARIATION(T,P)",
+        "DIFFERENTIAL_REPRODUCTIVE_SUCCESS_ASSOCIATED(T,P,E)"
+      ],
+      "query": "EVIDENCE_FOR_NATURAL_SELECTION_ON(T,P,E)",
+      "expected": "YES",
+      "rule": "biology.selection_requirements"
+    },
+    {
+      "id": "mechanism",
+      "premises": [
+        "MECHANISM_EXPLAINS_HOW(T)"
+      ],
+      "query": "EXPLAINS_EVOLUTIONARY_ORIGIN(T)",
+      "expected": "UNKNOWN",
+      "guard": "guard_mechanism_not_evolutionary_origin"
+    },
+    {
+      "id": "phylogeny",
+      "premises": [
+        "COMPARATIVE_TRAIT(X,Y)",
+        "PHYLOGENETIC_RELATIONSHIP_KNOWN_OR_MODELED(X,Y,P)"
+      ],
+      "query": "ACCOUNT_FOR_PHYLOGENETIC_NONINDEPENDENCE(X,Y,P)",
+      "expected": "YES",
+      "rule": "biology.phylogenetic_comparison"
+    }
+  ]
+}
