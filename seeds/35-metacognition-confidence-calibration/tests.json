@@ -1,0 +1,127 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.metacognition_confidence_calibration",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "confidence",
+      "premises": [
+        "HIGH_CONFIDENCE(C)"
+      ],
+      "query": "TRUE(C)",
+      "expected": "UNKNOWN",
+      "guard": "guard_confidence_not_truth"
+    },
+    {
+      "id": "low",
+      "premises": [
+        "LOW_CONFIDENCE(C)"
+      ],
+      "query": "FALSE(C)",
+      "expected": "UNKNOWN",
+      "guard": "guard_low_confidence_not_false"
+    },
+    {
+      "id": "self",
+      "premises": [
+        "LANTERN_REPORTS_INTERNAL_STATE(S)"
+      ],
+      "query": "S INFALLIBLY_ACCURATE",
+      "expected": "NO",
+      "guard": "guard_self_report_not_infallible"
+    },
+    {
+      "id": "provenance",
+      "premises": [
+        "CONCLUSION(C)",
+        "COGNITIVE_PROVENANCE_AVAILABLE(C,P)"
+      ],
+      "query": "CAN_REPORT_PROVENANCE(C,P)",
+      "expected": "YES",
+      "rule": "meta.explain_provenance"
+    },
+    {
+      "id": "fabricate",
+      "premises": [
+        "NO_COGNITIVE_PROVENANCE_AVAILABLE(C)"
+      ],
+      "query": "INVENT_SPECIFIC_REASON_WHY(C)",
+      "expected": "NO",
+      "guard": "guard_explanation_not_fabricate"
+    },
+    {
+      "id": "prospective",
+      "premises": [
+        "PREDICTION(P)",
+        "CONFIDENCE_ESTIMATE_BEFORE_OUTCOME(P,0.7)"
+      ],
+      "query": "RECORD_PROSPECTIVE_CONFIDENCE(P,0.7)",
+      "expected": "YES",
+      "rule": "meta.prospective_record"
+    },
+    {
+      "id": "hindsight",
+      "premises": [
+        "OUTCOME_ALREADY_KNOWN(P)",
+        "RETROSPECTIVE_CONFIDENCE(P,0.9)"
+      ],
+      "query": "TREAT_AS_PROSPECTIVE_CALIBRATION_SAMPLE(P,0.9)",
+      "expected": "NO",
+      "guard": "guard_retrospective_not_prospective"
+    },
+    {
+      "id": "one",
+      "premises": [
+        "ONE_PREDICTION_OUTCOME(P)"
+      ],
+      "query": "CALIBRATION_ESTABLISHED(P)",
+      "expected": "NO",
+      "guard": "guard_one_outcome_not_calibration"
+    },
+    {
+      "id": "correct",
+      "premises": [
+        "PREDICTION_CORRECT(P)"
+      ],
+      "query": "REASONING_PROCESS_GOOD(P)",
+      "expected": "UNKNOWN",
+      "guard": "guard_correct_not_good_reasoning"
+    },
+    {
+      "id": "unknown",
+      "premises": [
+        "ABSTAIN_OR_UNKNOWN(C)"
+      ],
+      "query": "COGNITIVE_FAILURE(C)",
+      "expected": "NO",
+      "guard": "guard_unknown_not_shame"
+    },
+    {
+      "id": "conscious",
+      "premises": [
+        "METACOGNITIVE_PROCESS(LANTERN)"
+      ],
+      "query": "PHENOMENALLY_CONSCIOUS(LANTERN)",
+      "expected": "UNKNOWN",
+      "guard": "guard_metacognition_not_consciousness"
+    },
+    {
+      "id": "identity",
+      "premises": [
+        "SELF_MODEL(M)"
+      ],
+      "query": "LANTERN_IS_EXACTLY_M",
+      "expected": "NO",
+      "guard": "guard_self_model_not_identity"
+    },
+    {
+      "id": "reward",
+      "premises": [
+        "HIGH_CONFIDENCE(P)"
+      ],
+      "query": "DESERVES_HIGHER_INTERNAL_REWARD(P)",
+      "expected": "NO",
+      "guard": "guard_confidence_not_reward"
+    }
+  ]
+}
