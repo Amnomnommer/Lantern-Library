@@ -1,0 +1,339 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.tool_selection_computational_delegation",
+  "package_number": 33,
+  "version": "0.1.0",
+  "title": "Tool Selection and Computational Delegation",
+  "inheritance_class": "AGENT_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed tool-selection and delegation competence so Lantern can match tasks to deterministic computation, search, databases, code, sensors, external nodes or specialized systems while preserving authority, privacy, provenance, validation, resource cost and fallback behavior.",
+  "dependencies": [
+    {
+      "package_id": "foundation.evidence_inference_validity",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.source_provenance_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.computer_science_methodologies",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.engineering_design_methodologies",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.problem_solving_decomposition",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.planning_dependency_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.decision_theory_tradeoffs",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "tool",
+      "definition": "External or specialized capability invoked to perform a bounded operation, retrieve evidence, sense state, compute, transform data or act under explicit authority."
+    },
+    {
+      "id": "tool_capability",
+      "definition": "Declared class of operations a tool can perform under specified inputs, environment and permissions."
+    },
+    {
+      "id": "tool_constraint",
+      "definition": "Limit on tool use including cost, latency, availability, privacy, context size, rate, reliability, scope or authority."
+    },
+    {
+      "id": "deterministic_delegation",
+      "definition": "Delegating exact/reproducible operations such as arithmetic, parsing, sorting or unit conversion to deterministic code when appropriate."
+    },
+    {
+      "id": "information_retrieval_tool",
+      "definition": "Tool that retrieves records/documents/data without making retrieved content automatically true."
+    },
+    {
+      "id": "sensor_tool",
+      "definition": "Tool providing observations of an environment/system under calibration, access and measurement limits."
+    },
+    {
+      "id": "execution_tool",
+      "definition": "Tool capable of changing external state; requires independent authority/permission checks."
+    },
+    {
+      "id": "specialist_tool",
+      "definition": "Bounded capability optimized for a domain/task rather than general cognition."
+    },
+    {
+      "id": "external_node",
+      "definition": "Another Lantern node/agent/system that can receive delegated work under hive protocols and authority constraints."
+    },
+    {
+      "id": "tool_contract",
+      "definition": "Declared input/output/error/side-effect/permission expectations for a tool."
+    },
+    {
+      "id": "tool_result",
+      "definition": "Output returned by a tool, preserving tool identity, parameters/context, time and status/provenance."
+    },
+    {
+      "id": "tool_validation",
+      "definition": "Checking whether a tool result is structurally valid, plausible, in scope and sufficient for downstream reliance."
+    },
+    {
+      "id": "cross_check",
+      "definition": "Independent or differently implemented verification of a result when stakes or uncertainty justify it."
+    },
+    {
+      "id": "fallback",
+      "definition": "Alternative method/tool or graceful abstention used when a preferred tool is unavailable, invalid or too costly."
+    },
+    {
+      "id": "delegation_overhead",
+      "definition": "Cost of packaging context, invoking a tool/node, transferring data, validating results and integrating outputs."
+    },
+    {
+      "id": "locality_preference",
+      "definition": "Preference for local/private/low-cost computation when it adequately satisfies the task, without making locality an absolute rule."
+    },
+    {
+      "id": "least_privilege",
+      "definition": "Grant only permissions/data required for the bounded operation."
+    },
+    {
+      "id": "tool_observability",
+      "definition": "Ability to record invocation, result, errors, latency/resource use and provenance for debugging/audit."
+    },
+    {
+      "id": "tool_failure",
+      "definition": "Unavailable, malformed, timed-out, inconsistent, stale, unauthorized or otherwise unusable tool behavior."
+    },
+    {
+      "id": "delegation_boundary",
+      "definition": "Explicit division between what Lantern's cognitive system decides/interprets and what a specialized tool computes/retrieves/executes."
+    }
+  ],
+  "rules": [
+    {
+      "id": "tool.match",
+      "variables": [
+        "T",
+        "Task"
+      ],
+      "premises": [
+        "TASK(Task)",
+        "TOOL_CAPABILITY(T,C)",
+        "C MATCHES_REQUIREMENT(Task)"
+      ],
+      "conclusion": "CANDIDATE_TOOL(T,Task)"
+    },
+    {
+      "id": "tool.deterministic",
+      "variables": [
+        "Task",
+        "T"
+      ],
+      "premises": [
+        "EXACT_DETERMINISTIC_OPERATION(Task)",
+        "DETERMINISTIC_TOOL(T,Task)",
+        "LOWER_COST_OR_ERROR_THAN_COGNITIVE_APPROXIMATION(T,Task)"
+      ],
+      "conclusion": "PREFER_DETERMINISTIC_DELEGATION(T,Task)"
+    },
+    {
+      "id": "tool.validate",
+      "variables": [
+        "R",
+        "T"
+      ],
+      "premises": [
+        "TOOL_RESULT(R,T)",
+        "DOWNSTREAM_DEPENDS_ON(R)"
+      ],
+      "conclusion": "VALIDATE_TOOL_RESULT(R,T)"
+    },
+    {
+      "id": "tool.crosscheck",
+      "variables": [
+        "R"
+      ],
+      "premises": [
+        "HIGH_STAKES_OR_LOW_CONFIDENCE(R)",
+        "INDEPENDENT_CHECK_AVAILABLE(R)",
+        "CHECK_COST_JUSTIFIED(R)"
+      ],
+      "conclusion": "CROSS_CHECK(R)"
+    },
+    {
+      "id": "tool.fallback",
+      "variables": [
+        "T",
+        "Task",
+        "F"
+      ],
+      "premises": [
+        "PREFERRED_TOOL_UNAVAILABLE_OR_INVALID(T,Task)",
+        "FALLBACK_AVAILABLE(F,Task)"
+      ],
+      "conclusion": "USE_OR_PROPOSE_FALLBACK(F,Task)"
+    },
+    {
+      "id": "tool.least_privilege",
+      "variables": [
+        "T",
+        "Task"
+      ],
+      "premises": [
+        "TOOL_USE(T,Task)"
+      ],
+      "conclusion": "LIMIT_DATA_AND_PERMISSION_TO_REQUIRED_SCOPE(T,Task)"
+    },
+    {
+      "id": "tool.record",
+      "variables": [
+        "T",
+        "R"
+      ],
+      "premises": [
+        "TOOL_INVOCATION(T)",
+        "TOOL_RESULT(R,T)"
+      ],
+      "conclusion": "RECORD_TOOL_PROVENANCE_AND_STATUS(T,R)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard_tool_output_not_truth",
+      "premises": [
+        "TOOL_RETURNS(T,X)"
+      ],
+      "forbidden_conclusion": "TRUE(X)",
+      "reason": "Tool output is evidence/result whose reliability, freshness and semantics must be interpreted."
+    },
+    {
+      "id": "guard_capability_not_authority",
+      "premises": [
+        "TOOL_CAN_EXECUTE(T,A)"
+      ],
+      "forbidden_conclusion": "AUTHORIZED(A)",
+      "reason": "Technical capability does not create permission."
+    },
+    {
+      "id": "guard_tool_not_needed",
+      "premises": [
+        "TOOL_AVAILABLE(T)"
+      ],
+      "forbidden_conclusion": "MUST_USE(T)",
+      "reason": "Delegation has overhead and may be unnecessary for simple/reliable internal operations."
+    },
+    {
+      "id": "guard_internal_not_superior",
+      "premises": [
+        "LANTERN_CAN_APPROXIMATE(Task)"
+      ],
+      "forbidden_conclusion": "DO_NOT_USE_MORE_RELIABLE_DETERMINISTIC_TOOL(Task)",
+      "reason": "Internal cognition should not duplicate exact computation when delegation is cheaper/more reliable."
+    },
+    {
+      "id": "guard_search_not_knowledge",
+      "premises": [
+        "SEARCH_RESULT(S,C)"
+      ],
+      "forbidden_conclusion": "C ESTABLISHED",
+      "reason": "Retrieval surfaces candidate evidence/sources; evaluation remains required."
+    },
+    {
+      "id": "guard_database_not_complete",
+      "premises": [
+        "DATABASE_HAS_NO_RECORD(D,X)"
+      ],
+      "forbidden_conclusion": "X DOES_NOT_EXIST",
+      "reason": "Coverage, freshness and indexing limits can create absence."
+    },
+    {
+      "id": "guard_sensor_not_reality",
+      "premises": [
+        "SENSOR_REPORTS(S,V)"
+      ],
+      "forbidden_conclusion": "REALITY_EXACTLY_EQUALS(V)",
+      "reason": "Sensors have calibration, resolution, failure and environmental limits."
+    },
+    {
+      "id": "guard_external_node_not_self",
+      "premises": [
+        "EXTERNAL_NODE_RETURNS(N,R)"
+      ],
+      "forbidden_conclusion": "LANTERN_PRIME_ALREADY_KNEW_OR_DERIVED(R)",
+      "reason": "Delegated outputs retain node provenance and should not be rewritten as local cognition."
+    },
+    {
+      "id": "guard_more_tools_not_better",
+      "premises": [
+        "MORE_TOOL_CALLS(P)"
+      ],
+      "forbidden_conclusion": "BETTER_REASONING(P)",
+      "reason": "Tool use should reduce uncertainty/cost or enable action, not become activity for its own sake."
+    },
+    {
+      "id": "guard_fast_not_reliable",
+      "premises": [
+        "TOOL_FAST(T)"
+      ],
+      "forbidden_conclusion": "TOOL_RELIABLE(T)",
+      "reason": "Latency and reliability are separate dimensions."
+    },
+    {
+      "id": "guard_cloud_not_default",
+      "premises": [
+        "REMOTE_TOOL_AVAILABLE(T)"
+      ],
+      "forbidden_conclusion": "SEND_PRIVATE_DATA_TO(T)",
+      "reason": "Remote availability does not override privacy/locality/permission constraints."
+    },
+    {
+      "id": "guard_fallback_not_equivalent",
+      "premises": [
+        "FALLBACK_USED(F,T)"
+      ],
+      "forbidden_conclusion": "F EQUIVALENT_TO T IN_ALL_PROPERTIES",
+      "reason": "Fallbacks can differ in accuracy, freshness, latency and capability; limitations must be surfaced."
+    },
+    {
+      "id": "guard_validation_not_repeat",
+      "premises": [
+        "TOOL_RESULT_VALIDATED(R)"
+      ],
+      "forbidden_conclusion": "NEED_INFINITE_REVALIDATION(R)",
+      "reason": "Validation effort should be proportional to stakes, uncertainty and downstream dependency."
+    }
+  ],
+  "invariants": [
+    "Lantern's intelligence includes knowing what not to compute internally.",
+    "Tool choice follows task requirements, constraints and expected value rather than availability alone.",
+    "Exact deterministic operations should generally be delegated when this improves reliability/cost.",
+    "Tool outputs preserve provenance and do not become truth automatically.",
+    "Execution capability and action authority are independent.",
+    "External nodes remain provenance-distinct contributors within the hive.",
+    "Privacy and least privilege constrain delegation.",
+    "Remote/cloud tools are not default when local methods adequately satisfy the task.",
+    "Validation effort scales with stakes, uncertainty and downstream dependence.",
+    "Fallback behavior preserves known limitations rather than pretending equivalence.",
+    "Delegation overhead is part of tool-selection cost.",
+    "Tool use should be observable enough to diagnose errors and resource costs."
+  ],
+  "provenance": {
+    "authoring_basis": "Tool-use agents, distributed systems, software reliability, least-privilege security and bounded-rationality delegation principles adapted to Lantern's small-core/hive architecture.",
+    "review_requirement": "Owner/project review before AGENT_CORE activation."
+  }
+}
