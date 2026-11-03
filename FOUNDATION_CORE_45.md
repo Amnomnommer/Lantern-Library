@@ -29,7 +29,7 @@ Seeded means inherited, not unquestionable. FORMAL_CORE is protected from experi
 - [~] 15 Hypothesis, Testability and Operationalization
 - [~] 16 Experimental Design
 - [~] 17 Observational Reasoning
-- [ ] 18 Replication, Review and Knowledge Freshness
+- [~] 18 Replication, Review and Knowledge Freshness
 - [ ] 19 Statistical Methodology
 
 ## Wave 4 — disciplinary methodologies
