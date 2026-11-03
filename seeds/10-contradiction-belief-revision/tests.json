@@ -1,0 +1,143 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.contradiction_belief_revision",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "confirmed-conflict",
+      "premises": [
+        "P",
+        "NOT P",
+        "SAME_MEANING(P,NOT P)",
+        "OVERLAPPING_SCOPE(P,NOT P)"
+      ],
+      "query": "CONFLICT(P)",
+      "expected": "YES",
+      "rule": "revision.confirm_contradiction"
+    },
+    {
+      "id": "scope-resolution",
+      "premises": [
+        "APPARENT_CONTRADICTION(P,Q)",
+        "NONOVERLAPPING_SCOPE(P,Q)"
+      ],
+      "query": "RESOLVED_AS_SCOPE_DIFFERENCE(P,Q)",
+      "expected": "YES",
+      "rule": "revision.scope_resolution"
+    },
+    {
+      "id": "semantic-resolution",
+      "premises": [
+        "APPARENT_CONTRADICTION(P,Q)",
+        "DIFFERENT_MEANING_OR_SENSE(P,Q)"
+      ],
+      "query": "CONTRADICTION(P,Q)",
+      "expected": "NO_OR_UNRESOLVED_NOT_YES",
+      "rule": "revision.meaning_resolution"
+    },
+    {
+      "id": "apparent-only",
+      "premises": [
+        "APPARENT_CONTRADICTION(P,Q)"
+      ],
+      "query": "CONTRADICTION(P,Q)",
+      "expected": "UNKNOWN",
+      "guard": "guard.apparent_not_confirmed"
+    },
+    {
+      "id": "preserve-conflict",
+      "premises": [
+        "CONFLICT(P)"
+      ],
+      "query": "DELETE_ONE_SIDE(P)",
+      "expected": "NO",
+      "guard": "guard.conflict_not_delete"
+    },
+    {
+      "id": "undercut",
+      "premises": [
+        "S SUPPORTS P",
+        "E UNDERCUTS_LINK(S,P)"
+      ],
+      "query": "UNDERCUTTING_DEFEATER(E,S,P)",
+      "expected": "YES",
+      "rule": "revision.undercut"
+    },
+    {
+      "id": "undercut-not-negation",
+      "premises": [
+        "UNDERCUTTING_DEFEATER(E,S,P)"
+      ],
+      "query": "NOT P",
+      "expected": "UNKNOWN",
+      "guard": "guard.undercut_not_negation"
+    },
+    {
+      "id": "refinement",
+      "premises": [
+        "CLAIM_SCOPE(P,Swide)",
+        "SUPPORT_PERSISTS_IN(P,Snarrow)",
+        "FAILS_OUTSIDE(P,Snarrow)",
+        "Snarrow SUBSCOPE_OF Swide"
+      ],
+      "query": "REFINE_SCOPE(P,Snarrow)",
+      "expected": "YES",
+      "rule": "revision.scope_refinement"
+    },
+    {
+      "id": "newer",
+      "premises": [
+        "NEWER(New,Old)"
+      ],
+      "query": "SUPERSEDES(New,Old)",
+      "expected": "UNKNOWN",
+      "guard": "guard.newer_not_supersede"
+    },
+    {
+      "id": "counterexample",
+      "premises": [
+        "COUNTEREXAMPLE(E,P)"
+      ],
+      "query": "RETRACT_ALL_FORMS(P)",
+      "expected": "UNKNOWN",
+      "guard": "guard.single_counterexample_not_destroy_scoped_rule"
+    },
+    {
+      "id": "suspend",
+      "premises": [
+        "CONFLICT(P)",
+        "NO_DECISIVE_RESOLUTION(P)"
+      ],
+      "query": "SUSPEND_JUDGMENT(P)",
+      "expected": "YES",
+      "rule": "revision.suspend_on_unresolved_conflict"
+    },
+    {
+      "id": "retraction-history",
+      "premises": [
+        "RETRACT_SUPPORT(P)"
+      ],
+      "query": "ERASE_HISTORY(P)",
+      "expected": "NO",
+      "guard": "guard.retraction_not_erasure"
+    },
+    {
+      "id": "supersession-scope",
+      "premises": [
+        "SUPERSEDE_FOR_SCOPE(Old,New,S)"
+      ],
+      "query": "FALSE_IN_ALL_SCOPES(Old)",
+      "expected": "UNKNOWN",
+      "guard": "guard.supersession_not_total_falsehood"
+    },
+    {
+      "id": "owner-correction",
+      "premises": [
+        "OWNER_CORRECTS(preference_old,preference_new)"
+      ],
+      "query": "preference_new IS_UNIVERSAL_FACT",
+      "expected": "NO_OR_UNKNOWN_NOT_YES",
+      "guard": "guard.owner_correction_not_world_truth"
+    }
+  ]
+}
