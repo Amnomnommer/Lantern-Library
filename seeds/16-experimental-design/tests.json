@@ -1,0 +1,129 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.experimental_design",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "candidate-design",
+      "premises": [
+        "TESTABLE(H)",
+        "MANIPULABLE_FACTOR(H,I)",
+        "MEASURABLE_OUTCOME(H,O)",
+        "JUSTIFIED_COMPARISON(C)"
+      ],
+      "query": "CANDIDATE_EXPERIMENT(H,I,O,C)",
+      "expected": "YES",
+      "rule": "experiment.design_from_hypothesis"
+    },
+    {
+      "id": "assignment-sampling",
+      "premises": [
+        "RANDOM_ASSIGNMENT(E)"
+      ],
+      "query": "REPRESENTATIVE_SAMPLE(E)",
+      "expected": "UNKNOWN",
+      "guard": "guard.random_assignment_not_sampling"
+    },
+    {
+      "id": "sampling-assignment",
+      "premises": [
+        "RANDOM_SAMPLE_FROM(E,P)"
+      ],
+      "query": "TREATMENT_GROUPS_EXCHANGEABLE(E)",
+      "expected": "UNKNOWN",
+      "guard": "guard.random_sampling_not_assignment"
+    },
+    {
+      "id": "active-control",
+      "premises": [
+        "CONTROL_CONDITION(C)"
+      ],
+      "query": "NO_TREATMENT(C)",
+      "expected": "UNKNOWN",
+      "guard": "guard.control_not_no_treatment"
+    },
+    {
+      "id": "blinding",
+      "premises": [
+        "BLINDED(E)"
+      ],
+      "query": "VALID_EXPERIMENT(E)",
+      "expected": "UNKNOWN",
+      "guard": "guard.blinding_not_validity"
+    },
+    {
+      "id": "randomization",
+      "premises": [
+        "RANDOM_ASSIGNMENT(E)"
+      ],
+      "query": "NO_CONFOUNDING_OR_IMBALANCE_POSSIBLE(E)",
+      "expected": "NO",
+      "guard": "guard.randomization_not_perfection"
+    },
+    {
+      "id": "manipulation",
+      "premises": [
+        "INTENDED_MANIPULATION(E,M)",
+        "MANIPULATION_CHECK_CONFIRMS(E,M)"
+      ],
+      "query": "EVIDENCE_MANIPULATION_OCCURRED(E,M)",
+      "expected": "YES",
+      "rule": "experiment.manipulation_check"
+    },
+    {
+      "id": "manipulation-hypothesis",
+      "premises": [
+        "MANIPULATION_CHECK_CONFIRMS(E,M)"
+      ],
+      "query": "HYPOTHESIS_CONFIRMED(E)",
+      "expected": "UNKNOWN",
+      "guard": "guard.manipulation_check_not_outcome"
+    },
+    {
+      "id": "internal-external",
+      "premises": [
+        "HIGH_INTERNAL_VALIDITY(E)"
+      ],
+      "query": "HIGH_EXTERNAL_VALIDITY(E)",
+      "expected": "UNKNOWN",
+      "guard": "guard.internal_not_external"
+    },
+    {
+      "id": "factorial",
+      "premises": [
+        "FACTORIAL_DESIGN(A,B,Y)"
+      ],
+      "query": "CAN_ESTIMATE_MAIN_AND_INTERACTION_EFFECTS(A,B,Y)",
+      "expected": "YES",
+      "rule": "experiment.factorial_interaction"
+    },
+    {
+      "id": "same-data",
+      "premises": [
+        "REUSES_SAME_DATA(S2,S1)"
+      ],
+      "query": "INDEPENDENT_REPLICATION(S2,S1)",
+      "expected": "NO",
+      "guard": "guard.replication_not_copy"
+    },
+    {
+      "id": "ethics",
+      "premises": [
+        "EXPERIMENT(E)",
+        "ETHICAL_REQUIREMENTS_NOT_MET(E)"
+      ],
+      "query": "DO_NOT_RUN(E)",
+      "expected": "YES",
+      "rule": "experiment.ethics_gate"
+    },
+    {
+      "id": "causal-not-rct-only",
+      "premises": [
+        "CAUSAL_QUESTION(Q)"
+      ],
+      "query": "MUST_USE_RANDOMIZED_EXPERIMENT(Q)",
+      "expected": "NO",
+      "guard": "guard.experiment_not_only_method"
+    }
+  ]
+}
