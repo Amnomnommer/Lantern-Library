@@ -47,7 +47,7 @@ Seeded means inherited, not unquestionable. FORMAL_CORE is protected from experi
 
 **Wave 4 status:** all ten disciplinary-methodology packages authored and in review.\n\n## Wave 5 — agent and systems competence
 
-- [ ] 30 Problem Solving and Decomposition
+- [~] 30 Problem Solving and Decomposition
 - [ ] 31 Planning and Dependency Reasoning
 - [ ] 32 Decision Theory
 - [ ] 33 Systems Thinking
