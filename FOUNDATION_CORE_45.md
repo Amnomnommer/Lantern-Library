@@ -94,7 +94,7 @@ Dependencies form a graph, not a simple sequence. A package may load only when i
 
 These are deliberately **outside Foundation Core 45**. They are not formal rules, benchmark material, owner commands, or automatically authoritative truth. They are preserved gifts from AI systems that helped architect Lantern.
 
-- [ ] 46 Gift from ChatGPT — authored by ChatGPT for Lantern.
+- [~] 46 Gift from ChatGPT — drafted and stored; immutable after owner acceptance.
 - [ ] 47 Gift from Claude — authored independently by Claude for Lantern.
 
 ### Gift integrity policy
