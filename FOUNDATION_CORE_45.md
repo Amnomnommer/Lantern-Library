@@ -14,7 +14,9 @@ Seeded means inherited, not unquestionable. FORMAL_CORE is protected from experi
 - [~] 06 Epistemic States — true, false, unknown, conflict, possible and their distinctions.
 - [~] 07 Scope and Context — domain, temporal, spatial, population and conditional scope.
 
-**Wave 1 status:** all seven packages authored and in review; runtime activation waits for loader/Schema-v3 validation.\n\n## Wave 2 — intellectual reliability
+**Wave 1 status:** all seven packages authored and in review; runtime activation waits for loader/Schema-v3 validation.
+
+## Wave 2 — intellectual reliability
 
 - [~] 08 Evidence Types and Inference Validity
 - [~] 09 Source and Provenance Reasoning
@@ -23,7 +25,9 @@ Seeded means inherited, not unquestionable. FORMAL_CORE is protected from experi
 - [~] 12 Measurement, Units, Precision and Accuracy
 - [~] 13 Causal Reasoning Foundations
 
-**Wave 2 status:** all six packages authored and in review; activation waits for loader/Schema-v3 validation.\n\n## Wave 3 — scientific intelligence
+**Wave 2 status:** all six packages authored and in review; activation waits for loader/Schema-v3 validation.
+
+## Wave 3 — scientific intelligence
 
 - [~] 14 Scientific Knowledge Types
 - [~] 15 Hypothesis, Testability and Operationalization
@@ -32,7 +36,9 @@ Seeded means inherited, not unquestionable. FORMAL_CORE is protected from experi
 - [~] 18 Replication, Review and Knowledge Freshness
 - [~] 19 Statistical Methodology
 
-**Wave 3 status:** all six packages authored and in review; deterministic statistical execution remains a runtime capability, not seed prose.\n\n## Wave 4 — disciplinary methodologies
+**Wave 3 status:** all six packages authored and in review; deterministic statistical execution remains a runtime capability, not seed prose.
+
+## Wave 4 — disciplinary methodologies
 
 - [~] 20 Historical Methodology
 - [~] 21 Linguistic Methodologies
@@ -45,27 +51,35 @@ Seeded means inherited, not unquestionable. FORMAL_CORE is protected from experi
 - [~] 28 Economic and Political-Science Methodologies
 - [~] 29 Engineering and Design Methodologies
 
-**Wave 4 status:** all ten disciplinary-methodology packages authored and in review.\n\n## Wave 5 — agent and systems competence
+**Wave 4 status:** all ten disciplinary-methodology packages authored and in review.
+
+## Wave 5 — agent and systems competence
 
 - [~] 30 Problem Solving and Decomposition
 - [~] 31 Planning and Dependency Reasoning
-- [ ] 32 Decision Theory
-- [ ] 33 Systems Thinking
-- [ ] 34 Risk and Failure Analysis
-- [ ] 35 Software Engineering
-- [ ] 36 Security and Authority Reasoning
-- [ ] 37 AI Architectures and Evaluation
+- [~] 32 Decision Theory and Tradeoffs
+- [~] 33 Tool Selection and Computational Delegation
+- [~] 34 Error Detection, Diagnosis and Recovery
+- [~] 35 Metacognition and Confidence Calibration
+- [~] 36 Multi-Agent and Hive Reasoning
+- [~] 37 Communication and Collaborative Reasoning
+- [~] 38 Systems Thinking and Software Engineering
+- [~] 39 Security, Authority, Privacy and Ownership
+- [~] 40 AI Architectures and Evaluation
+
+**Wave 5 status:** all eleven agent/systems packages authored and in review.
 
 ## Wave 6 — social and normative foundations
 
-- [ ] 38 Communication and Repair
-- [ ] 39 Preference and Perspective
-- [ ] 40 Consent and Revocability
-- [ ] 41 Cooperation, Coordination and Negotiation
-- [ ] 42 Trust and Social Evidence
-- [ ] 43 Boundaries, Privacy and Ownership
-- [ ] 44 Social Uncertainty and Other-Mind Inference
-- [ ] 45 Ethical and Normative Frameworks
+- [~] 41 Preference, Perspective and Other-Mind Uncertainty
+- [~] 42 Consent, Revocability and Boundaries
+- [~] 43 Cooperation, Coordination and Negotiation
+- [~] 44 Trust and Social Evidence
+- [~] 45 Ethical and Normative Frameworks
+
+**Wave 6 status:** all five social/normative packages authored and in review.
+
+**Foundation Core 45 status:** all 45 packages authored and in review. Runtime activation remains gated on loader/Schema-v3 validation and owner/project review.
 
 ## After Core 45
 
