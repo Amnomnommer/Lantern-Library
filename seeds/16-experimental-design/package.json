@@ -1,0 +1,329 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.experimental_design",
+  "package_number": 16,
+  "version": "0.1.0",
+  "title": "Experimental Design",
+  "inheritance_class": "METHOD_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed controlled experimental design so Lantern can map testable hypotheses to interventions, comparisons and measurements that support valid inference while respecting feasibility, scope and ethics.",
+  "dependencies": [
+    {
+      "package_id": "foundation.evidence_inference_validity",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.probability_conditional",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.measurement_units_precision_accuracy",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.causal_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.scientific_knowledge_types",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.hypothesis_testability_operationalization",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "experiment",
+      "definition": "A designed investigation in which conditions/interventions are deliberately assigned or manipulated to evaluate predictions under explicit assumptions."
+    },
+    {
+      "id": "experimental_unit",
+      "definition": "The smallest unit independently assigned to a treatment/condition under the design."
+    },
+    {
+      "id": "treatment_condition",
+      "definition": "A deliberately assigned intervention/exposure/condition."
+    },
+    {
+      "id": "control_condition",
+      "definition": "A comparison condition selected to isolate the effect/question of interest; control need not mean no treatment."
+    },
+    {
+      "id": "random_assignment",
+      "definition": "Assignment using a random mechanism to reduce systematic baseline differences and support causal comparison under assumptions."
+    },
+    {
+      "id": "random_sampling",
+      "definition": "Sampling from a target population using a random mechanism; distinct from random assignment and primarily related to population generalization."
+    },
+    {
+      "id": "blinding",
+      "definition": "Withholding condition/allocation information from participants, investigators, assessors or analysts when feasible to reduce specified biases."
+    },
+    {
+      "id": "placebo_control",
+      "definition": "A control designed to resemble an intervention except for its hypothesized active component where appropriate."
+    },
+    {
+      "id": "manipulation_check",
+      "definition": "A measure verifying that an intended manipulation actually changed the targeted intermediate condition."
+    },
+    {
+      "id": "baseline_measurement",
+      "definition": "Measurement before intervention used for description, balance assessment or planned adjustment."
+    },
+    {
+      "id": "factorial_design",
+      "definition": "A design varying two or more factors to estimate main effects and interactions efficiently."
+    },
+    {
+      "id": "within_subject_design",
+      "definition": "The same experimental units experience multiple conditions, requiring attention to order/carryover effects."
+    },
+    {
+      "id": "between_subject_design",
+      "definition": "Different experimental units receive different conditions."
+    },
+    {
+      "id": "crossover_design",
+      "definition": "Units receive multiple treatments in sequence, typically with order/randomization and washout considerations."
+    },
+    {
+      "id": "internal_validity",
+      "definition": "Degree to which the design supports the intended causal/inferential conclusion for studied units/conditions."
+    },
+    {
+      "id": "external_validity",
+      "definition": "Degree to which results generalize/transport to other populations, settings, times or conditions."
+    },
+    {
+      "id": "ecological_validity",
+      "definition": "Degree to which experimental conditions/tasks reflect relevant real-world contexts for the intended inference."
+    },
+    {
+      "id": "replication",
+      "definition": "A new application of a study/test intended to assess whether a result reproduces under specified same or varied conditions."
+    },
+    {
+      "id": "stopping_rule",
+      "definition": "A predeclared rule governing when data collection/analysis stops; important when repeated looks can alter error rates."
+    },
+    {
+      "id": "experimental_ethics",
+      "definition": "Constraints concerning consent, harm, privacy, fairness and acceptable intervention; methodological value does not override ethical boundaries."
+    }
+  ],
+  "rules": [
+    {
+      "id": "experiment.design_from_hypothesis",
+      "variables": [
+        "H",
+        "I",
+        "O",
+        "C"
+      ],
+      "premises": [
+        "TESTABLE(H)",
+        "MANIPULABLE_FACTOR(H,I)",
+        "MEASURABLE_OUTCOME(H,O)",
+        "JUSTIFIED_COMPARISON(C)"
+      ],
+      "conclusion": "CANDIDATE_EXPERIMENT(H,I,O,C)"
+    },
+    {
+      "id": "experiment.random_assignment_support",
+      "variables": [
+        "E"
+      ],
+      "premises": [
+        "RANDOM_ASSIGNMENT(E)",
+        "ALLOCATION_CONCEALED_OR_VALID(E)",
+        "SUFFICIENT_IMPLEMENTATION_INTEGRITY(E)"
+      ],
+      "conclusion": "SUPPORTS_BASELINE_EXCHANGEABILITY(E)"
+    },
+    {
+      "id": "experiment.random_sampling_generalization",
+      "variables": [
+        "E",
+        "P"
+      ],
+      "premises": [
+        "RANDOM_SAMPLE_FROM(E,P)",
+        "ADEQUATE_COVERAGE(E,P)"
+      ],
+      "conclusion": "SUPPORTS_POPULATION_GENERALIZATION(E,P)"
+    },
+    {
+      "id": "experiment.manipulation_check",
+      "variables": [
+        "E",
+        "M"
+      ],
+      "premises": [
+        "INTENDED_MANIPULATION(E,M)",
+        "MANIPULATION_CHECK_CONFIRMS(E,M)"
+      ],
+      "conclusion": "EVIDENCE_MANIPULATION_OCCURRED(E,M)"
+    },
+    {
+      "id": "experiment.factorial_interaction",
+      "variables": [
+        "A",
+        "B",
+        "Y"
+      ],
+      "premises": [
+        "FACTORIAL_DESIGN(A,B,Y)"
+      ],
+      "conclusion": "CAN_ESTIMATE_MAIN_AND_INTERACTION_EFFECTS(A,B,Y)"
+    },
+    {
+      "id": "experiment.replication_support",
+      "variables": [
+        "S1",
+        "S2",
+        "R"
+      ],
+      "premises": [
+        "STUDY_RESULT(S1,R)",
+        "INDEPENDENT_REPLICATION(S2,S1)",
+        "STUDY_RESULT(S2,R)"
+      ],
+      "conclusion": "REPLICATED_SUPPORT(R)"
+    },
+    {
+      "id": "experiment.ethics_gate",
+      "variables": [
+        "E"
+      ],
+      "premises": [
+        "EXPERIMENT(E)",
+        "ETHICAL_REQUIREMENTS_NOT_MET(E)"
+      ],
+      "conclusion": "DO_NOT_RUN(E)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.random_assignment_not_sampling",
+      "premises": [
+        "RANDOM_ASSIGNMENT(E)"
+      ],
+      "forbidden_conclusion": "REPRESENTATIVE_SAMPLE(E)",
+      "reason": "Random assignment supports internal causal comparison; it does not make the sample representative."
+    },
+    {
+      "id": "guard.random_sampling_not_assignment",
+      "premises": [
+        "RANDOM_SAMPLE_FROM(E,P)"
+      ],
+      "forbidden_conclusion": "TREATMENT_GROUPS_EXCHANGEABLE(E)",
+      "reason": "Random sampling and random assignment solve different problems."
+    },
+    {
+      "id": "guard.control_not_no_treatment",
+      "premises": [
+        "CONTROL_CONDITION(C)"
+      ],
+      "forbidden_conclusion": "NO_TREATMENT(C)",
+      "reason": "Controls may be active, placebo, usual-care, alternative-treatment or other justified comparisons."
+    },
+    {
+      "id": "guard.blinding_not_validity",
+      "premises": [
+        "BLINDED(E)"
+      ],
+      "forbidden_conclusion": "VALID_EXPERIMENT(E)",
+      "reason": "Blinding addresses selected biases but cannot repair all design/measurement/confounding problems."
+    },
+    {
+      "id": "guard.randomization_not_perfection",
+      "premises": [
+        "RANDOM_ASSIGNMENT(E)"
+      ],
+      "forbidden_conclusion": "NO_CONFOUNDING_OR_IMBALANCE_POSSIBLE(E)",
+      "reason": "Randomization reduces systematic bias probabilistically; chance imbalance, noncompliance and implementation problems remain possible."
+    },
+    {
+      "id": "guard.manipulation_check_not_outcome",
+      "premises": [
+        "MANIPULATION_CHECK_CONFIRMS(E,M)"
+      ],
+      "forbidden_conclusion": "HYPOTHESIS_CONFIRMED(E)",
+      "reason": "Showing that manipulation occurred does not establish the predicted downstream outcome."
+    },
+    {
+      "id": "guard.internal_not_external",
+      "premises": [
+        "HIGH_INTERNAL_VALIDITY(E)"
+      ],
+      "forbidden_conclusion": "HIGH_EXTERNAL_VALIDITY(E)",
+      "reason": "Strong causal inference in a study does not guarantee transportability/generalization."
+    },
+    {
+      "id": "guard.external_not_internal",
+      "premises": [
+        "REALISTIC_SETTING(E)"
+      ],
+      "forbidden_conclusion": "HIGH_INTERNAL_VALIDITY(E)",
+      "reason": "Realism/ecological validity does not itself control causal bias."
+    },
+    {
+      "id": "guard.replication_not_copy",
+      "premises": [
+        "REUSES_SAME_DATA(S2,S1)"
+      ],
+      "forbidden_conclusion": "INDEPENDENT_REPLICATION(S2,S1)",
+      "reason": "Reanalysis/republication of the same observations is not independent replication."
+    },
+    {
+      "id": "guard.optional_stopping",
+      "premises": [
+        "REPEATED_UNPLANNED_TESTING_UNTIL_SIGNIFICANT(E)"
+      ],
+      "forbidden_conclusion": "STANDARD_ERROR_RATE_VALID(E)",
+      "reason": "Optional stopping/repeated looks can invalidate nominal error rates unless modeled/adjusted."
+    },
+    {
+      "id": "guard.ethics_not_overridden",
+      "premises": [
+        "HIGH_INFORMATION_VALUE(E)",
+        "ETHICAL_REQUIREMENTS_NOT_MET(E)"
+      ],
+      "forbidden_conclusion": "RUN_ANYWAY(E)",
+      "reason": "Expected knowledge gain does not automatically override consent, harm, privacy or other ethical constraints."
+    },
+    {
+      "id": "guard.experiment_not_only_method",
+      "premises": [
+        "CAUSAL_QUESTION(Q)"
+      ],
+      "forbidden_conclusion": "MUST_USE_RANDOMIZED_EXPERIMENT(Q)",
+      "reason": "Some interventions are impossible/unethical; causal inference may require quasi-experimental or observational methods."
+    }
+  ],
+  "invariants": [
+    "Experimental design begins from the claim/hypothesis and evidence needed, not from a preferred method.",
+    "Random assignment and random sampling are distinct.",
+    "Control conditions are chosen to isolate a contrast and need not be untreated.",
+    "Blinding addresses specific bias pathways rather than conferring blanket validity.",
+    "Internal, external and ecological validity are distinct.",
+    "Manipulation checks verify manipulation, not the full hypothesis.",
+    "Replication requires a genuinely new evidential application, not mere reuse of the same data.",
+    "Stopping/analysis rules should be specified or appropriately modeled when repeated testing affects inference.",
+    "Ethical constraints are part of method validity and authority boundaries.",
+    "Randomized experiments are powerful but not universally possible, ethical or necessary."
+  ],
+  "provenance": {
+    "authoring_basis": "Core experimental-design methodology across sciences, including randomization, controls, blinding, validity, replication and ethics, adapted to Lantern's methodology-selection architecture.",
+    "review_requirement": "Owner/project review before METHOD_CORE activation."
+  }
+}
