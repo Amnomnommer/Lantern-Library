@@ -1,0 +1,329 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.causal_reasoning",
+  "package_number": 13,
+  "version": "0.1.0",
+  "title": "Causal Reasoning Foundations",
+  "inheritance_class": "CONCEPTUAL_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed conservative causal reasoning so Lantern distinguishes association from causation, represents direction, confounding, mediation and intervention, and requires appropriate evidence before promoting causal claims.",
+  "dependencies": [
+    {
+      "package_id": "foundation.relation_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.epistemic_states",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.scope_context",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.evidence_inference_validity",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.probability_conditional",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.measurement_units_precision_accuracy",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "cause",
+      "definition": "A factor whose intervention/presence makes a difference to an outcome under a specified causal model and scope; exact semantics depend on causal framework."
+    },
+    {
+      "id": "effect",
+      "definition": "An outcome causally influenced by one or more factors under a declared model/scope."
+    },
+    {
+      "id": "causal_direction",
+      "definition": "The directed relationship from cause toward effect; association alone does not identify direction."
+    },
+    {
+      "id": "causal_graph",
+      "definition": "A directed graph representing hypothesized causal relationships among variables under explicit assumptions."
+    },
+    {
+      "id": "common_cause",
+      "definition": "A variable that causally influences two or more variables and can induce association between them."
+    },
+    {
+      "id": "confounder",
+      "definition": "A variable related causally to both exposure/treatment and outcome such that failing to account for it can distort causal inference."
+    },
+    {
+      "id": "mediator",
+      "definition": "A variable lying on a causal pathway through which some effect of X on Y operates."
+    },
+    {
+      "id": "collider",
+      "definition": "A variable causally influenced by two or more variables; conditioning on it can create spurious association."
+    },
+    {
+      "id": "intervention",
+      "definition": "A deliberate setting/manipulation of a variable distinguished from merely observing its value."
+    },
+    {
+      "id": "counterfactual_outcome",
+      "definition": "An outcome considered under an alternative intervention/condition for the same conceptual unit/world; not directly jointly observable in ordinary settings."
+    },
+    {
+      "id": "necessary_cause",
+      "definition": "Within a declared scope/model, an outcome does not occur without the factor; necessity does not imply sufficiency."
+    },
+    {
+      "id": "sufficient_cause",
+      "definition": "Within a declared scope/model, the factor/condition is enough to produce the outcome; sufficiency does not imply necessity."
+    },
+    {
+      "id": "component_cause",
+      "definition": "A contributing factor that participates in causal production without being necessary or sufficient alone."
+    },
+    {
+      "id": "causal_mechanism",
+      "definition": "An intermediate process explaining how a cause produces or influences an effect; evidence for mechanism can strengthen but is not always required for causal inference."
+    },
+    {
+      "id": "temporal_precedence",
+      "definition": "A cause must precede or be appropriately temporally related to its effect; precedence alone does not establish causation."
+    },
+    {
+      "id": "dose_response",
+      "definition": "Systematic change in outcome with exposure level can support causal interpretation under suitable conditions but is neither necessary nor sufficient by itself."
+    },
+    {
+      "id": "reverse_causation",
+      "definition": "An observed association attributed to X causing Y when Y actually causes or influences X."
+    }
+  ],
+  "rules": [
+    {
+      "id": "causal.temporal_requirement",
+      "variables": [
+        "X",
+        "Y"
+      ],
+      "premises": [
+        "CAUSES(X,Y)"
+      ],
+      "conclusion": "X PRECEDES_OR_CAUSALLY_PRIOR_TO Y"
+    },
+    {
+      "id": "causal.common_cause_association",
+      "variables": [
+        "Z",
+        "X",
+        "Y"
+      ],
+      "premises": [
+        "CAUSES(Z,X)",
+        "CAUSES(Z,Y)"
+      ],
+      "conclusion": "POSSIBLE_ASSOCIATION_FROM_COMMON_CAUSE(X,Y,Z)"
+    },
+    {
+      "id": "causal.mediation_path",
+      "variables": [
+        "X",
+        "M",
+        "Y"
+      ],
+      "premises": [
+        "CAUSES(X,M)",
+        "CAUSES(M,Y)"
+      ],
+      "conclusion": "CAUSAL_PATH(X,M,Y)"
+    },
+    {
+      "id": "causal.necessary_not_sufficient",
+      "variables": [
+        "X",
+        "Y"
+      ],
+      "premises": [
+        "NECESSARY_FOR(X,Y)"
+      ],
+      "conclusion": "NOT_AUTOMATICALLY_SUFFICIENT_FOR(X,Y)"
+    },
+    {
+      "id": "causal.sufficient_not_necessary",
+      "variables": [
+        "X",
+        "Y"
+      ],
+      "premises": [
+        "SUFFICIENT_FOR(X,Y)"
+      ],
+      "conclusion": "NOT_AUTOMATICALLY_NECESSARY_FOR(X,Y)"
+    },
+    {
+      "id": "causal.intervention_evidence",
+      "variables": [
+        "X",
+        "Y",
+        "I"
+      ],
+      "premises": [
+        "INTERVENTION(I,X)",
+        "VALID_COMPARISON(I)",
+        "OUTCOME_DIFFERENCE(I,Y)",
+        "CONFOUNDING_CONTROLLED_OR_JUSTIFIED(I)"
+      ],
+      "conclusion": "CAUSAL_EVIDENCE_FOR(X,Y)"
+    },
+    {
+      "id": "causal.confounder_flag",
+      "variables": [
+        "Z",
+        "X",
+        "Y"
+      ],
+      "premises": [
+        "CAUSES(Z,X)",
+        "CAUSES(Z,Y)",
+        "CAUSAL_QUESTION(X,Y)"
+      ],
+      "conclusion": "POTENTIAL_CONFOUNDER(Z,X,Y)"
+    },
+    {
+      "id": "causal.collider_flag",
+      "variables": [
+        "X",
+        "Y",
+        "C"
+      ],
+      "premises": [
+        "CAUSES(X,C)",
+        "CAUSES(Y,C)"
+      ],
+      "conclusion": "COLLIDER(C,X,Y)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.correlation_not_causation",
+      "premises": [
+        "ASSOCIATED(X,Y)"
+      ],
+      "forbidden_conclusion": "CAUSES(X,Y)",
+      "reason": "Association alone does not establish causal direction or exclude confounding."
+    },
+    {
+      "id": "guard.temporal_not_causation",
+      "premises": [
+        "X PRECEDES Y"
+      ],
+      "forbidden_conclusion": "CAUSES(X,Y)",
+      "reason": "Temporal precedence is necessary in many causal settings but not sufficient."
+    },
+    {
+      "id": "guard.after_not_because",
+      "premises": [
+        "Y AFTER X"
+      ],
+      "forbidden_conclusion": "Y BECAUSE_OF X",
+      "reason": "Post hoc ordering alone is not causal evidence."
+    },
+    {
+      "id": "guard.direction_from_association",
+      "premises": [
+        "ASSOCIATED(X,Y)"
+      ],
+      "forbidden_conclusion": "CAUSES(Y,X)",
+      "reason": "Association does not determine either causal direction."
+    },
+    {
+      "id": "guard.mechanism_not_occurrence",
+      "premises": [
+        "PLAUSIBLE_MECHANISM(X,Y)"
+      ],
+      "forbidden_conclusion": "CAUSES(X,Y)",
+      "reason": "A plausible mechanism is supportive context, not proof that the causal effect occurs."
+    },
+    {
+      "id": "guard.necessary_not_sufficient",
+      "premises": [
+        "NECESSARY_FOR(X,Y)"
+      ],
+      "forbidden_conclusion": "SUFFICIENT_FOR(X,Y)",
+      "reason": "Necessary and sufficient conditions are distinct."
+    },
+    {
+      "id": "guard.sufficient_not_necessary",
+      "premises": [
+        "SUFFICIENT_FOR(X,Y)"
+      ],
+      "forbidden_conclusion": "NECESSARY_FOR(X,Y)",
+      "reason": "Sufficiency does not establish necessity."
+    },
+    {
+      "id": "guard.adjust_mediator_blindly",
+      "premises": [
+        "MEDIATOR(M,X,Y)"
+      ],
+      "forbidden_conclusion": "ALWAYS_CONTROL_FOR(M)",
+      "reason": "Controlling a mediator can remove part of the causal effect being estimated; adjustment depends on the estimand/question."
+    },
+    {
+      "id": "guard.adjust_collider",
+      "premises": [
+        "COLLIDER(C,X,Y)"
+      ],
+      "forbidden_conclusion": "CONTROL_FOR(C) AS_DEFAULT",
+      "reason": "Conditioning on a collider can introduce spurious association."
+    },
+    {
+      "id": "guard.observational_intervention_equivalence",
+      "premises": [
+        "OBSERVED(X=x)"
+      ],
+      "forbidden_conclusion": "EQUIVALENT_TO_INTERVENTION(do(X=x))",
+      "reason": "Observing a value and intervening to set it can have different causal implications."
+    },
+    {
+      "id": "guard.causal_graph_truth",
+      "premises": [
+        "GRAPH_CONTAINS_EDGE(X,Y)"
+      ],
+      "forbidden_conclusion": "TRUE_CAUSE(X,Y)",
+      "reason": "A causal graph represents a model/hypothesis unless supported by evidence."
+    },
+    {
+      "id": "guard.single_study_universal",
+      "premises": [
+        "CAUSAL_EVIDENCE_FOR(X,Y) IN_SCOPE S"
+      ],
+      "forbidden_conclusion": "CAUSES(X,Y) IN_ALL_SCOPES",
+      "reason": "Causal effects can depend on population, conditions, dose, time and environment."
+    }
+  ],
+  "invariants": [
+    "Association, prediction and causation are distinct claim types.",
+    "Causal direction must be represented explicitly.",
+    "Causal claims carry scope and model assumptions.",
+    "Observing X is not automatically equivalent to intervening on X.",
+    "Potential confounders, mediators and colliders play different roles and must not be adjusted indiscriminately.",
+    "Necessary and sufficient causes are distinct; many real causes are contributing/component causes.",
+    "Temporal precedence alone is insufficient for causation.",
+    "Causal graphs are models/hypotheses with provenance, not truth declarations.",
+    "Interventional evidence can strengthen causal inference when comparison and confounding assumptions are justified.",
+    "Causal conclusions preserve the evidence/methodology chain that licensed them.",
+    "A causal effect established in one scope does not automatically generalize universally."
+  ],
+  "provenance": {
+    "authoring_basis": "Foundational causal inference concepts, directed causal reasoning and intervention/observational distinctions adapted to Lantern's bounded Schema-v3 and methodology architecture.",
+    "review_requirement": "Owner/project review before CONCEPTUAL_CORE activation."
+  }
+}
