@@ -1,0 +1,160 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.set_reasoning",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "subset-member",
+      "premises": [
+        "birds SUBSET_OF animals",
+        "sparrow IN birds"
+      ],
+      "query": "sparrow IN animals",
+      "expected": "YES",
+      "rule": "set.subset_membership"
+    },
+    {
+      "id": "subset-chain",
+      "premises": [
+        "sparrows SUBSET_OF birds",
+        "birds SUBSET_OF animals"
+      ],
+      "query": "sparrows SUBSET_OF animals",
+      "expected": "YES",
+      "rule": "set.subset_transitivity"
+    },
+    {
+      "id": "subset-reverse-member",
+      "premises": [
+        "birds SUBSET_OF animals",
+        "cat IN animals"
+      ],
+      "query": "cat IN birds",
+      "expected": "UNKNOWN",
+      "guard": "guard.member_of_subset_reverse"
+    },
+    {
+      "id": "membership-category",
+      "premises": [
+        "sparrow IN birds"
+      ],
+      "query": "sparrow SUBSET_OF birds",
+      "expected": "UNKNOWN",
+      "guard": "guard.membership_not_subset"
+    },
+    {
+      "id": "subset-category",
+      "premises": [
+        "sparrows SUBSET_OF birds"
+      ],
+      "query": "sparrows IN birds",
+      "expected": "UNKNOWN",
+      "guard": "guard.subset_not_membership"
+    },
+    {
+      "id": "equal-by-subsets",
+      "premises": [
+        "A SUBSET_OF B",
+        "B SUBSET_OF A"
+      ],
+      "query": "A = B",
+      "expected": "YES",
+      "rule": "set.antisymmetric_equality"
+    },
+    {
+      "id": "proper-needs-inequality",
+      "premises": [
+        "A SUBSET_OF B"
+      ],
+      "query": "A PROPER_SUBSET_OF B",
+      "expected": "UNKNOWN",
+      "guard": "guard.subset_not_proper"
+    },
+    {
+      "id": "union",
+      "premises": [
+        "red_ball IN red_objects"
+      ],
+      "query": "red_ball IN (red_objects UNION round_objects)",
+      "expected": "YES",
+      "rule": "set.union_left"
+    },
+    {
+      "id": "union-origin-unknown",
+      "premises": [
+        "x IN (A UNION B)"
+      ],
+      "query": "x IN A",
+      "expected": "UNKNOWN",
+      "guard": "guard.union_member_origin"
+    },
+    {
+      "id": "intersection",
+      "premises": [
+        "x IN A",
+        "x IN B"
+      ],
+      "query": "x IN (A INTERSECTION B)",
+      "expected": "YES",
+      "rule": "set.intersection_membership"
+    },
+    {
+      "id": "intersection-insufficient",
+      "premises": [
+        "x IN A"
+      ],
+      "query": "x IN (A INTERSECTION B)",
+      "expected": "UNKNOWN",
+      "guard": "guard.intersection_from_single_membership"
+    },
+    {
+      "id": "difference",
+      "premises": [
+        "x IN A",
+        "NOT (x IN B)"
+      ],
+      "query": "x IN (A DIFFERENCE B)",
+      "expected": "YES",
+      "rule": "set.difference_membership"
+    },
+    {
+      "id": "disjoint",
+      "premises": [
+        "DISJOINT(A,B)",
+        "x IN A"
+      ],
+      "query": "NOT (x IN B)",
+      "expected": "YES",
+      "rule": "set.disjoint_no_shared_member"
+    },
+    {
+      "id": "empty",
+      "premises": [
+        "EMPTY(A)"
+      ],
+      "query": "x IN A",
+      "expected": "NO",
+      "rule": "set.empty_no_members"
+    },
+    {
+      "id": "cardinality",
+      "premises": [
+        "CARDINALITY(A)=3",
+        "CARDINALITY(B)=3"
+      ],
+      "query": "A = B",
+      "expected": "UNKNOWN",
+      "guard": "guard.cardinality_not_identity"
+    },
+    {
+      "id": "relative-complement",
+      "premises": [
+        "x IN U",
+        "NOT (x IN A)"
+      ],
+      "query": "x IN COMPLEMENT(A,U)",
+      "expected": "YES",
+      "rule": "set.relative_complement"
+    }
+  ]
+}
