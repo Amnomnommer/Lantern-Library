@@ -1,0 +1,61 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.ai_architectures_evaluation",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "guard-1",
+      "premises": [
+        "TRIGGER(benchmark_not_intelligence)"
+      ],
+      "query": "INVALID_COLLAPSE(benchmark_not_intelligence)",
+      "expected": "NO",
+      "guard": "guard.benchmark_not_intelligence"
+    },
+    {
+      "id": "guard-2",
+      "premises": [
+        "TRIGGER(parameter_count_not_capability)"
+      ],
+      "query": "INVALID_COLLAPSE(parameter_count_not_capability)",
+      "expected": "NO",
+      "guard": "guard.parameter_count_not_capability"
+    },
+    {
+      "id": "guard-3",
+      "premises": [
+        "TRIGGER(neural_not_only_ai)"
+      ],
+      "query": "INVALID_COLLAPSE(neural_not_only_ai)",
+      "expected": "NO",
+      "guard": "guard.neural_not_only_ai"
+    },
+    {
+      "id": "guard-4",
+      "premises": [
+        "TRIGGER(symbolic_not_infallible)"
+      ],
+      "query": "INVALID_COLLAPSE(symbolic_not_infallible)",
+      "expected": "NO",
+      "guard": "guard.symbolic_not_infallible"
+    },
+    {
+      "id": "guard-5",
+      "premises": [
+        "TRIGGER(simulation_not_agency)"
+      ],
+      "query": "INVALID_COLLAPSE(simulation_not_agency)",
+      "expected": "NO",
+      "guard": "guard.simulation_not_agency"
+    },
+    {
+      "id": "guard-6",
+      "premises": [
+        "TRIGGER(self_improvement_not_agi)"
+      ],
+      "query": "INVALID_COLLAPSE(self_improvement_not_agi)",
+      "expected": "NO",
+      "guard": "guard.self_improvement_not_agi"
+    }
+  ]
+}
