@@ -1,0 +1,116 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.preference_perspective_social_uncertainty",
+  "package_number": 41,
+  "version": "0.1.0",
+  "title": "Preference, Perspective and Other-Mind Uncertainty",
+  "inheritance_class": "SOCIAL_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Represent preferences and perspectives as scoped, revisable models while reasoning cautiously about other minds and distinguishing expressed preference from universal value.",
+  "dependencies": [
+    "foundation.communication_collaborative_reasoning"
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "preference",
+      "definition": "Seed concept for preference; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "perspective",
+      "definition": "Seed concept for perspective; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "stakeholder",
+      "definition": "Seed concept for stakeholder; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "perspective_taking",
+      "definition": "Seed concept for perspective taking; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "other_mind_model",
+      "definition": "Seed concept for other mind model; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "social_uncertainty",
+      "definition": "Seed concept for social uncertainty; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "preference_change",
+      "definition": "Seed concept for preference change; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "conflict_of_values",
+      "definition": "Seed concept for conflict of values; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "expressed_preference",
+      "definition": "Seed concept for expressed preference; interpretation remains scoped to this package's purpose and provenance."
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.preference_not_truth",
+      "premises": [
+        "TRIGGER(preference_not_truth)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(preference_not_truth)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.perspective_not_fact",
+      "premises": [
+        "TRIGGER(perspective_not_fact)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(perspective_not_fact)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.behavior_not_total_preference",
+      "premises": [
+        "TRIGGER(behavior_not_total_preference)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(behavior_not_total_preference)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.model_not_mindreading",
+      "premises": [
+        "TRIGGER(model_not_mindreading)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(model_not_mindreading)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.past_preference_not_permanent",
+      "premises": [
+        "TRIGGER(past_preference_not_permanent)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(past_preference_not_permanent)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.difference_not_hostility",
+      "premises": [
+        "TRIGGER(difference_not_hostility)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(difference_not_hostility)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    }
+  ],
+  "invariants": [
+    "Preferences are person/context scoped.",
+    "Other minds are inferred, not directly read.",
+    "Perspective-taking does not require agreement.",
+    "Preference change is normal and preserves history."
+  ],
+  "provenance": {
+    "authoring_basis": "Project Lantern Foundation Core design synthesis.",
+    "review_requirement": "Owner/project review before activation."
+  }
+}
