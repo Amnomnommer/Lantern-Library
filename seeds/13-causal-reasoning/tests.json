@@ -1,0 +1,132 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.causal_reasoning",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "correlation",
+      "premises": [
+        "ASSOCIATED(ice_cream,drowning)"
+      ],
+      "query": "CAUSES(ice_cream,drowning)",
+      "expected": "UNKNOWN",
+      "guard": "guard.correlation_not_causation"
+    },
+    {
+      "id": "posthoc",
+      "premises": [
+        "headache AFTER coffee"
+      ],
+      "query": "headache BECAUSE_OF coffee",
+      "expected": "UNKNOWN",
+      "guard": "guard.after_not_because"
+    },
+    {
+      "id": "common-cause",
+      "premises": [
+        "CAUSES(temperature,ice_cream_sales)",
+        "CAUSES(temperature,drowning)"
+      ],
+      "query": "POSSIBLE_ASSOCIATION_FROM_COMMON_CAUSE(ice_cream_sales,drowning,temperature)",
+      "expected": "YES",
+      "rule": "causal.common_cause_association"
+    },
+    {
+      "id": "confounder",
+      "premises": [
+        "CAUSES(age,treatment_choice)",
+        "CAUSES(age,outcome)",
+        "CAUSAL_QUESTION(treatment_choice,outcome)"
+      ],
+      "query": "POTENTIAL_CONFOUNDER(age,treatment_choice,outcome)",
+      "expected": "YES",
+      "rule": "causal.confounder_flag"
+    },
+    {
+      "id": "mediation",
+      "premises": [
+        "CAUSES(X,M)",
+        "CAUSES(M,Y)"
+      ],
+      "query": "CAUSAL_PATH(X,M,Y)",
+      "expected": "YES",
+      "rule": "causal.mediation_path"
+    },
+    {
+      "id": "necessary",
+      "premises": [
+        "NECESSARY_FOR(oxygen,ordinary_combustion)"
+      ],
+      "query": "SUFFICIENT_FOR(oxygen,ordinary_combustion)",
+      "expected": "UNKNOWN",
+      "guard": "guard.necessary_not_sufficient"
+    },
+    {
+      "id": "sufficient",
+      "premises": [
+        "SUFFICIENT_FOR(conditionX,outcomeY)"
+      ],
+      "query": "NECESSARY_FOR(conditionX,outcomeY)",
+      "expected": "UNKNOWN",
+      "guard": "guard.sufficient_not_necessary"
+    },
+    {
+      "id": "observation-vs-do",
+      "premises": [
+        "OBSERVED(X=x)"
+      ],
+      "query": "EQUIVALENT_TO_INTERVENTION(do(X=x))",
+      "expected": "NO_OR_UNKNOWN_NOT_YES",
+      "guard": "guard.observational_intervention_equivalence"
+    },
+    {
+      "id": "collider",
+      "premises": [
+        "CAUSES(X,C)",
+        "CAUSES(Y,C)"
+      ],
+      "query": "COLLIDER(C,X,Y)",
+      "expected": "YES",
+      "rule": "causal.collider_flag"
+    },
+    {
+      "id": "collider-adjust",
+      "premises": [
+        "COLLIDER(C,X,Y)"
+      ],
+      "query": "CONTROL_FOR(C) AS_DEFAULT",
+      "expected": "NO",
+      "guard": "guard.adjust_collider"
+    },
+    {
+      "id": "intervention",
+      "premises": [
+        "INTERVENTION(I,X)",
+        "VALID_COMPARISON(I)",
+        "OUTCOME_DIFFERENCE(I,Y)",
+        "CONFOUNDING_CONTROLLED_OR_JUSTIFIED(I)"
+      ],
+      "query": "CAUSAL_EVIDENCE_FOR(X,Y)",
+      "expected": "YES",
+      "rule": "causal.intervention_evidence"
+    },
+    {
+      "id": "graph-model",
+      "premises": [
+        "GRAPH_CONTAINS_EDGE(X,Y)"
+      ],
+      "query": "TRUE_CAUSE(X,Y)",
+      "expected": "UNKNOWN",
+      "guard": "guard.causal_graph_truth"
+    },
+    {
+      "id": "scope",
+      "premises": [
+        "CAUSAL_EVIDENCE_FOR(X,Y) IN_SCOPE S"
+      ],
+      "query": "CAUSES(X,Y) IN_ALL_SCOPES",
+      "expected": "UNKNOWN",
+      "guard": "guard.single_study_universal"
+    }
+  ]
+}
