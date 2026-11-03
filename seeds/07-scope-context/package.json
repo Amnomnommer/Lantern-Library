@@ -1,0 +1,311 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.scope_context",
+  "package_number": 7,
+  "version": "0.1.0",
+  "title": "Scope and Context",
+  "inheritance_class": "CONCEPTUAL_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed explicit scope/context reasoning so Lantern applies claims and rules only where warranted and distinguishes genuine contradiction from differences in time, place, population, conditions, domain, perspective or hypothetical context.",
+  "dependencies": [
+    {
+      "package_id": "foundation.formal_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.predicate_quantifier_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.relation_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.epistemic_states",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "scope",
+      "definition": "The explicitly bounded circumstances under which a proposition, rule, model or method is asserted to apply."
+    },
+    {
+      "id": "domain_scope",
+      "definition": "The subject-matter or formal domain within which a claim/rule is intended to apply."
+    },
+    {
+      "id": "population_scope",
+      "definition": "The population or class of entities to which an empirical/general claim applies."
+    },
+    {
+      "id": "temporal_scope",
+      "definition": "The time, interval, ordering or historical period for which a claim is asserted."
+    },
+    {
+      "id": "spatial_scope",
+      "definition": "The place, region, environment or coordinate context for which a claim is asserted."
+    },
+    {
+      "id": "conditional_scope",
+      "definition": "Conditions, prerequisites or environmental states under which a claim/rule applies."
+    },
+    {
+      "id": "measurement_scope",
+      "definition": "The operational definition, instrument, unit or measurement regime under which a quantity/claim is interpreted."
+    },
+    {
+      "id": "model_scope",
+      "definition": "The assumptions and regimes under which a model's predictions/approximations are licensed."
+    },
+    {
+      "id": "discourse_context",
+      "definition": "The active conversational/document context used to resolve references and intended meanings without changing underlying truth by itself."
+    },
+    {
+      "id": "hypothetical_context",
+      "definition": "A declared imagined/counterfactual world in which propositions may be evaluated without asserting them as actual."
+    },
+    {
+      "id": "attribution_context",
+      "definition": "The speaker/source/believer to whom a proposition is attributed; attributed content is not automatically Lantern's assertion."
+    },
+    {
+      "id": "scope_overlap",
+      "definition": "Two scopes overlap when there are circumstances/entities to which both apply."
+    },
+    {
+      "id": "scope_disjoint",
+      "definition": "Two scopes are disjoint when no permitted case is covered by both."
+    },
+    {
+      "id": "scope_refinement",
+      "definition": "A narrower scope proposed when a broader claim succeeds only under identifiable conditions."
+    },
+    {
+      "id": "scope_extension",
+      "definition": "Evidence-supported expansion of applicability beyond an earlier scope; not assumed automatically."
+    }
+  ],
+  "rules": [
+    {
+      "id": "scope.rule_application",
+      "variables": [
+        "R",
+        "case",
+        "S"
+      ],
+      "premises": [
+        "RULE_SCOPE(R,S)",
+        "case IN_SCOPE S",
+        "RULE_CONDITIONS_MET(R,case)"
+      ],
+      "conclusion": "RULE_APPLICABLE(R,case)"
+    },
+    {
+      "id": "scope.disjoint_not_conflict",
+      "variables": [
+        "P",
+        "Q",
+        "S1",
+        "S2"
+      ],
+      "premises": [
+        "CLAIM_SCOPE(P,S1)",
+        "CLAIM_SCOPE(Q,S2)",
+        "APPARENT_NEGATION(P,Q)",
+        "DISJOINT(S1,S2)"
+      ],
+      "conclusion": "NOT_CONTRADICTION_BY_SCOPE(P,Q)"
+    },
+    {
+      "id": "scope.overlap_conflict_candidate",
+      "variables": [
+        "P",
+        "Q",
+        "S1",
+        "S2"
+      ],
+      "premises": [
+        "CLAIM_SCOPE(P,S1)",
+        "CLAIM_SCOPE(Q,S2)",
+        "APPARENT_NEGATION(P,Q)",
+        "OVERLAP(S1,S2)"
+      ],
+      "conclusion": "CONTRADICTION_REQUIRES_OVERLAP_RESOLUTION(P,Q)"
+    },
+    {
+      "id": "scope.temporal_change",
+      "variables": [
+        "P",
+        "entity",
+        "t1",
+        "t2"
+      ],
+      "premises": [
+        "P(entity,t1)",
+        "NOT P(entity,t2)",
+        "t1 != t2"
+      ],
+      "conclusion": "POSSIBLE_STATE_CHANGE_NOT_LOGICAL_CONTRADICTION"
+    },
+    {
+      "id": "scope.hypothetical_containment",
+      "variables": [
+        "P",
+        "H"
+      ],
+      "premises": [
+        "ASSERTED_IN_HYPOTHETICAL(P,H)"
+      ],
+      "conclusion": "POSSIBLE_WITHIN(P,H)"
+    },
+    {
+      "id": "scope.attribution_containment",
+      "variables": [
+        "P",
+        "source"
+      ],
+      "premises": [
+        "ATTRIBUTED_TO(P,source)"
+      ],
+      "conclusion": "SOURCE_ASSERTS(source,P)"
+    },
+    {
+      "id": "scope.narrower_inherits_applicable_rule",
+      "variables": [
+        "R",
+        "Swide",
+        "Snarrow",
+        "case"
+      ],
+      "premises": [
+        "RULE_SCOPE(R,Swide)",
+        "Snarrow SUBSCOPE_OF Swide",
+        "case IN_SCOPE Snarrow",
+        "RULE_CONDITIONS_MET(R,case)"
+      ],
+      "conclusion": "RULE_APPLICABLE(R,case)"
+    },
+    {
+      "id": "scope.refinement_candidate",
+      "variables": [
+        "R",
+        "S",
+        "C"
+      ],
+      "premises": [
+        "RULE_SCOPE(R,S)",
+        "SYSTEMATIC_FAILURE_OUTSIDE_CONDITION(R,C)",
+        "SYSTEMATIC_SUPPORT_INSIDE_CONDITION(R,C)"
+      ],
+      "conclusion": "CANDIDATE_SCOPE_REFINEMENT(R,C)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.scope_generalization",
+      "premises": [
+        "P HOLDS_IN S1"
+      ],
+      "forbidden_conclusion": "P HOLDS_IN SUPER_SCOPE(S1)",
+      "reason": "Evidence within a narrow scope does not automatically establish broader applicability."
+    },
+    {
+      "id": "guard.population_generalization",
+      "premises": [
+        "P HOLDS_FOR SAMPLE"
+      ],
+      "forbidden_conclusion": "P HOLDS_FOR POPULATION",
+      "reason": "Generalization requires methodological/evidential justification."
+    },
+    {
+      "id": "guard.temporal_projection",
+      "premises": [
+        "P AT t1"
+      ],
+      "forbidden_conclusion": "P AT t2",
+      "reason": "State may change over time unless persistence is separately established."
+    },
+    {
+      "id": "guard.spatial_projection",
+      "premises": [
+        "P IN place1"
+      ],
+      "forbidden_conclusion": "P IN place2",
+      "reason": "Spatial applicability cannot be transferred without support."
+    },
+    {
+      "id": "guard.model_out_of_scope",
+      "premises": [
+        "MODEL_PREDICTS(M,P)",
+        "case OUTSIDE_SCOPE M"
+      ],
+      "forbidden_conclusion": "P(case)",
+      "reason": "A model prediction is not licensed outside its stated applicability regime."
+    },
+    {
+      "id": "guard.hypothetical_to_actual",
+      "premises": [
+        "P IN_HYPOTHETICAL H"
+      ],
+      "forbidden_conclusion": "P IN_ACTUAL_WORLD",
+      "reason": "Imagined/counterfactual content is not evidence of actuality."
+    },
+    {
+      "id": "guard.attribution_to_truth",
+      "premises": [
+        "SOURCE_ASSERTS(source,P)"
+      ],
+      "forbidden_conclusion": "TRUE(P)",
+      "reason": "Attribution establishes who said/believed P, not that P is true."
+    },
+    {
+      "id": "guard.context_to_identity",
+      "premises": [
+        "REFERENCE_RESOLVED_AS(x,e) IN context1"
+      ],
+      "forbidden_conclusion": "REFERENCE_RESOLVED_AS(x,e) IN context2",
+      "reason": "Reference resolution may depend on discourse context."
+    },
+    {
+      "id": "guard.measurement_scope_mix",
+      "premises": [
+        "VALUE(x)=v UNDER measurement1"
+      ],
+      "forbidden_conclusion": "VALUE(x)=v UNDER measurement2",
+      "reason": "Different instruments/definitions/units may not be directly interchangeable."
+    },
+    {
+      "id": "guard.scope_difference_not_falsehood",
+      "premises": [
+        "P HOLDS_IN S1",
+        "NOT P HOLDS_IN S2",
+        "DISJOINT(S1,S2)"
+      ],
+      "forbidden_conclusion": "FALSE(P)",
+      "reason": "Different scoped results do not establish global falsehood."
+    }
+  ],
+  "invariants": [
+    "Every empirical/general rule should be capable of carrying scope even when some scope fields are initially unknown.",
+    "A rule applies only when the case is within scope and required conditions are met.",
+    "Different temporal, spatial, population or conditional scopes can explain apparent contradictions.",
+    "Narrow-scope evidence does not automatically generalize to broader scope.",
+    "Historical change is not logical contradiction when time differs.",
+    "Hypothetical and attributed contexts do not leak into actual-world assertion.",
+    "Discourse context can change reference/meaning resolution without changing provenance.",
+    "Model validity is scope-dependent; useful approximations may remain valid within narrower regimes after broader models are discovered.",
+    "Scope refinement preserves belief genealogy rather than silently rewriting the original claim.",
+    "Scope never grants authority or permission."
+  ],
+  "provenance": {
+    "authoring_basis": "Formal/contextual scope principles and conservative empirical applicability rules, adapted to Lantern's Schema-v2 context, Lens, attribution and future Schema-v3 rule system.",
+    "review_requirement": "Owner/project review before CONCEPTUAL_CORE activation."
+  }
+}
