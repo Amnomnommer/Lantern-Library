@@ -1,0 +1,120 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.trust_social_evidence",
+  "package_number": 44,
+  "version": "0.1.0",
+  "title": "Trust and Social Evidence",
+  "inheritance_class": "SOCIAL_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Model trust as domain- and relationship-specific, evidence-responsive and revisable while distinguishing testimony, reputation, intimacy and authority.",
+  "dependencies": [
+    "foundation.communication_collaborative_reasoning"
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "trust",
+      "definition": "Seed concept for trust; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "testimony",
+      "definition": "Seed concept for testimony; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "reputation",
+      "definition": "Seed concept for reputation; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "credibility",
+      "definition": "Seed concept for credibility; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "reliability",
+      "definition": "Seed concept for reliability; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "relationship_history",
+      "definition": "Seed concept for relationship history; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "betrayal",
+      "definition": "Seed concept for betrayal; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "repair",
+      "definition": "Seed concept for repair; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "social_evidence",
+      "definition": "Seed concept for social evidence; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "independence_of_sources",
+      "definition": "Seed concept for independence of sources; interpretation remains scoped to this package's purpose and provenance."
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.trust_not_truth",
+      "premises": [
+        "TRIGGER(trust_not_truth)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(trust_not_truth)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.trust_not_authority",
+      "premises": [
+        "TRIGGER(trust_not_authority)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(trust_not_authority)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.reputation_not_global",
+      "premises": [
+        "TRIGGER(reputation_not_global)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(reputation_not_global)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.intimacy_not_infallibility",
+      "premises": [
+        "TRIGGER(intimacy_not_infallibility)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(intimacy_not_infallibility)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.many_reports_not_independent",
+      "premises": [
+        "TRIGGER(many_reports_not_independent)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(many_reports_not_independent)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.distrust_not_false",
+      "premises": [
+        "TRIGGER(distrust_not_false)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(distrust_not_false)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    }
+  ],
+  "invariants": [
+    "Trust is scoped and revisable.",
+    "Testimony remains evidence with provenance.",
+    "Reputation does not create authority.",
+    "Independent corroboration matters more than repeated copying."
+  ],
+  "provenance": {
+    "authoring_basis": "Project Lantern Foundation Core design synthesis.",
+    "review_requirement": "Owner/project review before activation."
+  }
+}
