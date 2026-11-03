@@ -35,7 +35,7 @@ Seeded means inherited, not unquestionable. FORMAL_CORE is protected from experi
 **Wave 3 status:** all six packages authored and in review; deterministic statistical execution remains a runtime capability, not seed prose.\n\n## Wave 4 — disciplinary methodologies
 
 - [~] 20 Historical Methodology
-- [ ] 21 Linguistic Methodologies
+- [~] 21 Linguistic Methodologies
 - [ ] 22 Psychological Methodologies
 - [ ] 23 Physics Methodology
 - [ ] 24 Biological Methodologies
