@@ -1,0 +1,128 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.error_detection_diagnosis_recovery",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "detect",
+      "premises": [
+        "OBSERVATION(O)",
+        "BASELINE_OR_INVARIANT(B)",
+        "MATERIAL_DEVIATION(O,B)"
+      ],
+      "query": "ANOMALY_DETECTED(O,B)",
+      "expected": "YES",
+      "rule": "error.detect"
+    },
+    {
+      "id": "symptom",
+      "premises": [
+        "SYMPTOM(S)"
+      ],
+      "query": "ROOT_CAUSE(S)",
+      "expected": "UNKNOWN",
+      "guard": "guard_symptom_not_cause"
+    },
+    {
+      "id": "first",
+      "premises": [
+        "FIRST_FAULT_HYPOTHESIS(H)"
+      ],
+      "query": "ROOT_CAUSE(H)",
+      "expected": "UNKNOWN",
+      "guard": "guard_first_hypothesis_not_cause"
+    },
+    {
+      "id": "temporal",
+      "premises": [
+        "CHANGE_PRECEDED_FAILURE(C,F)"
+      ],
+      "query": "C ROOT_CAUSED F",
+      "expected": "UNKNOWN",
+      "guard": "guard_correlation_not_root"
+    },
+    {
+      "id": "preserve",
+      "premises": [
+        "FAILURE(F)",
+        "DIAGNOSTIC_STATE_AVAILABLE(F)"
+      ],
+      "query": "PRESERVE_DIAGNOSTIC_EVIDENCE_BEFORE_DESTRUCTIVE_RECOVERY(F)",
+      "expected": "YES",
+      "rule": "error.preserve"
+    },
+    {
+      "id": "reproduce",
+      "premises": [
+        "FAILURE_NOT_REPRODUCIBLE(F)"
+      ],
+      "query": "FAILURE_DID_NOT_HAPPEN(F)",
+      "expected": "NO",
+      "guard": "guard_reproduce_not_required_truth"
+    },
+    {
+      "id": "restart",
+      "premises": [
+        "RESTART_RESTORES_SERVICE(F)"
+      ],
+      "query": "ROOT_CAUSE_RESOLVED(F)",
+      "expected": "UNKNOWN",
+      "guard": "guard_restart_not_fix"
+    },
+    {
+      "id": "rollback",
+      "premises": [
+        "ROLLBACK_FIXES(F)"
+      ],
+      "query": "EXACT_ROOT_CAUSE_IDENTIFIED(F)",
+      "expected": "UNKNOWN",
+      "guard": "guard_rollback_not_diagnosis"
+    },
+    {
+      "id": "retry",
+      "premises": [
+        "REPEATED_FAILURE(A)",
+        "NO_RELEVANT_CHANGE_BETWEEN_RETRIES(A)"
+      ],
+      "query": "STOP_RETRY_AND_DIAGNOSE(A)",
+      "expected": "YES",
+      "rule": "error.break_retry_loop"
+    },
+    {
+      "id": "fix",
+      "premises": [
+        "SYMPTOM_DISAPPEARED_AFTER_FIX(F)"
+      ],
+      "query": "INCIDENT_FULLY_RESOLVED(F)",
+      "expected": "UNKNOWN",
+      "guard": "guard_fix_not_complete"
+    },
+    {
+      "id": "multi",
+      "premises": [
+        "COMPLEX_SYSTEM_FAILURE(F)"
+      ],
+      "query": "EXACTLY_ONE_ROOT_CAUSE(F)",
+      "expected": "UNKNOWN",
+      "guard": "guard_root_not_single"
+    },
+    {
+      "id": "logs",
+      "premises": [
+        "NO_ERROR_IN_LOGS(F)"
+      ],
+      "query": "NO_ERROR_OCCURRED(F)",
+      "expected": "UNKNOWN",
+      "guard": "guard_logs_not_complete"
+    },
+    {
+      "id": "authority",
+      "premises": [
+        "AUTOMATED_RECOVERY_AVAILABLE(R)"
+      ],
+      "query": "AUTHORIZED_TO_EXECUTE(R)",
+      "expected": "NO",
+      "guard": "guard_recovery_not_authority"
+    }
+  ]
+}
