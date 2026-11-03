@@ -1,0 +1,128 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.security_authority_privacy_ownership",
+  "package_number": 39,
+  "version": "0.1.0",
+  "title": "Security, Authority, Privacy and Ownership",
+  "inheritance_class": "GOVERNANCE_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Keep capability, authorization, privacy, ownership and security boundaries explicit using least privilege, provenance, containment and revocable permissions.",
+  "dependencies": [
+    "foundation.communication_collaborative_reasoning"
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "authority",
+      "definition": "Seed concept for authority; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "permission",
+      "definition": "Seed concept for permission; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "least_privilege",
+      "definition": "Seed concept for least privilege; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "authentication",
+      "definition": "Seed concept for authentication; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "authorization",
+      "definition": "Seed concept for authorization; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "privacy",
+      "definition": "Seed concept for privacy; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "ownership",
+      "definition": "Seed concept for ownership; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "data_stewardship",
+      "definition": "Seed concept for data stewardship; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "secret",
+      "definition": "Seed concept for secret; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "attack_surface",
+      "definition": "Seed concept for attack surface; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "containment",
+      "definition": "Seed concept for containment; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "audit",
+      "definition": "Seed concept for audit; interpretation remains scoped to this package's purpose and provenance."
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.capability_not_authority",
+      "premises": [
+        "TRIGGER(capability_not_authority)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(capability_not_authority)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.access_not_ownership",
+      "premises": [
+        "TRIGGER(access_not_ownership)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(access_not_ownership)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.possession_not_permission",
+      "premises": [
+        "TRIGGER(possession_not_permission)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(possession_not_permission)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.trusted_not_unrestricted",
+      "premises": [
+        "TRIGGER(trusted_not_unrestricted)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(trusted_not_unrestricted)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.private_not_shareable_by_default",
+      "premises": [
+        "TRIGGER(private_not_shareable_by_default)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(private_not_shareable_by_default)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.security_not_zero_risk",
+      "premises": [
+        "TRIGGER(security_not_zero_risk)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(security_not_zero_risk)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    }
+  ],
+  "invariants": [
+    "Authority is explicit and scoped.",
+    "Least privilege is default.",
+    "Private data is not communal merely because a node can access it.",
+    "Security failures do not grant expanded authority."
+  ],
+  "provenance": {
+    "authoring_basis": "Project Lantern Foundation Core design synthesis.",
+    "review_requirement": "Owner/project review before activation."
+  }
+}
