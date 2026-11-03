@@ -1,0 +1,317 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.relation_logic",
+  "package_number": 3,
+  "version": "0.1.0",
+  "title": "Relation Logic",
+  "inheritance_class": "FORMAL_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed the formal properties of relations so Lantern preserves argument roles and only performs inversion, symmetry, transitivity or composition when those operations are explicitly licensed.",
+  "dependencies": [
+    {
+      "package_id": "foundation.formal_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.predicate_quantifier_logic",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "relation",
+      "definition": "A predicate whose ordered argument positions connect two or more terms."
+    },
+    {
+      "id": "binary_relation",
+      "definition": "A relation with two ordered argument positions, conventionally R(a,b)."
+    },
+    {
+      "id": "argument_role",
+      "definition": "The semantic position occupied by an argument; exchanging roles can change the proposition."
+    },
+    {
+      "id": "inverse_relation",
+      "definition": "Relation S is the inverse of R when R(a,b) holds exactly when S(b,a) holds under the declared semantics."
+    },
+    {
+      "id": "symmetric_relation",
+      "definition": "R is symmetric when R(a,b) implies R(b,a)."
+    },
+    {
+      "id": "asymmetric_relation",
+      "definition": "R is asymmetric when R(a,b) implies NOT R(b,a)."
+    },
+    {
+      "id": "antisymmetric_relation",
+      "definition": "R is antisymmetric when R(a,b) and R(b,a) together imply a=b."
+    },
+    {
+      "id": "transitive_relation",
+      "definition": "R is transitive when R(a,b) and R(b,c) imply R(a,c)."
+    },
+    {
+      "id": "intransitive_relation",
+      "definition": "R is intransitive when R(a,b) and R(b,c) imply NOT R(a,c) where the definition applies."
+    },
+    {
+      "id": "nontransitive_unspecified",
+      "definition": "A relation lacking a transitivity declaration licenses neither R(a,c) nor NOT R(a,c) from a two-edge chain."
+    },
+    {
+      "id": "reflexive_relation",
+      "definition": "R is reflexive on domain D when every a in D satisfies R(a,a)."
+    },
+    {
+      "id": "irreflexive_relation",
+      "definition": "R is irreflexive on domain D when every a in D satisfies NOT R(a,a)."
+    },
+    {
+      "id": "functional_relation",
+      "definition": "R is functional from its first role when each permitted a relates by R to at most one b within the declared scope."
+    },
+    {
+      "id": "inverse_functional_relation",
+      "definition": "R is inverse-functional when each permitted b has at most one a related to it by R within scope."
+    },
+    {
+      "id": "relation_composition",
+      "definition": "A declared composition R(a,b) AND S(b,c) -> T(a,c); composition is never inferred merely because edges form a path."
+    },
+    {
+      "id": "relation_path",
+      "definition": "A sequence of connected relation instances. A path is evidence of connectivity, not automatically a derived proposition."
+    }
+  ],
+  "rules": [
+    {
+      "id": "relation.symmetric_application",
+      "variables": [
+        "R",
+        "a",
+        "b"
+      ],
+      "premises": [
+        "SYMMETRIC(R)",
+        "R(a,b)"
+      ],
+      "conclusion": "R(b,a)"
+    },
+    {
+      "id": "relation.inverse_application",
+      "variables": [
+        "R",
+        "S",
+        "a",
+        "b"
+      ],
+      "premises": [
+        "INVERSE(R,S)",
+        "R(a,b)"
+      ],
+      "conclusion": "S(b,a)"
+    },
+    {
+      "id": "relation.transitive_application",
+      "variables": [
+        "R",
+        "a",
+        "b",
+        "c"
+      ],
+      "premises": [
+        "TRANSITIVE(R)",
+        "R(a,b)",
+        "R(b,c)"
+      ],
+      "conclusion": "R(a,c)"
+    },
+    {
+      "id": "relation.asymmetric_application",
+      "variables": [
+        "R",
+        "a",
+        "b"
+      ],
+      "premises": [
+        "ASYMMETRIC(R)",
+        "R(a,b)"
+      ],
+      "conclusion": "NOT R(b,a)"
+    },
+    {
+      "id": "relation.antisymmetric_identity",
+      "variables": [
+        "R",
+        "a",
+        "b"
+      ],
+      "premises": [
+        "ANTISYMMETRIC(R)",
+        "R(a,b)",
+        "R(b,a)"
+      ],
+      "conclusion": "a = b"
+    },
+    {
+      "id": "relation.reflexive_application",
+      "variables": [
+        "R",
+        "a",
+        "D"
+      ],
+      "premises": [
+        "REFLEXIVE_ON(R,D)",
+        "a IN D"
+      ],
+      "conclusion": "R(a,a)"
+    },
+    {
+      "id": "relation.irreflexive_application",
+      "variables": [
+        "R",
+        "a",
+        "D"
+      ],
+      "premises": [
+        "IRREFLEXIVE_ON(R,D)",
+        "a IN D"
+      ],
+      "conclusion": "NOT R(a,a)"
+    },
+    {
+      "id": "relation.declared_composition",
+      "variables": [
+        "R",
+        "S",
+        "T",
+        "a",
+        "b",
+        "c"
+      ],
+      "premises": [
+        "COMPOSES(R,S,T)",
+        "R(a,b)",
+        "S(b,c)"
+      ],
+      "conclusion": "T(a,c)"
+    },
+    {
+      "id": "relation.functional_conflict",
+      "variables": [
+        "R",
+        "a",
+        "b",
+        "c"
+      ],
+      "premises": [
+        "FUNCTIONAL(R)",
+        "R(a,b)",
+        "R(a,c)",
+        "NOT (b = c)"
+      ],
+      "conclusion": "CONFLICT_WITH_FUNCTIONALITY"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.role_reversal",
+      "premises": [
+        "R(a,b)"
+      ],
+      "forbidden_conclusion": "R(b,a)",
+      "reason": "Argument reversal requires a symmetric relation or another explicit rule."
+    },
+    {
+      "id": "guard.undeclared_transitivity",
+      "premises": [
+        "R(a,b)",
+        "R(b,c)"
+      ],
+      "forbidden_conclusion": "R(a,c)",
+      "reason": "A two-edge path does not imply transitivity unless R is declared transitive."
+    },
+    {
+      "id": "guard.path_is_not_claim",
+      "premises": [
+        "R(a,b)",
+        "S(b,c)"
+      ],
+      "forbidden_conclusion": "T(a,c)",
+      "reason": "Connectivity does not license a proposition without a declared composition rule."
+    },
+    {
+      "id": "guard.inverse_not_same_relation",
+      "premises": [
+        "INVERSE(R,S)",
+        "R(a,b)"
+      ],
+      "forbidden_conclusion": "R(b,a)",
+      "reason": "An inverse relation S need not be the same predicate as R."
+    },
+    {
+      "id": "guard.asymmetric_not_antisymmetric",
+      "premises": [
+        "ANTISYMMETRIC(R)",
+        "R(a,b)"
+      ],
+      "forbidden_conclusion": "NOT R(b,a)",
+      "reason": "Antisymmetry permits both directions when a=b; it is not asymmetry."
+    },
+    {
+      "id": "guard.functional_not_bijective",
+      "premises": [
+        "FUNCTIONAL(R)",
+        "R(a,b)"
+      ],
+      "forbidden_conclusion": "UNIQUE a SUCH_THAT R(a,b)",
+      "reason": "Functionality constrains outputs per input; it does not establish inverse functionality."
+    },
+    {
+      "id": "guard.no_relation_property_from_examples",
+      "premises": [
+        "R(a,b)",
+        "R(b,a)"
+      ],
+      "forbidden_conclusion": "SYMMETRIC(R)",
+      "reason": "Observed symmetric instances do not prove the relation is universally symmetric."
+    },
+    {
+      "id": "guard.no_transitivity_from_examples",
+      "premises": [
+        "R(a,b)",
+        "R(b,c)",
+        "R(a,c)"
+      ],
+      "forbidden_conclusion": "TRANSITIVE(R)",
+      "reason": "A matching example does not establish a universal relation property."
+    },
+    {
+      "id": "guard.relation_scope_leakage",
+      "premises": [
+        "TRANSITIVE_ON(R,D1)"
+      ],
+      "forbidden_conclusion": "TRANSITIVE_ON(R,D2)",
+      "reason": "A relation property may be scope/domain constrained."
+    }
+  ],
+  "invariants": [
+    "Relation arguments are ordered unless the relation semantics explicitly erase that distinction.",
+    "A graph path is not automatically an inference.",
+    "Transitivity, symmetry, reflexivity, functionality and inverse relationships require declared semantics or separately supported learned rules.",
+    "Absence of a relation property declaration means UNKNOWN, not the opposite property.",
+    "Relation properties may be scoped to a domain or context.",
+    "Observed instances can support a hypothesis about a relation property but cannot promote it to FORMAL_CORE.",
+    "Schema-v2 relation catalog declarations may be reused as runtime metadata when compatible, but seed semantics remain versioned and reviewable.",
+    "Formal relation inference never grants factual authority or external permission."
+  ],
+  "provenance": {
+    "authoring_basis": "Standard relation theory and first-order relational properties, adapted to Lantern's conservative typed-graph inference.",
+    "review_requirement": "Owner/project review before CORE activation."
+  }
+}
