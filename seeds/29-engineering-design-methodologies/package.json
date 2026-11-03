@@ -1,0 +1,363 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.engineering_design_methodologies",
+  "package_number": 29,
+  "version": "0.1.0",
+  "title": "Engineering and Design Methodologies",
+  "inheritance_class": "METHOD_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed engineering/design methodology so Lantern can transform needs into requirements, constraints, architectures and prototypes; evaluate tradeoffs, verification, validation, safety, failure modes, maintainability and lifecycle; and iterate from evidence rather than treating implementation completion as success.",
+  "dependencies": [
+    {
+      "package_id": "foundation.scope_context",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.causal_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.experimental_design",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.statistical_methodology",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.computer_science_methodologies",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.philosophical_methodologies",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "stakeholder_need",
+      "definition": "A problem, goal or desired outcome expressed from a stakeholder/user/system perspective before committing to a specific solution."
+    },
+    {
+      "id": "requirement",
+      "definition": "A testable statement of required system behavior, property, interface or performance derived from needs and constraints."
+    },
+    {
+      "id": "constraint",
+      "definition": "A boundary limiting feasible solutions, such as compute, cost, time, safety, law, compatibility, ethics or physical limits."
+    },
+    {
+      "id": "design_objective",
+      "definition": "A property to optimize or improve subject to requirements and constraints; multiple objectives can conflict."
+    },
+    {
+      "id": "architecture",
+      "definition": "High-level organization of components, responsibilities, interfaces and interactions chosen to satisfy requirements."
+    },
+    {
+      "id": "interface",
+      "definition": "Declared boundary/contract through which components or users interact."
+    },
+    {
+      "id": "prototype",
+      "definition": "Purpose-built representation/implementation used to test assumptions, interactions, feasibility or user experience before full commitment."
+    },
+    {
+      "id": "minimum_viable_experiment",
+      "definition": "Smallest implementation/test sufficient to resolve a high-value uncertainty; not necessarily a market product."
+    },
+    {
+      "id": "verification",
+      "definition": "Evidence that an implementation satisfies specified requirements/design outputs: building the thing according to specification."
+    },
+    {
+      "id": "validation",
+      "definition": "Evidence that the resulting system satisfies intended stakeholder needs/use context: building the right thing."
+    },
+    {
+      "id": "tradeoff",
+      "definition": "A design choice where improving one objective can worsen another; tradeoffs should expose objectives and weights rather than hide them."
+    },
+    {
+      "id": "design_margin",
+      "definition": "Deliberate capacity/tolerance beyond nominal expected conditions to account for uncertainty/variation."
+    },
+    {
+      "id": "failure_mode",
+      "definition": "A specific way a component/system can fail to perform intended function or violate constraints."
+    },
+    {
+      "id": "fmea",
+      "definition": "Failure Modes and Effects Analysis: structured identification of potential failures, consequences, causes, detection and mitigation priorities."
+    },
+    {
+      "id": "fault_tree",
+      "definition": "Top-down analysis of combinations of failures/events that can produce an undesired outcome."
+    },
+    {
+      "id": "graceful_degradation",
+      "definition": "System property of retaining bounded useful/safe behavior when components/resources fail or degrade."
+    },
+    {
+      "id": "fail_safe",
+      "definition": "Design behavior intended to move toward a safer state when specified failures occur."
+    },
+    {
+      "id": "human_centered_design",
+      "definition": "Iterative design grounded in users' goals, contexts, capabilities, accessibility and observed interaction rather than designer assumptions alone."
+    },
+    {
+      "id": "usability_testing",
+      "definition": "Observation/evaluation of representative users performing relevant tasks to identify interaction problems and validate design assumptions."
+    },
+    {
+      "id": "maintainability",
+      "definition": "Ease/safety with which a system can be understood, diagnosed, repaired, modified and tested over its lifecycle."
+    },
+    {
+      "id": "technical_debt",
+      "definition": "Future cost/risk created by implementation/design shortcuts or accumulated complexity; debt may be intentional but should be visible."
+    },
+    {
+      "id": "lifecycle",
+      "definition": "Stages from concept/design through implementation, operation, maintenance, migration and retirement/decommissioning."
+    },
+    {
+      "id": "traceability_engineering",
+      "definition": "Links among stakeholder needs, requirements, design decisions, implementation components and verification/validation evidence."
+    },
+    {
+      "id": "change_control",
+      "definition": "Structured evaluation and recording of modifications, dependencies, risks, tests and rollback/migration requirements."
+    }
+  ],
+  "rules": [
+    {
+      "id": "engineering.need_to_requirement",
+      "variables": [
+        "N",
+        "R"
+      ],
+      "premises": [
+        "STAKEHOLDER_NEED(N)",
+        "DERIVED_TESTABLE_REQUIREMENT(R,N)"
+      ],
+      "conclusion": "TRACE_REQUIREMENT_TO_NEED(R,N)"
+    },
+    {
+      "id": "engineering.requirement_verification",
+      "variables": [
+        "R",
+        "T"
+      ],
+      "premises": [
+        "REQUIREMENT(R)",
+        "VERIFICATION_METHOD(T,R)"
+      ],
+      "conclusion": "VERIFY_REQUIREMENT_WITH(R,T)"
+    },
+    {
+      "id": "engineering.validation",
+      "variables": [
+        "S",
+        "N",
+        "E"
+      ],
+      "premises": [
+        "SYSTEM(S)",
+        "INTENDED_NEED(N)",
+        "USE_CONTEXT_EVIDENCE(E,S,N)"
+      ],
+      "conclusion": "VALIDATE_SYSTEM_AGAINST_NEED(S,N,E)"
+    },
+    {
+      "id": "engineering.prototype_uncertainty",
+      "variables": [
+        "P",
+        "U"
+      ],
+      "premises": [
+        "PROTOTYPE(P)",
+        "DESIGNED_TO_TEST(P,U)"
+      ],
+      "conclusion": "PROTOTYPE_EVIDENCE_TARGETS(P,U)"
+    },
+    {
+      "id": "engineering.tradeoff_record",
+      "variables": [
+        "D",
+        "O1",
+        "O2"
+      ],
+      "premises": [
+        "DESIGN_DECISION(D)",
+        "IMPROVES(D,O1)",
+        "WORSENS(D,O2)"
+      ],
+      "conclusion": "RECORD_TRADEOFF(D,O1,O2)"
+    },
+    {
+      "id": "engineering.failure_analysis",
+      "variables": [
+        "S",
+        "F"
+      ],
+      "premises": [
+        "SYSTEM(S)",
+        "PLAUSIBLE_FAILURE_MODE(F,S)"
+      ],
+      "conclusion": "ANALYZE_EFFECT_DETECTION_AND_MITIGATION(F,S)"
+    },
+    {
+      "id": "engineering.change_regression",
+      "variables": [
+        "C",
+        "S"
+      ],
+      "premises": [
+        "CHANGE(C,S)",
+        "AFFECTED_DEPENDENCIES_IDENTIFIED(C,S)"
+      ],
+      "conclusion": "REQUIRE_TARGETED_AND_REGRESSION_TESTS(C,S)"
+    },
+    {
+      "id": "engineering.lifecycle_retirement",
+      "variables": [
+        "S"
+      ],
+      "premises": [
+        "SYSTEM_RETIREMENT(S)"
+      ],
+      "conclusion": "PLAN_DATA_STATE_DEPENDENCY_AND_USER_TRANSITION(S)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard_requirement_not_need",
+      "premises": [
+        "REQUIREMENT(R)"
+      ],
+      "forbidden_conclusion": "R PERFECTLY_CAPTURES_STAKEHOLDER_NEED",
+      "reason": "Requirements are interpretations/formalizations of needs and can be incomplete or wrong."
+    },
+    {
+      "id": "guard_verification_not_validation",
+      "premises": [
+        "ALL_REQUIREMENTS_VERIFIED(S)"
+      ],
+      "forbidden_conclusion": "SYSTEM_VALIDATED_FOR_REAL_NEED(S)",
+      "reason": "A system can meet its written specification while solving the wrong problem."
+    },
+    {
+      "id": "guard_validation_not_verification",
+      "premises": [
+        "USERS_FIND_SYSTEM_USEFUL(S)"
+      ],
+      "forbidden_conclusion": "ALL_TECHNICAL_REQUIREMENTS_SATISFIED(S)",
+      "reason": "Usefulness does not prove all technical/safety/interface requirements."
+    },
+    {
+      "id": "guard_prototype_not_product",
+      "premises": [
+        "PROTOTYPE_WORKS(P)"
+      ],
+      "forbidden_conclusion": "PRODUCTION_READY(P)",
+      "reason": "Prototypes may omit reliability, security, scale, maintainability and edge conditions."
+    },
+    {
+      "id": "guard_optimization_not_requirement",
+      "premises": [
+        "METRIC_IMPROVED(S,M)"
+      ],
+      "forbidden_conclusion": "SYSTEM_BETTER_OVERALL(S)",
+      "reason": "Improving one objective can regress other requirements/objectives."
+    },
+    {
+      "id": "guard_safety_margin_not_invulnerable",
+      "premises": [
+        "DESIGN_MARGIN(S,M)"
+      ],
+      "forbidden_conclusion": "CANNOT_FAIL(S)",
+      "reason": "Margins address specified uncertainty/ranges, not all failure modes."
+    },
+    {
+      "id": "guard_fail_safe_not_zero_risk",
+      "premises": [
+        "FAIL_SAFE_FEATURE(S)"
+      ],
+      "forbidden_conclusion": "ZERO_RISK(S)",
+      "reason": "Fail-safe mechanisms have assumptions/failure modes and reduce rather than erase risk."
+    },
+    {
+      "id": "guard_user_request_not_requirement_alone",
+      "premises": [
+        "USER_REQUESTS_FEATURE(F)"
+      ],
+      "forbidden_conclusion": "IMPLEMENT_F_IMMEDIATELY",
+      "reason": "Requests should be understood in context of underlying need, constraints, interactions and priorities."
+    },
+    {
+      "id": "guard_designer_assumption_not_user_evidence",
+      "premises": [
+        "DESIGNER_THINKS_USERS_WANT(F)"
+      ],
+      "forbidden_conclusion": "VALIDATED_USER_NEED(F)",
+      "reason": "Human-centered design tests assumptions with relevant users/context."
+    },
+    {
+      "id": "guard_technical_debt_not_always_bad",
+      "premises": [
+        "TECHNICAL_DEBT(D)"
+      ],
+      "forbidden_conclusion": "NEVER_ACCEPT(D)",
+      "reason": "Debt can be an explicit bounded tradeoff when benefits, risks and repayment/containment are understood."
+    },
+    {
+      "id": "guard_more_features_not_better",
+      "premises": [
+        "MORE_FEATURES(A,B)"
+      ],
+      "forbidden_conclusion": "BETTER_DESIGN(A,B)",
+      "reason": "Additional features can increase complexity, resource use, failure surface and usability burden."
+    },
+    {
+      "id": "guard_new_architecture_not_rewrite",
+      "premises": [
+        "ARCHITECTURAL_IMPROVEMENT_PROPOSED(A)"
+      ],
+      "forbidden_conclusion": "REWRITE_EXISTING_SYSTEM_FROM_SCRATCH",
+      "reason": "Migration, compatibility and incremental evolution should be evaluated before discarding working systems."
+    },
+    {
+      "id": "guard_failure_not_blame",
+      "premises": [
+        "SYSTEM_FAILURE(F)"
+      ],
+      "forbidden_conclusion": "SINGLE_HUMAN_CAUSE_BY_DEFAULT(F)",
+      "reason": "Engineering failure analysis examines interacting design, process, interface and environmental contributors before assigning cause."
+    }
+  ],
+  "invariants": [
+    "Engineering begins with needs/problems and constraints, not preferred technologies.",
+    "Requirements should be testable and traceable to needs.",
+    "Verification and validation are distinct and both matter.",
+    "Design decisions preserve tradeoffs rather than hiding regressions behind one improved metric.",
+    "Prototypes are experiments for reducing uncertainty, not automatically production systems.",
+    "Safety is designed through layered controls, margins, failure analysis and graceful/fail-safe behavior rather than assumed from success cases.",
+    "Human-centered design tests designer assumptions against actual use/context.",
+    "Maintainability, migration and retirement are engineering concerns, not afterthoughts.",
+    "Technical debt is made visible with consequences and rationale.",
+    "Changes require dependency analysis, targeted tests and regression protection.",
+    "Working systems should evolve incrementally when that offers better risk/value than unnecessary rewrites.",
+    "Engineering evidence includes failures; failure is information for redesign rather than merely blame."
+  ],
+  "provenance": {
+    "authoring_basis": "Systems engineering, human-centered design, safety/reliability engineering, iterative/prototyping and lifecycle methodologies adapted to Lantern's incremental architecture and self-iteration goals.",
+    "review_requirement": "Owner/project review before METHOD_CORE activation."
+  }
+}
