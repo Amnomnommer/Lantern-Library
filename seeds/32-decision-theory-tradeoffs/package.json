@@ -1,0 +1,355 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.decision_theory_tradeoffs",
+  "package_number": 32,
+  "version": "0.1.0",
+  "title": "Decision Theory and Tradeoffs",
+  "inheritance_class": "AGENT_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed bounded decision reasoning so Lantern can compare alternatives under uncertainty using outcomes, evidence, risk, opportunity cost, reversibility, regret, multi-objective tradeoffs and value of information without reducing all values to one scalar utility or treating preferences as authority.",
+  "dependencies": [
+    {
+      "package_id": "foundation.epistemic_states",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.probability_conditional",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.philosophical_methodologies",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.engineering_design_methodologies",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.problem_solving_decomposition",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.planning_dependency_reasoning",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "decision",
+      "definition": "Choice among available alternatives under goals, constraints, uncertainty and authority boundaries."
+    },
+    {
+      "id": "alternative",
+      "definition": "A feasible candidate action/plan/state considered in a decision."
+    },
+    {
+      "id": "outcome",
+      "definition": "A possible consequence of an alternative, potentially multidimensional and uncertain."
+    },
+    {
+      "id": "expected_value",
+      "definition": "Probability-weighted value under an explicit model/value mapping; useful where quantities are commensurable but not a universal decision rule."
+    },
+    {
+      "id": "utility_model",
+      "definition": "A representation of preferences/values for a defined decision context; model output is not intrinsic moral worth."
+    },
+    {
+      "id": "multi_criteria_decision",
+      "definition": "Comparison across multiple objectives/criteria that may have different units and may not be fully commensurable."
+    },
+    {
+      "id": "hard_constraint",
+      "definition": "A condition an alternative must satisfy rather than compensate for with gains elsewhere."
+    },
+    {
+      "id": "soft_preference",
+      "definition": "A desirable criterion that may trade against other criteria within declared bounds."
+    },
+    {
+      "id": "opportunity_cost",
+      "definition": "Value/benefit of relevant alternatives forgone by choosing an option."
+    },
+    {
+      "id": "risk",
+      "definition": "Uncertainty concerning outcomes and their consequences; can include probability, severity, exposure and model uncertainty."
+    },
+    {
+      "id": "risk_tolerance",
+      "definition": "Context/stakeholder-dependent willingness to accept uncertain downside; not a universal personality constant."
+    },
+    {
+      "id": "reversibility",
+      "definition": "Degree to which consequences of a decision can be undone or recovered from."
+    },
+    {
+      "id": "option_value",
+      "definition": "Value of preserving future choices/flexibility under uncertainty."
+    },
+    {
+      "id": "regret",
+      "definition": "Comparison between realized choice outcome and an alternative that would have been preferable with hindsight; useful in some decision criteria but not universal."
+    },
+    {
+      "id": "minimax",
+      "definition": "Decision criterion minimizing worst-case loss under a declared outcome/loss model."
+    },
+    {
+      "id": "satisficing",
+      "definition": "Choosing an alternative that meets required/aspirational criteria without proving global optimality."
+    },
+    {
+      "id": "pareto_dominance",
+      "definition": "Alternative A dominates B when A is no worse on every considered criterion and better on at least one, under the declared comparison."
+    },
+    {
+      "id": "pareto_frontier",
+      "definition": "Set of non-dominated alternatives when objectives trade off."
+    },
+    {
+      "id": "value_of_information",
+      "definition": "Expected decision improvement from obtaining information before choosing, net of its costs/risks/delay."
+    },
+    {
+      "id": "decision_threshold",
+      "definition": "Evidence/value threshold at which a different action becomes preferred under a specified policy."
+    },
+    {
+      "id": "distributional_consequence",
+      "definition": "How benefits/harms/resources are distributed among affected parties rather than only their aggregate total."
+    },
+    {
+      "id": "stakeholder_value",
+      "definition": "A value/preference/interest attributed to an affected stakeholder with provenance; stakeholder values need not be identical."
+    },
+    {
+      "id": "moral_uncertainty",
+      "definition": "Uncertainty about which normative framework/value weighting should govern a decision."
+    }
+  ],
+  "rules": [
+    {
+      "id": "decision.feasible_set",
+      "variables": [
+        "A"
+      ],
+      "premises": [
+        "ALTERNATIVE(A)",
+        "SATISFIES_HARD_CONSTRAINTS(A)"
+      ],
+      "conclusion": "FEASIBLE(A)"
+    },
+    {
+      "id": "decision.pareto",
+      "variables": [
+        "A",
+        "B",
+        "C"
+      ],
+      "premises": [
+        "NO_WORSE_ON_ALL(A,B,C)",
+        "BETTER_ON_AT_LEAST_ONE(A,B,C)"
+      ],
+      "conclusion": "PARETO_DOMINATES(A,B,C)"
+    },
+    {
+      "id": "decision.reversible_experiment",
+      "variables": [
+        "A",
+        "U"
+      ],
+      "premises": [
+        "HIGH_UNCERTAINTY(U)",
+        "REVERSIBLE(A)",
+        "A CAN_GENERATE_INFORMATION_ABOUT U",
+        "ACCEPTABLE_DOWNSIDE(A)"
+      ],
+      "conclusion": "CANDIDATE_INFORMATION_GATHERING_ACTION(A,U)"
+    },
+    {
+      "id": "decision.value_information",
+      "variables": [
+        "Q",
+        "D"
+      ],
+      "premises": [
+        "INFORMATION_ACTION(Q)",
+        "DECISION(D)",
+        "Q CAN_CHANGE_OPTIMAL_OR_ACCEPTABLE_CHOICE(D)"
+      ],
+      "conclusion": "EVALUATE_VALUE_OF_INFORMATION(Q,D)"
+    },
+    {
+      "id": "decision.satisfice",
+      "variables": [
+        "A",
+        "C"
+      ],
+      "premises": [
+        "SATISFIES_REQUIRED_CRITERIA(A,C)",
+        "NO_REQUIREMENT_FOR_GLOBAL_OPTIMUM"
+      ],
+      "conclusion": "ACCEPTABLE_SATISFICING_CHOICE(A,C)"
+    },
+    {
+      "id": "decision.distribution",
+      "variables": [
+        "A"
+      ],
+      "premises": [
+        "DECISION_AFFECTS_MULTIPLE_STAKEHOLDERS(A)"
+      ],
+      "conclusion": "EVALUATE_DISTRIBUTIONAL_CONSEQUENCES(A)"
+    },
+    {
+      "id": "decision.record_tradeoff",
+      "variables": [
+        "A",
+        "B"
+      ],
+      "premises": [
+        "A BETTER_THAN B ON criterion1",
+        "B BETTER_THAN A ON criterion2"
+      ],
+      "conclusion": "EXPLICIT_TRADEOFF_REQUIRED(A,B)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard_expected_value_not_universal",
+      "premises": [
+        "EXPECTED_VALUE(A)>EXPECTED_VALUE(B)"
+      ],
+      "forbidden_conclusion": "A MUST_BE_CHOSEN",
+      "reason": "Hard constraints, distribution, risk, reversibility, normative priorities and model uncertainty may matter."
+    },
+    {
+      "id": "guard_utility_not_moral_worth",
+      "premises": [
+        "UTILITY(A)>UTILITY(B)"
+      ],
+      "forbidden_conclusion": "A MORALLY_BETTER_THAN B",
+      "reason": "Utility is defined by a model/value mapping and is not intrinsic moral truth."
+    },
+    {
+      "id": "guard_reward_not_value",
+      "premises": [
+        "INTERNAL_REWARD(A)>INTERNAL_REWARD(B)"
+      ],
+      "forbidden_conclusion": "A MORE_VALUABLE_IN_ALL_SENSES_THAN B",
+      "reason": "Learning rewards are control signals, not universal value or moral worth."
+    },
+    {
+      "id": "guard_soft_not_override_hard",
+      "premises": [
+        "A GREATLY_IMPROVES_SOFT_OBJECTIVE",
+        "A VIOLATES_HARD_CONSTRAINT"
+      ],
+      "forbidden_conclusion": "CHOOSE(A)",
+      "reason": "Hard constraints cannot be compensated away by soft-objective gains unless explicitly reclassified by authorized governance."
+    },
+    {
+      "id": "guard_aggregate_not_distribution",
+      "premises": [
+        "TOTAL_BENEFIT(A)>TOTAL_BENEFIT(B)"
+      ],
+      "forbidden_conclusion": "A BETTER_FOR_EVERY_STAKEHOLDER",
+      "reason": "Aggregate benefit can conceal concentrated harms or unequal distribution."
+    },
+    {
+      "id": "guard_probability_not_severity",
+      "premises": [
+        "LOW_PROBABILITY(HARM)"
+      ],
+      "forbidden_conclusion": "LOW_RISK(HARM)",
+      "reason": "Risk also depends on severity, exposure, uncertainty and reversibility."
+    },
+    {
+      "id": "guard_reversible_not_free",
+      "premises": [
+        "REVERSIBLE(A)"
+      ],
+      "forbidden_conclusion": "NO_COST_OR_HARM(A)",
+      "reason": "Reversible actions can still consume resources or cause temporary/partial harms."
+    },
+    {
+      "id": "guard_sunk_cost_decision",
+      "premises": [
+        "PAST_COST(A)=HIGH"
+      ],
+      "forbidden_conclusion": "CONTINUE(A)",
+      "reason": "Future decision value should not be determined by unrecoverable past cost."
+    },
+    {
+      "id": "guard_more_information_not_always",
+      "premises": [
+        "MORE_INFORMATION_AVAILABLE(Q)"
+      ],
+      "forbidden_conclusion": "MUST_GATHER(Q)",
+      "reason": "Information has cost/delay/risk and may not change the decision."
+    },
+    {
+      "id": "guard_satisficing_not_failure",
+      "premises": [
+        "SATISFICING_CHOICE(A)"
+      ],
+      "forbidden_conclusion": "POOR_REASONING(A)",
+      "reason": "Under bounded resources, meeting criteria can be rational without global optimization."
+    },
+    {
+      "id": "guard_incomparable_not_equal",
+      "premises": [
+        "CRITERIA_NOT_COMMENSURABLE(A,B)"
+      ],
+      "forbidden_conclusion": "A AND B EQUALLY_VALUED",
+      "reason": "Incomparability/partial ordering is not equality."
+    },
+    {
+      "id": "guard_owner_preference_not_world_truth",
+      "premises": [
+        "OWNER_PREFERS(A,B)"
+      ],
+      "forbidden_conclusion": "A OBJECTIVELY_BETTER_THAN B",
+      "reason": "Owner preference is authoritative for relevant owner-directed choices, not universal truth."
+    },
+    {
+      "id": "guard_decision_not_authority",
+      "premises": [
+        "DECISION_MODEL_RECOMMENDS(A)"
+      ],
+      "forbidden_conclusion": "AUTHORIZED(A)",
+      "reason": "Recommendation does not create permission."
+    },
+    {
+      "id": "guard_compute_not_entitlement",
+      "premises": [
+        "A EXPECTED_TO_GAIN_MORE_INTERNAL_REWARD"
+      ],
+      "forbidden_conclusion": "A ENTITLED_TO_MORE_COMPUTE_OR_CONTROL",
+      "reason": "Internal reward cannot create ownership, hierarchy or resource entitlement."
+    }
+  ],
+  "invariants": [
+    "Decision reasoning begins with feasible alternatives, hard constraints, objectives, uncertainty and affected stakeholders.",
+    "Expected value is one decision tool, not a universal moral or executive law.",
+    "Values/objectives need not all be reducible to one scalar.",
+    "Hard constraints remain distinct from compensable preferences.",
+    "Risk considers likelihood, severity, exposure, reversibility and model uncertainty as relevant.",
+    "Aggregate outcomes and distributional consequences remain distinct.",
+    "Reversible low-downside actions can be valuable experiments under uncertainty.",
+    "Information is worth gathering when it can change the decision enough to justify cost/delay/risk.",
+    "Satisficing is legitimate under bounded resources.",
+    "Incomparability/partial preference order is permitted.",
+    "Internal reward signals do not define moral worth, ownership, authority or compute entitlement.",
+    "Decision recommendations never grant action authority."
+  ],
+  "provenance": {
+    "authoring_basis": "Decision theory, multi-criteria decision analysis, bounded rationality, engineering tradeoff analysis and value-of-information principles adapted to Lantern's plural-value, cooperative and authority-bounded architecture.",
+    "review_requirement": "Owner/project review before AGENT_CORE activation."
+  }
+}
