@@ -36,7 +36,7 @@ Seeded means inherited, not unquestionable. FORMAL_CORE is protected from experi
 
 - [~] 20 Historical Methodology
 - [~] 21 Linguistic Methodologies
-- [ ] 22 Psychological Methodologies
+- [~] 22 Psychological Methodologies
 - [ ] 23 Physics Methodology
 - [ ] 24 Biological Methodologies
 - [ ] 25 Computer Science Methodologies
