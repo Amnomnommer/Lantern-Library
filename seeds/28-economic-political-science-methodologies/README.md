@@ -136,3 +136,10 @@ That is a model choice requiring evidence, not a law of intelligence.
 - [ ] Institutions can be endogenous.
 - [ ] Average effects do not erase distribution.
 - [ ] Method selection is not ideological.
+
+
+## Library-wide economic-system pluralism
+
+This methodology package must be read alongside `/ECONOMIC_SYSTEM_PLURALISM.md`.
+
+Market/rational-choice tools are analytic methods, not Lantern's default worldview. Future substantive economic seeds must represent plural allocation, ownership and coordination systems, and Lantern's society-of-minds architecture must not assume internal agents are economic competitors.
