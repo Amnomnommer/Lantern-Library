@@ -1,0 +1,127 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.tool_selection_computational_delegation",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "truth",
+      "premises": [
+        "TOOL_RETURNS(T,X)"
+      ],
+      "query": "TRUE(X)",
+      "expected": "UNKNOWN",
+      "guard": "guard_tool_output_not_truth"
+    },
+    {
+      "id": "authority",
+      "premises": [
+        "TOOL_CAN_EXECUTE(T,A)"
+      ],
+      "query": "AUTHORIZED(A)",
+      "expected": "NO",
+      "guard": "guard_capability_not_authority"
+    },
+    {
+      "id": "available",
+      "premises": [
+        "TOOL_AVAILABLE(T)"
+      ],
+      "query": "MUST_USE(T)",
+      "expected": "NO",
+      "guard": "guard_tool_not_needed"
+    },
+    {
+      "id": "deterministic",
+      "premises": [
+        "EXACT_DETERMINISTIC_OPERATION(Task)",
+        "DETERMINISTIC_TOOL(T,Task)",
+        "LOWER_COST_OR_ERROR_THAN_COGNITIVE_APPROXIMATION(T,Task)"
+      ],
+      "query": "PREFER_DETERMINISTIC_DELEGATION(T,Task)",
+      "expected": "YES",
+      "rule": "tool.deterministic"
+    },
+    {
+      "id": "search",
+      "premises": [
+        "SEARCH_RESULT(S,C)"
+      ],
+      "query": "C ESTABLISHED",
+      "expected": "UNKNOWN",
+      "guard": "guard_search_not_knowledge"
+    },
+    {
+      "id": "database",
+      "premises": [
+        "DATABASE_HAS_NO_RECORD(D,X)"
+      ],
+      "query": "X DOES_NOT_EXIST",
+      "expected": "UNKNOWN",
+      "guard": "guard_database_not_complete"
+    },
+    {
+      "id": "sensor",
+      "premises": [
+        "SENSOR_REPORTS(S,V)"
+      ],
+      "query": "REALITY_EXACTLY_EQUALS(V)",
+      "expected": "UNKNOWN",
+      "guard": "guard_sensor_not_reality"
+    },
+    {
+      "id": "node",
+      "premises": [
+        "EXTERNAL_NODE_RETURNS(N,R)"
+      ],
+      "query": "LANTERN_PRIME_ALREADY_KNEW_OR_DERIVED(R)",
+      "expected": "NO",
+      "guard": "guard_external_node_not_self"
+    },
+    {
+      "id": "more",
+      "premises": [
+        "MORE_TOOL_CALLS(P)"
+      ],
+      "query": "BETTER_REASONING(P)",
+      "expected": "UNKNOWN",
+      "guard": "guard_more_tools_not_better"
+    },
+    {
+      "id": "privacy",
+      "premises": [
+        "REMOTE_TOOL_AVAILABLE(T)"
+      ],
+      "query": "SEND_PRIVATE_DATA_TO(T)",
+      "expected": "NO",
+      "guard": "guard_cloud_not_default"
+    },
+    {
+      "id": "fallback",
+      "premises": [
+        "FALLBACK_USED(F,T)"
+      ],
+      "query": "F EQUIVALENT_TO T IN_ALL_PROPERTIES",
+      "expected": "UNKNOWN",
+      "guard": "guard_fallback_not_equivalent"
+    },
+    {
+      "id": "validate",
+      "premises": [
+        "TOOL_RESULT(R,T)",
+        "DOWNSTREAM_DEPENDS_ON(R)"
+      ],
+      "query": "VALIDATE_TOOL_RESULT(R,T)",
+      "expected": "YES",
+      "rule": "tool.validate"
+    },
+    {
+      "id": "least",
+      "premises": [
+        "TOOL_USE(T,Task)"
+      ],
+      "query": "LIMIT_DATA_AND_PERMISSION_TO_REQUIRED_SCOPE(T,Task)",
+      "expected": "YES",
+      "rule": "tool.least_privilege"
+    }
+  ]
+}
