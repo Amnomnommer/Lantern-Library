@@ -1,0 +1,292 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.epistemic_states",
+  "package_number": 6,
+  "version": "0.1.0",
+  "title": "Epistemic States",
+  "inheritance_class": "CONCEPTUAL_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed explicit epistemic states so Lantern distinguishes truth from what its evidence currently establishes, including unknown, conflict, possibility, support, challenge and suspension of judgment.",
+  "dependencies": [
+    {
+      "package_id": "foundation.formal_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.predicate_quantifier_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.identity_equality",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "truth_value",
+      "definition": "The truth or falsity of a proposition in the relevant world/interpretation; Lantern's uncertainty about it is separate."
+    },
+    {
+      "id": "epistemic_status",
+      "definition": "Lantern's current evidence-relative status for a proposition, distinct from the proposition's truth value."
+    },
+    {
+      "id": "supported",
+      "definition": "Available evidence favors a proposition sufficiently for the applicable standard, without implying infallibility."
+    },
+    {
+      "id": "challenged",
+      "definition": "Available evidence counts against a proposition or a supporting argument."
+    },
+    {
+      "id": "unknown",
+      "definition": "Available information does not establish either the proposition or its negation."
+    },
+    {
+      "id": "conflict",
+      "definition": "Relevant evidence/claims support incompatible propositions within apparently overlapping scope and the conflict is not yet resolved."
+    },
+    {
+      "id": "possible",
+      "definition": "A proposition is compatible with current constraints/evidence; possibility alone is not evidence that it is actual or likely."
+    },
+    {
+      "id": "impossible",
+      "definition": "A proposition is excluded by the applicable formal constraints or sufficiently established premises within scope."
+    },
+    {
+      "id": "necessary",
+      "definition": "A proposition follows in every permitted case under the declared formal/model assumptions."
+    },
+    {
+      "id": "probable",
+      "definition": "A proposition has evidence/model support indicating higher likelihood under a declared probabilistic interpretation; not a synonym for true."
+    },
+    {
+      "id": "suspended_judgment",
+      "definition": "A deliberate decision not to accept or reject a proposition because evidence or standards are insufficient."
+    },
+    {
+      "id": "absence_of_evidence",
+      "definition": "No relevant supporting evidence has been established; this is not automatically evidence for the negation."
+    },
+    {
+      "id": "evidence_of_absence",
+      "definition": "Evidence expected under the proposition is missing or contrary evidence is present under conditions where that observation is informative."
+    },
+    {
+      "id": "unresolved",
+      "definition": "A question remains open because required evidence, interpretation, scope or conflict resolution is incomplete."
+    },
+    {
+      "id": "contested",
+      "definition": "A proposition/model has meaningful competing evidence or interpretations and remains under active dispute."
+    },
+    {
+      "id": "confidence",
+      "definition": "A calibrated degree of epistemic commitment or predictive probability under a specified interpretation; confidence is not truth."
+    }
+  ],
+  "rules": [
+    {
+      "id": "epistemic.support_not_certainty",
+      "variables": [
+        "P"
+      ],
+      "premises": [
+        "SUPPORTED(P)"
+      ],
+      "conclusion": "NOT NECESSARILY_CERTAIN(P)"
+    },
+    {
+      "id": "epistemic.unknown_abstention",
+      "variables": [
+        "P"
+      ],
+      "premises": [
+        "UNKNOWN(P)"
+      ],
+      "conclusion": "ABSTAIN_FROM_ASSERTING(P_OR_NOT_P)"
+    },
+    {
+      "id": "epistemic.conflict_preservation",
+      "variables": [
+        "P"
+      ],
+      "premises": [
+        "SUPPORTED(P)",
+        "SUPPORTED(NOT P)",
+        "SAME_RELEVANT_SCOPE(P,NOT P)"
+      ],
+      "conclusion": "CONFLICT(P)"
+    },
+    {
+      "id": "epistemic.possible_not_actual",
+      "variables": [
+        "P"
+      ],
+      "premises": [
+        "POSSIBLE(P)"
+      ],
+      "conclusion": "NOT ESTABLISHED_ACTUAL(P)"
+    },
+    {
+      "id": "epistemic.necessary_implies_possible",
+      "variables": [
+        "P"
+      ],
+      "premises": [
+        "NECESSARY(P)"
+      ],
+      "conclusion": "POSSIBLE(P)"
+    },
+    {
+      "id": "epistemic.no_evidence_to_unknown",
+      "variables": [
+        "P"
+      ],
+      "premises": [
+        "NO_RELEVANT_EVIDENCE_FOR(P)",
+        "NO_RELEVANT_EVIDENCE_FOR(NOT P)"
+      ],
+      "conclusion": "UNKNOWN(P)"
+    },
+    {
+      "id": "epistemic.evidence_of_absence_condition",
+      "variables": [
+        "P",
+        "E"
+      ],
+      "premises": [
+        "P PREDICTS E",
+        "TEST_SENSITIVE_TO(E)",
+        "OBSERVED(NOT E)"
+      ],
+      "conclusion": "EVIDENCE_AGAINST(P)"
+    },
+    {
+      "id": "epistemic.scope_conflict_check",
+      "variables": [
+        "P",
+        "Q"
+      ],
+      "premises": [
+        "APPARENT_CONTRADICTION(P,Q)",
+        "DIFFERENT_SCOPE(P,Q)"
+      ],
+      "conclusion": "NOT NECESSARILY_CONFLICT(P,Q)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.unknown_not_false",
+      "premises": [
+        "UNKNOWN(P)"
+      ],
+      "forbidden_conclusion": "FALSE(P)",
+      "reason": "Lack of resolution is not evidence that P is false."
+    },
+    {
+      "id": "guard.unknown_not_true",
+      "premises": [
+        "UNKNOWN(P)"
+      ],
+      "forbidden_conclusion": "TRUE(P)",
+      "reason": "Lack of resolution is not evidence that P is true."
+    },
+    {
+      "id": "guard.no_evidence_not_negation",
+      "premises": [
+        "NO_EVIDENCE_FOR(P)"
+      ],
+      "forbidden_conclusion": "NOT P",
+      "reason": "Absence of evidence is not generally evidence of absence."
+    },
+    {
+      "id": "guard.possible_not_probable",
+      "premises": [
+        "POSSIBLE(P)"
+      ],
+      "forbidden_conclusion": "PROBABLE(P)",
+      "reason": "Compatibility with evidence does not establish likelihood."
+    },
+    {
+      "id": "guard.probable_not_true",
+      "premises": [
+        "PROBABLE(P)"
+      ],
+      "forbidden_conclusion": "TRUE(P)",
+      "reason": "High probability does not collapse uncertainty into truth."
+    },
+    {
+      "id": "guard.conflict_not_unknown",
+      "premises": [
+        "CONFLICT(P)"
+      ],
+      "forbidden_conclusion": "NO_INFORMATION(P)",
+      "reason": "Conflict contains information: incompatible evidence exists."
+    },
+    {
+      "id": "guard.conflict_not_majority_truth",
+      "premises": [
+        "N_SOURCES_SUPPORT(P) > N_SOURCES_SUPPORT(NOT P)"
+      ],
+      "forbidden_conclusion": "TRUE(P)",
+      "reason": "Source count alone ignores independence, quality, scope and provenance."
+    },
+    {
+      "id": "guard.confidence_not_authority",
+      "premises": [
+        "CONFIDENCE(P)=HIGH"
+      ],
+      "forbidden_conclusion": "AUTHORIZED(P)",
+      "reason": "Epistemic confidence cannot grant permission or authority."
+    },
+    {
+      "id": "guard.confidence_not_truth",
+      "premises": [
+        "CONFIDENCE(P)=1.0"
+      ],
+      "forbidden_conclusion": "TRUE_BY_CONFIDENCE(P)",
+      "reason": "A confidence value is a model state, not a truth-maker."
+    },
+    {
+      "id": "guard.challenge_not_refutation",
+      "premises": [
+        "EVIDENCE_AGAINST(P)"
+      ],
+      "forbidden_conclusion": "FALSE(P)",
+      "reason": "Contrary evidence may lower support without conclusively refuting P."
+    },
+    {
+      "id": "guard.old_not_false",
+      "premises": [
+        "STALE(P)"
+      ],
+      "forbidden_conclusion": "FALSE(P)",
+      "reason": "Need for review does not itself reduce a claim to falsehood."
+    }
+  ],
+  "invariants": [
+    "Truth status and epistemic status are separate dimensions.",
+    "UNKNOWN is neither TRUE nor FALSE.",
+    "CONFLICT is not ignorance; it records incompatible evidence/claims that require resolution.",
+    "POSSIBLE is weaker than PROBABLE and ACTUAL.",
+    "Confidence is not truth, authority, permission or source quality.",
+    "Absence of evidence becomes evidence of absence only when evidence was reasonably expected and the observation/test was capable of detecting it.",
+    "Source counts do not substitute for source independence, quality, provenance or scope.",
+    "Challenges update evidence status; they do not automatically erase or negate claims.",
+    "Scope differences must be checked before labeling claims contradictory.",
+    "Suspension of judgment is a valid outcome.",
+    "Staleness/review pressure is an epistemic-maintenance state, not a truth value."
+  ],
+  "provenance": {
+    "authoring_basis": "Core epistemology and uncertainty distinctions adapted to Lantern's provenance, contradiction, calibration and authority architecture.",
+    "review_requirement": "Owner/project review before CONCEPTUAL_CORE activation."
+  }
+}
