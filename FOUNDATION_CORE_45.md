@@ -17,7 +17,7 @@ Seeded means inherited, not unquestionable. FORMAL_CORE is protected from experi
 **Wave 1 status:** all seven packages authored and in review; runtime activation waits for loader/Schema-v3 validation.\n\n## Wave 2 — intellectual reliability
 
 - [~] 08 Evidence Types and Inference Validity
-- [ ] 09 Source and Provenance Reasoning
+- [~] 09 Source and Provenance Reasoning
 - [ ] 10 Contradiction and Belief Revision
 - [ ] 11 Probability and Conditional Probability
 - [ ] 12 Measurement, Units, Precision and Accuracy
