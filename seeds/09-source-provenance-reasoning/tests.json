@@ -1,0 +1,137 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.source_provenance_reasoning",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "copy-independence",
+      "premises": [
+        "s2 COPIES_OR_DERIVES_FROM s1",
+        "s1 REPORTS C",
+        "s2 REPORTS C"
+      ],
+      "query": "INDEPENDENT_FOR(s1,s2,C)",
+      "expected": "NO",
+      "rule": "source.copy_not_independent"
+    },
+    {
+      "id": "independent-corroboration",
+      "premises": [
+        "s1 SUPPORTS C",
+        "s2 SUPPORTS C",
+        "INDEPENDENT_FOR(s1,s2,C)",
+        "RELEVANT_SOURCE(s1,C)",
+        "RELEVANT_SOURCE(s2,C)"
+      ],
+      "query": "CORROBORATED(C)",
+      "expected": "YES",
+      "rule": "source.independent_corroboration"
+    },
+    {
+      "id": "primary-truth",
+      "premises": [
+        "PRIMARY_SOURCE(s,C)"
+      ],
+      "query": "TRUE(C)",
+      "expected": "UNKNOWN",
+      "guard": "guard.primary_not_true"
+    },
+    {
+      "id": "secondary-ranking",
+      "premises": [
+        "SECONDARY_SOURCE(review,C)",
+        "PRIMARY_SOURCE(case_report,C)"
+      ],
+      "query": "WEAKER_THAN_ANY_PRIMARY(review,C)",
+      "expected": "NO_OR_UNKNOWN_NOT_YES",
+      "guard": "guard.secondary_not_inferior"
+    },
+    {
+      "id": "expert-domain",
+      "premises": [
+        "EXPERT_IN(s,physics)",
+        "CLAIM_DOMAIN(C,physics)"
+      ],
+      "query": "EXPERTISE_RELEVANT(s,C)",
+      "expected": "YES",
+      "rule": "source.expertise_scoped"
+    },
+    {
+      "id": "expert-truth",
+      "premises": [
+        "EXPERTISE_RELEVANT(s,C)",
+        "s ASSERTS C"
+      ],
+      "query": "TRUE(C)",
+      "expected": "UNKNOWN",
+      "guard": "guard.expert_not_truth"
+    },
+    {
+      "id": "expert-leak",
+      "premises": [
+        "EXPERT_IN(s,physics)",
+        "CLAIM_DOMAIN(C,medicine)",
+        "physics != medicine"
+      ],
+      "query": "EXPERTISE_RELEVANT(s,C)",
+      "expected": "UNKNOWN",
+      "guard": "guard.expertise_domain_leak"
+    },
+    {
+      "id": "conflict-interest",
+      "premises": [
+        "CONFLICT_OF_INTEREST(s,C)"
+      ],
+      "query": "FALSE(C)",
+      "expected": "UNKNOWN",
+      "guard": "guard.conflict_not_false"
+    },
+    {
+      "id": "derivative-majority",
+      "premises": [
+        "MANY_SOURCES_DERIVE_FROM(s0,C)"
+      ],
+      "query": "MANY_INDEPENDENT_CONFIRMATIONS(C)",
+      "expected": "NO_OR_UNKNOWN_NOT_YES",
+      "guard": "guard.many_derivatives_not_independent"
+    },
+    {
+      "id": "newer",
+      "premises": [
+        "NEWER(s2,s1)"
+      ],
+      "query": "BETTER_SOURCE(s2,s1)",
+      "expected": "UNKNOWN",
+      "guard": "guard.recency_not_quality"
+    },
+    {
+      "id": "old",
+      "premises": [
+        "OLD_SOURCE(s)"
+      ],
+      "query": "OBSOLETE(s)",
+      "expected": "UNKNOWN",
+      "guard": "guard.old_not_obsolete"
+    },
+    {
+      "id": "authenticity",
+      "premises": [
+        "SOURCE_CLAIM(s,C)",
+        "AUTHENTICITY_UNRESOLVED(s)"
+      ],
+      "query": "SOURCE_SUPPORT_LIMITED_PENDING_AUTHENTICITY(s,C)",
+      "expected": "YES",
+      "rule": "source.authenticity_prerequisite"
+    },
+    {
+      "id": "provenance",
+      "premises": [
+        "s2 DERIVES_FROM s1",
+        "s1 SUPPORTS C"
+      ],
+      "query": "PROVENANCE_LINK(s2,s1,C)",
+      "expected": "YES",
+      "rule": "source.derivative_chain"
+    }
+  ]
+}
