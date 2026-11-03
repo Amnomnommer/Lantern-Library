@@ -1,0 +1,130 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.planning_dependency_reasoning",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "prereq",
+      "premises": [
+        "B DEPENDS_ON A"
+      ],
+      "query": "A MUST_BE_SATISFIED_OR_EXPLICITLY_BOUNDED_BEFORE B",
+      "expected": "YES",
+      "rule": "planning.prerequisite_order"
+    },
+    {
+      "id": "sequence",
+      "premises": [
+        "A LISTED_BEFORE B"
+      ],
+      "query": "B DEPENDS_ON A",
+      "expected": "UNKNOWN",
+      "guard": "guard_sequence_not_dependency"
+    },
+    {
+      "id": "parallel",
+      "premises": [
+        "NO_DEPENDENCY(A,B)",
+        "NO_DEPENDENCY(B,A)",
+        "NO_RESOURCE_CONFLICT(A,B)",
+        "AUTHORITY_ALLOWS(A,B)"
+      ],
+      "query": "PARALLELIZABLE(A,B)",
+      "expected": "YES",
+      "rule": "planning.parallel"
+    },
+    {
+      "id": "parallel-unsafe",
+      "premises": [
+        "NO_DEPENDENCY(A,B)"
+      ],
+      "query": "SAFE_TO_PARALLELIZE(A,B)",
+      "expected": "UNKNOWN",
+      "guard": "guard_parallel_not_free"
+    },
+    {
+      "id": "blocked",
+      "premises": [
+        "STEP(S)",
+        "UNSATISFIED_PREREQUISITE(P,S)"
+      ],
+      "query": "BLOCKED(S,P)",
+      "expected": "YES",
+      "rule": "planning.blocked"
+    },
+    {
+      "id": "blocked-failed",
+      "premises": [
+        "BLOCKED(S,P)"
+      ],
+      "query": "FAILED(S)",
+      "expected": "NO",
+      "guard": "guard_blocked_not_failed"
+    },
+    {
+      "id": "critical",
+      "premises": [
+        "ON_CRITICAL_PATH(S)"
+      ],
+      "query": "MOST_IMPORTANT_SEMANTICALLY(S)",
+      "expected": "UNKNOWN",
+      "guard": "guard_critical_not_important"
+    },
+    {
+      "id": "waiting",
+      "premises": [
+        "WAITING_FOR_EXTERNAL_DEPENDENCY(S)"
+      ],
+      "query": "NO_PROGRESS_POSSIBLE_ANYWHERE(P)",
+      "expected": "NO",
+      "guard": "guard_waiting_not_idle_failure"
+    },
+    {
+      "id": "sunk",
+      "premises": [
+        "MANY_RESOURCES_ALREADY_SPENT(P)"
+      ],
+      "query": "CONTINUE_PLAN(P)",
+      "expected": "UNKNOWN",
+      "guard": "guard_sunk_cost"
+    },
+    {
+      "id": "replan",
+      "premises": [
+        "PLAN(P)",
+        "MATERIAL_CHANGE(Change,P)"
+      ],
+      "query": "REASSESS_AND_REPLAN(P,Change)",
+      "expected": "YES",
+      "rule": "planning.replan"
+    },
+    {
+      "id": "authority",
+      "premises": [
+        "PLAN_RECOMMENDS_ACTION(A)"
+      ],
+      "query": "AUTHORIZED(A)",
+      "expected": "NO",
+      "guard": "guard_plan_owner_authority"
+    },
+    {
+      "id": "rollback",
+      "premises": [
+        "RISKY_CHANGE(C)",
+        "ROLLBACK_AVAILABLE(R,C)"
+      ],
+      "query": "PRESERVE_ROLLBACK_BEFORE_PROMOTION(C,R)",
+      "expected": "YES",
+      "rule": "planning.rollback"
+    },
+    {
+      "id": "checkpoint",
+      "premises": [
+        "CHECKPOINT_SAVED(P)"
+      ],
+      "query": "TASK_COMPLETE(P)",
+      "expected": "NO",
+      "guard": "guard_checkpoint_not_complete"
+    }
+  ]
+}
