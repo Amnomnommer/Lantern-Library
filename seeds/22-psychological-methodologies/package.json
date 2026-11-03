@@ -1,0 +1,328 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.psychological_methodologies",
+  "package_number": 22,
+  "version": "0.1.0",
+  "title": "Psychological Methodologies",
+  "inheritance_class": "METHOD_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed plural psychological research methods so Lantern can investigate behavior, cognition, emotion and psychological constructs using experiments, observation, psychometrics, self-report, longitudinal and clinical/case evidence while preserving construct, sampling and interpretive limitations.",
+  "dependencies": [
+    {
+      "package_id": "foundation.epistemic_states",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.measurement_units_precision_accuracy",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.hypothesis_testability_operationalization",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.experimental_design",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.observational_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.replication_review_freshness",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.statistical_methodology",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "psychological_construct",
+      "definition": "A theoretical concept such as working memory, anxiety or motivation inferred through patterns of behavior/report/measurement rather than directly identical to one instrument score."
+    },
+    {
+      "id": "psychometrics",
+      "definition": "Methods for designing/evaluating measurements of psychological attributes, including reliability, validity, scaling and measurement invariance."
+    },
+    {
+      "id": "reliability",
+      "definition": "Consistency/stability of measurement under specified conditions; necessary for many uses but not sufficient for validity."
+    },
+    {
+      "id": "construct_validity",
+      "definition": "Evidence that a measurement behaves as expected for the intended construct and interpretation."
+    },
+    {
+      "id": "measurement_invariance",
+      "definition": "Evidence that a measure has sufficiently comparable measurement properties across groups/times for intended comparisons."
+    },
+    {
+      "id": "self_report",
+      "definition": "Participant-provided reports of thoughts, feelings, experiences or behavior, informative but affected by memory, interpretation, response style and context."
+    },
+    {
+      "id": "behavioral_measure",
+      "definition": "Observed/task-recorded behavior used as evidence about psychological processes under an explicit interpretation."
+    },
+    {
+      "id": "physiological_measure",
+      "definition": "Biological/physiological signal used as evidence relevant to psychological questions; not automatically identical to a psychological construct."
+    },
+    {
+      "id": "experimental_psychology",
+      "definition": "Controlled manipulation/measurement methods used to test psychological hypotheses."
+    },
+    {
+      "id": "naturalistic_observation",
+      "definition": "Systematic observation of behavior in relatively natural contexts with coding/sampling procedures."
+    },
+    {
+      "id": "clinical_case_method",
+      "definition": "Intensive study of an individual/small case, useful for description, rare phenomena and hypothesis generation but limited for population generalization."
+    },
+    {
+      "id": "longitudinal_psychology",
+      "definition": "Repeated study of psychological variables over time to examine development/change and temporal relations."
+    },
+    {
+      "id": "cross_cultural_psychology",
+      "definition": "Study of psychological processes across cultural contexts with attention to construct/measurement comparability."
+    },
+    {
+      "id": "demand_characteristics",
+      "definition": "Features of a study that influence participants because they infer expectations/purpose."
+    },
+    {
+      "id": "expectancy_effect",
+      "definition": "Researcher/participant expectations can influence behavior, measurement or interpretation."
+    },
+    {
+      "id": "social_desirability_bias",
+      "definition": "Tendency for responses to be shaped by perceived social acceptability."
+    },
+    {
+      "id": "response_bias",
+      "definition": "Systematic response tendencies unrelated to the target construct."
+    },
+    {
+      "id": "weird_sampling",
+      "definition": "Overreliance on Western, Educated, Industrialized, Rich and Democratic populations that may limit generalization."
+    },
+    {
+      "id": "diagnostic_classification",
+      "definition": "A clinical classification framework used under specified criteria; classification is not a complete explanation of an individual."
+    },
+    {
+      "id": "school_of_psychology",
+      "definition": "A theoretical/methodological tradition whose claims must be evaluated individually and historically rather than inherited wholesale as truth."
+    }
+  ],
+  "rules": [
+    {
+      "id": "psych.reliability_required",
+      "variables": [
+        "M",
+        "C"
+      ],
+      "premises": [
+        "MEASURE(M,C)",
+        "INTENDED_FOR_REPEATED_OR_COMPARATIVE_USE(M)"
+      ],
+      "conclusion": "EVALUATE_RELIABILITY(M,C)"
+    },
+    {
+      "id": "psych.validity_required",
+      "variables": [
+        "M",
+        "C"
+      ],
+      "premises": [
+        "MEASURE(M,C)",
+        "INTERPRET_AS_CONSTRUCT(M,C)"
+      ],
+      "conclusion": "EVALUATE_CONSTRUCT_VALIDITY(M,C)"
+    },
+    {
+      "id": "psych.invariance_required",
+      "variables": [
+        "M",
+        "G1",
+        "G2"
+      ],
+      "premises": [
+        "COMPARE_GROUPS_WITH(M,G1,G2)"
+      ],
+      "conclusion": "EVALUATE_MEASUREMENT_INVARIANCE(M,G1,G2)"
+    },
+    {
+      "id": "psych.multimethod_convergence",
+      "variables": [
+        "E1",
+        "E2",
+        "C"
+      ],
+      "premises": [
+        "DIFFERENT_METHODS(E1,E2)",
+        "INDEPENDENT_LIMITATIONS(E1,E2)",
+        "BOTH_SUPPORT(E1,E2,C)"
+      ],
+      "conclusion": "CONVERGENT_PSYCHOLOGICAL_EVIDENCE(C)"
+    },
+    {
+      "id": "psych.case_hypothesis",
+      "variables": [
+        "Case",
+        "H"
+      ],
+      "premises": [
+        "CLINICAL_CASE(Case)",
+        "OBSERVATION_SUGGESTS(Case,H)"
+      ],
+      "conclusion": "HYPOTHESIS_GENERATED(H,Case)"
+    },
+    {
+      "id": "psych.demand_flag",
+      "variables": [
+        "S"
+      ],
+      "premises": [
+        "PARTICIPANT_CAN_INFER_EXPECTED_RESPONSE(S)"
+      ],
+      "conclusion": "DEMAND_CHARACTERISTICS_RISK(S)"
+    },
+    {
+      "id": "psych.sample_scope",
+      "variables": [
+        "S",
+        "P"
+      ],
+      "premises": [
+        "SAMPLE_DRAWN_FROM(S,P)"
+      ],
+      "conclusion": "DEFAULT_GENERALIZATION_SCOPE(S,P)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.reliability_not_validity",
+      "premises": [
+        "HIGH_RELIABILITY(M)"
+      ],
+      "forbidden_conclusion": "VALID_MEASURE_OF(M,C)",
+      "reason": "A measure can consistently measure the wrong thing."
+    },
+    {
+      "id": "guard.score_not_construct",
+      "premises": [
+        "SCORE(person,M)=x"
+      ],
+      "forbidden_conclusion": "CONSTRUCT(person,C)=x",
+      "reason": "A score is an indicator under a measurement model, not the construct itself."
+    },
+    {
+      "id": "guard.self_report_not_direct_mind",
+      "premises": [
+        "SELF_REPORT(person,P)"
+      ],
+      "forbidden_conclusion": "DIRECT_OBSERVATION_OF_INTERNAL_STATE(P)",
+      "reason": "Self-report is testimony/evidence about experience, not unmediated access to mind."
+    },
+    {
+      "id": "guard.physiology_not_construct",
+      "premises": [
+        "PHYSIOLOGICAL_SIGNAL(person,S)=x"
+      ],
+      "forbidden_conclusion": "PSYCHOLOGICAL_CONSTRUCT(person,C)=x",
+      "reason": "Biological signals require validated interpretation and may be multiply determined."
+    },
+    {
+      "id": "guard.case_not_population",
+      "premises": [
+        "CASE_SUPPORTS(Case,H)"
+      ],
+      "forbidden_conclusion": "POPULATION_GENERALIZATION(H)",
+      "reason": "Case evidence can establish/illuminate a case and generate hypotheses but not population prevalence/effects alone."
+    },
+    {
+      "id": "guard.sample_not_humanity",
+      "premises": [
+        "SAMPLE_FROM(S,WEIRD_POPULATION)"
+      ],
+      "forbidden_conclusion": "UNIVERSAL_HUMAN_EFFECT(S)",
+      "reason": "Population/cultural scope must be justified rather than assumed."
+    },
+    {
+      "id": "guard.group_difference_not_essence",
+      "premises": [
+        "GROUP_MEAN_DIFFERENCE(G1,G2,C)"
+      ],
+      "forbidden_conclusion": "ESSENTIAL_INHERENT_DIFFERENCE(G1,G2,C)",
+      "reason": "Observed group differences can reflect many causal/social/measurement structures and do not establish immutable essence."
+    },
+    {
+      "id": "guard.diagnosis_not_person",
+      "premises": [
+        "DIAGNOSIS(person,D)"
+      ],
+      "forbidden_conclusion": "COMPLETE_EXPLANATION_OF_PERSON(person,D)",
+      "reason": "Diagnostic classification is a bounded clinical framework, not total identity/explanation."
+    },
+    {
+      "id": "guard.school_not_truth",
+      "premises": [
+        "HISTORICALLY_INFLUENTIAL_SCHOOL(S)"
+      ],
+      "forbidden_conclusion": "CLAIMS_OF(S)_TRUE_BY_INFLUENCE",
+      "reason": "Historical influence is not evidence that all theoretical claims are correct."
+    },
+    {
+      "id": "guard.freud_not_default",
+      "premises": [
+        "PSYCHOANALYTIC_INTERPRETATION(I)"
+      ],
+      "forbidden_conclusion": "ESTABLISHED_MECHANISM(I)",
+      "reason": "Interpretive/theoretical claims require evidence and should retain their school/method provenance."
+    },
+    {
+      "id": "guard.task_performance_not_capacity",
+      "premises": [
+        "TASK_SCORE(person,T)=x"
+      ],
+      "forbidden_conclusion": "FIXED_GLOBAL_CAPACITY(person)=x",
+      "reason": "Performance depends on task validity, context, state, strategy and measurement error."
+    },
+    {
+      "id": "guard_correlation_not_mechanism",
+      "premises": [
+        "PSYCHOLOGICAL_CORRELATION(X,Y)"
+      ],
+      "forbidden_conclusion": "MECHANISM(X,Y)",
+      "reason": "Association does not identify psychological mechanism or causal direction."
+    }
+  ],
+  "invariants": [
+    "Psychological constructs are theoretical objects inferred from evidence, not identical to individual scores or biomarkers.",
+    "Reliability and validity are distinct; reliability alone cannot establish validity.",
+    "Measurement comparability across groups/times requires invariance or other justification.",
+    "Self-report, behavior, physiology and task performance are different evidence types with different limitations.",
+    "Multi-method convergence can strengthen inference when limitations are sufficiently independent.",
+    "Case studies are valuable for cases/rare phenomena/hypothesis generation but have bounded population generalization.",
+    "Sampling/cultural scope is explicit; no sample silently becomes humanity.",
+    "Group-level differences do not establish immutable individual or group essences.",
+    "Demand characteristics, expectancy and response biases are methodological risks to evaluate.",
+    "Diagnostic categories are tools/classifications, not complete identities or causal explanations.",
+    "Historical schools/frameworks retain provenance and are evaluated claim-by-claim rather than inherited as truth.",
+    "Psychological claims preserve uncertainty, scope and methodology."
+  ],
+  "provenance": {
+    "authoring_basis": "Experimental, psychometric, observational, clinical/case, developmental and cross-cultural psychological methodologies adapted to Lantern's construct-validity and evidence architecture.",
+    "review_requirement": "Owner/project review before METHOD_CORE activation."
+  }
+}
