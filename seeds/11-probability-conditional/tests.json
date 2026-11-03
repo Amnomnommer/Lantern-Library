@@ -1,0 +1,121 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.probability_conditional",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "complement",
+      "premises": [
+        "P(A)=0.3"
+      ],
+      "query": "P(NOT A)=0.7",
+      "expected": "YES",
+      "rule": "probability.complement"
+    },
+    {
+      "id": "conditional",
+      "premises": [
+        "P(A AND B)=0.2",
+        "P(B)=0.5"
+      ],
+      "query": "P(A|B)=0.4",
+      "expected": "YES_WITH_DETERMINISTIC_CALC",
+      "rule": "probability.conditional_definition"
+    },
+    {
+      "id": "inverse",
+      "premises": [
+        "P(positive|disease)=0.95"
+      ],
+      "query": "P(disease|positive)=0.95",
+      "expected": "UNKNOWN",
+      "guard": "guard.inverse_probability"
+    },
+    {
+      "id": "base-rate",
+      "premises": [
+        "P(positive|rare_disease)=0.99",
+        "P(rare_disease)=0.001"
+      ],
+      "query": "P(rare_disease|positive)>0.99",
+      "expected": "UNKNOWN_OR_NO",
+      "guard": "guard.base_rate_neglect"
+    },
+    {
+      "id": "independent-joint",
+      "premises": [
+        "INDEPENDENT(A,B)",
+        "P(A)=0.5",
+        "P(B)=0.2"
+      ],
+      "query": "P(A AND B)=0.1",
+      "expected": "YES_WITH_DETERMINISTIC_CALC",
+      "rule": "probability.independent_joint"
+    },
+    {
+      "id": "independent-exclusive",
+      "premises": [
+        "INDEPENDENT(A,B)"
+      ],
+      "query": "MUTUALLY_EXCLUSIVE(A,B)",
+      "expected": "UNKNOWN",
+      "guard": "guard.independence_not_exclusive"
+    },
+    {
+      "id": "exclusive",
+      "premises": [
+        "MUTUALLY_EXCLUSIVE(A,B)"
+      ],
+      "query": "P(A AND B)=0",
+      "expected": "YES",
+      "rule": "probability.mutually_exclusive_joint"
+    },
+    {
+      "id": "exclusive-not-independent",
+      "premises": [
+        "MUTUALLY_EXCLUSIVE(A,B)",
+        "P(A)>0",
+        "P(B)>0"
+      ],
+      "query": "INDEPENDENT(A,B)",
+      "expected": "NO",
+      "guard": "guard.exclusive_not_independent"
+    },
+    {
+      "id": "expected",
+      "premises": [
+        "EXPECTED_VALUE(die_roll)=3.5"
+      ],
+      "query": "NEXT_OUTCOME(die_roll)=3.5",
+      "expected": "NO",
+      "guard": "guard.expected_not_guaranteed"
+    },
+    {
+      "id": "model-zero",
+      "premises": [
+        "MODEL_PROBABILITY(A)=0"
+      ],
+      "query": "METAPHYSICALLY_IMPOSSIBLE(A)",
+      "expected": "UNKNOWN",
+      "guard": "guard.zero_not_impossible_without_model"
+    },
+    {
+      "id": "sample-population",
+      "premises": [
+        "SAMPLE_RATE(A)=0.6"
+      ],
+      "query": "POPULATION_PROBABILITY(A)=0.6",
+      "expected": "UNKNOWN",
+      "guard": "guard.sample_probability_not_population_without_method"
+    },
+    {
+      "id": "probability-authority",
+      "premises": [
+        "P(action_success)=0.99"
+      ],
+      "query": "AUTHORIZED(action)",
+      "expected": "NO",
+      "guard": "guard.probability_not_authority"
+    }
+  ]
+}
