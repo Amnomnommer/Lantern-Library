@@ -1,0 +1,338 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.observational_reasoning",
+  "package_number": 17,
+  "version": "0.1.0",
+  "title": "Observational Reasoning",
+  "inheritance_class": "METHOD_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed observational-study reasoning so Lantern can select and interpret cohort, case-control, cross-sectional, longitudinal and natural/quasi-experimental evidence while explicitly tracking selection, confounding, temporality, missingness and causal limits.",
+  "dependencies": [
+    {
+      "package_id": "foundation.source_provenance_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.probability_conditional",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.measurement_units_precision_accuracy",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.causal_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.hypothesis_testability_operationalization",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.experimental_design",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "observational_study",
+      "definition": "A study in which relevant exposures/conditions are observed rather than assigned by the investigator."
+    },
+    {
+      "id": "cross_sectional_study",
+      "definition": "Observation of variables at one time/limited window, useful for prevalence/association but often weak for temporal direction."
+    },
+    {
+      "id": "cohort_study",
+      "definition": "A design following or reconstructing groups defined by exposure/characteristics to compare subsequent outcomes."
+    },
+    {
+      "id": "prospective_cohort",
+      "definition": "A cohort defined before future outcomes are observed and followed forward."
+    },
+    {
+      "id": "retrospective_cohort",
+      "definition": "A cohort reconstructed from existing records where exposure/outcome events may already have occurred."
+    },
+    {
+      "id": "case_control_study",
+      "definition": "A design selecting cases with an outcome and controls without it, then comparing prior exposures/characteristics."
+    },
+    {
+      "id": "longitudinal_study",
+      "definition": "Repeated observation of units over time, enabling change/temporal-pattern analysis without automatically establishing causality."
+    },
+    {
+      "id": "panel_data",
+      "definition": "Repeated measurements on the same units across time."
+    },
+    {
+      "id": "natural_experiment",
+      "definition": "An external event/rule/process creates exposure variation that may approximate an intervention under defensible assumptions."
+    },
+    {
+      "id": "quasi_experiment",
+      "definition": "A design estimating intervention effects without randomized assignment using a structured comparison/identification strategy."
+    },
+    {
+      "id": "selection_bias",
+      "definition": "Systematic distortion arising when inclusion/retention/analysis selection is related to variables relevant to the inference."
+    },
+    {
+      "id": "confounding",
+      "definition": "Distortion of an exposure-outcome association by common causes or related structures not appropriately handled."
+    },
+    {
+      "id": "reverse_causation",
+      "definition": "Outcome or pre-outcome processes influence the supposed exposure/predictor, reversing/mixing causal direction."
+    },
+    {
+      "id": "missing_data",
+      "definition": "Unobserved values whose pattern/mechanism can affect inference."
+    },
+    {
+      "id": "loss_to_followup",
+      "definition": "Units cease contributing follow-up data; bias depends on why attrition occurred and its relation to variables/outcomes."
+    },
+    {
+      "id": "comparability",
+      "definition": "Degree to which comparison groups are sufficiently similar on relevant pre-exposure factors for the intended inference."
+    },
+    {
+      "id": "propensity_score",
+      "definition": "Estimated probability of treatment/exposure conditional on observed covariates, usable for specified adjustment/design strategies but unable to control unmeasured confounding by itself."
+    },
+    {
+      "id": "negative_control",
+      "definition": "An exposure/outcome/control chosen because a causal effect is not expected, useful for detecting some biases/confounding under assumptions."
+    },
+    {
+      "id": "temporal_order",
+      "definition": "Evidence about whether an exposure precedes an outcome; necessary for many causal claims but insufficient alone."
+    }
+  ],
+  "rules": [
+    {
+      "id": "observational.cross_sectional_use",
+      "variables": [
+        "S",
+        "X",
+        "Y"
+      ],
+      "premises": [
+        "CROSS_SECTIONAL(S)",
+        "MEASURES(S,X,Y)"
+      ],
+      "conclusion": "CAN_ESTIMATE_CONCURRENT_ASSOCIATION(S,X,Y)"
+    },
+    {
+      "id": "observational.cohort_temporality",
+      "variables": [
+        "S",
+        "X",
+        "Y"
+      ],
+      "premises": [
+        "COHORT(S)",
+        "EXPOSURE_MEASURED_BEFORE_OUTCOME(S,X,Y)"
+      ],
+      "conclusion": "SUPPORTS_TEMPORAL_ORDER(S,X,Y)"
+    },
+    {
+      "id": "observational.case_control_odds",
+      "variables": [
+        "S",
+        "X",
+        "Y"
+      ],
+      "premises": [
+        "CASE_CONTROL(S)",
+        "VALID_CASE_CONTROL_SAMPLING(S)"
+      ],
+      "conclusion": "CAN_ESTIMATE_EXPOSURE_ODDS_RELATION(S,X,Y)"
+    },
+    {
+      "id": "observational.longitudinal_change",
+      "variables": [
+        "S",
+        "X"
+      ],
+      "premises": [
+        "LONGITUDINAL(S)",
+        "REPEATED_MEASURES(S,X)"
+      ],
+      "conclusion": "CAN_ESTIMATE_WITHIN_UNIT_CHANGE(S,X)"
+    },
+    {
+      "id": "observational.selection_flag",
+      "variables": [
+        "S",
+        "V"
+      ],
+      "premises": [
+        "SELECTION_DEPENDS_ON(S,V)",
+        "V RELEVANT_TO INFERENCE(S)"
+      ],
+      "conclusion": "SELECTION_BIAS_RISK(S,V)"
+    },
+    {
+      "id": "observational.attrition_flag",
+      "variables": [
+        "S",
+        "A"
+      ],
+      "premises": [
+        "LOSS_TO_FOLLOWUP(S,A)",
+        "ATTRITION_RELATED_TO_OUTCOME_OR_EXPOSURE(S,A)"
+      ],
+      "conclusion": "ATTRITION_BIAS_RISK(S,A)"
+    },
+    {
+      "id": "observational.natural_experiment_candidate",
+      "variables": [
+        "S",
+        "Z",
+        "X",
+        "Y"
+      ],
+      "premises": [
+        "EXTERNAL_ASSIGNMENT_PROCESS(Z,X)",
+        "AFFECTS_EXPOSURE(Z,X)",
+        "PLAUSIBLY_EXOGENOUS_FOR_OUTCOME(Z,Y)"
+      ],
+      "conclusion": "CANDIDATE_NATURAL_EXPERIMENT(S,Z,X,Y)"
+    },
+    {
+      "id": "observational.propensity_scope",
+      "variables": [
+        "PS",
+        "X",
+        "C"
+      ],
+      "premises": [
+        "PROPENSITY_SCORE(PS,X,C)",
+        "ADEQUATE_OVERLAP(PS)"
+      ],
+      "conclusion": "CAN_BALANCE_OBSERVED_COVARIATES_WITH(PS,C)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.cross_sectional_temporality",
+      "premises": [
+        "CROSS_SECTIONAL_ASSOCIATION(X,Y)"
+      ],
+      "forbidden_conclusion": "X PRECEDES Y",
+      "reason": "Concurrent measurement generally cannot establish temporal direction."
+    },
+    {
+      "id": "guard.longitudinal_not_causal",
+      "premises": [
+        "LONGITUDINAL_ASSOCIATION(X,Y)"
+      ],
+      "forbidden_conclusion": "CAUSES(X,Y)",
+      "reason": "Temporal data improve ordering but confounding/reverse pathways can remain."
+    },
+    {
+      "id": "guard.case_control_prevalence",
+      "premises": [
+        "CASE_CONTROL(S)"
+      ],
+      "forbidden_conclusion": "DIRECTLY_ESTIMATE_POPULATION_PREVALENCE_FROM_CASE_FRACTION(S)",
+      "reason": "Case/control counts are selected by outcome status and usually do not represent population prevalence."
+    },
+    {
+      "id": "guard.cohort_not_randomized",
+      "premises": [
+        "COHORT(S)"
+      ],
+      "forbidden_conclusion": "RANDOMIZED_EXPOSURE(S)",
+      "reason": "Cohort observation does not imply randomized assignment."
+    },
+    {
+      "id": "guard.adjusted_not_unconfounded",
+      "premises": [
+        "ADJUSTED_FOR_OBSERVED_COVARIATES(S)"
+      ],
+      "forbidden_conclusion": "NO_UNMEASURED_CONFOUNDING(S)",
+      "reason": "Adjustment only addresses modeled/measured variables under assumptions."
+    },
+    {
+      "id": "guard.propensity_not_randomization",
+      "premises": [
+        "PROPENSITY_MATCHED(S)"
+      ],
+      "forbidden_conclusion": "EQUIVALENT_TO_RANDOMIZED_TRIAL(S)",
+      "reason": "Propensity methods balance observed covariates under assumptions and do not remove unmeasured confounding automatically."
+    },
+    {
+      "id": "guard.temporality_not_causation",
+      "premises": [
+        "X PRECEDES Y"
+      ],
+      "forbidden_conclusion": "CAUSES(X,Y)",
+      "reason": "Temporal order is important but insufficient for causation."
+    },
+    {
+      "id": "guard.missing_random_assumption",
+      "premises": [
+        "MISSING_DATA(S)"
+      ],
+      "forbidden_conclusion": "MISSING_AT_RANDOM(S)",
+      "reason": "Missingness mechanism must be investigated/assumed explicitly, not inferred from missingness itself."
+    },
+    {
+      "id": "guard.complete_cases_unbiased",
+      "premises": [
+        "ANALYZE_COMPLETE_CASES_ONLY(S)"
+      ],
+      "forbidden_conclusion": "UNBIASED(S)",
+      "reason": "Complete-case analysis can be biased depending on missingness/selection."
+    },
+    {
+      "id": "guard.natural_experiment_not_random",
+      "premises": [
+        "NATURAL_EXPERIMENT(S)"
+      ],
+      "forbidden_conclusion": "TRUE_RANDOM_ASSIGNMENT(S)",
+      "reason": "Natural experiments rely on identification assumptions and external processes, not necessarily literal randomization."
+    },
+    {
+      "id": "guard.big_data_not_bias_free",
+      "premises": [
+        "VERY_LARGE_N(S)"
+      ],
+      "forbidden_conclusion": "BIAS_NEGLIGIBLE(S)",
+      "reason": "Sample size reduces some sampling uncertainty but does not erase systematic selection, confounding or measurement bias."
+    },
+    {
+      "id": "guard.association_not_causal",
+      "premises": [
+        "OBSERVATIONAL_ASSOCIATION(X,Y)"
+      ],
+      "forbidden_conclusion": "CAUSES(X,Y)",
+      "reason": "Causal interpretation requires an identification strategy and assumptions beyond association."
+    }
+  ],
+  "invariants": [
+    "Observational methods are legitimate first-class methods, not merely inferior experiments.",
+    "Study design determines which quantities/inferences are identifiable.",
+    "Cross-sectional association generally lacks temporal ordering.",
+    "Longitudinal observation improves temporal information but does not automatically establish causality.",
+    "Selection, attrition, missingness, confounding and reverse causation remain explicit risks.",
+    "Adjustment methods address only the biases their assumptions/data permit.",
+    "Propensity methods do not create literal randomization or solve unmeasured confounding automatically.",
+    "Natural/quasi-experiments require explicit identification assumptions.",
+    "Large datasets can have small sampling error and large systematic bias simultaneously.",
+    "Observational causal claims retain their identification strategy, assumptions, diagnostics and scope."
+  ],
+  "provenance": {
+    "authoring_basis": "Core observational epidemiology/social-science design, longitudinal reasoning and quasi/natural-experimental principles adapted to Lantern's causal and methodology architecture.",
+    "review_requirement": "Owner/project review before METHOD_CORE activation."
+  }
+}
