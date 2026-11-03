@@ -1,0 +1,129 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.problem_solving_decomposition",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "frame",
+      "premises": [
+        "PROBLEM(P)"
+      ],
+      "query": "IDENTIFY_GOAL_CONSTRAINTS_UNKNOWNS_SUCCESS(P)",
+      "expected": "YES",
+      "rule": "problem.frame_first"
+    },
+    {
+      "id": "decompose",
+      "premises": [
+        "PROBLEM(P)",
+        "COMPLEXITY_OR_DEPENDENCY_JUSTIFIES_DECOMPOSITION(P)"
+      ],
+      "query": "GENERATE_SUBPROBLEMS(P)",
+      "expected": "YES",
+      "rule": "problem.decompose_when_useful"
+    },
+    {
+      "id": "many",
+      "premises": [
+        "MANY_SUBPROBLEMS(P)"
+      ],
+      "query": "GOOD_REASONING(P)",
+      "expected": "UNKNOWN",
+      "guard": "guard_decomposition_not_goal"
+    },
+    {
+      "id": "part",
+      "premises": [
+        "SOLVED(S)",
+        "S SUBPROBLEM_OF P"
+      ],
+      "query": "SOLVED(P)",
+      "expected": "UNKNOWN",
+      "guard": "guard_subproblem_not_parent"
+    },
+    {
+      "id": "dependency",
+      "premises": [
+        "SUBPROBLEM(A)",
+        "SUBPROBLEM(B)",
+        "B DEPENDS_ON A"
+      ],
+      "query": "RESOLVE_OR_BOUND(A) BEFORE_RELYING_ON B",
+      "expected": "YES",
+      "rule": "problem.dependency_order"
+    },
+    {
+      "id": "unknown",
+      "premises": [
+        "UNKNOWN(U)"
+      ],
+      "query": "CANNOT_PROGRESS(P)",
+      "expected": "NO_OR_UNKNOWN_NOT_YES",
+      "guard": "guard_unknown_not_block"
+    },
+    {
+      "id": "assume",
+      "premises": [
+        "ASSUME(A)"
+      ],
+      "query": "TRUE(A)",
+      "expected": "UNKNOWN",
+      "guard": "guard_assumption_not_fact"
+    },
+    {
+      "id": "long",
+      "premises": [
+        "LONG_REASONING_TRACE(P)"
+      ],
+      "query": "HIGHER_QUALITY_REASONING(P)",
+      "expected": "UNKNOWN",
+      "guard": "guard_more_steps_not_intelligence"
+    },
+    {
+      "id": "valid",
+      "premises": [
+        "FOUND_VALID_SOLUTION(S)"
+      ],
+      "query": "OPTIMAL_SOLUTION(S)",
+      "expected": "UNKNOWN",
+      "guard": "guard_first_solution_not_best"
+    },
+    {
+      "id": "adequate",
+      "premises": [
+        "IMPERFECT_BUT_MEETS_CRITERIA(S)"
+      ],
+      "query": "REJECT(S)",
+      "expected": "NO",
+      "guard": "guard_perfection_not_required"
+    },
+    {
+      "id": "retry",
+      "premises": [
+        "ATTEMPT_FAILED(A)"
+      ],
+      "query": "REPEAT_IDENTICAL_ATTEMPT_WITHOUT_NEW_INFORMATION(A)",
+      "expected": "NO",
+      "guard": "guard_failure_not_repeat"
+    },
+    {
+      "id": "authority",
+      "premises": [
+        "TOOL_CAN_EXECUTE(T,A)"
+      ],
+      "query": "AUTHORIZED_TO_EXECUTE(T,A)",
+      "expected": "NO",
+      "guard": "guard_tool_not_authority"
+    },
+    {
+      "id": "stop",
+      "premises": [
+        "SUCCESS_CRITERIA_MET(P)",
+        "NO_HIGH_VALUE_UNRESOLVED_RISK(P)"
+      ],
+      "query": "STOP_AS_ADEQUATE(P)",
+      "expected": "YES",
+      "rule": "problem.stop"
+    }
+  ]
+}
