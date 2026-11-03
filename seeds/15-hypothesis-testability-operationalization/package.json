@@ -1,0 +1,318 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.hypothesis_testability_operationalization",
+  "package_number": 15,
+  "version": "0.1.0",
+  "title": "Hypothesis, Testability and Operationalization",
+  "inheritance_class": "CONCEPTUAL_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed structured hypothesis formation and testability reasoning so Lantern can convert questions into evaluable claims, operationalize vague constructs, identify discriminating evidence and recognize when a proposed test cannot resolve the question.",
+  "dependencies": [
+    {
+      "package_id": "foundation.epistemic_states",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.scope_context",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.evidence_inference_validity",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.measurement_units_precision_accuracy",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.causal_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.scientific_knowledge_types",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "research_question",
+      "definition": "A sufficiently specified question identifying what is to be described, compared, explained, predicted or evaluated."
+    },
+    {
+      "id": "hypothesis",
+      "definition": "A proposed claim with enough structure to identify relevant evidence and possible outcomes that would support or challenge it."
+    },
+    {
+      "id": "null_hypothesis",
+      "definition": "A reference hypothesis used in some statistical testing frameworks, commonly representing no specified effect/difference; not the universal form of scientific skepticism."
+    },
+    {
+      "id": "alternative_hypothesis",
+      "definition": "A specified competing claim considered against another hypothesis."
+    },
+    {
+      "id": "testability",
+      "definition": "Degree to which a claim can be connected to observations/evidence capable of differentiating it from relevant alternatives."
+    },
+    {
+      "id": "falsifiability",
+      "definition": "Whether possible observations could count against a claim under its stated assumptions/scope; useful but not the only criterion of scientific value."
+    },
+    {
+      "id": "operationalization",
+      "definition": "A declared mapping from an abstract construct/question to observable/measurable variables or procedures."
+    },
+    {
+      "id": "construct",
+      "definition": "A concept that may require operational definition before empirical measurement."
+    },
+    {
+      "id": "independent_variable",
+      "definition": "A variable treated as predictor/exposure/manipulated factor according to the design; the label alone does not establish causality."
+    },
+    {
+      "id": "dependent_variable",
+      "definition": "An outcome/response variable measured or modeled in relation to predictors/conditions."
+    },
+    {
+      "id": "control_variable",
+      "definition": "A variable held constant, adjusted for or otherwise accounted for according to a justified design."
+    },
+    {
+      "id": "confounder_candidate",
+      "definition": "A variable requiring causal/methodological consideration because it may distort the relationship of interest."
+    },
+    {
+      "id": "prediction",
+      "definition": "An expected observable result derived from a hypothesis under stated conditions."
+    },
+    {
+      "id": "falsifier",
+      "definition": "An observation/result that would count substantially against a hypothesis under specified assumptions and adequate measurement."
+    },
+    {
+      "id": "discriminating_test",
+      "definition": "A test whose possible outcomes differ meaningfully among competing hypotheses."
+    },
+    {
+      "id": "auxiliary_assumption",
+      "definition": "An additional assumption required to connect a hypothesis to a prediction/test; failures may implicate the assumption, measurement or hypothesis."
+    },
+    {
+      "id": "pre_specification",
+      "definition": "Recording hypotheses, outcomes and analysis decisions before observing the relevant test results to distinguish confirmatory from post-hoc reasoning."
+    }
+  ],
+  "rules": [
+    {
+      "id": "hypothesis.structure",
+      "variables": [
+        "H",
+        "C",
+        "V",
+        "S",
+        "P"
+      ],
+      "premises": [
+        "HYPOTHESIS(H)",
+        "CLAIM(H,C)",
+        "VARIABLES(H,V)",
+        "SCOPE(H,S)",
+        "PREDICTIONS(H,P)"
+      ],
+      "conclusion": "STRUCTURED_HYPOTHESIS(H)"
+    },
+    {
+      "id": "hypothesis.testable",
+      "variables": [
+        "H",
+        "P",
+        "O"
+      ],
+      "premises": [
+        "STRUCTURED_HYPOTHESIS(H)",
+        "PREDICTS(H,P)",
+        "OBSERVABLE_OR_MEASURABLE(P)",
+        "POSSIBLE_OUTCOME(O)",
+        "O WOULD_CHALLENGE H"
+      ],
+      "conclusion": "TESTABLE(H)"
+    },
+    {
+      "id": "hypothesis.needs_operationalization",
+      "variables": [
+        "H",
+        "C"
+      ],
+      "premises": [
+        "HYPOTHESIS(H)",
+        "USES_CONSTRUCT(H,C)",
+        "NOT_OPERATIONALLY_DEFINED(C)"
+      ],
+      "conclusion": "OPERATIONALIZATION_REQUIRED(H,C)"
+    },
+    {
+      "id": "hypothesis.operationalized_construct",
+      "variables": [
+        "C",
+        "M"
+      ],
+      "premises": [
+        "CONSTRUCT(C)",
+        "OPERATIONAL_DEFINITION(C,M)",
+        "MEASURABLE(M)"
+      ],
+      "conclusion": "EMPIRICALLY_ADDRESSABLE_AS(C,M)"
+    },
+    {
+      "id": "hypothesis.discriminating_test",
+      "variables": [
+        "T",
+        "H1",
+        "H2",
+        "O1",
+        "O2"
+      ],
+      "premises": [
+        "TEST(T)",
+        "H1 PREDICTS O1 UNDER T",
+        "H2 PREDICTS O2 UNDER T",
+        "O1 != O2"
+      ],
+      "conclusion": "DISCRIMINATES(T,H1,H2)"
+    },
+    {
+      "id": "hypothesis.inconclusive_test",
+      "variables": [
+        "T",
+        "H1",
+        "H2",
+        "O"
+      ],
+      "premises": [
+        "H1 PREDICTS O UNDER T",
+        "H2 PREDICTS O UNDER T"
+      ],
+      "conclusion": "TEST_NOT_DISCRIMINATING_FOR(T,H1,H2)"
+    },
+    {
+      "id": "hypothesis.auxiliary_failure_check",
+      "variables": [
+        "H",
+        "A",
+        "P"
+      ],
+      "premises": [
+        "H PLUS A PREDICTS P",
+        "NOT P OBSERVED"
+      ],
+      "conclusion": "CHALLENGES_JOINT_SYSTEM(H,A)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.vague_not_testable",
+      "premises": [
+        "VAGUE_UNDEFINED_CONSTRUCT(H)"
+      ],
+      "forbidden_conclusion": "TESTABLE(H)",
+      "reason": "A claim needs sufficient operational meaning before an empirical test can bear on it."
+    },
+    {
+      "id": "guard.no_falsifier_not_confirmed",
+      "premises": [
+        "NO_POSSIBLE_CHALLENGING_OUTCOME(H)"
+      ],
+      "forbidden_conclusion": "CONFIRMED(H)",
+      "reason": "Immunity to contrary evidence is not confirmation."
+    },
+    {
+      "id": "guard.measure_not_construct_identity",
+      "premises": [
+        "OPERATIONAL_DEFINITION(C,M)"
+      ],
+      "forbidden_conclusion": "C = M",
+      "reason": "An operational measure represents a construct under a method; it is not identical to the construct."
+    },
+    {
+      "id": "guard.iv_not_cause",
+      "premises": [
+        "INDEPENDENT_VARIABLE(X)",
+        "DEPENDENT_VARIABLE(Y)"
+      ],
+      "forbidden_conclusion": "CAUSES(X,Y)",
+      "reason": "Variable labels/design roles alone do not establish causation."
+    },
+    {
+      "id": "guard.failed_prediction_not_hypothesis_alone",
+      "premises": [
+        "H PLUS A PREDICTS P",
+        "NOT P OBSERVED"
+      ],
+      "forbidden_conclusion": "FALSE(H) BY_ITSELF",
+      "reason": "Prediction may depend on auxiliary assumptions, measurement and scope."
+    },
+    {
+      "id": "guard.same_prediction_not_discriminate",
+      "premises": [
+        "H1 PREDICTS O UNDER T",
+        "H2 PREDICTS O UNDER T"
+      ],
+      "forbidden_conclusion": "T DISTINGUISHES H1 FROM H2",
+      "reason": "A test cannot distinguish hypotheses when they predict the same observed result."
+    },
+    {
+      "id": "guard.posthoc_not_prespecified",
+      "premises": [
+        "H FORMULATED_AFTER SEEING D"
+      ],
+      "forbidden_conclusion": "PRESPECIFIED_CONFIRMATORY_TEST(H,D)",
+      "reason": "Hypotheses generated from data require fresh/held-out evidence for confirmatory testing."
+    },
+    {
+      "id": "guard.statistical_rejection_not_substantive_truth",
+      "premises": [
+        "REJECT_NULL_STATISTICALLY(H0)"
+      ],
+      "forbidden_conclusion": "TRUE(H1)",
+      "reason": "Rejecting a statistical null does not automatically establish a specific substantive alternative."
+    },
+    {
+      "id": "guard.untestable_not_false",
+      "premises": [
+        "NOT_CURRENTLY_TESTABLE(H)"
+      ],
+      "forbidden_conclusion": "FALSE(H)",
+      "reason": "Lack of current testability may reflect vague definitions, unavailable observations or technological limits; it is not itself falsity."
+    },
+    {
+      "id": "guard.testable_not_important",
+      "premises": [
+        "TESTABLE(H)"
+      ],
+      "forbidden_conclusion": "SCIENTIFICALLY_IMPORTANT(H)",
+      "reason": "Testability is a methodological property, not a measure of significance or value."
+    }
+  ],
+  "invariants": [
+    "A hypothesis should identify claim type, variables/constructs, scope, predictions and evidence that could challenge it where applicable.",
+    "Operational definitions are explicit mappings, not identities between constructs and measures.",
+    "Testability requires evidence that can bear differently on the hypothesis versus relevant alternatives.",
+    "A test that all competing hypotheses predict equally is not discriminating.",
+    "Independent/dependent variable labels do not establish causal direction.",
+    "Prediction failure can challenge a joint system of hypothesis, assumptions, measurement and scope; diagnosis precedes global rejection.",
+    "Hypotheses generated from observed data require fresh/held-out evidence before being treated as independently confirmed.",
+    "Not currently testable does not mean false.",
+    "Testability does not imply importance, truth or authority.",
+    "Structured hypotheses remain candidate epistemic objects until evidence updates their status."
+  ],
+  "provenance": {
+    "authoring_basis": "Scientific hypothesis formulation, falsifiability, operationalization and discriminating-test principles adapted to Lantern's typed scientific and causal architecture.",
+    "review_requirement": "Owner/project review before CONCEPTUAL_CORE activation."
+  }
+}
