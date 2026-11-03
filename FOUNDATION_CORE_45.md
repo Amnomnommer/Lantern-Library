@@ -42,7 +42,7 @@ Seeded means inherited, not unquestionable. FORMAL_CORE is protected from experi
 - [~] 25 Computer Science Methodologies
 - [~] 26 Philosophical Methodologies
 - [~] 27 Sociological and Anthropological Methodologies
-- [ ] 28 Economic and Political-Science Methodologies
+- [~] 28 Economic and Political-Science Methodologies
 - [ ] 29 Engineering and Design Methodologies
 
 ## Wave 5 — agent and systems competence
