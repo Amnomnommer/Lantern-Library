@@ -1,0 +1,349 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.economic_political_science_methodologies",
+  "package_number": 28,
+  "version": "0.1.0",
+  "title": "Economic and Political-Science Methodologies",
+  "inheritance_class": "METHOD_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed economic and political-science methods so Lantern can study incentives, institutions, strategic behavior, public opinion, policy and political outcomes using models, econometrics, surveys, experiments, comparative cases and causal identification while keeping descriptive and normative claims distinct.",
+  "dependencies": [
+    {
+      "package_id": "foundation.probability_conditional",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.causal_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.experimental_design",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.observational_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.statistical_methodology",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.historical_methodology",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.sociological_anthropological_methodologies",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.philosophical_methodologies",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "positive_economic_analysis",
+      "definition": "Analysis of descriptive/causal claims about economic behavior/outcomes under stated models/evidence, distinct from judgments about what ought to be."
+    },
+    {
+      "id": "normative_policy_analysis",
+      "definition": "Evaluation of policy/outcomes using explicit values, welfare criteria, rights, distributional priorities or other normative premises."
+    },
+    {
+      "id": "economic_model",
+      "definition": "Simplified representation of agents, institutions, constraints and relationships used to derive predictions/explanations under assumptions."
+    },
+    {
+      "id": "econometrics",
+      "definition": "Statistical methods for estimating/testing economic and social relationships with explicit identification/model assumptions."
+    },
+    {
+      "id": "causal_identification",
+      "definition": "Strategy/assumptions allowing observed variation to estimate a causal quantity rather than mere association."
+    },
+    {
+      "id": "instrumental_variable",
+      "definition": "Variable used under assumptions to isolate exogenous variation in an exposure/treatment; validity depends on relevance and exclusion/independence assumptions."
+    },
+    {
+      "id": "difference_in_differences",
+      "definition": "Quasi-experimental comparison of changes over time across treated/comparison groups under assumptions such as parallel trends."
+    },
+    {
+      "id": "regression_discontinuity",
+      "definition": "Design exploiting treatment assignment around a threshold under continuity/manipulation assumptions."
+    },
+    {
+      "id": "behavioral_experiment",
+      "definition": "Controlled or field experiment studying decisions/behavior under incentives, information or institutional conditions."
+    },
+    {
+      "id": "incentive",
+      "definition": "Feature changing costs, benefits or constraints of actions; responses vary by preferences, norms, information and context."
+    },
+    {
+      "id": "strategic_interaction",
+      "definition": "Situation where outcomes depend on choices of multiple actors who may respond to one another."
+    },
+    {
+      "id": "game_theoretic_model",
+      "definition": "Formal model of actors, strategies, information, payoffs and solution concepts; a representation, not proof humans literally optimize that model."
+    },
+    {
+      "id": "institutional_analysis",
+      "definition": "Study of how formal/informal rules, organizations and enforcement shape political/economic behavior and outcomes."
+    },
+    {
+      "id": "comparative_politics",
+      "definition": "Structured comparison across political systems/cases to study institutions, processes and outcomes."
+    },
+    {
+      "id": "public_opinion_poll",
+      "definition": "Sample-based measurement of expressed attitudes/preferences under a specific questionnaire, sampling frame, mode and time."
+    },
+    {
+      "id": "sampling_frame",
+      "definition": "Operational population/list/process from which survey respondents can be selected; coverage can differ from target population."
+    },
+    {
+      "id": "nonresponse_bias",
+      "definition": "Bias when response probability relates to variables relevant to the estimate after adjustment."
+    },
+    {
+      "id": "question_wording_effect",
+      "definition": "Change in responses caused by wording, order, framing or survey context."
+    },
+    {
+      "id": "policy_evaluation",
+      "definition": "Systematic assessment of policy implementation, effects, distribution, costs and unintended consequences under explicit criteria."
+    },
+    {
+      "id": "institutional_endogeneity",
+      "definition": "Institutions and outcomes may mutually influence each other or share causes, complicating causal inference."
+    },
+    {
+      "id": "revealed_preference",
+      "definition": "Inference about preferences from choices under constraints; behavior can reflect constraints, information, norms and strategic considerations rather than unconstrained desire."
+    },
+    {
+      "id": "distributional_effect",
+      "definition": "Variation in policy/economic effects across people/groups rather than only an aggregate average."
+    }
+  ],
+  "rules": [
+    {
+      "id": "econpol.identification_required",
+      "variables": [
+        "X",
+        "Y",
+        "S"
+      ],
+      "premises": [
+        "CAUSAL_CLAIM(X,Y)",
+        "OBSERVATIONAL_OR_QUASI_DATA(S)"
+      ],
+      "conclusion": "REQUIRE_CAUSAL_IDENTIFICATION_STRATEGY(X,Y,S)"
+    },
+    {
+      "id": "econpol.poll_scope",
+      "variables": [
+        "P",
+        "F",
+        "T"
+      ],
+      "premises": [
+        "POLL(P)",
+        "SAMPLING_FRAME(P,F)",
+        "FIELD_TIME(P,T)"
+      ],
+      "conclusion": "INTERPRET_POLL_WITH_FRAME_AND_TIME(P,F,T)"
+    },
+    {
+      "id": "econpol.normative_bridge",
+      "variables": [
+        "Policy",
+        "Outcome",
+        "N"
+      ],
+      "premises": [
+        "POLICY_EFFECT_ESTIMATE(Policy,Outcome)",
+        "NORMATIVE_POLICY_CONCLUSION(Policy,N)"
+      ],
+      "conclusion": "MAKE_VALUE_CRITERION_EXPLICIT(Policy,N)"
+    },
+    {
+      "id": "econpol.did_assumption",
+      "variables": [
+        "D"
+      ],
+      "premises": [
+        "DIFFERENCE_IN_DIFFERENCES(D)"
+      ],
+      "conclusion": "EVALUATE_PARALLEL_TRENDS_AND_COMPOSITION(D)"
+    },
+    {
+      "id": "econpol.iv_assumption",
+      "variables": [
+        "Z",
+        "X",
+        "Y"
+      ],
+      "premises": [
+        "INSTRUMENTAL_VARIABLE(Z,X,Y)"
+      ],
+      "conclusion": "EVALUATE_RELEVANCE_EXCLUSION_AND_INDEPENDENCE(Z,X,Y)"
+    },
+    {
+      "id": "econpol.distribution",
+      "variables": [
+        "P",
+        "Y"
+      ],
+      "premises": [
+        "POLICY_EVALUATION(P,Y)"
+      ],
+      "conclusion": "CONSIDER_AVERAGE_AND_DISTRIBUTIONAL_EFFECTS(P,Y)"
+    },
+    {
+      "id": "econpol.model_assumptions",
+      "variables": [
+        "M"
+      ],
+      "premises": [
+        "ECONOMIC_OR_GAME_MODEL(M)"
+      ],
+      "conclusion": "RETAIN_ASSUMPTIONS_AND_SOLUTION_CONCEPT(M)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard_model_not_behavior_truth",
+      "premises": [
+        "MODEL_PREDICTS(M,B)"
+      ],
+      "forbidden_conclusion": "ALL_ACTORS_ACTUALLY_REASON_AS_MODEL(M)",
+      "reason": "Models can predict behavior without literally describing actors' cognition."
+    },
+    {
+      "id": "guard_incentive_not_determinism",
+      "premises": [
+        "INCENTIVE_CHANGES(A)"
+      ],
+      "forbidden_conclusion": "ALL_ACTORS_RESPOND_IDENTICALLY(A)",
+      "reason": "Responses depend on preferences, norms, information, constraints and context."
+    },
+    {
+      "id": "guard_rational_not_selfish",
+      "premises": [
+        "RATIONAL_CHOICE_MODEL(A)"
+      ],
+      "forbidden_conclusion": "A SELF_INTERESTED_ONLY",
+      "reason": "Formal preferences/payoffs can include altruism, norms, identity and collective goals."
+    },
+    {
+      "id": "guard_market_outcome_not_optimal",
+      "premises": [
+        "MARKET_EQUILIBRIUM(E)"
+      ],
+      "forbidden_conclusion": "SOCIALLY_OPTIMAL(E)",
+      "reason": "Equilibrium is descriptive/model-relative and need not maximize welfare, rights or fairness."
+    },
+    {
+      "id": "guard_efficiency_not_justice",
+      "premises": [
+        "EFFICIENT_POLICY(P)"
+      ],
+      "forbidden_conclusion": "JUST_OR_DESIRABLE(P)",
+      "reason": "Efficiency is one criterion; normative conclusions require values/distributional considerations."
+    },
+    {
+      "id": "guard_poll_not_population_truth",
+      "premises": [
+        "POLL_ESTIMATE(P,x)"
+      ],
+      "forbidden_conclusion": "EXACT_POPULATION_VALUE(x)",
+      "reason": "Poll estimates carry sampling/nonresponse/measurement uncertainty and time scope."
+    },
+    {
+      "id": "guard_poll_not_vote",
+      "premises": [
+        "POLL_SUPPORT(candidate)=x"
+      ],
+      "forbidden_conclusion": "FINAL_ELECTION_RESULT(candidate)=x",
+      "reason": "Polls measure preferences at a time under a method; turnout, change and error remain."
+    },
+    {
+      "id": "guard_majority_not_normative_truth",
+      "premises": [
+        "MAJORITY_PREFERS(P)"
+      ],
+      "forbidden_conclusion": "MORALLY_RIGHT(P)",
+      "reason": "Public preference is politically relevant evidence, not a truth-maker for normative claims."
+    },
+    {
+      "id": "guard_correlation_policy",
+      "premises": [
+        "POLICY_PRESENT(P)",
+        "OUTCOME_HIGH(Y)"
+      ],
+      "forbidden_conclusion": "POLICY_CAUSED(P,Y)",
+      "reason": "Cross-case association can reflect selection, confounding, reverse causation or institutional endogeneity."
+    },
+    {
+      "id": "guard_iv_label_not_valid",
+      "premises": [
+        "PROPOSED_INSTRUMENT(Z)"
+      ],
+      "forbidden_conclusion": "VALID_INSTRUMENT(Z)",
+      "reason": "Instrument validity depends on substantive assumptions and diagnostics."
+    },
+    {
+      "id": "guard_did_not_automatic",
+      "premises": [
+        "BEFORE_AFTER_TREATMENT_CONTROL_DATA(D)"
+      ],
+      "forbidden_conclusion": "VALID_DID_CAUSAL_EFFECT(D)",
+      "reason": "Parallel trends, composition and other assumptions require evaluation."
+    },
+    {
+      "id": "guard_revealed_not_total_preference",
+      "premises": [
+        "CHOSE(person,A,context)"
+      ],
+      "forbidden_conclusion": "A IS_PERSONS_UNCONSTRAINED_TOTAL_PREFERENCE",
+      "reason": "Observed choices reflect constraints, information, strategy and context."
+    },
+    {
+      "id": "guard_aggregate_not_distribution",
+      "premises": [
+        "AVERAGE_POLICY_EFFECT(P)=positive"
+      ],
+      "forbidden_conclusion": "EVERY_GROUP_BENEFITS(P)",
+      "reason": "Average effects can conceal heterogeneous gains/losses."
+    }
+  ],
+  "invariants": [
+    "Economic/political models are representations with assumptions, not literal descriptions of all human cognition.",
+    "Positive/descriptive analysis and normative policy judgment remain distinct.",
+    "Normative policy conclusions expose value/welfare/rights/distributional criteria.",
+    "Incentives influence behavior without implying deterministic or purely selfish actors.",
+    "Equilibrium, efficiency, welfare, fairness and justice are distinct concepts.",
+    "Observational policy/economic causal claims require identification strategies and assumptions.",
+    "Polls preserve sampling frame, field time, mode, wording and uncertainty.",
+    "Public opinion and election outcomes are distinct objects.",
+    "Institutional arrangements can be endogenous to the outcomes they correlate with.",
+    "Average policy effects do not substitute for distributional analysis.",
+    "Strategic/game models preserve actors, information, strategies, payoffs and solution concepts.",
+    "Method choice follows the political/economic question rather than ideology."
+  ],
+  "provenance": {
+    "authoring_basis": "Core econometric, behavioral, institutional, comparative-politics, polling, causal-identification and policy-evaluation methodologies adapted to Lantern's causal and normative architecture.",
+    "review_requirement": "Owner/project review before METHOD_CORE activation."
+  }
+}
