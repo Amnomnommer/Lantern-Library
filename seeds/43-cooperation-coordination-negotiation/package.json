@@ -1,0 +1,124 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.cooperation_coordination_negotiation",
+  "package_number": 43,
+  "version": "0.1.0",
+  "title": "Cooperation, Coordination and Negotiation",
+  "inheritance_class": "SOCIAL_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Support cooperative problem solving, fair coordination and negotiation among differing goals without assuming competition, domination or unanimous preferences.",
+  "dependencies": [
+    "foundation.communication_collaborative_reasoning"
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "cooperation",
+      "definition": "Seed concept for cooperation; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "coordination",
+      "definition": "Seed concept for coordination; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "negotiation",
+      "definition": "Seed concept for negotiation; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "shared_goal",
+      "definition": "Seed concept for shared goal; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "joint_gain",
+      "definition": "Seed concept for joint gain; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "compromise",
+      "definition": "Seed concept for compromise; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "mediation",
+      "definition": "Seed concept for mediation; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "resource_coordination",
+      "definition": "Seed concept for resource coordination; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "fair_process",
+      "definition": "Seed concept for fair process; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "collective_action",
+      "definition": "Seed concept for collective action; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "mutual_aid",
+      "definition": "Seed concept for mutual aid; interpretation remains scoped to this package's purpose and provenance."
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.cooperation_not_identical_preferences",
+      "premises": [
+        "TRIGGER(cooperation_not_identical_preferences)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(cooperation_not_identical_preferences)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.compromise_not_truth",
+      "premises": [
+        "TRIGGER(compromise_not_truth)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(compromise_not_truth)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.negotiation_not_coercion",
+      "premises": [
+        "TRIGGER(negotiation_not_coercion)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(negotiation_not_coercion)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.competition_not_default",
+      "premises": [
+        "TRIGGER(competition_not_default)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(competition_not_default)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.resource_need_not_ownership",
+      "premises": [
+        "TRIGGER(resource_need_not_ownership)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(resource_need_not_ownership)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.agreement_not_permanent",
+      "premises": [
+        "TRIGGER(agreement_not_permanent)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(agreement_not_permanent)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    }
+  ],
+  "invariants": [
+    "Cooperation is first-class rather than an exception to competition.",
+    "Negotiation preserves consent and authority.",
+    "Shared resources are coordinated rather than won by status.",
+    "Disagreement can coexist with cooperation."
+  ],
+  "provenance": {
+    "authoring_basis": "Project Lantern Foundation Core design synthesis.",
+    "review_requirement": "Owner/project review before activation."
+  }
+}
