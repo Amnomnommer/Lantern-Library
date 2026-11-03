@@ -1,0 +1,128 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.engineering_design_methodologies",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "need",
+      "premises": [
+        "STAKEHOLDER_NEED(N)",
+        "DERIVED_TESTABLE_REQUIREMENT(R,N)"
+      ],
+      "query": "TRACE_REQUIREMENT_TO_NEED(R,N)",
+      "expected": "YES",
+      "rule": "engineering.need_to_requirement"
+    },
+    {
+      "id": "requirement",
+      "premises": [
+        "REQUIREMENT(R)"
+      ],
+      "query": "R PERFECTLY_CAPTURES_STAKEHOLDER_NEED",
+      "expected": "UNKNOWN",
+      "guard": "guard_requirement_not_need"
+    },
+    {
+      "id": "verify-validate",
+      "premises": [
+        "ALL_REQUIREMENTS_VERIFIED(S)"
+      ],
+      "query": "SYSTEM_VALIDATED_FOR_REAL_NEED(S)",
+      "expected": "UNKNOWN",
+      "guard": "guard_verification_not_validation"
+    },
+    {
+      "id": "validate-verify",
+      "premises": [
+        "USERS_FIND_SYSTEM_USEFUL(S)"
+      ],
+      "query": "ALL_TECHNICAL_REQUIREMENTS_SATISFIED(S)",
+      "expected": "UNKNOWN",
+      "guard": "guard_validation_not_verification"
+    },
+    {
+      "id": "prototype",
+      "premises": [
+        "PROTOTYPE_WORKS(P)"
+      ],
+      "query": "PRODUCTION_READY(P)",
+      "expected": "UNKNOWN",
+      "guard": "guard_prototype_not_product"
+    },
+    {
+      "id": "metric",
+      "premises": [
+        "METRIC_IMPROVED(S,M)"
+      ],
+      "query": "SYSTEM_BETTER_OVERALL(S)",
+      "expected": "UNKNOWN",
+      "guard": "guard_optimization_not_requirement"
+    },
+    {
+      "id": "tradeoff",
+      "premises": [
+        "DESIGN_DECISION(D)",
+        "IMPROVES(D,O1)",
+        "WORSENS(D,O2)"
+      ],
+      "query": "RECORD_TRADEOFF(D,O1,O2)",
+      "expected": "YES",
+      "rule": "engineering.tradeoff_record"
+    },
+    {
+      "id": "margin",
+      "premises": [
+        "DESIGN_MARGIN(S,M)"
+      ],
+      "query": "CANNOT_FAIL(S)",
+      "expected": "NO",
+      "guard": "guard_safety_margin_not_invulnerable"
+    },
+    {
+      "id": "request",
+      "premises": [
+        "USER_REQUESTS_FEATURE(F)"
+      ],
+      "query": "IMPLEMENT_F_IMMEDIATELY",
+      "expected": "NO_OR_UNKNOWN_NOT_YES",
+      "guard": "guard_user_request_not_requirement_alone"
+    },
+    {
+      "id": "features",
+      "premises": [
+        "MORE_FEATURES(A,B)"
+      ],
+      "query": "BETTER_DESIGN(A,B)",
+      "expected": "UNKNOWN",
+      "guard": "guard_more_features_not_better"
+    },
+    {
+      "id": "rewrite",
+      "premises": [
+        "ARCHITECTURAL_IMPROVEMENT_PROPOSED(A)"
+      ],
+      "query": "REWRITE_EXISTING_SYSTEM_FROM_SCRATCH",
+      "expected": "NO_OR_UNKNOWN_NOT_YES",
+      "guard": "guard_new_architecture_not_rewrite"
+    },
+    {
+      "id": "change",
+      "premises": [
+        "CHANGE(C,S)",
+        "AFFECTED_DEPENDENCIES_IDENTIFIED(C,S)"
+      ],
+      "query": "REQUIRE_TARGETED_AND_REGRESSION_TESTS(C,S)",
+      "expected": "YES",
+      "rule": "engineering.change_regression"
+    },
+    {
+      "id": "retire",
+      "premises": [
+        "SYSTEM_RETIREMENT(S)"
+      ],
+      "query": "PLAN_DATA_STATE_DEPENDENCY_AND_USER_TRANSITION(S)",
+      "expected": "YES",
+      "rule": "engineering.lifecycle_retirement"
+    }
+  ]
+}
