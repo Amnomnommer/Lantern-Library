@@ -1,0 +1,328 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.physics_methodology",
+  "package_number": 23,
+  "version": "0.1.0",
+  "title": "Physics Methodology",
+  "inheritance_class": "METHOD_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed physics-specific methodology so Lantern can connect mathematical models to calibrated measurement, use dimensions/conservation/symmetry as constraints, reason with idealizations and approximation regimes, and distinguish theoretical, experimental and computational evidence.",
+  "dependencies": [
+    {
+      "package_id": "foundation.formal_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.probability_conditional",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.measurement_units_precision_accuracy",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.causal_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.scientific_knowledge_types",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.hypothesis_testability_operationalization",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.experimental_design",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.statistical_methodology",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "physical_quantity",
+      "definition": "A measurable property represented by magnitude, dimension/unit and uncertainty under an operational procedure."
+    },
+    {
+      "id": "physical_model",
+      "definition": "A mathematical/conceptual representation of a physical system with assumptions, state variables, parameters and applicability regime."
+    },
+    {
+      "id": "theoretical_physics",
+      "definition": "Development/analysis of mathematical frameworks/models and their consequences, constrained by consistency and empirical testability where applicable."
+    },
+    {
+      "id": "experimental_physics",
+      "definition": "Designed measurement/intervention used to test physical predictions, determine parameters or discover phenomena."
+    },
+    {
+      "id": "computational_physics",
+      "definition": "Numerical simulation/computation used when analytic solutions are unavailable/impractical; results remain conditional on equations, algorithms, approximations and inputs."
+    },
+    {
+      "id": "dimensional_analysis",
+      "definition": "Use of physical dimensions to constrain equations, conversions and scaling relationships."
+    },
+    {
+      "id": "conservation_law",
+      "definition": "A physical regularity asserting invariance of a quantity under specified system conditions/scope."
+    },
+    {
+      "id": "symmetry_physics",
+      "definition": "Invariance of a physical description under a transformation; symmetries can constrain allowed models and relate to conservation structures."
+    },
+    {
+      "id": "idealization",
+      "definition": "Intentional simplification such as point mass, frictionless plane or ideal gas used within a defined approximation purpose."
+    },
+    {
+      "id": "approximation_regime",
+      "definition": "Range of parameters/conditions where a simplified model approximates a more general description to acceptable accuracy."
+    },
+    {
+      "id": "boundary_initial_conditions",
+      "definition": "Specified conditions needed with governing equations to determine/predict system behavior."
+    },
+    {
+      "id": "parameter_estimation_physics",
+      "definition": "Inference of model parameters from measurements with uncertainty and model assumptions."
+    },
+    {
+      "id": "precision_test",
+      "definition": "High-accuracy comparison of a model prediction against measurement to constrain deviations/parameters."
+    },
+    {
+      "id": "null_result_physics",
+      "definition": "Failure to detect a predicted/new effect within stated sensitivity, producing bounds rather than automatically proving exact absence."
+    },
+    {
+      "id": "scaling_law",
+      "definition": "Relationship describing how a physical quantity changes with scale/parameters under specified regime."
+    },
+    {
+      "id": "order_of_magnitude",
+      "definition": "Approximate scale reasoning useful for feasibility, plausibility and dominant-effect estimation."
+    },
+    {
+      "id": "error_propagation",
+      "definition": "Quantification of how input measurement/parameter uncertainty contributes to uncertainty in a derived physical result."
+    },
+    {
+      "id": "systematic_uncertainty_physics",
+      "definition": "Structured uncertainty from calibration, environment, model/instrument effects or analysis that does not vanish by simple repetition."
+    }
+  ],
+  "rules": [
+    {
+      "id": "physics.dimension_constraint",
+      "variables": [
+        "Eq"
+      ],
+      "premises": [
+        "PHYSICAL_EQUATION(Eq)",
+        "DIMENSIONALLY_INCONSISTENT(Eq)"
+      ],
+      "conclusion": "INVALID_AS_STATED_PHYSICAL_EQUATION(Eq)"
+    },
+    {
+      "id": "physics.model_prediction",
+      "variables": [
+        "M",
+        "I",
+        "B",
+        "P"
+      ],
+      "premises": [
+        "PHYSICAL_MODEL(M)",
+        "INITIAL_CONDITIONS(I)",
+        "BOUNDARY_CONDITIONS(B)",
+        "DERIVES(M,I,B,P)"
+      ],
+      "conclusion": "PHYSICAL_PREDICTION(P,M,I,B)"
+    },
+    {
+      "id": "physics.regime_application",
+      "variables": [
+        "M",
+        "R",
+        "case"
+      ],
+      "premises": [
+        "VALID_REGIME(M,R)",
+        "case IN R"
+      ],
+      "conclusion": "MODEL_APPLICABLE_WITHIN(M,case,R)"
+    },
+    {
+      "id": "physics.precision_test",
+      "variables": [
+        "M",
+        "P",
+        "O",
+        "U"
+      ],
+      "premises": [
+        "MODEL_PREDICTS(M,P)",
+        "MEASUREMENT(O,U)",
+        "COMPARABLE_QUANTITY(P,O)"
+      ],
+      "conclusion": "COMPARE_PREDICTION_TO_MEASUREMENT(M,P,O,U)"
+    },
+    {
+      "id": "physics.null_bound",
+      "variables": [
+        "E",
+        "T",
+        "S"
+      ],
+      "premises": [
+        "PREDICTED_EFFECT(E)",
+        "TEST(T,E)",
+        "SENSITIVITY_LIMIT(T,S)",
+        "NOT_DETECTED(E,T)"
+      ],
+      "conclusion": "CONSTRAIN_EFFECT_WITHIN(E,S)"
+    },
+    {
+      "id": "physics.idealization_scope",
+      "variables": [
+        "M",
+        "A",
+        "R"
+      ],
+      "premises": [
+        "IDEALIZATION(M,A)",
+        "APPROXIMATION_VALID_WITHIN(M,R)"
+      ],
+      "conclusion": "USE_IDEALIZATION_WITHIN(M,A,R)"
+    },
+    {
+      "id": "physics.uncertainty_propagation",
+      "variables": [
+        "Inputs",
+        "F"
+      ],
+      "premises": [
+        "DERIVED_QUANTITY(F,Inputs)",
+        "INPUT_UNCERTAINTIES_AVAILABLE(Inputs)"
+      ],
+      "conclusion": "PROPAGATE_UNCERTAINTY(F,Inputs)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.dimension_consistency_not_truth",
+      "premises": [
+        "DIMENSIONALLY_CONSISTENT(Eq)"
+      ],
+      "forbidden_conclusion": "PHYSICALLY_TRUE(Eq)",
+      "reason": "Dimensional consistency is necessary for many physical equations but not sufficient for empirical correctness."
+    },
+    {
+      "id": "guard.math_consistency_not_reality",
+      "premises": [
+        "MATHEMATICALLY_CONSISTENT(M)"
+      ],
+      "forbidden_conclusion": "REALIZED_IN_NATURE(M)",
+      "reason": "A coherent mathematical model may not describe the physical world."
+    },
+    {
+      "id": "guard_idealization_not_literal",
+      "premises": [
+        "IDEALIZATION(M,A)"
+      ],
+      "forbidden_conclusion": "A LITERALLY_TRUE_OF_SYSTEM",
+      "reason": "Idealizations are deliberate simplifications, not necessarily literal descriptions."
+    },
+    {
+      "id": "guard_approximation_not_global",
+      "premises": [
+        "APPROXIMATION_VALID_WITHIN(M,R)"
+      ],
+      "forbidden_conclusion": "MODEL_VALID_ALL_REGIMES(M)",
+      "reason": "Approximation validity is regime-bounded."
+    },
+    {
+      "id": "guard_simulation_not_experiment",
+      "premises": [
+        "COMPUTATIONAL_RESULT(S)"
+      ],
+      "forbidden_conclusion": "EXPERIMENTALLY_OBSERVED(S)",
+      "reason": "Numerical output is conditional on model, algorithm and inputs."
+    },
+    {
+      "id": "guard_null_not_zero",
+      "premises": [
+        "NOT_DETECTED(E,T)",
+        "SENSITIVITY_LIMIT(T,S)"
+      ],
+      "forbidden_conclusion": "EFFECT_EXACTLY_ZERO(E)",
+      "reason": "A null result generally constrains effects below detection/sensitivity rather than proving exact zero."
+    },
+    {
+      "id": "guard_precision_not_model_validity",
+      "premises": [
+        "VERY_PRECISE_MEASUREMENT(O)"
+      ],
+      "forbidden_conclusion": "CORRECT_MODEL(M)",
+      "reason": "Precision improves comparison but model validity depends on prediction agreement and assumptions."
+    },
+    {
+      "id": "guard_conservation_scope",
+      "premises": [
+        "CONSERVATION_LAW(Q)"
+      ],
+      "forbidden_conclusion": "Q CONSERVED_IN_ANY_OPEN_OR_UNDEFINED_SYSTEM",
+      "reason": "Conservation statements depend on system boundaries/symmetry/conditions."
+    },
+    {
+      "id": "guard_order_magnitude_not_exact",
+      "premises": [
+        "ORDER_OF_MAGNITUDE_ESTIMATE(x)=v"
+      ],
+      "forbidden_conclusion": "EXACT_VALUE(x)=v",
+      "reason": "Scale estimates are intentionally approximate."
+    },
+    {
+      "id": "guard_fit_not_explanation",
+      "premises": [
+        "MODEL_FITS_DATA(M,D)"
+      ],
+      "forbidden_conclusion": "M IS_UNIQUE_TRUE_EXPLANATION(D)",
+      "reason": "Multiple models can fit finite data; prediction, mechanism, parsimony and new tests matter."
+    },
+    {
+      "id": "guard_physics_not_universal_method",
+      "premises": [
+        "PHYSICS_METHOD_SUCCESSFUL(M)"
+      ],
+      "forbidden_conclusion": "M BEST_METHOD_FOR_ALL_DISCIPLINES",
+      "reason": "Methods appropriate to physical quantities need not answer historical, interpretive or social questions."
+    }
+  ],
+  "invariants": [
+    "Physical claims connect mathematical structure to operationally defined measurement.",
+    "Dimensions constrain meaningful equations but do not prove empirical truth.",
+    "Models preserve assumptions, parameters, initial/boundary conditions and applicability regimes.",
+    "Idealizations are tools whose usefulness depends on approximation error and purpose.",
+    "Theoretical consistency, computational simulation and experimental measurement are distinct evidence/method types.",
+    "Precision tests compare predictions and measurements with uncertainty on both model/parameter and measurement sides where applicable.",
+    "Null results produce sensitivity-dependent constraints rather than automatic exact-zero conclusions.",
+    "Systematic uncertainty cannot be removed merely by more repeated measurements.",
+    "Conservation/symmetry reasoning is scope/system dependent.",
+    "Order-of-magnitude reasoning supports plausibility/feasibility but is not exact calculation.",
+    "Physics methodology is domain-specific and must not be projected as the sole scientific method."
+  ],
+  "provenance": {
+    "authoring_basis": "Core methodology of theoretical, experimental and computational physics, dimensional analysis, measurement science, approximation and precision testing adapted to Lantern's scientific architecture.",
+    "review_requirement": "Owner/project review before METHOD_CORE activation."
+  }
+}
