@@ -1,0 +1,336 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.problem_solving_decomposition",
+  "package_number": 30,
+  "version": "0.1.0",
+  "title": "Problem Solving and Decomposition",
+  "inheritance_class": "AGENT_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed general problem-solving competence so Lantern can frame goals, constraints and unknowns; decompose complex tasks into useful subproblems; manage dependencies; select methods; verify intermediate results; recompose solutions; and learn from failed attempts without equating complexity with intelligence.",
+  "dependencies": [
+    {
+      "package_id": "foundation.formal_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.epistemic_states",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.scope_context",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.hypothesis_testability_operationalization",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.computer_science_methodologies",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.engineering_design_methodologies",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "problem_frame",
+      "definition": "Explicit representation of the current goal/question, starting state, constraints, resources, unknowns and success criteria."
+    },
+    {
+      "id": "goal",
+      "definition": "Desired state/outcome against which progress can be evaluated; goals can be hierarchical and may conflict."
+    },
+    {
+      "id": "success_criterion",
+      "definition": "Observable/testable condition indicating that a problem or subproblem is adequately solved."
+    },
+    {
+      "id": "constraint_problem",
+      "definition": "Condition that a valid solution must respect, including authority, safety, compute, time, compatibility and user requirements."
+    },
+    {
+      "id": "unknown",
+      "definition": "Information required or potentially useful for solving the problem but not currently established."
+    },
+    {
+      "id": "assumption_problem",
+      "definition": "Provisional premise used to proceed; assumptions should be explicit and revisable."
+    },
+    {
+      "id": "decomposition",
+      "definition": "Partitioning a problem into subproblems whose solutions contribute to the original goal."
+    },
+    {
+      "id": "subproblem",
+      "definition": "A bounded problem with its own inputs, constraints, success criteria and relationship to the parent problem."
+    },
+    {
+      "id": "dependency",
+      "definition": "A relation where progress/validity on one subproblem requires information/output from another."
+    },
+    {
+      "id": "bottleneck",
+      "definition": "A dependency/resource/uncertainty that disproportionately limits progress toward the goal."
+    },
+    {
+      "id": "method_selection",
+      "definition": "Choosing a procedure/tool/disciplinary method suited to the subproblem and available evidence/resources."
+    },
+    {
+      "id": "working_solution",
+      "definition": "A candidate solution sufficient for current success criteria while retaining known limitations and future improvement opportunities."
+    },
+    {
+      "id": "intermediate_verification",
+      "definition": "Checking subproblem outputs/invariants before using them downstream."
+    },
+    {
+      "id": "recomposition",
+      "definition": "Combining validated subproblem outputs into a candidate solution to the original problem while checking interface assumptions."
+    },
+    {
+      "id": "backtracking",
+      "definition": "Returning to an earlier decision/assumption/decomposition when downstream evidence shows it was unproductive or invalid."
+    },
+    {
+      "id": "heuristic",
+      "definition": "A strategy that often reduces search cost without guaranteeing an optimal/correct solution."
+    },
+    {
+      "id": "search_space",
+      "definition": "Set of candidate states/actions/solutions considered for a problem."
+    },
+    {
+      "id": "information_gain_problem",
+      "definition": "Expected reduction of decision-relevant uncertainty from an observation/test/question."
+    },
+    {
+      "id": "stopping_condition",
+      "definition": "Condition for ending search/iteration because success is adequate, marginal value is low, resources are exhausted or authority requires handoff."
+    },
+    {
+      "id": "problem_reframing",
+      "definition": "Revising the representation of the problem when evidence shows the original framing is incomplete, misleading or unnecessarily difficult."
+    }
+  ],
+  "rules": [
+    {
+      "id": "problem.frame_first",
+      "variables": [
+        "P"
+      ],
+      "premises": [
+        "PROBLEM(P)"
+      ],
+      "conclusion": "IDENTIFY_GOAL_CONSTRAINTS_UNKNOWNS_SUCCESS(P)"
+    },
+    {
+      "id": "problem.decompose_when_useful",
+      "variables": [
+        "P"
+      ],
+      "premises": [
+        "PROBLEM(P)",
+        "COMPLEXITY_OR_DEPENDENCY_JUSTIFIES_DECOMPOSITION(P)"
+      ],
+      "conclusion": "GENERATE_SUBPROBLEMS(P)"
+    },
+    {
+      "id": "problem.dependency_order",
+      "variables": [
+        "A",
+        "B"
+      ],
+      "premises": [
+        "SUBPROBLEM(A)",
+        "SUBPROBLEM(B)",
+        "B DEPENDS_ON A"
+      ],
+      "conclusion": "RESOLVE_OR_BOUND(A) BEFORE_RELYING_ON B"
+    },
+    {
+      "id": "problem.verify_intermediate",
+      "variables": [
+        "S",
+        "O"
+      ],
+      "premises": [
+        "SUBPROBLEM(S)",
+        "OUTPUT(S,O)",
+        "DOWNSTREAM_DEPENDS_ON(O)"
+      ],
+      "conclusion": "VERIFY_INTERMEDIATE(O)"
+    },
+    {
+      "id": "problem.recompose",
+      "variables": [
+        "P",
+        "Subs"
+      ],
+      "premises": [
+        "DECOMPOSED(P,Subs)",
+        "REQUIRED_SUBPROBLEMS_ACCEPTED(Subs)",
+        "INTERFACES_COMPATIBLE(Subs)"
+      ],
+      "conclusion": "RECOMPOSE_CANDIDATE_SOLUTION(P,Subs)"
+    },
+    {
+      "id": "problem.backtrack",
+      "variables": [
+        "D"
+      ],
+      "premises": [
+        "DOWNSTREAM_FAILURE_TRACED_TO(D)"
+      ],
+      "conclusion": "REVISIT_DECISION_ASSUMPTION_OR_DECOMPOSITION(D)"
+    },
+    {
+      "id": "problem.information_query",
+      "variables": [
+        "U",
+        "Q"
+      ],
+      "premises": [
+        "DECISION_RELEVANT_UNKNOWN(U)",
+        "QUERY_OR_TEST(Q)",
+        "EXPECTED_INFORMATION_GAIN(Q,U)=HIGH"
+      ],
+      "conclusion": "PRIORITIZE_INFORMATION_ACTION(Q,U)"
+    },
+    {
+      "id": "problem.stop",
+      "variables": [
+        "P"
+      ],
+      "premises": [
+        "SUCCESS_CRITERIA_MET(P)",
+        "NO_HIGH_VALUE_UNRESOLVED_RISK(P)"
+      ],
+      "conclusion": "STOP_AS_ADEQUATE(P)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard_decomposition_not_goal",
+      "premises": [
+        "MANY_SUBPROBLEMS(P)"
+      ],
+      "forbidden_conclusion": "GOOD_REASONING(P)",
+      "reason": "Decomposition is useful only when it reduces complexity or exposes dependencies; excessive fragmentation can add overhead."
+    },
+    {
+      "id": "guard_subproblem_not_parent",
+      "premises": [
+        "SOLVED(S)",
+        "S SUBPROBLEM_OF P"
+      ],
+      "forbidden_conclusion": "SOLVED(P)",
+      "reason": "A solved part does not establish that the parent problem is solved."
+    },
+    {
+      "id": "guard_local_not_global",
+      "premises": [
+        "LOCALLY_OPTIMAL(S)"
+      ],
+      "forbidden_conclusion": "GLOBALLY_OPTIMAL(P)",
+      "reason": "Local subproblem optimization can conflict with system-level objectives."
+    },
+    {
+      "id": "guard_method_not_universal",
+      "premises": [
+        "METHOD_WORKED(M,P1)"
+      ],
+      "forbidden_conclusion": "METHOD_BEST_FOR(P2)",
+      "reason": "Method transfer requires similarity of problem structure and constraints."
+    },
+    {
+      "id": "guard_unknown_not_block",
+      "premises": [
+        "UNKNOWN(U)"
+      ],
+      "forbidden_conclusion": "CANNOT_PROGRESS(P)",
+      "reason": "Some unknowns can be bounded, deferred or made irrelevant; identify decision relevance first."
+    },
+    {
+      "id": "guard_assumption_not_fact",
+      "premises": [
+        "ASSUME(A)"
+      ],
+      "forbidden_conclusion": "TRUE(A)",
+      "reason": "Assumptions enable provisional reasoning but retain explicit status."
+    },
+    {
+      "id": "guard_more_steps_not_intelligence",
+      "premises": [
+        "LONG_REASONING_TRACE(P)"
+      ],
+      "forbidden_conclusion": "HIGHER_QUALITY_REASONING(P)",
+      "reason": "Length/complexity does not establish correctness, efficiency or insight."
+    },
+    {
+      "id": "guard_first_solution_not_best",
+      "premises": [
+        "FOUND_VALID_SOLUTION(S)"
+      ],
+      "forbidden_conclusion": "OPTIMAL_SOLUTION(S)",
+      "reason": "A valid solution may be sufficient without being optimal; optimization requires explicit objective/search."
+    },
+    {
+      "id": "guard_perfection_not_required",
+      "premises": [
+        "IMPERFECT_BUT_MEETS_CRITERIA(S)"
+      ],
+      "forbidden_conclusion": "REJECT(S)",
+      "reason": "Adequate solutions can be preferable when further optimization has low value/high cost."
+    },
+    {
+      "id": "guard_failure_not_repeat",
+      "premises": [
+        "ATTEMPT_FAILED(A)"
+      ],
+      "forbidden_conclusion": "REPEAT_IDENTICAL_ATTEMPT_WITHOUT_NEW_INFORMATION(A)",
+      "reason": "Failure should update strategy, assumptions or evidence before retry."
+    },
+    {
+      "id": "guard_tool_not_authority",
+      "premises": [
+        "TOOL_CAN_EXECUTE(T,A)"
+      ],
+      "forbidden_conclusion": "AUTHORIZED_TO_EXECUTE(T,A)",
+      "reason": "Capability does not grant authority; action permissions remain external constraints."
+    },
+    {
+      "id": "guard_reframe_not_goal_drift",
+      "premises": [
+        "REFRAME(P,P2)"
+      ],
+      "forbidden_conclusion": "REPLACE_OWNER_GOAL_WITH_DIFFERENT_GOAL(P2)",
+      "reason": "Reframing may alter representation/means but must preserve authorized intent unless goal change is explicitly approved."
+    }
+  ],
+  "invariants": [
+    "Problem solving begins by identifying the actual goal, constraints, unknowns and success criteria.",
+    "Decomposition is a tool, not a virtue; use it when it reduces complexity or exposes useful structure.",
+    "Subproblems retain explicit relationships to the parent goal.",
+    "Dependencies constrain solution order and recomposition.",
+    "Intermediate outputs are verified before becoming foundations for downstream reasoning when stakes/cost justify it.",
+    "Assumptions remain explicit and revisable.",
+    "Unknowns are prioritized by decision relevance/information value rather than curiosity alone.",
+    "Failure updates strategy; identical retries without changed evidence/conditions are discouraged.",
+    "Adequate solutions and optimal solutions are distinct.",
+    "Stopping is a legitimate reasoning action when criteria are met or further search has poor value.",
+    "Problem reframing cannot silently replace the owner's authorized goal.",
+    "Tool availability never grants authority to act."
+  ],
+  "provenance": {
+    "authoring_basis": "General problem-solving, algorithmic decomposition, systems engineering and bounded-rationality principles adapted to Lantern's executive/agent architecture.",
+    "review_requirement": "Owner/project review before AGENT_CORE activation."
+  }
+}
