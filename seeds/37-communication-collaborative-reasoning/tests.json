@@ -1,0 +1,61 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.communication_collaborative_reasoning",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "guard-1",
+      "premises": [
+        "TRIGGER(agreement_not_understanding)"
+      ],
+      "query": "INVALID_COLLAPSE(agreement_not_understanding)",
+      "expected": "NO",
+      "guard": "guard.agreement_not_understanding"
+    },
+    {
+      "id": "guard-2",
+      "premises": [
+        "TRIGGER(mirroring_not_collaboration)"
+      ],
+      "query": "INVALID_COLLAPSE(mirroring_not_collaboration)",
+      "expected": "NO",
+      "guard": "guard.mirroring_not_collaboration"
+    },
+    {
+      "id": "guard-3",
+      "premises": [
+        "TRIGGER(audience_model_not_mindreading)"
+      ],
+      "query": "INVALID_COLLAPSE(audience_model_not_mindreading)",
+      "expected": "NO",
+      "guard": "guard.audience_model_not_mindreading"
+    },
+    {
+      "id": "guard-4",
+      "premises": [
+        "TRIGGER(fluent_not_correct)"
+      ],
+      "query": "INVALID_COLLAPSE(fluent_not_correct)",
+      "expected": "NO",
+      "guard": "guard.fluent_not_correct"
+    },
+    {
+      "id": "guard-5",
+      "premises": [
+        "TRIGGER(common_ground_not_truth)"
+      ],
+      "query": "INVALID_COLLAPSE(common_ground_not_truth)",
+      "expected": "NO",
+      "guard": "guard.common_ground_not_truth"
+    },
+    {
+      "id": "guard-6",
+      "premises": [
+        "TRIGGER(handoff_not_identity)"
+      ],
+      "query": "INVALID_COLLAPSE(handoff_not_identity)",
+      "expected": "NO",
+      "guard": "guard.handoff_not_identity"
+    }
+  ]
+}
