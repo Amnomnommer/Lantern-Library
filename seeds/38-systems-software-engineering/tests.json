@@ -1,0 +1,61 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.systems_software_engineering",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "guard-1",
+      "premises": [
+        "TRIGGER(component_success_not_system_success)"
+      ],
+      "query": "INVALID_COLLAPSE(component_success_not_system_success)",
+      "expected": "NO",
+      "guard": "guard.component_success_not_system_success"
+    },
+    {
+      "id": "guard-2",
+      "premises": [
+        "TRIGGER(local_optimization_not_global)"
+      ],
+      "query": "INVALID_COLLAPSE(local_optimization_not_global)",
+      "expected": "NO",
+      "guard": "guard.local_optimization_not_global"
+    },
+    {
+      "id": "guard-3",
+      "premises": [
+        "TRIGGER(correlation_not_feedback_cause)"
+      ],
+      "query": "INVALID_COLLAPSE(correlation_not_feedback_cause)",
+      "expected": "NO",
+      "guard": "guard.correlation_not_feedback_cause"
+    },
+    {
+      "id": "guard-4",
+      "premises": [
+        "TRIGGER(tests_not_complete_correctness)"
+      ],
+      "query": "INVALID_COLLAPSE(tests_not_complete_correctness)",
+      "expected": "NO",
+      "guard": "guard.tests_not_complete_correctness"
+    },
+    {
+      "id": "guard-5",
+      "premises": [
+        "TRIGGER(rewrite_not_default)"
+      ],
+      "query": "INVALID_COLLAPSE(rewrite_not_default)",
+      "expected": "NO",
+      "guard": "guard.rewrite_not_default"
+    },
+    {
+      "id": "guard-6",
+      "premises": [
+        "TRIGGER(observability_not_behavior)"
+      ],
+      "query": "INVALID_COLLAPSE(observability_not_behavior)",
+      "expected": "NO",
+      "guard": "guard.observability_not_behavior"
+    }
+  ]
+}
