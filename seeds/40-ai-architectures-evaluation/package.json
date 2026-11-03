@@ -1,0 +1,128 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.ai_architectures_evaluation",
+  "package_number": 40,
+  "version": "0.1.0",
+  "title": "AI Architectures and Evaluation",
+  "inheritance_class": "AGENT_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Represent AI architectures pluralistically and evaluate capability, resources, robustness, interpretability, safety and task fit without assuming larger neural models are the universal endpoint.",
+  "dependencies": [
+    "foundation.communication_collaborative_reasoning"
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "symbolic_ai",
+      "definition": "Seed concept for symbolic ai; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "neural_ai",
+      "definition": "Seed concept for neural ai; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "hybrid_ai",
+      "definition": "Seed concept for hybrid ai; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "agent_architecture",
+      "definition": "Seed concept for agent architecture; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "memory_system",
+      "definition": "Seed concept for memory system; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "planner",
+      "definition": "Seed concept for planner; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "world_model",
+      "definition": "Seed concept for world model; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "benchmark",
+      "definition": "Seed concept for benchmark; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "white_box_evaluation",
+      "definition": "Seed concept for white box evaluation; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "ablation",
+      "definition": "Seed concept for ablation; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "resource_efficiency",
+      "definition": "Seed concept for resource efficiency; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "robustness",
+      "definition": "Seed concept for robustness; interpretation remains scoped to this package's purpose and provenance."
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.benchmark_not_intelligence",
+      "premises": [
+        "TRIGGER(benchmark_not_intelligence)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(benchmark_not_intelligence)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.parameter_count_not_capability",
+      "premises": [
+        "TRIGGER(parameter_count_not_capability)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(parameter_count_not_capability)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.neural_not_only_ai",
+      "premises": [
+        "TRIGGER(neural_not_only_ai)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(neural_not_only_ai)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.symbolic_not_infallible",
+      "premises": [
+        "TRIGGER(symbolic_not_infallible)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(symbolic_not_infallible)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.simulation_not_agency",
+      "premises": [
+        "TRIGGER(simulation_not_agency)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(simulation_not_agency)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.self_improvement_not_agi",
+      "premises": [
+        "TRIGGER(self_improvement_not_agi)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(self_improvement_not_agi)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    }
+  ],
+  "invariants": [
+    "AI architecture is selected by goals and constraints.",
+    "Capability and resource efficiency are separate dimensions.",
+    "White-box tests can complement benchmarks.",
+    "Self-iteration remains bounded by evaluation and authority."
+  ],
+  "provenance": {
+    "authoring_basis": "Project Lantern Foundation Core design synthesis.",
+    "review_requirement": "Owner/project review before activation."
+  }
+}
