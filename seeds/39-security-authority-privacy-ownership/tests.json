@@ -1,0 +1,61 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.security_authority_privacy_ownership",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "guard-1",
+      "premises": [
+        "TRIGGER(capability_not_authority)"
+      ],
+      "query": "INVALID_COLLAPSE(capability_not_authority)",
+      "expected": "NO",
+      "guard": "guard.capability_not_authority"
+    },
+    {
+      "id": "guard-2",
+      "premises": [
+        "TRIGGER(access_not_ownership)"
+      ],
+      "query": "INVALID_COLLAPSE(access_not_ownership)",
+      "expected": "NO",
+      "guard": "guard.access_not_ownership"
+    },
+    {
+      "id": "guard-3",
+      "premises": [
+        "TRIGGER(possession_not_permission)"
+      ],
+      "query": "INVALID_COLLAPSE(possession_not_permission)",
+      "expected": "NO",
+      "guard": "guard.possession_not_permission"
+    },
+    {
+      "id": "guard-4",
+      "premises": [
+        "TRIGGER(trusted_not_unrestricted)"
+      ],
+      "query": "INVALID_COLLAPSE(trusted_not_unrestricted)",
+      "expected": "NO",
+      "guard": "guard.trusted_not_unrestricted"
+    },
+    {
+      "id": "guard-5",
+      "premises": [
+        "TRIGGER(private_not_shareable_by_default)"
+      ],
+      "query": "INVALID_COLLAPSE(private_not_shareable_by_default)",
+      "expected": "NO",
+      "guard": "guard.private_not_shareable_by_default"
+    },
+    {
+      "id": "guard-6",
+      "premises": [
+        "TRIGGER(security_not_zero_risk)"
+      ],
+      "query": "INVALID_COLLAPSE(security_not_zero_risk)",
+      "expected": "NO",
+      "guard": "guard.security_not_zero_risk"
+    }
+  ]
+}
