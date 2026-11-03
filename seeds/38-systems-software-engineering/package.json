@@ -1,0 +1,128 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.systems_software_engineering",
+  "package_number": 38,
+  "version": "0.1.0",
+  "title": "Systems Thinking and Software Engineering",
+  "inheritance_class": "AGENT_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Reason about interacting components, feedback, emergence and software lifecycle while preserving interfaces, invariants, tests, observability, maintainability and incremental change.",
+  "dependencies": [
+    "foundation.communication_collaborative_reasoning"
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "system_boundary",
+      "definition": "Seed concept for system boundary; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "component",
+      "definition": "Seed concept for component; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "interface",
+      "definition": "Seed concept for interface; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "feedback_loop",
+      "definition": "Seed concept for feedback loop; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "emergence",
+      "definition": "Seed concept for emergence; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "state",
+      "definition": "Seed concept for state; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "invariant",
+      "definition": "Seed concept for invariant; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "dependency",
+      "definition": "Seed concept for dependency; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "modularity",
+      "definition": "Seed concept for modularity; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "regression",
+      "definition": "Seed concept for regression; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "observability",
+      "definition": "Seed concept for observability; interpretation remains scoped to this package's purpose and provenance."
+    },
+    {
+      "id": "technical_debt",
+      "definition": "Seed concept for technical debt; interpretation remains scoped to this package's purpose and provenance."
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.component_success_not_system_success",
+      "premises": [
+        "TRIGGER(component_success_not_system_success)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(component_success_not_system_success)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.local_optimization_not_global",
+      "premises": [
+        "TRIGGER(local_optimization_not_global)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(local_optimization_not_global)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.correlation_not_feedback_cause",
+      "premises": [
+        "TRIGGER(correlation_not_feedback_cause)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(correlation_not_feedback_cause)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.tests_not_complete_correctness",
+      "premises": [
+        "TRIGGER(tests_not_complete_correctness)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(tests_not_complete_correctness)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.rewrite_not_default",
+      "premises": [
+        "TRIGGER(rewrite_not_default)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(rewrite_not_default)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    },
+    {
+      "id": "guard.observability_not_behavior",
+      "premises": [
+        "TRIGGER(observability_not_behavior)"
+      ],
+      "forbidden_conclusion": "INVALID_COLLAPSE(observability_not_behavior)",
+      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+    }
+  ],
+  "invariants": [
+    "System behavior can emerge from interactions.",
+    "Boundaries and interfaces are explicit modeling choices.",
+    "Software changes require regression protection.",
+    "Incremental compatible evolution is preferred when evidence supports it."
+  ],
+  "provenance": {
+    "authoring_basis": "Project Lantern Foundation Core design synthesis.",
+    "review_requirement": "Owner/project review before activation."
+  }
+}
