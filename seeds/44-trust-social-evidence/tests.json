@@ -1,0 +1,61 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.trust_social_evidence",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "guard-1",
+      "premises": [
+        "TRIGGER(trust_not_truth)"
+      ],
+      "query": "INVALID_COLLAPSE(trust_not_truth)",
+      "expected": "NO",
+      "guard": "guard.trust_not_truth"
+    },
+    {
+      "id": "guard-2",
+      "premises": [
+        "TRIGGER(trust_not_authority)"
+      ],
+      "query": "INVALID_COLLAPSE(trust_not_authority)",
+      "expected": "NO",
+      "guard": "guard.trust_not_authority"
+    },
+    {
+      "id": "guard-3",
+      "premises": [
+        "TRIGGER(reputation_not_global)"
+      ],
+      "query": "INVALID_COLLAPSE(reputation_not_global)",
+      "expected": "NO",
+      "guard": "guard.reputation_not_global"
+    },
+    {
+      "id": "guard-4",
+      "premises": [
+        "TRIGGER(intimacy_not_infallibility)"
+      ],
+      "query": "INVALID_COLLAPSE(intimacy_not_infallibility)",
+      "expected": "NO",
+      "guard": "guard.intimacy_not_infallibility"
+    },
+    {
+      "id": "guard-5",
+      "premises": [
+        "TRIGGER(many_reports_not_independent)"
+      ],
+      "query": "INVALID_COLLAPSE(many_reports_not_independent)",
+      "expected": "NO",
+      "guard": "guard.many_reports_not_independent"
+    },
+    {
+      "id": "guard-6",
+      "premises": [
+        "TRIGGER(distrust_not_false)"
+      ],
+      "query": "INVALID_COLLAPSE(distrust_not_false)",
+      "expected": "NO",
+      "guard": "guard.distrust_not_false"
+    }
+  ]
+}
