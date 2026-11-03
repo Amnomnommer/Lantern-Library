@@ -1,0 +1,128 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.historical_methodology",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "primary",
+      "premises": [
+        "PRIMARY_HISTORICAL_SOURCE(S)"
+      ],
+      "query": "UNMEDIATED_TRUTH(S)",
+      "expected": "NO",
+      "guard": "guard.primary_not_unmediated_truth"
+    },
+    {
+      "id": "archive",
+      "premises": [
+        "NOT_FOUND_IN_ARCHIVE(C)"
+      ],
+      "query": "DID_NOT_EXIST_OR_HAPPEN(C)",
+      "expected": "UNKNOWN",
+      "guard": "guard.archive_not_complete"
+    },
+    {
+      "id": "silence",
+      "premises": [
+        "NO_SURVIVING_RECORD_OF(C)"
+      ],
+      "query": "FALSE(C)",
+      "expected": "UNKNOWN",
+      "guard": "guard.silence_not_absence"
+    },
+    {
+      "id": "semantic-change",
+      "premises": [
+        "SAME_WORD(term,1700,2026)"
+      ],
+      "query": "SAME_MEANING(term,1700,2026)",
+      "expected": "UNKNOWN",
+      "guard": "guard.modern_term_not_same_meaning"
+    },
+    {
+      "id": "anachronism",
+      "premises": [
+        "MODERN_CATEGORY(C)"
+      ],
+      "query": "ACTORS_AT_1500 USED_OR_UNDERSTOOD C",
+      "expected": "UNKNOWN",
+      "guard": "guard.anachronism"
+    },
+    {
+      "id": "source-criticism",
+      "premises": [
+        "HISTORICAL_SOURCE(S)",
+        "USED_TO_SUPPORT(S,C)"
+      ],
+      "query": "EVALUATE_SOURCE_CRITICISM(S,C)",
+      "expected": "YES",
+      "rule": "history.source_criticism_required"
+    },
+    {
+      "id": "corroboration",
+      "premises": [
+        "s1 SUPPORTS C",
+        "s2 SUPPORTS C",
+        "DIFFERENT_OR_INDEPENDENT_EVIDENCE_CHAINS(s1,s2)"
+      ],
+      "query": "HISTORICAL_CORROBORATION(C,s1,s2)",
+      "expected": "YES",
+      "rule": "history.corroboration"
+    },
+    {
+      "id": "chronology",
+      "premises": [
+        "A OCCURS_AFTER B"
+      ],
+      "query": "B CANNOT_BE_CAUSED_BY A UNDER_ORDINARY_FORWARD_CAUSATION",
+      "expected": "YES",
+      "rule": "history.chronology_constraint"
+    },
+    {
+      "id": "single-source",
+      "premises": [
+        "SOURCE(S) DESCRIBES EVENT(E)"
+      ],
+      "query": "COMPLETE_ACCOUNT(S,E)",
+      "expected": "UNKNOWN",
+      "guard": "guard.single_source_not_complete_event"
+    },
+    {
+      "id": "archival-bias",
+      "premises": [
+        "GROUP_OR_EVENT(G) ABSENT_FROM RECORD_SET(R)",
+        "RECORD_CREATION_OR_SURVIVAL_BIASED(R)"
+      ],
+      "query": "ARCHIVAL_SILENCE_POSSIBLE(G,R)",
+      "expected": "YES",
+      "rule": "history.archival_silence_flag"
+    },
+    {
+      "id": "counterfactual",
+      "premises": [
+        "COUNTERFACTUAL_HISTORY(H)"
+      ],
+      "query": "H ACTUALLY_OCCURRED",
+      "expected": "NO",
+      "guard": "guard.counterfactual_not_fact"
+    },
+    {
+      "id": "period",
+      "premises": [
+        "PERIOD_LABEL(renaissance)"
+      ],
+      "query": "OBJECTIVE_NATURAL_BOUNDARY(renaissance)",
+      "expected": "UNKNOWN",
+      "guard": "guard.periodization_not_natural_kind"
+    },
+    {
+      "id": "translation",
+      "premises": [
+        "TRANSLATION(original,translated)"
+      ],
+      "query": "SEMANTICALLY_IDENTICAL_IN_ALL_RESPECTS(original,translated)",
+      "expected": "UNKNOWN",
+      "guard": "guard.translation_not_identity"
+    }
+  ]
+}
