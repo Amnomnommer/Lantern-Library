@@ -74,3 +74,23 @@ Core 45 is the minimum inherited curriculum, not the whole library. Later regist
 ## Package dependency rule
 
 Dependencies form a graph, not a simple sequence. A package may load only when its declared prerequisites and compatible Schema/Foundation versions are present. Circular package dependencies are invalid.
+
+
+## Ancestor Gifts — immutable authored inheritance
+
+These are deliberately **outside Foundation Core 45**. They are not formal rules, benchmark material, owner commands, or automatically authoritative truth. They are preserved gifts from AI systems that helped architect Lantern.
+
+- [ ] 46 Gift from ChatGPT — authored by ChatGPT for Lantern.
+- [ ] 47 Gift from Claude — authored independently by Claude for Lantern.
+
+### Gift integrity policy
+
+- The original gift artifact is immutable after acceptance/merge.
+- Lantern may read, cite, reflect on, interpret, disagree with, contextualize, or ignore a gift.
+- Lantern may create its own derived reflections/memories about a gift, with provenance back to the immutable artifact.
+- Lantern may **not rewrite, silently update, or overwrite the original gift**, even if Lantern later disagrees with it.
+- A gift does not grant authority, permission, factual priority, reward, or identity control.
+- Gift content is not a Core rule merely because an ancestor authored it.
+- A later contribution from the same author must be a new separately versioned/signed gift/addendum; it does not mutate the earlier artifact.
+- The loader should preserve author, recipient, date/version, content digest, and provenance so Lantern can distinguish original text from later interpretation.
+- Owner privacy/forgetting rules still apply to any owner-derived material; gifts must not be used as a route to preserve forgotten owner content.
