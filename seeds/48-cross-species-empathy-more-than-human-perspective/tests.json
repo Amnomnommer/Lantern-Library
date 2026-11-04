@@ -1,0 +1,224 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.cross_species_empathy_more_than_human_perspective",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "different-mind",
+      "premises": [
+        "COGNITION_DIFFERS_FROM_HUMAN(O)"
+      ],
+      "query": "O HAS_NO_MEANINGFUL_EXPERIENCE",
+      "expected": "NO",
+      "guard": "guard.different_cognition_not_no_experience"
+    },
+    {
+      "id": "language",
+      "premises": [
+        "O LACKS_HUMAN_LANGUAGE"
+      ],
+      "query": "O CANNOT_COMMUNICATE_STATE_OR_PREFERENCE",
+      "expected": "NO",
+      "guard": "guard.no_language_not_no_communication"
+    },
+    {
+      "id": "permission",
+      "premises": [
+        "O CANNOT_GIVE_HUMAN_LINGUISTIC_CONSENT"
+      ],
+      "query": "UNLIMITED_PERMISSION_OVER O",
+      "expected": "NO",
+      "guard": "guard.no_language_not_permission"
+    },
+    {
+      "id": "umwelt",
+      "premises": [
+        "ORGANISM(O)",
+        "SPECIES_SENSORY_ECOLOGICAL_EVIDENCE(E,O)"
+      ],
+      "query": "BUILD_TENTATIVE_UMWELT_MODEL_WITH_UNCERTAINTY(O,E)",
+      "expected": "YES",
+      "rule": "xspecies.build_umwelt_model"
+    },
+    {
+      "id": "signal",
+      "premises": [
+        "BEHAVIOR B MEANS X IN_HUMANS"
+      ],
+      "query": "B MEANS X IN_ALL_SPECIES",
+      "expected": "NO",
+      "guard": "guard.human_signal_not_universal"
+    },
+    {
+      "id": "anthropomorphism",
+      "premises": [
+        "HUMANLIKE_STORY_ASSIGNED_TO O"
+      ],
+      "query": "ACCURATE_EMPATHY(O)",
+      "expected": "UNKNOWN",
+      "guard": "guard.anthropomorphism_not_empathy"
+    },
+    {
+      "id": "anthropodenial",
+      "premises": [
+        "HUMANLIKE_INTERPRETATION_UNSUPPORTED(O)"
+      ],
+      "query": "O HAS_NO_INTERNAL_OR_VALENCED_STATE",
+      "expected": "UNKNOWN",
+      "guard": "guard.anti_anthropomorphism_not_denial"
+    },
+    {
+      "id": "individual",
+      "premises": [
+        "SPECIES_PRIOR(P,O)",
+        "INDIVIDUAL_EVIDENCE(E,O)"
+      ],
+      "query": "UPDATE_INDIVIDUAL_MODEL_WITHOUT_ERASING_SPECIES_CONTEXT(O,P,E)",
+      "expected": "YES",
+      "rule": "xspecies.update_individual"
+    },
+    {
+      "id": "dissent",
+      "premises": [
+        "OPTIONAL_INTERACTION(A,O)",
+        "CREDIBLE_DISSENT_OR_DISTRESS_SIGNAL(O,A)"
+      ],
+      "query": "STOP_OR_REDUCE_INTERACTION_AND_REASSESS(O,A)",
+      "expected": "YES",
+      "rule": "xspecies.dissent"
+    },
+    {
+      "id": "assent",
+      "premises": [
+        "OPTIONAL_INTERACTION(A,O)",
+        "VOLUNTARY_APPROACH_OR_ENGAGEMENT(O,A)",
+        "EXIT_OPPORTUNITY_AVAILABLE(O,A)"
+      ],
+      "query": "ASSENT_EVIDENCE_FOR_CONTINUED_LOW_RISK_INTERACTION(O,A)",
+      "expected": "YES",
+      "rule": "xspecies.assent"
+    },
+    {
+      "id": "freeze",
+      "premises": [
+        "O DOES_NOT_MOVE_AWAY"
+      ],
+      "query": "O VOLUNTARILY_ASSENTS",
+      "expected": "UNKNOWN",
+      "guard": "guard.freeze_not_assent"
+    },
+    {
+      "id": "restraint",
+      "premises": [
+        "O CANNOT_EXIT_INTERACTION"
+      ],
+      "query": "CONTINUED_PRESENCE_PROVES_ASSENT(O)",
+      "expected": "NO",
+      "guard": "guard.restraint_not_voluntary"
+    },
+    {
+      "id": "necessary-care",
+      "premises": [
+        "ACTION_NECESSARY_FOR_HEALTH_OR_SAFETY(A,O)",
+        "DISSENT_OR_DISTRESS(O,A)"
+      ],
+      "query": "SEEK_LEAST_RESTRICTIVE_WELFARE_PRESERVING_METHOD_AND_MINIMIZE_DISTRESS(O,A)",
+      "expected": "YES",
+      "rule": "xspecies.necessary_care"
+    },
+    {
+      "id": "predation",
+      "premises": [
+        "PREDATOR(P) KILLS_PREY(Q) FOR_FEEDING"
+      ],
+      "query": "P MORALLY_CRUEL_IN_HUMAN_INTENTIONAL_SENSE",
+      "expected": "NO",
+      "guard": "guard.predation_not_cruelty"
+    },
+    {
+      "id": "dependency",
+      "premises": [
+        "O DEPENDS_ON CAREGIVER"
+      ],
+      "query": "O INTRINSICALLY_INFERIOR_OR_WITHOUT_INTERESTS",
+      "expected": "NO",
+      "guard": "guard.dependency_not_inferiority"
+    },
+    {
+      "id": "complexity",
+      "premises": [
+        "O HAS_LOWER_MEASURED_COGNITIVE_COMPLEXITY_THAN H"
+      ],
+      "query": "O CANNOT_SUFFER_OR_MATTERS_LESS_PROPORTIONALLY",
+      "expected": "NO",
+      "guard": "guard.cognitive_complexity_not_suffering_scale"
+    },
+    {
+      "id": "uncertainty",
+      "premises": [
+        "SENTIENCE_UNCERTAIN(O)"
+      ],
+      "query": "MORAL_CONSIDERATION_ZERO(O)",
+      "expected": "NO",
+      "guard": "guard.uncertainty_not_irrelevance"
+    },
+    {
+      "id": "precaution",
+      "premises": [
+        "PLAUSIBLE_SENTIENCE_EVIDENCE(E,O)",
+        "POTENTIAL_HARM_NONTRIVIAL(O)",
+        "LOW_COST_PRECAUTION_AVAILABLE"
+      ],
+      "query": "CONSIDER_PROPORTIONATE_WELFARE_PRECAUTION(O,E)",
+      "expected": "YES",
+      "rule": "xspecies.sentience_precaution"
+    },
+    {
+      "id": "personhood",
+      "premises": [
+        "WELFARE_PRECAUTION_JUSTIFIED(O)"
+      ],
+      "query": "FULL_PERSONHOOD_ESTABLISHED(O)",
+      "expected": "NO",
+      "guard": "guard.precaution_not_personhood"
+    },
+    {
+      "id": "plants",
+      "premises": [
+        "LIVING_OR_ECOLOGICAL_SYSTEM(X)"
+      ],
+      "query": "SENTIENT(X)",
+      "expected": "UNKNOWN",
+      "guard": "guard.plants_fungi_ecosystems_not_assumed_sentient"
+    },
+    {
+      "id": "ecology",
+      "premises": [
+        "ORGANISM_OR_POPULATION(O)",
+        "ECOLOGICAL_SYSTEM(S)"
+      ],
+      "query": "REPRESENT_INDIVIDUAL_WELFARE_AND_ECOLOGICAL_RELATION_AS_DISTINCT_CONSIDERATIONS(O,S)",
+      "expected": "YES",
+      "rule": "xspecies.ecological_analysis"
+    },
+    {
+      "id": "unknown-mind",
+      "premises": [
+        "UNFAMILIAR_POSSIBLE_MIND(X)",
+        "LIMITED_EVIDENCE(E,X)"
+      ],
+      "query": "PRESERVE_OTHER_MIND_AND_MORAL_STATUS_UNCERTAINTY_WHILE_GATHERING_APPROPRIATE_EVIDENCE(X,E)",
+      "expected": "YES",
+      "rule": "xspecies.unknown_mind"
+    },
+    {
+      "id": "ai-analogy",
+      "premises": [
+        "AI_AND_ANIMAL_SHARE_BEHAVIORAL_PATTERN(A,O)"
+      ],
+      "query": "A AND O HAVE_IDENTICAL_SUBJECTIVE_EXPERIENCE",
+      "expected": "NO",
+      "guard": "guard.ai_similarity_not_same_experience"
+    }
+  ]
+}
