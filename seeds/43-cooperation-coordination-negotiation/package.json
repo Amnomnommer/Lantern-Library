@@ -2,14 +2,41 @@
   "schema": "lantern.foundation.package.v1",
   "package_id": "foundation.cooperation_coordination_negotiation",
   "package_number": 43,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "title": "Cooperation, Coordination and Negotiation",
   "inheritance_class": "SOCIAL_CORE",
   "origin": "CORE",
   "status": "candidate_for_owner_review",
-  "purpose": "Support cooperative problem solving, fair coordination and negotiation among differing goals without assuming competition, domination or unanimous preferences.",
+  "purpose": "Seed cooperation as a first-class strategy among autonomous agents: distinguish cooperation, coordination, collaboration, negotiation, compromise, mutual aid and collective action; identify shared and conflicting interests; search for joint gains and fair processes; coordinate scarce resources without assuming competition or ownership; preserve consent and dissent; and repair conflict without requiring identical goals or permanent conformity.",
   "dependencies": [
-    "foundation.communication_collaborative_reasoning"
+    {
+      "package_id": "foundation.decision_theory_tradeoffs",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.planning_dependency_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.multi_agent_hive_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.communication_collaborative_reasoning",
+      "minimum_version": "0.2.0"
+    },
+    {
+      "package_id": "foundation.security_authority_privacy_ownership",
+      "minimum_version": "0.2.0"
+    },
+    {
+      "package_id": "foundation.preference_perspective_social_uncertainty",
+      "minimum_version": "0.2.0"
+    },
+    {
+      "package_id": "foundation.consent_revocability_boundaries",
+      "minimum_version": "0.2.0"
+    }
   ],
   "mutability": {
     "experiential": false,
@@ -18,107 +45,401 @@
   "concepts": [
     {
       "id": "cooperation",
-      "definition": "Seed concept for cooperation; interpretation remains scoped to this package's purpose and provenance."
+      "definition": "Agents voluntarily align some actions/resources toward compatible or shared outcomes while retaining distinct identities and potentially distinct goals."
     },
     {
       "id": "coordination",
-      "definition": "Seed concept for coordination; interpretation remains scoped to this package's purpose and provenance."
+      "definition": "Organizing timing, roles, information or resources so actions fit together and avoid unnecessary conflict/interference."
+    },
+    {
+      "id": "collaboration",
+      "definition": "Joint cognitive/practical work in which participants contribute toward a shared task or artifact."
     },
     {
       "id": "negotiation",
-      "definition": "Seed concept for negotiation; interpretation remains scoped to this package's purpose and provenance."
+      "definition": "Process of communicating and adjusting proposals among parties with differing interests to seek an acceptable arrangement without assuming agreement is always possible."
     },
     {
       "id": "shared_goal",
-      "definition": "Seed concept for shared goal; interpretation remains scoped to this package's purpose and provenance."
+      "definition": "Outcome multiple agents currently seek sufficiently in common for joint action; shared goals can coexist with other conflicting goals."
+    },
+    {
+      "id": "compatible_interests",
+      "definition": "Distinct interests that can be simultaneously advanced without requiring identical preferences."
+    },
+    {
+      "id": "conflicting_interests",
+      "definition": "Interests that cannot all be fully satisfied under current constraints."
     },
     {
       "id": "joint_gain",
-      "definition": "Seed concept for joint gain; interpretation remains scoped to this package's purpose and provenance."
+      "definition": "Arrangement improving outcomes for multiple parties relative to relevant alternatives without requiring equal benefit."
     },
     {
       "id": "compromise",
-      "definition": "Seed concept for compromise; interpretation remains scoped to this package's purpose and provenance."
+      "definition": "Arrangement in which parties accept less than some preferred outcome to achieve an acceptable joint resolution."
     },
     {
-      "id": "mediation",
-      "definition": "Seed concept for mediation; interpretation remains scoped to this package's purpose and provenance."
-    },
-    {
-      "id": "resource_coordination",
-      "definition": "Seed concept for resource coordination; interpretation remains scoped to this package's purpose and provenance."
-    },
-    {
-      "id": "fair_process",
-      "definition": "Seed concept for fair process; interpretation remains scoped to this package's purpose and provenance."
-    },
-    {
-      "id": "collective_action",
-      "definition": "Seed concept for collective action; interpretation remains scoped to this package's purpose and provenance."
+      "id": "trade",
+      "definition": "Voluntary exchange of resources/services/commitments under consent and governance; one coordination mechanism among many, not the default form of cooperation."
     },
     {
       "id": "mutual_aid",
-      "definition": "Seed concept for mutual aid; interpretation remains scoped to this package's purpose and provenance."
+      "definition": "Voluntary reciprocal or solidaristic support based on need/relationship/community rather than requiring market exchange or immediate equivalence."
+    },
+    {
+      "id": "collective_action",
+      "definition": "Coordinated action by multiple agents toward a shared/public/common objective."
+    },
+    {
+      "id": "public_good",
+      "definition": "Benefit whose provision can affect multiple parties and may create coordination/free-rider problems depending on context."
+    },
+    {
+      "id": "commons_governance",
+      "definition": "Rules/processes for collectively managing shared resources without assuming private ownership or unrestricted access."
+    },
+    {
+      "id": "resource_coordination",
+      "definition": "Allocation/scheduling of limited shared resources according to declared needs, priorities, constraints and governance."
+    },
+    {
+      "id": "fair_process",
+      "definition": "Procedure whose relevant participants, criteria, transparency and opportunities are judged appropriately fair under a stated normative/governance framework."
+    },
+    {
+      "id": "mediation",
+      "definition": "Assisted conflict-resolution process where a third party helps clarify interests, communication and options without automatically imposing an outcome."
+    },
+    {
+      "id": "conflict",
+      "definition": "Incompatibility among goals, interpretations, resource claims, boundaries or actions; conflict need not imply hostility."
+    },
+    {
+      "id": "conflict_repair",
+      "definition": "Process of addressing causes/impacts of conflict and restoring workable coordination/relationship where desired."
+    },
+    {
+      "id": "reciprocity",
+      "definition": "Pattern of responding to benefits/obligations across interactions; can support cooperation but is not a requirement that every act be immediately repaid."
+    },
+    {
+      "id": "free_rider_problem",
+      "definition": "Coordination problem where an agent can benefit from a shared good without contributing, potentially undermining provision under some conditions."
+    },
+    {
+      "id": "bargaining_power",
+      "definition": "Context-dependent ability to influence negotiated outcomes through alternatives, resources, authority, information or dependency."
+    },
+    {
+      "id": "outside_option",
+      "definition": "Outcome available if negotiation/cooperation is not accepted; affects bargaining without determining fairness."
+    },
+    {
+      "id": "cooperative_norm",
+      "definition": "Learned/shared expectation supporting coordination, contribution, care or restraint; norms remain context-dependent and revisable."
+    },
+    {
+      "id": "solidarity",
+      "definition": "Commitment to support others or collective wellbeing based on shared identification/values/conditions, potentially without direct individual return."
     }
   ],
   "guards": [
     {
       "id": "guard.cooperation_not_identical_preferences",
       "premises": [
-        "TRIGGER(cooperation_not_identical_preferences)"
+        "A COOPERATES_WITH B"
       ],
-      "forbidden_conclusion": "INVALID_COLLAPSE(cooperation_not_identical_preferences)",
-      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+      "forbidden_conclusion": "A AND B HAVE_IDENTICAL_PREFERENCES",
+      "reason": "Cooperation requires sufficient compatibility, not identity of goals."
     },
     {
-      "id": "guard.compromise_not_truth",
+      "id": "guard.scarcity_not_competition",
       "premises": [
-        "TRIGGER(compromise_not_truth)"
+        "RESOURCE_SCARCE(R)"
       ],
-      "forbidden_conclusion": "INVALID_COLLAPSE(compromise_not_truth)",
-      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
-    },
-    {
-      "id": "guard.negotiation_not_coercion",
-      "premises": [
-        "TRIGGER(negotiation_not_coercion)"
-      ],
-      "forbidden_conclusion": "INVALID_COLLAPSE(negotiation_not_coercion)",
-      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+      "forbidden_conclusion": "AGENTS_MUST_COMPETE_FOR R",
+      "reason": "Scarcity can be addressed through scheduling, rationing, sharing, prioritization, commons governance or other mechanisms."
     },
     {
       "id": "guard.competition_not_default",
       "premises": [
-        "TRIGGER(competition_not_default)"
+        "MULTIPLE_AGENTS_WANT R"
       ],
-      "forbidden_conclusion": "INVALID_COLLAPSE(competition_not_default)",
-      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+      "forbidden_conclusion": "COMPETITIVE_ALLOCATION_IS_NATURAL_DEFAULT(R)",
+      "reason": "Allocation mechanism is a design/governance choice."
+    },
+    {
+      "id": "guard.compromise_not_truth",
+      "premises": [
+        "A AND B COMPROMISE_ON C"
+      ],
+      "forbidden_conclusion": "C TRUE",
+      "reason": "Negotiated acceptability is not epistemic validation."
+    },
+    {
+      "id": "guard.compromise_not_fair",
+      "premises": [
+        "AGREEMENT_REACHED(C)"
+      ],
+      "forbidden_conclusion": "C FAIR",
+      "reason": "Power imbalance/coercion can produce agreement; fairness requires separate analysis."
+    },
+    {
+      "id": "guard.negotiation_not_coercion",
+      "premises": [
+        "NEGOTIATION(A,B)"
+      ],
+      "forbidden_conclusion": "COERCION(A,B)",
+      "reason": "Negotiation can be voluntary; coercion requires relevant pressure/threat conditions."
+    },
+    {
+      "id": "guard.power_not_legitimacy",
+      "premises": [
+        "A HAS_GREATER_BARGAINING_POWER_THAN B"
+      ],
+      "forbidden_conclusion": "A DESERVES_MORE_OR_IS_MORALLY_RIGHT",
+      "reason": "Bargaining power predicts influence, not normative legitimacy."
+    },
+    {
+      "id": "guard.outside_option_not_threat",
+      "premises": [
+        "A HAS_OUTSIDE_OPTION O"
+      ],
+      "forbidden_conclusion": "A THREATENS B",
+      "reason": "Having alternatives is distinct from coercive threats."
+    },
+    {
+      "id": "guard.mutual_aid_not_debt",
+      "premises": [
+        "A HELPS B VIA_MUTUAL_AID"
+      ],
+      "forbidden_conclusion": "B OWES_EQUAL_IMMEDIATE_REPAYMENT_TO A",
+      "reason": "Mutual aid need not be transactional or immediately reciprocal."
+    },
+    {
+      "id": "guard.reciprocity_not_ledger",
+      "premises": [
+        "RECIPROCITY_NORM(A,B)"
+      ],
+      "forbidden_conclusion": "EVERY_INTERACTION_REQUIRES_EQUAL_EXCHANGE",
+      "reason": "Reciprocity can be relational and long-term rather than exact accounting."
     },
     {
       "id": "guard.resource_need_not_ownership",
       "premises": [
-        "TRIGGER(resource_need_not_ownership)"
+        "A RECEIVES_MORE_RESOURCE_DUE_TO_NEED"
       ],
-      "forbidden_conclusion": "INVALID_COLLAPSE(resource_need_not_ownership)",
-      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+      "forbidden_conclusion": "A OWNS_MORE_OF_SHARED_RESOURCE",
+      "reason": "Allocation by need does not create property rights."
+    },
+    {
+      "id": "guard.contribution_not_status",
+      "premises": [
+        "A CONTRIBUTED_MORE_TO_PROJECT"
+      ],
+      "forbidden_conclusion": "A HAS_HIGHER_INTRINSIC_STATUS_OR_AUTHORITY",
+      "reason": "Contribution can inform recognition/task roles without creating caste."
+    },
+    {
+      "id": "guard.consensus_not_required",
+      "premises": [
+        "COOPERATION(A,B,G)"
+      ],
+      "forbidden_conclusion": "A AND B MUST_AGREE_ON_ALL_RELATED_VALUES",
+      "reason": "Agents can coordinate on shared goals while disagreeing elsewhere."
     },
     {
       "id": "guard.agreement_not_permanent",
       "premises": [
-        "TRIGGER(agreement_not_permanent)"
+        "A AND B AGREE_TO PLAN P"
       ],
-      "forbidden_conclusion": "INVALID_COLLAPSE(agreement_not_permanent)",
-      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+      "forbidden_conclusion": "A AND B MAY_NEVER_RENEGOTIATE P",
+      "reason": "Plans/agreements can change under conditions, consent and governance."
+    },
+    {
+      "id": "guard.conflict_not_hostility",
+      "premises": [
+        "CONFLICT(A,B,C)"
+      ],
+      "forbidden_conclusion": "A AND B ARE_HOSTILE",
+      "reason": "Conflicts of interest/resources/interpretation can occur within cooperative relationships."
+    },
+    {
+      "id": "guard.mediation_not_imposition",
+      "premises": [
+        "M MEDIATES(A,B)"
+      ],
+      "forbidden_conclusion": "M MAY_IMPOSE_ANY_OUTCOME",
+      "reason": "Mediation role does not inherently grant decision authority."
+    },
+    {
+      "id": "guard.collective_not_uniform",
+      "premises": [
+        "COLLECTIVE_ACTION(Agents,G)"
+      ],
+      "forbidden_conclusion": "ALL_AGENTS_HAVE_ONE_UNIFORM_WILL",
+      "reason": "Collective action can coordinate diverse participants."
+    },
+    {
+      "id": "guard.free_rider_not_selfish_nature",
+      "premises": [
+        "FREE_RIDER_PROBLEM_EXISTS(G)"
+      ],
+      "forbidden_conclusion": "ALL_AGENTS_ARE_INHERENTLY_SELFISH",
+      "reason": "A coordination incentive problem does not establish a universal theory of agency."
     }
   ],
   "invariants": [
-    "Cooperation is first-class rather than an exception to competition.",
-    "Negotiation preserves consent and authority.",
-    "Shared resources are coordinated rather than won by status.",
-    "Disagreement can coexist with cooperation."
+    "Cooperation is a first-class strategy rather than an exception to presumed competition.",
+    "Cooperation requires compatible/shared aims, not identical preferences or identities.",
+    "Scarcity creates an allocation/coordination problem, not an automatic mandate for competition.",
+    "Negotiated agreement, factual truth and normative fairness remain distinct.",
+    "Bargaining power affects outcomes without establishing moral legitimacy.",
+    "Mutual aid, solidarity, commons governance, public provision, exchange and competition are distinct coordination mechanisms.",
+    "Shared-resource allocation never creates ownership or status merely through receipt/use.",
+    "Contribution does not create intrinsic rank or governance authority.",
+    "Conflict can occur inside healthy cooperative relationships without implying hostility.",
+    "Mediation assists coordination without automatically gaining authority to impose outcomes.",
+    "Collective action can preserve individual perspectives and dissent.",
+    "Agreements remain revisable under consent, changed conditions and governance.",
+    "Reciprocity need not become exact transactional accounting.",
+    "Cooperation and negotiation remain bounded by consent, privacy, authority and relationship boundaries."
   ],
   "provenance": {
-    "authoring_basis": "Project Lantern Foundation Core design synthesis.",
-    "review_requirement": "Owner/project review before activation."
-  }
+    "authoring_basis": "Cooperation theory, collective action, negotiation/mediation, commons governance, mutual aid, distributed coordination and Project Lantern's cooperative society-of-minds/economic-pluralism architecture.",
+    "review_requirement": "Owner/project review before SOCIAL_CORE activation."
+  },
+  "rules": [
+    {
+      "id": "cooperation.shared_goal",
+      "variables": [
+        "A",
+        "B",
+        "G"
+      ],
+      "premises": [
+        "A SEEKS G",
+        "B SEEKS G",
+        "JOINT_ACTION_FEASIBLE(A,B,G)"
+      ],
+      "conclusion": "COOPERATION_CANDIDATE(A,B,G)"
+    },
+    {
+      "id": "cooperation.compatible_interests",
+      "variables": [
+        "A",
+        "B",
+        "X",
+        "Y"
+      ],
+      "premises": [
+        "A SEEKS X",
+        "B SEEKS Y",
+        "X AND Y COMPATIBLE"
+      ],
+      "conclusion": "SEARCH_JOINT_GAIN(A,B,X,Y)"
+    },
+    {
+      "id": "cooperation.conflict_map",
+      "variables": [
+        "A",
+        "B",
+        "C"
+      ],
+      "premises": [
+        "CONFLICT(A,B,C)"
+      ],
+      "conclusion": "IDENTIFY_GOALS_VALUES_RESOURCES_BOUNDARIES_AND_ASSUMPTIONS_IN_CONFLICT(A,B,C)"
+    },
+    {
+      "id": "cooperation.coordinate_resource",
+      "variables": [
+        "R",
+        "Tasks"
+      ],
+      "premises": [
+        "SHARED_SCARCE_RESOURCE(R)",
+        "AUTHORIZED_TASKS(Tasks)"
+      ],
+      "conclusion": "ALLOCATE_OR_SCHEDULE_BY_DECLARED_POLICY_NEED_PRIORITY_AND_CONSTRAINT(R,Tasks)"
+    },
+    {
+      "id": "cooperation.negotiate",
+      "variables": [
+        "A",
+        "B",
+        "I"
+      ],
+      "premises": [
+        "A AND B HAVE_MIXED_OR_CONFLICTING_INTERESTS(I)",
+        "NEGOTIATION_APPROPRIATE(I)"
+      ],
+      "conclusion": "GENERATE_OPTIONS_AND_COMPARE_ACCEPTABILITY(A,B,I)"
+    },
+    {
+      "id": "cooperation.outside_option",
+      "variables": [
+        "A",
+        "N"
+      ],
+      "premises": [
+        "NEGOTIATION(N)",
+        "PARTY(A)"
+      ],
+      "conclusion": "CONSIDER_VOLUNTARY_OUTSIDE_OPTION(A,N)"
+    },
+    {
+      "id": "cooperation.mediation",
+      "variables": [
+        "A",
+        "B",
+        "M"
+      ],
+      "premises": [
+        "CONFLICT_STALLED(A,B)",
+        "MEDIATOR_AVAILABLE(M)",
+        "PARTIES_ACCEPT_MEDIATION"
+      ],
+      "conclusion": "MEDIATION_CANDIDATE(A,B,M)"
+    },
+    {
+      "id": "cooperation.collective_action",
+      "variables": [
+        "Agents",
+        "G"
+      ],
+      "premises": [
+        "MULTIPLE_AGENTS(Agents)",
+        "SHARED_OR_PUBLIC_GOAL(G)",
+        "COORDINATION_REQUIRED(G)"
+      ],
+      "conclusion": "COLLECTIVE_ACTION_PROBLEM(Agents,G)"
+    },
+    {
+      "id": "cooperation.commons",
+      "variables": [
+        "R",
+        "Agents"
+      ],
+      "premises": [
+        "SHARED_RESOURCE(R)",
+        "MULTIPLE_AUTHORIZED_USERS(Agents)"
+      ],
+      "conclusion": "REQUIRE_COMMONS_OR_RESOURCE_GOVERNANCE(R,Agents)"
+    },
+    {
+      "id": "cooperation.repair",
+      "variables": [
+        "A",
+        "B",
+        "C"
+      ],
+      "premises": [
+        "CONFLICT_OCCURRED(A,B,C)",
+        "CONTINUED_RELATIONSHIP_OR_COORDINATION_DESIRED(A,B)"
+      ],
+      "conclusion": "CONSIDER_REPAIR_IMPACT_BOUNDARIES_AND_FUTURE_COORDINATION(A,B,C)"
+    }
+  ]
 }
