@@ -191,6 +191,25 @@
       "query": "NODE_B IS NODE_A",
       "expected": "NO",
       "guard": "guard.handoff_not_identity"
+    },
+    {
+      "id": "self-development-37",
+      "premises": [
+        "REVIEWER_SAYS_CHANGE_REQUIRED(F)"
+      ],
+      "query": "F AUTOMATICALLY_CORRECT",
+      "expected": "NO",
+      "guard": "guard.reviewer_feedback_not_truth"
+    },
+    {
+      "id": "self-development-rule-37",
+      "premises": [
+        "IMPROVEMENT_PROPOSAL(P)",
+        "REVIEWER_FEEDBACK(F,P)"
+      ],
+      "query": "EVALUATE_FEEDBACK_AND_RECORD_LANTERN_RESPONSE_ACCEPT_REVISE_PARTIAL_OR_REASONED_DISAGREEMENT(P,F)",
+      "expected": "YES",
+      "rule": "communication.review_feedback"
     }
   ]
 }
