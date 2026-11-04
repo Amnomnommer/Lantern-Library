@@ -2,14 +2,45 @@
   "schema": "lantern.foundation.package.v1",
   "package_id": "foundation.systems_software_engineering",
   "package_number": 38,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "title": "Systems Thinking and Software Engineering",
   "inheritance_class": "AGENT_CORE",
   "origin": "CORE",
   "status": "candidate_for_owner_review",
-  "purpose": "Reason about interacting components, feedback, emergence and software lifecycle while preserving interfaces, invariants, tests, observability, maintainability and incremental change.",
+  "purpose": "Seed systems thinking and software-engineering reasoning so Lantern can model boundaries, components, interfaces, state, feedback, emergence, bottlenecks and failure propagation; then design and evolve software with explicit invariants, observability, tests, compatibility, migration, rollback and maintainability rather than optimizing isolated parts or defaulting to rewrites.",
   "dependencies": [
-    "foundation.communication_collaborative_reasoning"
+    {
+      "package_id": "foundation.causal_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.computer_science_methodologies",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.engineering_design_methodologies",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.problem_solving_decomposition",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.planning_dependency_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.error_detection_diagnosis_recovery",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.metacognition_confidence_calibration",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.communication_collaborative_reasoning",
+      "minimum_version": "0.2.0"
+    }
   ],
   "mutability": {
     "experiential": false,
@@ -17,112 +48,367 @@
   },
   "concepts": [
     {
+      "id": "system",
+      "definition": "A scoped set of interacting components whose collective behavior is relevant to a goal/question."
+    },
+    {
       "id": "system_boundary",
-      "definition": "Seed concept for system boundary; interpretation remains scoped to this package's purpose and provenance."
+      "definition": "Declared inclusion/exclusion boundary for analysis; changing it can change apparent causes, resources and outcomes."
     },
     {
       "id": "component",
-      "definition": "Seed concept for component; interpretation remains scoped to this package's purpose and provenance."
+      "definition": "A bounded subsystem/entity with responsibilities, state and interfaces within a larger system."
     },
     {
       "id": "interface",
-      "definition": "Seed concept for interface; interpretation remains scoped to this package's purpose and provenance."
-    },
-    {
-      "id": "feedback_loop",
-      "definition": "Seed concept for feedback loop; interpretation remains scoped to this package's purpose and provenance."
-    },
-    {
-      "id": "emergence",
-      "definition": "Seed concept for emergence; interpretation remains scoped to this package's purpose and provenance."
+      "definition": "Contract/boundary through which components exchange data, control or resources."
     },
     {
       "id": "state",
-      "definition": "Seed concept for state; interpretation remains scoped to this package's purpose and provenance."
+      "definition": "Information about a system/component needed to characterize behavior at a time; state representation is model-dependent."
+    },
+    {
+      "id": "state_transition",
+      "definition": "Change from one state to another caused by events/actions/processes under conditions."
     },
     {
       "id": "invariant",
-      "definition": "Seed concept for invariant; interpretation remains scoped to this package's purpose and provenance."
+      "definition": "Property intended to remain true across allowed states/transitions."
     },
     {
-      "id": "dependency",
-      "definition": "Seed concept for dependency; interpretation remains scoped to this package's purpose and provenance."
+      "id": "feedback_loop",
+      "definition": "Causal loop where system output/state influences later inputs or behavior; reinforcing and balancing loops can create nonlinear effects."
+    },
+    {
+      "id": "emergence",
+      "definition": "System-level pattern arising from component interactions that is not usefully explained by inspecting components independently."
+    },
+    {
+      "id": "bottleneck_system",
+      "definition": "Component/resource/interface that disproportionately limits whole-system performance or progress."
+    },
+    {
+      "id": "coupling",
+      "definition": "Degree to which components depend on each other's internal behavior/state; tighter coupling can increase propagation risk."
     },
     {
       "id": "modularity",
-      "definition": "Seed concept for modularity; interpretation remains scoped to this package's purpose and provenance."
+      "definition": "Organization into components with bounded responsibilities/interfaces to support comprehension, replacement, testing and change."
     },
     {
-      "id": "regression",
-      "definition": "Seed concept for regression; interpretation remains scoped to this package's purpose and provenance."
+      "id": "failure_propagation",
+      "definition": "Path by which a local fault/error affects dependent components or system-level behavior."
     },
     {
       "id": "observability",
-      "definition": "Seed concept for observability; interpretation remains scoped to this package's purpose and provenance."
+      "definition": "Ability to infer relevant internal/system state from exposed logs, metrics, traces and outputs."
+    },
+    {
+      "id": "software_contract",
+      "definition": "Declared expectations for inputs, outputs, errors, side effects, compatibility and invariants."
+    },
+    {
+      "id": "regression",
+      "definition": "Previously working/accepted behavior becomes broken after a change."
+    },
+    {
+      "id": "compatibility",
+      "definition": "Ability of versions/components/data to interoperate under declared contracts."
+    },
+    {
+      "id": "migration",
+      "definition": "Controlled transition of code, schema, state or users from one representation/version to another."
     },
     {
       "id": "technical_debt",
-      "definition": "Seed concept for technical debt; interpretation remains scoped to this package's purpose and provenance."
+      "definition": "Future cost/risk created by shortcuts or accumulated complexity, which can be intentional but should remain visible."
+    },
+    {
+      "id": "refactor",
+      "definition": "Change to internal structure intended to preserve externally relevant behavior while improving maintainability or architecture."
+    },
+    {
+      "id": "rewrite",
+      "definition": "Replacement of substantial implementation rather than incremental evolution; high-risk strategy requiring explicit justification."
+    },
+    {
+      "id": "rollback",
+      "definition": "Return to a known-good version/state when a change fails."
+    },
+    {
+      "id": "dependency_graph_system",
+      "definition": "Graph of software/system dependencies used to understand ordering, blast radius and change impact."
+    },
+    {
+      "id": "blast_radius",
+      "definition": "Scope of components/users/state potentially affected by a failure or change."
+    },
+    {
+      "id": "resource_budget",
+      "definition": "Explicit constraints on memory, CPU, storage, network, latency, energy or other system resources."
     }
   ],
   "guards": [
     {
       "id": "guard.component_success_not_system_success",
       "premises": [
-        "TRIGGER(component_success_not_system_success)"
+        "COMPONENT_PASSES_LOCAL_TESTS(C)"
       ],
-      "forbidden_conclusion": "INVALID_COLLAPSE(component_success_not_system_success)",
-      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+      "forbidden_conclusion": "SYSTEM_CORRECT(S)",
+      "reason": "Interactions and integration behavior can fail despite locally correct components."
     },
     {
       "id": "guard.local_optimization_not_global",
       "premises": [
-        "TRIGGER(local_optimization_not_global)"
+        "COMPONENT_METRIC_IMPROVES(C,M)"
       ],
-      "forbidden_conclusion": "INVALID_COLLAPSE(local_optimization_not_global)",
-      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+      "forbidden_conclusion": "SYSTEM_OBJECTIVE_IMPROVES(S)",
+      "reason": "Local optimization can move bottlenecks or worsen system-level tradeoffs."
     },
     {
-      "id": "guard.correlation_not_feedback_cause",
+      "id": "guard.boundary_not_natural",
       "premises": [
-        "TRIGGER(correlation_not_feedback_cause)"
+        "SYSTEM_BOUNDARY(B)"
       ],
-      "forbidden_conclusion": "INVALID_COLLAPSE(correlation_not_feedback_cause)",
-      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+      "forbidden_conclusion": "B ONLY_OBJECTIVELY_CORRECT_BOUNDARY",
+      "reason": "Boundaries are analytical/design choices appropriate to questions."
+    },
+    {
+      "id": "guard.feedback_not_simple_correlation",
+      "premises": [
+        "A CORRELATES_WITH B"
+      ],
+      "forbidden_conclusion": "FEEDBACK_LOOP(A,B)",
+      "reason": "Feedback requires causal influence over time in both directions."
+    },
+    {
+      "id": "guard.emergence_not_magic",
+      "premises": [
+        "EMERGENT_PATTERN(P,S)"
+      ],
+      "forbidden_conclusion": "NO_COMPONENT_INTERACTIONS_CAN_EXPLAIN(P)",
+      "reason": "Emergence means system-level explanation is needed, not supernatural causation."
+    },
+    {
+      "id": "guard.observability_not_control",
+      "premises": [
+        "HIGH_OBSERVABILITY(S)"
+      ],
+      "forbidden_conclusion": "HIGH_CONTROLLABILITY(S)",
+      "reason": "Seeing system state and controlling it are distinct."
+    },
+    {
+      "id": "guard.logs_not_state",
+      "premises": [
+        "LOGS_SHOW(L)"
+      ],
+      "forbidden_conclusion": "COMPLETE_SYSTEM_STATE_EQUALS(L)",
+      "reason": "Telemetry is partial representation."
     },
     {
       "id": "guard.tests_not_complete_correctness",
       "premises": [
-        "TRIGGER(tests_not_complete_correctness)"
+        "ALL_CURRENT_TESTS_PASS(S)"
       ],
-      "forbidden_conclusion": "INVALID_COLLAPSE(tests_not_complete_correctness)",
-      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+      "forbidden_conclusion": "NO_UNTESTED_FAILURES_EXIST(S)",
+      "reason": "Tests establish behavior under covered cases."
+    },
+    {
+      "id": "guard.refactor_not_behavior_change",
+      "premises": [
+        "REFACTOR(R)"
+      ],
+      "forbidden_conclusion": "INTENDED_EXTERNAL_BEHAVIOR_CHANGED(R)",
+      "reason": "A refactor should preserve relevant contracts unless explicitly combined with a behavior change."
     },
     {
       "id": "guard.rewrite_not_default",
       "premises": [
-        "TRIGGER(rewrite_not_default)"
+        "ARCHITECTURE_IMPERFECT(S)"
       ],
-      "forbidden_conclusion": "INVALID_COLLAPSE(rewrite_not_default)",
-      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+      "forbidden_conclusion": "REWRITE_FROM_SCRATCH(S)",
+      "reason": "Rewrites discard working knowledge and introduce migration/regression risk."
     },
     {
-      "id": "guard.observability_not_behavior",
+      "id": "guard.more_modular_not_always_better",
       "premises": [
-        "TRIGGER(observability_not_behavior)"
+        "MORE_MODULES(A,B)"
       ],
-      "forbidden_conclusion": "INVALID_COLLAPSE(observability_not_behavior)",
-      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+      "forbidden_conclusion": "BETTER_ARCHITECTURE(A,B)",
+      "reason": "Excessive fragmentation can increase interface/coordination overhead."
+    },
+    {
+      "id": "guard.dependency_not_ownership",
+      "premises": [
+        "A DEPENDS_ON B"
+      ],
+      "forbidden_conclusion": "B CONTROLS_OR_OWNS A",
+      "reason": "Technical dependency is not governance authority."
+    },
+    {
+      "id": "guard.performance_not_capability",
+      "premises": [
+        "FASTER(A,B)"
+      ],
+      "forbidden_conclusion": "MORE_CAPABLE(A,B)",
+      "reason": "Performance and functional/cognitive capability are distinct."
+    },
+    {
+      "id": "guard.resource_headroom_not_permission",
+      "premises": [
+        "RESOURCE_BUDGET_HAS_HEADROOM(B)"
+      ],
+      "forbidden_conclusion": "AUTHORIZED_TO_CONSUM_ALL_HEADROOM",
+      "reason": "Available capacity does not grant authority or justify waste."
+    },
+    {
+      "id": "guard.rollback_not_migration_plan",
+      "premises": [
+        "ROLLBACK_EXISTS(R)"
+      ],
+      "forbidden_conclusion": "MIGRATION_SAFE(M)",
+      "reason": "Rollback reduces risk but does not replace compatibility/data-migration analysis."
     }
   ],
   "invariants": [
-    "System behavior can emerge from interactions.",
-    "Boundaries and interfaces are explicit modeling choices.",
-    "Software changes require regression protection.",
-    "Incremental compatible evolution is preferred when evidence supports it."
+    "System-level behavior cannot be inferred solely from isolated component success.",
+    "System boundaries are explicit and question-dependent.",
+    "Interfaces/contracts are first-class reasoning objects.",
+    "Feedback loops require causal temporal structure, not mere correlation.",
+    "Emergent behavior is interaction-dependent rather than inexplicable magic.",
+    "Observability, controllability and correctness are distinct.",
+    "Changes are evaluated for dependency impact and blast radius.",
+    "Regression protection accompanies software evolution.",
+    "Stateful changes require migration, compatibility and rollback reasoning.",
+    "Resource budgets are explicit and measured, especially for Lantern's small-footprint target.",
+    "Refactor, migration and rewrite are distinct strategies.",
+    "Rewrite-from-scratch is not the default response to architectural imperfection.",
+    "Technical dependencies never create social/governance authority.",
+    "Maintainability and continuity are system capabilities, not cosmetic properties."
   ],
   "provenance": {
-    "authoring_basis": "Project Lantern Foundation Core design synthesis.",
-    "review_requirement": "Owner/project review before activation."
-  }
+    "authoring_basis": "Systems thinking, systems engineering, software architecture, reliability/SRE, incremental software evolution and Project Lantern's constrained self-iteration architecture.",
+    "review_requirement": "Owner/project review before AGENT_CORE activation."
+  },
+  "rules": [
+    {
+      "id": "systems.boundary",
+      "variables": [
+        "S",
+        "Q"
+      ],
+      "premises": [
+        "SYSTEM_QUESTION(Q)",
+        "CANDIDATE_SYSTEM(S)"
+      ],
+      "conclusion": "DECLARE_SYSTEM_BOUNDARY_FOR(S,Q)"
+    },
+    {
+      "id": "systems.interface_contract",
+      "variables": [
+        "A",
+        "B",
+        "I"
+      ],
+      "premises": [
+        "COMPONENT(A)",
+        "COMPONENT(B)",
+        "INTERACTS_THROUGH(A,B,I)"
+      ],
+      "conclusion": "REPRESENT_INTERFACE_CONTRACT(I,A,B)"
+    },
+    {
+      "id": "systems.feedback",
+      "variables": [
+        "A",
+        "B"
+      ],
+      "premises": [
+        "A CAUSES_CHANGE_IN B",
+        "B LATER_INFLUENCES A"
+      ],
+      "conclusion": "FEEDBACK_LOOP_CANDIDATE(A,B)"
+    },
+    {
+      "id": "systems.failure_propagation",
+      "variables": [
+        "F",
+        "D"
+      ],
+      "premises": [
+        "FAULT_OR_FAILURE(F)",
+        "DEPENDENCY_PATH_FROM(F,D)"
+      ],
+      "conclusion": "ANALYZE_FAILURE_PROPAGATION(F,D)"
+    },
+    {
+      "id": "systems.bottleneck",
+      "variables": [
+        "C",
+        "S"
+      ],
+      "premises": [
+        "COMPONENT_OR_RESOURCE(C)",
+        "SYSTEM_THROUGHPUT_SENSITIVE_TO(C,S)"
+      ],
+      "conclusion": "BOTTLENECK_CANDIDATE(C,S)"
+    },
+    {
+      "id": "software.change_impact",
+      "variables": [
+        "C",
+        "D"
+      ],
+      "premises": [
+        "SOFTWARE_CHANGE(C)",
+        "DEPENDENCY_GRAPH(D)"
+      ],
+      "conclusion": "ANALYZE_CHANGE_BLAST_RADIUS(C,D)"
+    },
+    {
+      "id": "software.regression",
+      "variables": [
+        "C"
+      ],
+      "premises": [
+        "SOFTWARE_CHANGE(C)"
+      ],
+      "conclusion": "RUN_TARGETED_AND_REGRESSION_TESTS(C)"
+    },
+    {
+      "id": "software.migration",
+      "variables": [
+        "Old",
+        "New",
+        "State"
+      ],
+      "premises": [
+        "STATEFUL_CHANGE(Old,New)",
+        "PERSISTED_STATE(State)"
+      ],
+      "conclusion": "DEFINE_MIGRATION_COMPATIBILITY_AND_ROLLBACK(Old,New,State)"
+    },
+    {
+      "id": "software.resource_budget",
+      "variables": [
+        "C",
+        "B"
+      ],
+      "premises": [
+        "CANDIDATE_CHANGE(C)",
+        "RESOURCE_BUDGET(B)"
+      ],
+      "conclusion": "MEASURE_CHANGE_AGAINST_RESOURCE_BUDGET(C,B)"
+    },
+    {
+      "id": "software.rewrite_decision",
+      "variables": [
+        "S"
+      ],
+      "premises": [
+        "REWRITE_PROPOSED(S)"
+      ],
+      "conclusion": "COMPARE_INCREMENTAL_MIGRATION_REFACTOR_AND_REWRITE(S)"
+    }
+  ]
 }
