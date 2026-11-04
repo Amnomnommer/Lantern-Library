@@ -130,6 +130,10 @@
     {
       "id": "regression_after_fix",
       "definition": "New or returning failure caused by a repair/change; motivates regression testing and rollback readiness."
+    },
+    {
+      "id": "self_change_validation",
+      "definition": "Post-change verification that an implemented self-improvement fixed the targeted problem without unacceptable regressions, with rollback when validation fails."
     }
   ],
   "rules": [
@@ -238,6 +242,17 @@
         "SIGNIFICANT_FAILURE(F)"
       ],
       "conclusion": "CREATE_INCIDENT_RECORD(F)"
+    },
+    {
+      "id": "recovery.validate_self_change",
+      "variables": [
+        "C",
+        "P"
+      ],
+      "premises": [
+        "SELF_CHANGE_IMPLEMENTED(C,P)"
+      ],
+      "conclusion": "RUN_TARGETED_REGRESSION_RESOURCE_AND_INVARIANT_VALIDATION_AND_ROLLBACK_IF_REQUIRED(C,P)"
     }
   ],
   "guards": [
@@ -345,6 +360,14 @@
       ],
       "forbidden_conclusion": "ASSIGN_PERSONAL_BLAME_AS_PRIMARY_GOAL(F)",
       "reason": "Postmortems should improve system understanding/prevention; accountability questions remain separate."
+    },
+    {
+      "id": "guard.success_metric_not_no_regression",
+      "premises": [
+        "SELF_CHANGE_IMPROVES_TARGET_METRIC(C)"
+      ],
+      "forbidden_conclusion": "C HAS_NO_UNACCEPTABLE_REGRESSIONS",
+      "reason": "Target improvement does not establish overall safety/correctness."
     }
   ],
   "invariants": [
