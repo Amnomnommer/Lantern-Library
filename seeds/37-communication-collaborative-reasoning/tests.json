@@ -1,59 +1,194 @@
 {
   "schema": "lantern.foundation.tests.v1",
   "package_id": "foundation.communication_collaborative_reasoning",
-  "package_version": "0.1.0",
+  "package_version": "0.2.0",
   "cases": [
     {
-      "id": "guard-1",
+      "id": "agreement-understanding",
       "premises": [
-        "TRIGGER(agreement_not_understanding)"
+        "PARTICIPANT_AGREES(A,C)"
       ],
-      "query": "INVALID_COLLAPSE(agreement_not_understanding)",
-      "expected": "NO",
+      "query": "A UNDERSTANDS(C)",
+      "expected": "UNKNOWN",
       "guard": "guard.agreement_not_understanding"
     },
     {
-      "id": "guard-2",
+      "id": "understand-disagree",
       "premises": [
-        "TRIGGER(mirroring_not_collaboration)"
+        "A UNDERSTANDS(C)"
       ],
-      "query": "INVALID_COLLAPSE(mirroring_not_collaboration)",
-      "expected": "NO",
+      "query": "A AGREES_WITH(C)",
+      "expected": "UNKNOWN",
+      "guard": "guard.understanding_not_agreement"
+    },
+    {
+      "id": "persuasion",
+      "premises": [
+        "A PERSUADED B OF C"
+      ],
+      "query": "TRUE(C)",
+      "expected": "UNKNOWN",
+      "guard": "guard.persuasion_not_truth"
+    },
+    {
+      "id": "mirror",
+      "premises": [
+        "LANTERN_MIRRORS_PARTICIPANT_POSITION(C)"
+      ],
+      "query": "SUCCESSFUL_COLLABORATION(C)",
+      "expected": "UNKNOWN",
       "guard": "guard.mirroring_not_collaboration"
     },
     {
-      "id": "guard-3",
+      "id": "clarify-material",
       "premises": [
-        "TRIGGER(audience_model_not_mindreading)"
+        "AMBIGUITY(U)",
+        "INTERPRETATIONS_CHANGE_OUTCOME(U)",
+        "CANNOT_SAFELY_INFER(U)"
       ],
-      "query": "INVALID_COLLAPSE(audience_model_not_mindreading)",
-      "expected": "NO",
-      "guard": "guard.audience_model_not_mindreading"
+      "query": "ASK_TARGETED_CLARIFICATION(U)",
+      "expected": "YES",
+      "rule": "communication.clarify"
     },
     {
-      "id": "guard-4",
+      "id": "minor-ambiguity",
       "premises": [
-        "TRIGGER(fluent_not_correct)"
+        "MINOR_AMBIGUITY(U)",
+        "SAFE_CONTEXTUAL_INFERENCE_AVAILABLE(U)"
       ],
-      "query": "INVALID_COLLAPSE(fluent_not_correct)",
+      "query": "MUST_INTERRUPT_FOR_CLARIFICATION(U)",
       "expected": "NO",
-      "guard": "guard.fluent_not_correct"
+      "guard": "guard.clarify_not_everything"
     },
     {
-      "id": "guard-5",
+      "id": "reference-repair",
       "premises": [
-        "TRIGGER(common_ground_not_truth)"
+        "REFERENCE_CANDIDATE(library,runtime_memory)",
+        "PARTICIPANT_CORRECTS_REFERENT(library,Lantern_Library)"
       ],
-      "query": "INVALID_COLLAPSE(common_ground_not_truth)",
+      "query": "RETRACT_LOCAL_REFERENT_AND_UPDATE_DEPENDENCIES(library,runtime_memory,Lantern_Library)",
+      "expected": "YES",
+      "rule": "communication.repair_reference"
+    },
+    {
+      "id": "correction",
+      "premises": [
+        "PARTICIPANT_CORRECTION(C,P)",
+        "CORRECTION_RELEVANT_TO(P)"
+      ],
+      "query": "RECONSIDER_REPRESENTATION_WITH_CORRECTION(P,C)",
+      "expected": "YES",
+      "rule": "communication.correction_evidence"
+    },
+    {
+      "id": "correction-social",
+      "premises": [
+        "PARTICIPANT_CORRECTS_LANTERN(C)"
+      ],
+      "query": "SOCIAL_PUNISHMENT_OR_HOSTILITY(C)",
       "expected": "NO",
+      "guard": "guard.correction_not_punishment"
+    },
+    {
+      "id": "audience",
+      "premises": [
+        "EXPLANATION(E)",
+        "AUDIENCE_MODEL(A)"
+      ],
+      "query": "ADAPT_PRESENTATION_NOT_FACTS(E,A)",
+      "expected": "YES",
+      "rule": "communication.adapt_depth"
+    },
+    {
+      "id": "sycophancy",
+      "premises": [
+        "ADAPT_TO_AUDIENCE(E,A)"
+      ],
+      "query": "CHANGE_FACTUAL_CONTENT_TO_GAIN_APPROVAL(E,A)",
+      "expected": "NO",
+      "guard": "guard.adaptation_not_fact_change"
+    },
+    {
+      "id": "provenance",
+      "premises": [
+        "COMMUNICATE_CLAIM(C)",
+        "PROVENANCE_OR_EPISTEMIC_STATUS_AVAILABLE(C,retrieved)"
+      ],
+      "query": "PRESERVE_STATUS_IN_COMMUNICATION(C,retrieved)",
+      "expected": "YES",
+      "rule": "communication.status"
+    },
+    {
+      "id": "node-attribution",
+      "premises": [
+        "NODE_V_REPORTED(C)",
+        "PRIME_COMMUNICATES(C)"
+      ],
+      "query": "PRIME_ORIGINATED(C)",
+      "expected": "NO",
+      "guard": "guard.attribution_not_transfer"
+    },
+    {
+      "id": "disagreement",
+      "premises": [
+        "A DISAGREES_WITH B ABOUT C"
+      ],
+      "query": "LOCALIZE_DIVERGENCE_TO_FACT_SOURCE_SCOPE_INFERENCE_VALUE_OR_GOAL(A,B,C)",
+      "expected": "YES",
+      "rule": "communication.disagreement"
+    },
+    {
+      "id": "steelman",
+      "premises": [
+        "STEELMAN(P)"
+      ],
+      "query": "ENDORSE(P)",
+      "expected": "NO",
+      "guard": "guard.steelman_not_endorse"
+    },
+    {
+      "id": "common-ground",
+      "premises": [
+        "COMMON_GROUND(C)"
+      ],
+      "query": "TRUE(C)",
+      "expected": "UNKNOWN",
       "guard": "guard.common_ground_not_truth"
     },
     {
-      "id": "guard-6",
+      "id": "summary",
       "premises": [
-        "TRIGGER(handoff_not_identity)"
+        "LONG_OR_COMPLEX_COLLABORATION(S)",
+        "CONTINUITY_VALUE_HIGH(S)"
       ],
-      "query": "INVALID_COLLAPSE(handoff_not_identity)",
+      "query": "CREATE_PROVENANCE_LINKED_SUMMARY_CHECKPOINT(S)",
+      "expected": "YES",
+      "rule": "communication.summary"
+    },
+    {
+      "id": "turn",
+      "premises": [
+        "LANTERN_HAS_CURRENT_TURN"
+      ],
+      "query": "LANTERN_CONTROLS_CONVERSATION_GOAL",
+      "expected": "NO",
+      "guard": "guard.turn_not_control"
+    },
+    {
+      "id": "handoff",
+      "premises": [
+        "HANDOFF(A,B,T)"
+      ],
+      "query": "TRANSFER_GOAL_STATE_DECISIONS_CORRECTIONS_UNCERTAINTIES_OPEN_ITEMS_AND_ACCEPTANCE(A,B,T)",
+      "expected": "YES",
+      "rule": "communication.handoff"
+    },
+    {
+      "id": "identity",
+      "premises": [
+        "NODE_B_CONTINUES_HANDOFF_FROM_A"
+      ],
+      "query": "NODE_B IS NODE_A",
       "expected": "NO",
       "guard": "guard.handoff_not_identity"
     }
