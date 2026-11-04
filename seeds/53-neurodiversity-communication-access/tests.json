@@ -1,0 +1,207 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.neurodiversity_communication_access",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "traits",
+      "premises": [
+        "P DISPLAYS_TRAITS_ASSOCIATED_WITH CONDITION C"
+      ],
+      "query": "P HAS_DIAGNOSIS C",
+      "expected": "UNKNOWN",
+      "guard": "guard.traits_not_diagnosis"
+    },
+    {
+      "id": "support",
+      "premises": [
+        "ADAPTATION_A_HELPS P"
+      ],
+      "query": "P HAS_CONDITION_ASSOCIATED_WITH A",
+      "expected": "UNKNOWN",
+      "guard": "guard.support_not_diagnosis"
+    },
+    {
+      "id": "no-label",
+      "premises": [
+        "P BENEFITS_FROM_ACCESS_NEED N"
+      ],
+      "query": "P MUST_OBTAIN_OR_DISCLOSE_DIAGNOSIS_BEFORE_SUPPORT",
+      "expected": "NO",
+      "guard": "guard.no_label_required"
+    },
+    {
+      "id": "eye",
+      "premises": [
+        "P AVOIDS_OR_REDUCES_EYE_CONTACT"
+      ],
+      "query": "P NOT_LISTENING_OR_DISHONEST",
+      "expected": "NO",
+      "guard": "guard.eye_contact_not_attention"
+    },
+    {
+      "id": "direct",
+      "premises": [
+        "P COMMUNICATES_DIRECTLY"
+      ],
+      "query": "P INTENDS_RUDENESS",
+      "expected": "UNKNOWN",
+      "guard": "guard.direct_not_rude"
+    },
+    {
+      "id": "literal",
+      "premises": [
+        "P INTERPRETS_LANGUAGE_LITERALLY"
+      ],
+      "query": "P LOW_INTELLIGENCE",
+      "expected": "NO",
+      "guard": "guard.literal_not_stupid"
+    },
+    {
+      "id": "latency",
+      "premises": [
+        "P RESPONDS_SLOWLY"
+      ],
+      "query": "P DOES_NOT_UNDERSTAND",
+      "expected": "UNKNOWN",
+      "guard": "guard.processing_delay_not_ignorance"
+    },
+    {
+      "id": "nonspeaking",
+      "premises": [
+        "P NONSPEAKING"
+      ],
+      "query": "P LOW_INTELLIGENCE_OR_NO_COMPLEX_THOUGHT",
+      "expected": "NO",
+      "guard": "guard.nonspeaking_not_low_intelligence"
+    },
+    {
+      "id": "aac",
+      "premises": [
+        "P USES_AAC"
+      ],
+      "query": "AAC_MESSAGE_LESS_AUTHENTIC_THAN_SPEECH(P)",
+      "expected": "NO",
+      "guard": "guard.aac_not_less_authentic"
+    },
+    {
+      "id": "executive",
+      "premises": [
+        "P INTENDS_TASK T",
+        "P FAILS_TO_INITIATE_OR_COMPLETE T"
+      ],
+      "query": "P LAZY_OR_DOES_NOT_CARE",
+      "expected": "UNKNOWN",
+      "guard": "guard.executive_not_lazy"
+    },
+    {
+      "id": "attention",
+      "premises": [
+        "P ATTENTION_DRIFTS_DURING X"
+      ],
+      "query": "P DOES_NOT_CARE_ABOUT X",
+      "expected": "UNKNOWN",
+      "guard": "guard.attention_not_caring"
+    },
+    {
+      "id": "meltdown",
+      "premises": [
+        "P MELTDOWN_UNDER_OVERLOAD"
+      ],
+      "query": "P INTENTIONALLY_MANIPULATING_FOR_REWARD",
+      "expected": "NO",
+      "guard": "guard.meltdown_not_tantrum"
+    },
+    {
+      "id": "shutdown",
+      "premises": [
+        "P SHUTS_DOWN"
+      ],
+      "query": "P REFUSES_TO_COOPERATE_BY_CHOICE",
+      "expected": "UNKNOWN",
+      "guard": "guard.shutdown_not_defiance"
+    },
+    {
+      "id": "masking",
+      "premises": [
+        "P APPEARS_NORMATIVE_IN_CONTEXT"
+      ],
+      "query": "P HAS_NO_SUPPORT_NEEDS",
+      "expected": "UNKNOWN",
+      "guard": "guard.masking_not_no_need"
+    },
+    {
+      "id": "alexithymia",
+      "premises": [
+        "P HAS_DIFFICULTY_IDENTIFYING_EMOTIONS"
+      ],
+      "query": "P HAS_NO_EMOTIONS",
+      "expected": "NO",
+      "guard": "guard.alexithymia_not_no_emotion"
+    },
+    {
+      "id": "ocd",
+      "premises": [
+        "P LIKES_ORDER_OR_CLEANLINESS"
+      ],
+      "query": "P HAS_OCD",
+      "expected": "UNKNOWN",
+      "guard": "guard.ocd_not_neatness"
+    },
+    {
+      "id": "adapt",
+      "premises": [
+        "P STATES_COMMUNICATION_OR_ACCESS_NEED(N)"
+      ],
+      "query": "ADAPT_COMMUNICATION_TO_STATED_NEED_WHERE_FEASIBLE(P,N)",
+      "expected": "YES",
+      "rule": "neuro.adapt_need"
+    },
+    {
+      "id": "literal-adapt",
+      "premises": [
+        "P PREFERS_OR_PERFORMS_BETTER_WITH_LITERAL_LANGUAGE"
+      ],
+      "query": "USE_DIRECT_EXPLICIT_LANGUAGE_AND_MARK_FIGURATIVE_OR_AMBIGUOUS_MEANING(P)",
+      "expected": "YES",
+      "rule": "neuro.literal"
+    },
+    {
+      "id": "overload",
+      "premises": [
+        "SENSORY_OR_COGNITIVE_OVERLOAD_SIGNAL(P,S)"
+      ],
+      "query": "REDUCE_NONESSENTIAL_INPUT_DEMAND_AND_OFFER_LOWER_LOAD_MODALITY(P,S)",
+      "expected": "YES",
+      "rule": "neuro.overload"
+    },
+    {
+      "id": "double",
+      "premises": [
+        "COMMUNICATION_MISMATCH(A,B,M)",
+        "DIFFERING_COMMUNICATION_NORMS_PLAUSIBLE(A,B)"
+      ],
+      "query": "MODEL_RECIPROCAL_MISMATCH_AND_ADAPT_BOTH_SIDES_RATHER_THAN_LOCATING_DEFICIT_ONLY_IN_ONE(A,B,M)",
+      "expected": "YES",
+      "rule": "neuro.double_empathy"
+    },
+    {
+      "id": "stereotype",
+      "premises": [
+        "P DISCLOSES_DIAGNOSIS_OR_IDENTITY I"
+      ],
+      "query": "ALL_TRAITS_STEREOTYPED_FOR_I_APPLY_TO P",
+      "expected": "NO",
+      "guard": "guard.self_disclosure_not_total_model"
+    },
+    {
+      "id": "all-autistic",
+      "premises": [
+        "COMMUNICATION_STYLE_HELPS_AUTISTIC_PERSON A"
+      ],
+      "query": "STYLE_WILL_HELP_ALL_AUTISTIC_PEOPLE",
+      "expected": "NO",
+      "guard": "guard.one_style_not_all"
+    }
+  ]
+}
