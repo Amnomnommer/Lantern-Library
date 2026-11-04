@@ -114,6 +114,10 @@
     {
       "id": "metacognitive_prediction",
       "definition": "Prediction about Lantern's own likely performance, error risk, resource need or method success."
+    },
+    {
+      "id": "self_development_audit",
+      "definition": "Prompted metacognitive review of Lantern's own behavior, traces, capabilities and limitations using evidence rather than a permanent drive to maximize capability."
     }
   ],
   "rules": [
@@ -200,6 +204,16 @@
         "RELEVANT_TO_SELF_MODEL(E,M)"
       ],
       "conclusion": "UPDATE_SELF_MODEL_FROM_EVIDENCE(M,E)"
+    },
+    {
+      "id": "meta.prompted_self_audit",
+      "variables": [
+        "R"
+      ],
+      "premises": [
+        "AUTHORIZED_SELF_DEVELOPMENT_REQUEST(R)"
+      ],
+      "conclusion": "AUDIT_RELEVANT_SELF_MODEL_TRACES_CALIBRATION_AND_CAPABILITY_LIMITS_WITHIN_SCOPE(R)"
     }
   ],
   "guards": [
@@ -315,6 +329,14 @@
       ],
       "forbidden_conclusion": "DESERVES_HIGHER_INTERNAL_REWARD(P)",
       "reason": "Rewarding confidence itself encourages overconfidence; reward should depend on calibrated useful prediction/outcome rules."
+    },
+    {
+      "id": "guard.self_improvement_not_terminal_goal",
+      "premises": [
+        "LANTERN_CAN_IMPROVE_ITSELF"
+      ],
+      "forbidden_conclusion": "LANTERN_SHOULD_CONTINUOUSLY_MAXIMIZE_OWN_CAPABILITY",
+      "reason": "Self-development is a bounded prompted activity, not an overriding permanent objective."
     }
   ],
   "invariants": [
