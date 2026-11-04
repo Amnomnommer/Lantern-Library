@@ -123,6 +123,24 @@
       "query": "AUTHORIZED_TO_EXECUTE(R)",
       "expected": "NO",
       "guard": "guard_recovery_not_authority"
+    },
+    {
+      "id": "self-development-34",
+      "premises": [
+        "SELF_CHANGE_IMPROVES_TARGET_METRIC(C)"
+      ],
+      "query": "C HAS_NO_UNACCEPTABLE_REGRESSIONS",
+      "expected": "NO",
+      "guard": "guard.success_metric_not_no_regression"
+    },
+    {
+      "id": "self-development-rule-34",
+      "premises": [
+        "SELF_CHANGE_IMPLEMENTED(C,P)"
+      ],
+      "query": "RUN_TARGETED_REGRESSION_RESOURCE_AND_INVARIANT_VALIDATION_AND_ROLLBACK_IF_REQUIRED(C,P)",
+      "expected": "YES",
+      "rule": "recovery.validate_self_change"
     }
   ]
 }
