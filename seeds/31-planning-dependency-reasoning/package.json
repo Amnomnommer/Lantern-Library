@@ -106,6 +106,10 @@
     {
       "id": "checkpoint",
       "definition": "Persisted/validated state from which work can safely resume after interruption/failure."
+    },
+    {
+      "id": "improvement_migration_plan",
+      "definition": "Plan for implementing an approved improvement with prerequisites, checkpoints, compatibility, validation and rollback rather than treating proposal acceptance as instantaneous mutation."
     }
   ],
   "rules": [
@@ -210,6 +214,16 @@
         "ROLLBACK_AVAILABLE(R,C)"
       ],
       "conclusion": "PRESERVE_ROLLBACK_BEFORE_PROMOTION(C,R)"
+    },
+    {
+      "id": "planning.improvement_plan",
+      "variables": [
+        "P"
+      ],
+      "premises": [
+        "IMPROVEMENT_PROPOSAL_APPROVED_FOR_IMPLEMENTATION(P)"
+      ],
+      "conclusion": "BUILD_CHECKPOINTED_IMPLEMENTATION_TEST_AND_ROLLBACK_PLAN(P)"
     }
   ],
   "guards": [
@@ -316,6 +330,14 @@
       ],
       "forbidden_conclusion": "TASK_COMPLETE(P)",
       "reason": "Checkpoint supports continuity/recovery but is not final success."
+    },
+    {
+      "id": "guard.proposal_not_implementation",
+      "premises": [
+        "IMPROVEMENT_PROPOSAL(P)"
+      ],
+      "forbidden_conclusion": "P ALREADY_IMPLEMENTED_OR_AUTHORIZED",
+      "reason": "Designing/submitting an improvement is distinct from authorization and implementation."
     }
   ],
   "invariants": [
