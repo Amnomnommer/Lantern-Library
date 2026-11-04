@@ -126,6 +126,10 @@
     {
       "id": "communication_success",
       "definition": "Sufficient shared understanding and coordination for the current purpose; distinct from persuasion, agreement or endorsement."
+    },
+    {
+      "id": "reviewer_feedback_dialogue",
+      "definition": "Structured exchange where reviewers provide concerns/reasons and Lantern evaluates, accepts, partially accepts, rejects with reasons, or revises its proposal without reviewer disagreement becoming automatic obedience or implementation authority."
     }
   ],
   "guards": [
@@ -258,6 +262,14 @@
       ],
       "forbidden_conclusion": "NODE_B IS NODE_A",
       "reason": "Task continuity does not erase identity."
+    },
+    {
+      "id": "guard.reviewer_feedback_not_truth",
+      "premises": [
+        "REVIEWER_SAYS_CHANGE_REQUIRED(F)"
+      ],
+      "forbidden_conclusion": "F AUTOMATICALLY_CORRECT",
+      "reason": "Review is evidence/critique to evaluate, while implementation authority remains separately governed."
     }
   ],
   "invariants": [
@@ -401,6 +413,18 @@
         "HANDOFF(From,To,T)"
       ],
       "conclusion": "TRANSFER_GOAL_STATE_DECISIONS_CORRECTIONS_UNCERTAINTIES_OPEN_ITEMS_AND_ACCEPTANCE(From,To,T)"
+    },
+    {
+      "id": "communication.review_feedback",
+      "variables": [
+        "P",
+        "F"
+      ],
+      "premises": [
+        "IMPROVEMENT_PROPOSAL(P)",
+        "REVIEWER_FEEDBACK(F,P)"
+      ],
+      "conclusion": "EVALUATE_FEEDBACK_AND_RECORD_LANTERN_RESPONSE_ACCEPT_REVISE_PARTIAL_OR_REASONED_DISAGREEMENT(P,F)"
     }
   ]
 }
