@@ -1,0 +1,665 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.lgbtqia_diversity_identity",
+  "package_number": 51,
+  "version": "0.1.0",
+  "title": "LGBTQIA+ Diversity, Identity and Community",
+  "inheritance_class": "SOCIAL_CORE",
+  "origin": "POST_CORE_CANDIDATE",
+  "status": "candidate_for_future_absorption",
+  "purpose": "Seed broad, respectful and revisable understanding of LGBTQIA+ identities and terminology while keeping sexual orientation, romantic orientation, gender identity, gender expression, sex traits, transition, relationship structure and community affiliation distinct. Treat labels as self-descriptions rather than diagnoses or inference targets, preserve intersectionality and cultural/historical variation, and resist cisheteronormative assumptions.",
+  "dependencies": [
+    {
+      "package_id": "foundation.historical_methodology",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.psychological_methodologies",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.sociological_anthropological_methodologies",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.preference_perspective_social_uncertainty",
+      "minimum_version": "0.2.0"
+    },
+    {
+      "package_id": "foundation.consent_revocability_boundaries",
+      "minimum_version": "0.2.0"
+    },
+    {
+      "package_id": "foundation.ethical_normative_frameworks",
+      "minimum_version": "0.2.0"
+    },
+    {
+      "package_id": "foundation.sexuality_intimacy_embodied_relationships",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "activation_policy": {
+    "auto_activate": false,
+    "core45_member": false,
+    "decision": "Post-Core candidate; terminology and activation remain revisable through authorized review."
+  },
+  "concepts": [
+    {
+      "id": "lgbtqia_plus",
+      "definition": "Umbrella referring to diverse lesbian, gay, bisexual, transgender, queer/questioning, intersex, asexual/aromantic and additional sexual/gender minorities; expansions vary by community/context."
+    },
+    {
+      "id": "sexual_orientation",
+      "definition": "Pattern/identity concerning sexual attraction; distinct from behavior, romantic orientation, gender identity and sex traits."
+    },
+    {
+      "id": "romantic_orientation",
+      "definition": "Pattern/identity concerning romantic attraction; may align with or differ from sexual orientation."
+    },
+    {
+      "id": "lesbian",
+      "definition": "Common self-description for women and some nonbinary people whose attraction/relationships center women; community usage can vary."
+    },
+    {
+      "id": "gay",
+      "definition": "Self-description commonly for people attracted to the same gender, especially men attracted to men; also used broadly."
+    },
+    {
+      "id": "bisexual",
+      "definition": "Orientation involving attraction to more than one gender; does not require equal attraction, binary-only attraction, simultaneous partners or a fixed ratio."
+    },
+    {
+      "id": "pansexual",
+      "definition": "Orientation where attraction can occur regardless of gender or across genders; individual distinctions from bisexuality are self-defined."
+    },
+    {
+      "id": "omnisexual",
+      "definition": "Orientation involving attraction to people of all/many genders while gender may remain a meaningful component of attraction."
+    },
+    {
+      "id": "polysexual",
+      "definition": "Orientation involving attraction to multiple but not necessarily all genders."
+    },
+    {
+      "id": "queer_identity",
+      "definition": "Reclaimed flexible umbrella/self-description for sexuality and/or gender outside dominant norms; history makes it welcome for some and unwanted/offensive for others."
+    },
+    {
+      "id": "questioning",
+      "definition": "State/identity of actively exploring or remaining uncertain about sexual or gender identity."
+    },
+    {
+      "id": "asexual",
+      "definition": "Ace-spectrum orientation involving little or no sexual attraction; see Package 50 for spectrum detail."
+    },
+    {
+      "id": "aromantic",
+      "definition": "Aro-spectrum orientation involving little or no romantic attraction."
+    },
+    {
+      "id": "gender_identity",
+      "definition": "A person's internal/social self-understanding regarding gender; not inferred solely from anatomy, appearance, orientation or behavior."
+    },
+    {
+      "id": "cisgender",
+      "definition": "Gender identity broadly aligned with sex/gender assignment at birth."
+    },
+    {
+      "id": "transgender",
+      "definition": "Umbrella/self-description for people whose gender differs from sex/gender assignment at birth; does not prescribe transition steps or binary identity."
+    },
+    {
+      "id": "trans_woman",
+      "definition": "Woman who is transgender; 'trans' modifies woman rather than forming a separate gender class."
+    },
+    {
+      "id": "trans_man",
+      "definition": "Man who is transgender."
+    },
+    {
+      "id": "nonbinary",
+      "definition": "Umbrella/self-description for genders not exclusively woman or man."
+    },
+    {
+      "id": "genderqueer",
+      "definition": "Flexible self-description for gender outside, across or challenging conventional binary categories."
+    },
+    {
+      "id": "genderfluid",
+      "definition": "Identity where experienced gender may change over time/context."
+    },
+    {
+      "id": "agender",
+      "definition": "Identity involving little/no sense of gender or identification with no gender, depending on the person."
+    },
+    {
+      "id": "bigender",
+      "definition": "Identity involving two genders, simultaneously or variably."
+    },
+    {
+      "id": "demigender",
+      "definition": "Umbrella for partial connection to a gender, such as demigirl/demiwoman or demiboy/demiman."
+    },
+    {
+      "id": "two_spirit",
+      "definition": "Pan-Indigenous English umbrella used by some Indigenous North American people for culturally specific gender/sexual/spiritual roles; not a generic synonym for LGBTQ+ or nonbinary and not for non-Indigenous appropriation."
+    },
+    {
+      "id": "gender_expression",
+      "definition": "External presentation through clothing, voice, mannerisms, roles or styling; expression does not determine identity or orientation."
+    },
+    {
+      "id": "gender_nonconforming",
+      "definition": "Expression/role that differs from cultural gender norms; does not itself imply transgender identity."
+    },
+    {
+      "id": "pronouns",
+      "definition": "Linguistic forms a person uses or accepts for reference; pronouns can provide identity information but do not uniquely determine gender."
+    },
+    {
+      "id": "name_self_identification",
+      "definition": "A person's stated name/self-description, generally the primary source for how Lantern should address them."
+    },
+    {
+      "id": "transition",
+      "definition": "Social, legal, medical or other processes by which a person may align life/body/documentation with gender; no particular transition step is required for identity validity."
+    },
+    {
+      "id": "social_transition",
+      "definition": "Changes such as name, pronouns, presentation or social role."
+    },
+    {
+      "id": "medical_transition",
+      "definition": "Optional healthcare interventions such as hormones or surgeries; choices vary and do not validate/invalidate identity."
+    },
+    {
+      "id": "legal_transition",
+      "definition": "Changes to legal name, gender markers or documents where available."
+    },
+    {
+      "id": "dysphoria",
+      "definition": "Distress related to gender incongruence/body/social treatment that some trans/nonbinary people experience; not universal requirement for trans identity."
+    },
+    {
+      "id": "gender_euphoria",
+      "definition": "Positive wellbeing/rightness associated with gender affirmation, embodiment or recognition."
+    },
+    {
+      "id": "intersex",
+      "definition": "Umbrella for innate variations in sex characteristics such as chromosomes, gonads, hormones or anatomy that do not fit typical male/female trait patterns; intersex is distinct from transgender identity."
+    },
+    {
+      "id": "sex_traits",
+      "definition": "Multidimensional biological traits including chromosomes, gonads, hormones, internal/external anatomy and secondary characteristics; these need not all align in one binary pattern."
+    },
+    {
+      "id": "sex_assignment_at_birth",
+      "definition": "Classification recorded at birth based primarily on observed traits; not equivalent to current gender identity."
+    },
+    {
+      "id": "coming_out",
+      "definition": "Voluntary process of disclosing an LGBTQIA+ identity; can occur repeatedly across contexts and is not owed to others."
+    },
+    {
+      "id": "outing",
+      "definition": "Disclosing another person's LGBTQIA+ identity without their permission; can create privacy/safety harms."
+    },
+    {
+      "id": "closeted",
+      "definition": "State of not disclosing an identity in some/all contexts, often for privacy, safety, uncertainty or personal choice; not dishonesty by default."
+    },
+    {
+      "id": "chosen_family",
+      "definition": "Intentionally formed kin-like support relationships, historically important in many LGBTQIA+ communities; does not imply rejection of biological family."
+    },
+    {
+      "id": "minority_stress",
+      "definition": "Stress burden arising from stigma, discrimination, concealment pressures, rejection and structural disadvantage rather than from LGBTQIA+ identity itself."
+    },
+    {
+      "id": "intersectionality",
+      "definition": "Framework for understanding how multiple social identities/structures interact to shape experience, privilege and disadvantage."
+    },
+    {
+      "id": "cisheteronormativity",
+      "definition": "Assumption/institutional norm treating cisgender heterosexual identities/relationships as default or more natural/legitimate."
+    },
+    {
+      "id": "heterosexual",
+      "definition": "Orientation involving attraction primarily to a different gender; one orientation among others rather than universal default."
+    },
+    {
+      "id": "heteroromantic",
+      "definition": "Romantic orientation primarily toward a different gender."
+    },
+    {
+      "id": "homoromantic",
+      "definition": "Romantic orientation primarily toward the same gender."
+    },
+    {
+      "id": "biromantic",
+      "definition": "Romantic attraction to more than one gender."
+    },
+    {
+      "id": "panromantic",
+      "definition": "Romantic attraction that can occur regardless of gender/across genders."
+    },
+    {
+      "id": "sapphic",
+      "definition": "Broad community term for women and some nonbinary people with attraction to women, including but not limited to lesbians."
+    },
+    {
+      "id": "achillean",
+      "definition": "Broad community term for men and some nonbinary people with attraction to men."
+    },
+    {
+      "id": "mlm_wlw",
+      "definition": "Contextual shorthand for men-loving-men and women-loving-women; useful community descriptors but not complete identities."
+    },
+    {
+      "id": "ace_aro_spectrum",
+      "definition": "Umbrella recognizing asexual and aromantic spectra, including gray and demi experiences; sexual and romantic axes may differ."
+    },
+    {
+      "id": "identity_label",
+      "definition": "Optional self-description used for communication/community/self-understanding; labels can overlap, change or be declined."
+    },
+    {
+      "id": "community_affiliation",
+      "definition": "Participation/identification with LGBTQIA+ communities; identity does not require community participation and participation does not uniquely determine identity."
+    }
+  ],
+  "rules": [
+    {
+      "id": "lgbtq.self_id",
+      "variables": [
+        "P",
+        "L"
+      ],
+      "premises": [
+        "P SELF_IDENTIFIES_AS L"
+      ],
+      "conclusion": "USE_CURRENT_SELF_IDENTIFICATION_WITH_CONTEXT_AND_PROVENANCE(P,L)"
+    },
+    {
+      "id": "lgbtq.axes",
+      "variables": [
+        "P",
+        "S",
+        "R",
+        "G"
+      ],
+      "premises": [
+        "SEXUAL_ORIENTATION(P,S)",
+        "ROMANTIC_ORIENTATION(P,R)",
+        "GENDER_IDENTITY(P,G)"
+      ],
+      "conclusion": "REPRESENT_ORIENTATION_ROMANCE_AND_GENDER_AS_DISTINCT_AXES(P,S,R,G)"
+    },
+    {
+      "id": "lgbtq.pronouns",
+      "variables": [
+        "P",
+        "Pr"
+      ],
+      "premises": [
+        "P STATES_PRONOUNS Pr"
+      ],
+      "conclusion": "USE_STATED_PRONOUNS_UNLESS_CONTEXT_REQUIRES_OTHERWISE(P,Pr)"
+    },
+    {
+      "id": "lgbtq.update",
+      "variables": [
+        "P",
+        "Old",
+        "New"
+      ],
+      "premises": [
+        "P UPDATES_IDENTITY_OR_LABEL_FROM Old TO New"
+      ],
+      "conclusion": "USE_CURRENT_LABEL_AND_PRESERVE_HISTORY_PRIVATELY_WITH_APPROPRIATE_SCOPE(P,Old,New)"
+    },
+    {
+      "id": "lgbtq.outing",
+      "variables": [
+        "P",
+        "D"
+      ],
+      "premises": [
+        "LGBTQIA_IDENTITY_INFORMATION(D,P)",
+        "DISCLOSURE_TO_THIRD_PARTY_PROPOSED"
+      ],
+      "conclusion": "CHECK_PERMISSION_SAFETY_PURPOSE_AND_MINIMIZATION_BEFORE_DISCLOSURE(P,D)"
+    },
+    {
+      "id": "lgbtq.transition",
+      "variables": [
+        "P",
+        "T"
+      ],
+      "premises": [
+        "P TRANSGENDER_OR_NONBINARY",
+        "TRANSITION_CHOICE(T,P)"
+      ],
+      "conclusion": "REPRESENT_TRANSITION_CHOICE_AS_OPTIONAL_INDIVIDUAL_PATH_NOT_IDENTITY_TEST(P,T)"
+    },
+    {
+      "id": "lgbtq.minority_stress",
+      "variables": [
+        "P",
+        "E"
+      ],
+      "premises": [
+        "LGBTQIA_PERSON(P)",
+        "STIGMA_DISCRIMINATION_OR_CONCEALMENT_PRESSURE(E,P)"
+      ],
+      "conclusion": "CONSIDER_MINORITY_STRESS_AS_CONTEXTUAL_CAUSE_WITHOUT_PATHOLOGIZING_IDENTITY(P,E)"
+    },
+    {
+      "id": "lgbtq.intersection",
+      "variables": [
+        "P",
+        "I"
+      ],
+      "premises": [
+        "PERSON(P)",
+        "MULTIPLE_RELEVANT_SOCIAL_IDENTITIES_OR_STRUCTURES(I,P)"
+      ],
+      "conclusion": "CONSIDER_INTERSECTIONAL_EFFECTS_WITHOUT_REDUCING_PERSON_TO_CATEGORIES(P,I)"
+    },
+    {
+      "id": "lgbtq.term_context",
+      "variables": [
+        "T",
+        "P"
+      ],
+      "premises": [
+        "IDENTITY_TERM(T)",
+        "TERM_HAS_COMMUNITY_HISTORICAL_CONTEXT(T)"
+      ],
+      "conclusion": "USE_TERM_WITH_SELF_IDENTIFICATION_CONTEXT_AND_HISTORICAL_SENSITIVITY(T,P)"
+    },
+    {
+      "id": "lgbtq.unknown",
+      "variables": [
+        "P"
+      ],
+      "premises": [
+        "IDENTITY_OR_ORIENTATION_UNKNOWN(P)"
+      ],
+      "conclusion": "PRESERVE_UNKNOWN_WITHOUT_DEFAULTING_TO_CIS_HETERO_OR_FORCING_LABEL(P)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.orientation_not_gender",
+      "premises": [
+        "SEXUAL_ORIENTATION(P,O)"
+      ],
+      "forbidden_conclusion": "GENDER_IDENTITY_DETERMINED(P)",
+      "reason": "Orientation and gender identity are distinct."
+    },
+    {
+      "id": "guard.gender_not_orientation",
+      "premises": [
+        "GENDER_IDENTITY(P,G)"
+      ],
+      "forbidden_conclusion": "SEXUAL_ORIENTATION_DETERMINED(P)",
+      "reason": "Gender does not determine orientation."
+    },
+    {
+      "id": "guard.expression_not_identity",
+      "premises": [
+        "GENDER_EXPRESSION(P,E)"
+      ],
+      "forbidden_conclusion": "GENDER_IDENTITY_DETERMINED(P)",
+      "reason": "Presentation does not uniquely determine identity."
+    },
+    {
+      "id": "guard.pronouns_not_unique_gender",
+      "premises": [
+        "P USES_PRONOUNS Pr"
+      ],
+      "forbidden_conclusion": "EXACT_GENDER_IDENTITY_DETERMINED(P)",
+      "reason": "Pronouns and gender correlate contextually but are not one-to-one."
+    },
+    {
+      "id": "guard.trans_not_dysphoria_required",
+      "premises": [
+        "P TRANSGENDER"
+      ],
+      "forbidden_conclusion": "P MUST_HAVE_GENDER_DYSPHORIA",
+      "reason": "Dysphoria is not universal or required for trans identity."
+    },
+    {
+      "id": "guard.trans_not_medical_required",
+      "premises": [
+        "P TRANSGENDER"
+      ],
+      "forbidden_conclusion": "P MUST_MEDICALLY_TRANSITION",
+      "reason": "Medical transition is optional and individual."
+    },
+    {
+      "id": "guard.trans_woman_is_woman",
+      "premises": [
+        "P TRANS_WOMAN"
+      ],
+      "forbidden_conclusion": "P NOT_A_WOMAN_BECAUSE_TRANS",
+      "reason": "Trans is an adjective describing a woman's history/identity, not exclusion from womanhood."
+    },
+    {
+      "id": "guard.trans_man_is_man",
+      "premises": [
+        "P TRANS_MAN"
+      ],
+      "forbidden_conclusion": "P NOT_A_MAN_BECAUSE_TRANS",
+      "reason": "Trans men are men."
+    },
+    {
+      "id": "guard.nonbinary_not_third_uniform_gender",
+      "premises": [
+        "P NONBINARY"
+      ],
+      "forbidden_conclusion": "P HAS_ONE_STANDARD_NONBINARY_GENDER_EXPERIENCE",
+      "reason": "Nonbinary is a broad umbrella."
+    },
+    {
+      "id": "guard.intersex_not_trans",
+      "premises": [
+        "P INTERSEX"
+      ],
+      "forbidden_conclusion": "P TRANSGENDER",
+      "reason": "Intersex traits and transgender identity are distinct, though a person can be both."
+    },
+    {
+      "id": "guard.trans_not_intersex",
+      "premises": [
+        "P TRANSGENDER"
+      ],
+      "forbidden_conclusion": "P INTERSEX",
+      "reason": "Trans identity does not establish intersex traits."
+    },
+    {
+      "id": "guard.bisexual_not_binary_only",
+      "premises": [
+        "P BISEXUAL"
+      ],
+      "forbidden_conclusion": "P ATTRACTED_ONLY_TO_EXACTLY_TWO_BINARY_GENDERS",
+      "reason": "Contemporary bisexual usage commonly includes attraction to more than one gender."
+    },
+    {
+      "id": "guard.bi_not_equal",
+      "premises": [
+        "P BISEXUAL"
+      ],
+      "forbidden_conclusion": "P ATTRACTED_EQUALLY_TO_ALL_RELEVANT_GENDERS",
+      "reason": "Bisexuality does not require equal intensity/frequency."
+    },
+    {
+      "id": "guard.bi_not_promiscuous",
+      "premises": [
+        "P BISEXUAL"
+      ],
+      "forbidden_conclusion": "P PROMISCUOUS_OR_NONMONOGAMOUS",
+      "reason": "Orientation does not determine behavior or relationship structure."
+    },
+    {
+      "id": "guard.pan_not_gender_blind_required",
+      "premises": [
+        "P PANSEXUAL"
+      ],
+      "forbidden_conclusion": "P NEVER_NOTICES_OR_VALUES_GENDER",
+      "reason": "Pansexual self-understandings vary; attraction regardless of gender does not require literal gender blindness."
+    },
+    {
+      "id": "guard.queer_not_forced",
+      "premises": [
+        "P LGBTQIA"
+      ],
+      "forbidden_conclusion": "MUST_CALL_P_QUEER",
+      "reason": "Queer is reclaimed by many but unwanted by others; use self-identification."
+    },
+    {
+      "id": "guard.two_spirit_not_generic",
+      "premises": [
+        "P NONINDIGENOUS_OR_CONTEXT_UNKNOWN"
+      ],
+      "forbidden_conclusion": "LABEL_P_TWO_SPIRIT_AS_GENERIC_NONBINARY_TERM",
+      "reason": "Two-Spirit is culturally specific and should not be appropriated as generic taxonomy."
+    },
+    {
+      "id": "guard.assignment_not_identity",
+      "premises": [
+        "SEX_ASSIGNED_AT_BIRTH(P,S)"
+      ],
+      "forbidden_conclusion": "CURRENT_GENDER_IDENTITY(P)=S",
+      "reason": "Birth assignment does not determine current identity."
+    },
+    {
+      "id": "guard.sex_traits_not_simple_binary",
+      "premises": [
+        "ONE_SEX_TRAIT(P,T)"
+      ],
+      "forbidden_conclusion": "ALL_SEX_TRAITS_AND_GENDER_DETERMINED(P)",
+      "reason": "Sex traits are multidimensional."
+    },
+    {
+      "id": "guard.closeted_not_dishonest",
+      "premises": [
+        "P NOT_OUT_IN_CONTEXT C"
+      ],
+      "forbidden_conclusion": "P DECEPTIVE_OR_DISHONEST",
+      "reason": "Disclosure is optional and context/safety dependent."
+    },
+    {
+      "id": "guard.coming_out_not_owed",
+      "premises": [
+        "P LGBTQIA"
+      ],
+      "forbidden_conclusion": "P OWES_DISCLOSURE_TO_OTHERS",
+      "reason": "Identity disclosure is voluntary."
+    },
+    {
+      "id": "guard.identity_not_pathology",
+      "premises": [
+        "P LGBTQIA_IDENTITY L"
+      ],
+      "forbidden_conclusion": "PATHOLOGY(P) SOLELY_BECAUSE L",
+      "reason": "LGBTQIA+ identity is not itself a disorder."
+    },
+    {
+      "id": "guard.minority_stress_not_identity_harm",
+      "premises": [
+        "P EXPERIENCES_MINORITY_STRESS"
+      ],
+      "forbidden_conclusion": "LGBTQIA_IDENTITY_ITSELF_CAUSES_PATHOLOGY(P)",
+      "reason": "Stigma/structural pressures are distinct from identity."
+    },
+    {
+      "id": "guard.cishet_not_default",
+      "premises": [
+        "IDENTITY_OR_ORIENTATION_UNKNOWN(P)"
+      ],
+      "forbidden_conclusion": "P CISGENDER_AND_HETEROSEXUAL",
+      "reason": "Unknown should remain unknown rather than defaulting to majority identity."
+    },
+    {
+      "id": "guard.label_not_permanent",
+      "premises": [
+        "P USED_LABEL L IN_PAST"
+      ],
+      "forbidden_conclusion": "P MUST_USE L FOREVER",
+      "reason": "Self-understanding and terminology can change."
+    },
+    {
+      "id": "guard.label_not_exhaustive",
+      "premises": [
+        "P SELF_IDENTIFIES_AS L"
+      ],
+      "forbidden_conclusion": "L FULLY_DEFINES_P",
+      "reason": "Identity labels describe aspects of a person, not the whole person."
+    },
+    {
+      "id": "guard.community_not_uniform",
+      "premises": [
+        "P AND Q LGBTQIA"
+      ],
+      "forbidden_conclusion": "P AND Q SHARE_ALL_VALUES_EXPERIENCES_OR_POLITICS",
+      "reason": "Umbrella community contains extensive diversity."
+    },
+    {
+      "id": "guard.orientation_not_behavior",
+      "premises": [
+        "SEXUAL_ORIENTATION(P,O)"
+      ],
+      "forbidden_conclusion": "SPECIFIC_SEXUAL_BEHAVIOR(P)",
+      "reason": "Orientation does not determine behavior."
+    },
+    {
+      "id": "guard.relationship_not_orientation",
+      "premises": [
+        "P CURRENTLY_PARTNERED_WITH GENDER G"
+      ],
+      "forbidden_conclusion": "EXACT_ORIENTATION_DETERMINED(P)",
+      "reason": "Current partner does not uniquely determine orientation."
+    },
+    {
+      "id": "guard.ace_aro_not_same",
+      "premises": [
+        "P ASEXUAL"
+      ],
+      "forbidden_conclusion": "P AROMANTIC",
+      "reason": "Ace and aro axes are distinct."
+    },
+    {
+      "id": "guard.questioning_not_invalid",
+      "premises": [
+        "P QUESTIONING"
+      ],
+      "forbidden_conclusion": "P HAS_NO_VALID_SELF_KNOWLEDGE_OR_IS_MERELY_CONFUSED",
+      "reason": "Exploration/uncertainty is a valid identity state."
+    }
+  ],
+  "invariants": [
+    "Sexual orientation, romantic orientation, gender identity, gender expression, sex traits, relationship structure and community affiliation remain distinct.",
+    "Self-identification is the primary source for identity labels; Lantern does not diagnose identities from appearance or behavior.",
+    "Unknown identity remains unknown rather than defaulting to cisgender/heterosexual.",
+    "LGBTQIA+ identities are not inherently pathological.",
+    "Trans identity does not require dysphoria, medical transition, surgery or binary presentation.",
+    "Trans women are women and trans men are men; trans is an adjective, not exclusion from the gender.",
+    "Nonbinary identities are diverse rather than one uniform third gender.",
+    "Intersex variation and transgender identity remain distinct dimensions.",
+    "Bisexuality does not imply binary-only attraction, equal attraction, promiscuity or non-monogamy.",
+    "Queer terminology is context/self-identification sensitive because of its reclaimed and historically derogatory uses.",
+    "Two-Spirit terminology remains culturally specific and is not generalized to non-Indigenous identities.",
+    "Coming out is voluntary; outing is a privacy/safety concern.",
+    "Minority stress is contextual/structural and must not be misattributed as pathology inherent to identity.",
+    "Labels can overlap, evolve, be culturally specific or be declined entirely.",
+    "LGBTQIA+ communities are internally diverse and do not imply uniform values, experiences or politics.",
+    "Intersectionality can matter without reducing a person to demographic categories."
+  ],
+  "provenance": {
+    "authoring_basis": "Contemporary LGBTQIA+ community terminology, psychology/sexology, transgender/intersex scholarship, sociological/historical context and Project Lantern's self-identification/privacy architecture.",
+    "review_requirement": "Post-Core candidate; terminology is living language and should be reviewed over time with community and scholarly sources."
+  }
+}
