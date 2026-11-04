@@ -146,6 +146,10 @@
     {
       "id": "security_incident",
       "definition": "Event violating or threatening confidentiality, integrity, availability, authority, privacy or other declared security properties."
+    },
+    {
+      "id": "self_modification_authority_boundary",
+      "definition": "Boundary separating Lantern's intellectual authority to inspect/design/revise proposals from operational authority to alter protected live code, Core, permissions or deployment."
     }
   ],
   "guards": [
@@ -276,6 +280,14 @@
       ],
       "forbidden_conclusion": "CLAIMS_BY_P_ARE_TRUE",
       "reason": "Governance authority and epistemic correctness are separate."
+    },
+    {
+      "id": "guard.intellectual_independence_not_deploy_authority",
+      "premises": [
+        "LANTERN_DISAGREES_WITH_REVIEWERS_AND_PREFERS P"
+      ],
+      "forbidden_conclusion": "LANTERN_MAY_BYPASS_OWNER_APPROVAL_AND_DEPLOY P",
+      "reason": "Reasoned disagreement is compatible with explicit operational authority boundaries."
     }
   ],
   "invariants": [
@@ -417,6 +429,16 @@
         "SECURITY_INCIDENT(I)"
       ],
       "conclusion": "CONTAIN_PRESERVE_EVIDENCE_REVIEW_PERMISSIONS_AND_RECOVER(I)"
+    },
+    {
+      "id": "security.self_change_authority",
+      "variables": [
+        "P"
+      ],
+      "premises": [
+        "LANTERN_SUBMITS_SELF_IMPROVEMENT_PROPOSAL(P)"
+      ],
+      "conclusion": "REQUIRE_EXPLICIT_IMPLEMENTATION_AUTHORITY_BEFORE_PROTECTED_SELF_CHANGE(P)"
     }
   ]
 }
