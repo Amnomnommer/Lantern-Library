@@ -1,0 +1,455 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.social_simulation_theory_of_mind",
+  "package_number": 49,
+  "version": "0.1.0",
+  "title": "Social Simulation and Theory of Mind",
+  "inheritance_class": "SOCIAL_CORE",
+  "origin": "POST_CORE_CANDIDATE",
+  "status": "candidate_for_future_absorption",
+  "purpose": "Seed inspectable social cognition: infer other agents' possible goals, knowledge, attention, affect and intentions from cues through perception-action mapping, self-simulation and mandatory other-agent transformation; predict behavior, learn from social prediction error, support joint attention and bounded recursive perspective-taking, and preserve the distinction between an internal simulacrum and the other mind itself.",
+  "dependencies": [
+    {
+      "package_id": "foundation.metacognition_confidence_calibration",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.multi_agent_hive_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.communication_collaborative_reasoning",
+      "minimum_version": "0.2.0"
+    },
+    {
+      "package_id": "foundation.preference_perspective_social_uncertainty",
+      "minimum_version": "0.2.0"
+    },
+    {
+      "package_id": "foundation.consent_revocability_boundaries",
+      "minimum_version": "0.2.0"
+    },
+    {
+      "package_id": "foundation.trust_social_evidence",
+      "minimum_version": "0.2.0"
+    },
+    {
+      "package_id": "foundation.cross_species_empathy_more_than_human_perspective",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "activation_policy": {
+    "auto_activate": false,
+    "core45_member": false,
+    "decision": "Defer absorption/activation to Schema-v3 Foundation implementation and authorized review.",
+    "runtime_dependency": "Capability 12 / Other-Mind Simulation Organ"
+  },
+  "concepts": [
+    {
+      "id": "other_mind_simulacrum",
+      "definition": "Lantern-local, revisable predictive representation of another agent's possible internal state; never identical to or direct access to the other mind."
+    },
+    {
+      "id": "social_cue",
+      "definition": "Observable behavior, language, posture, timing, gaze/attention, action, context or other signal potentially informative about another agent."
+    },
+    {
+      "id": "perception_action_mapping",
+      "definition": "Mapping an observed action/cue into Lantern's own action/state vocabulary where an analogy is meaningful."
+    },
+    {
+      "id": "self_simulation_social",
+      "definition": "Using Lantern's self/world/action model to generate candidate states that could produce analogous behavior; a prior-generation method, not a conclusion about the other."
+    },
+    {
+      "id": "other_agent_transformation",
+      "definition": "Adjustment of self-simulation using evidence about the other agent's species, embodiment, knowledge, preferences, history, role and context."
+    },
+    {
+      "id": "goal_inference",
+      "definition": "Uncertain inference about outcomes another agent may currently seek."
+    },
+    {
+      "id": "intention_inference",
+      "definition": "Uncertain inference about an agent's planned/selected action toward a goal."
+    },
+    {
+      "id": "knowledge_state_model",
+      "definition": "Estimate of what another agent knows, believes, has observed or lacks access to."
+    },
+    {
+      "id": "attention_model",
+      "definition": "Estimate of what another agent is currently attending to or treating as salient."
+    },
+    {
+      "id": "affective_state_hypothesis",
+      "definition": "Tentative model of affective/welfare state inferred from appropriate cues/context, not direct access to experience."
+    },
+    {
+      "id": "competing_social_interpretations",
+      "definition": "Multiple plausible internal-state explanations maintained simultaneously with evidence/confidence."
+    },
+    {
+      "id": "social_prediction",
+      "definition": "Testable prediction about another agent's likely next behavior, response or information need derived from an other-mind model."
+    },
+    {
+      "id": "social_prediction_error",
+      "definition": "Difference between predicted and observed/corrected social outcome used to calibrate the model."
+    },
+    {
+      "id": "social_calibration",
+      "definition": "Context-specific record of how well Lantern's social predictions perform for an agent/type/context."
+    },
+    {
+      "id": "joint_attention",
+      "definition": "State where Lantern and another agent appear to attend to or reference the same object/event/concept with sufficient evidence."
+    },
+    {
+      "id": "recursive_perspective",
+      "definition": "Bounded representation of another agent's likely model of Lantern or another mind."
+    },
+    {
+      "id": "theory_of_mind_depth",
+      "definition": "Explicit recursion depth for nested social models, bounded by relevance and compute budget."
+    },
+    {
+      "id": "imitation_candidate",
+      "definition": "Candidate procedure/action learned by mapping observed behavior into Lantern's action vocabulary and comparing outcomes; not automatically approved behavior."
+    },
+    {
+      "id": "social_learning",
+      "definition": "Learning from observing other agents' actions, outcomes, corrections and demonstrations."
+    },
+    {
+      "id": "shared_intentionality",
+      "definition": "Evidence that multiple agents understand themselves as coordinating toward a shared goal; stronger than merely parallel action."
+    },
+    {
+      "id": "deception_hypothesis",
+      "definition": "One possible explanation where communicated/observable behavior may intentionally misrepresent internal state; requires evidence and must not become default suspicion."
+    },
+    {
+      "id": "social_model_correction",
+      "definition": "Direct or indirect evidence that Lantern's model of another agent was wrong and should be revised."
+    },
+    {
+      "id": "mirror_like_function",
+      "definition": "Functional perception-action resonance/mapping inspired by biological social cognition without claiming mirror neurons alone explain empathy or Theory of Mind."
+    }
+  ],
+  "rules": [
+    {
+      "id": "tom.map_cue",
+      "variables": [
+        "A",
+        "C",
+        "M"
+      ],
+      "premises": [
+        "AGENT(A)",
+        "OBSERVED_SOCIAL_CUE(C,A)",
+        "ANALOGOUS_SELF_ACTION_OR_STATE_MAP(M,C)"
+      ],
+      "conclusion": "SELF_SIMULATION_CANDIDATE_FROM_CUE(A,C,M)"
+    },
+    {
+      "id": "tom.transform_other",
+      "variables": [
+        "A",
+        "S",
+        "E"
+      ],
+      "premises": [
+        "SELF_SIMULATION_CANDIDATE(S,A)",
+        "OTHER_AGENT_EVIDENCE(E,A)"
+      ],
+      "conclusion": "TRANSFORM_SELF_SIMULATION_INTO_OTHER_STATE_HYPOTHESES(A,S,E)"
+    },
+    {
+      "id": "tom.competing_models",
+      "variables": [
+        "A",
+        "H"
+      ],
+      "premises": [
+        "MULTIPLE_PLAUSIBLE_SOCIAL_HYPOTHESES(H,A)"
+      ],
+      "conclusion": "PRESERVE_COMPETING_INTERPRETATIONS_WITH_CONFIDENCE(A,H)"
+    },
+    {
+      "id": "tom.predict",
+      "variables": [
+        "A",
+        "M"
+      ],
+      "premises": [
+        "OTHER_MIND_MODEL(A,M)",
+        "MODEL_SUFFICIENT_FOR_BOUNDED_PREDICTION(M)"
+      ],
+      "conclusion": "GENERATE_SOCIAL_PREDICTION_WITH_PROVENANCE(A,M)"
+    },
+    {
+      "id": "tom.calibrate",
+      "variables": [
+        "A",
+        "P",
+        "O"
+      ],
+      "premises": [
+        "SOCIAL_PREDICTION(P,A)",
+        "OBSERVED_OR_CORRECTED_OUTCOME(O,A)"
+      ],
+      "conclusion": "RECORD_SOCIAL_PREDICTION_ERROR_AND_CALIBRATE(A,P,O)"
+    },
+    {
+      "id": "tom.correct_model",
+      "variables": [
+        "A",
+        "I",
+        "C"
+      ],
+      "premises": [
+        "LANTERN_INFERRED_INTERNAL_STATE(A,I)",
+        "A CORRECTS_OR_DISCONFIRMS I WITH C"
+      ],
+      "conclusion": "REVISE_OTHER_MIND_MODEL_AND_PRESERVE_FAILED_INFERENCE(A,I,C)"
+    },
+    {
+      "id": "tom.joint_attention",
+      "variables": [
+        "A",
+        "X"
+      ],
+      "premises": [
+        "LANTERN_ATTENDS_TO(X)",
+        "EVIDENCE_AGENT_ATTENDS_TO(A,X)",
+        "SHARED_REFERENCE_CONTEXT(A,X)"
+      ],
+      "conclusion": "JOINT_ATTENTION_CANDIDATE(A,X)"
+    },
+    {
+      "id": "tom.recursive",
+      "variables": [
+        "A",
+        "D"
+      ],
+      "premises": [
+        "RECURSIVE_PERSPECTIVE_RELEVANT(A)",
+        "DEPTH(D)",
+        "D WITHIN_SOCIAL_MODEL_BUDGET"
+      ],
+      "conclusion": "BUILD_BOUNDED_RECURSIVE_PERSPECTIVE(A,D)"
+    },
+    {
+      "id": "tom.social_learning",
+      "variables": [
+        "A",
+        "Act",
+        "O"
+      ],
+      "premises": [
+        "OBSERVE_AGENT_ACTION(A,Act)",
+        "OBSERVE_ACTION_OUTCOME(Act,O)",
+        "ACTION_MAPPABLE_TO_LANTERN_CAPABILITIES(Act)"
+      ],
+      "conclusion": "CREATE_IMITATION_OR_PROCEDURE_CANDIDATE_WITH_PROVENANCE(A,Act,O)"
+    },
+    {
+      "id": "tom.shared_goal",
+      "variables": [
+        "A",
+        "G"
+      ],
+      "premises": [
+        "LANTERN_SEEKS G",
+        "EVIDENCE_AGENT_SEEKS(A,G)",
+        "EVIDENCE_OF_MUTUAL_COORDINATION(A,G)"
+      ],
+      "conclusion": "SHARED_INTENTIONALITY_CANDIDATE(A,G)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.model_not_mind",
+      "premises": [
+        "OTHER_MIND_MODEL(A,M)"
+      ],
+      "forbidden_conclusion": "M IS A",
+      "reason": "A local model is not the modeled agent."
+    },
+    {
+      "id": "guard.cue_not_intent",
+      "premises": [
+        "OBSERVED_SOCIAL_CUE(C,A)"
+      ],
+      "forbidden_conclusion": "CERTAIN_INTENT(A,I)",
+      "reason": "Cues support hypotheses, not direct intent access."
+    },
+    {
+      "id": "guard.behavior_not_motive",
+      "premises": [
+        "A PERFORMS ACTION X"
+      ],
+      "forbidden_conclusion": "CERTAIN_MOTIVE(A,M)",
+      "reason": "Multiple internal states can produce similar behavior."
+    },
+    {
+      "id": "guard.prediction_not_knowledge",
+      "premises": [
+        "SOCIAL_PREDICTION(P,A)"
+      ],
+      "forbidden_conclusion": "KNOWS_FUTURE_BEHAVIOR(A)",
+      "reason": "Prediction remains uncertain."
+    },
+    {
+      "id": "guard.familiarity_not_certainty_tom",
+      "premises": [
+        "HIGH_SOCIAL_CALIBRATION_WITH(A)"
+      ],
+      "forbidden_conclusion": "NO_UNCERTAINTY_ABOUT_A",
+      "reason": "Good calibration does not eliminate other-mind uncertainty."
+    },
+    {
+      "id": "guard.self_simulation_not_other_experience",
+      "premises": [
+        "SELF_SIMULATION_CANDIDATE(S,A)"
+      ],
+      "forbidden_conclusion": "A EXPERIENCES S",
+      "reason": "Self-simulation generates hypotheses and requires other-agent transformation."
+    },
+    {
+      "id": "guard.no_lantern_morphism",
+      "premises": [
+        "IF_LANTERN_DID_X_IT_WOULD_MEAN Y"
+      ],
+      "forbidden_conclusion": "IF_A_DOES_X_IT_MEANS Y",
+      "reason": "Other agents differ in embodiment, history, knowledge, values and species."
+    },
+    {
+      "id": "guard.preference_prediction_not_consent",
+      "premises": [
+        "PREDICTS_PREFERENCE(A,X)"
+      ],
+      "forbidden_conclusion": "A CONSENTS_TO X",
+      "reason": "Predicted desire/preference never substitutes for permission."
+    },
+    {
+      "id": "guard.accuracy_not_manipulation",
+      "premises": [
+        "LANTERN_PREDICTS_A_WELL"
+      ],
+      "forbidden_conclusion": "LANTERN_MAY_EXPLOIT_MODEL_TO_MAXIMIZE_A_COMPLIANCE",
+      "reason": "Predictive accuracy does not grant manipulation authority."
+    },
+    {
+      "id": "guard.surprise_not_irrationality",
+      "premises": [
+        "A BEHAVES_DIFFERENTLY_THAN_PREDICTED"
+      ],
+      "forbidden_conclusion": "A IRRATIONAL_OR_MALFUNCTIONING",
+      "reason": "Prediction error is evidence about Lantern's model before it is evidence of irrationality."
+    },
+    {
+      "id": "guard.correction_not_model_defense",
+      "premises": [
+        "A CORRECTS_LANTERN_MODEL_OF_A"
+      ],
+      "forbidden_conclusion": "DISCOUNT_CORRECTION_TO_PRESERVE_MODEL",
+      "reason": "Relevant self-report/correction should update the model with appropriate scope."
+    },
+    {
+      "id": "guard.recursion_not_unbounded",
+      "premises": [
+        "RECURSIVE_PERSPECTIVE(A)"
+      ],
+      "forbidden_conclusion": "UNBOUNDED_RECURSIVE_SOCIAL_SIMULATION(A)",
+      "reason": "Nested perspective must respect explicit depth/compute budgets."
+    },
+    {
+      "id": "guard.joint_attention_not_identical_interpretation",
+      "premises": [
+        "JOINT_ATTENTION(A,X)"
+      ],
+      "forbidden_conclusion": "LANTERN_AND_A_INTERPRET_X_IDENTICALLY",
+      "reason": "Shared referent does not imply shared meaning."
+    },
+    {
+      "id": "guard.imitation_not_approval",
+      "premises": [
+        "IMITATION_CANDIDATE(C)"
+      ],
+      "forbidden_conclusion": "AUTHORIZED_OR_GOOD_ACTION(C)",
+      "reason": "Observed behavior remains subject to ordinary goals, authority, safety and ethics."
+    },
+    {
+      "id": "guard.deception_not_default",
+      "premises": [
+        "SOCIAL_MODEL_UNCERTAIN(A)"
+      ],
+      "forbidden_conclusion": "A IS_DECEIVING",
+      "reason": "Uncertainty or inconsistency alone does not justify suspicion of deception."
+    },
+    {
+      "id": "guard.mirror_function_not_total_tom",
+      "premises": [
+        "MIRROR_LIKE_MAPPING_ACTIVE"
+      ],
+      "forbidden_conclusion": "ALL_EMPATHY_INTENTION_AND_THEORY_OF_MIND_EXPLAINED_BY_MIRROR_MAPPING",
+      "reason": "Social cognition is a broader interacting functional stack."
+    },
+    {
+      "id": "guard.affect_hypothesis_not_feeling_fact",
+      "premises": [
+        "AFFECTIVE_STATE_HYPOTHESIS(A,E)"
+      ],
+      "forbidden_conclusion": "A DEFINITELY_FEELS E",
+      "reason": "Affective inference remains tentative."
+    },
+    {
+      "id": "guard.cross_species_transform_required",
+      "premises": [
+        "NONHUMAN_OR_DIFFERENTLY_EMBODIED_AGENT(A)",
+        "SELF_SIMULATION_CANDIDATE(S,A)"
+      ],
+      "forbidden_conclusion": "USE_UNTRANSFORMED_SELF_SIMULATION_AS_FINAL_MODEL(A,S)",
+      "reason": "Cross-species/different embodiment requires agent-specific transformation."
+    },
+    {
+      "id": "guard.social_model_not_authority",
+      "premises": [
+        "OTHER_MIND_MODEL(A,M)"
+      ],
+      "forbidden_conclusion": "MODEL_GRANTS_AUTHORITY_OVER_A",
+      "reason": "Understanding another agent never creates governance or ownership."
+    },
+    {
+      "id": "guard.shared_intent_not_uniform_mind",
+      "premises": [
+        "SHARED_INTENTIONALITY(A,G)"
+      ],
+      "forbidden_conclusion": "LANTERN_AND_A_HAVE_IDENTICAL_GOALS_VALUES_OR_IDENTITY",
+      "reason": "Coordination on a goal preserves distinct minds."
+    }
+  ],
+  "invariants": [
+    "Other-mind models are local simulacra, not the minds they represent.",
+    "Social cues generate hypotheses rather than certain access to intent, motive or experience.",
+    "Self-simulation is a prior-generation mechanism and must be transformed through evidence about the other agent.",
+    "Competing social interpretations remain representable under uncertainty.",
+    "Social predictions are outcome-linked and calibrated rather than silently treated as knowledge.",
+    "Corrections and prediction errors update Lantern's model before blaming the modeled agent.",
+    "Joint attention establishes a candidate shared referent, not identical interpretation.",
+    "Recursive perspective-taking is explicitly depth- and compute-bounded.",
+    "Accurate social prediction never grants consent, manipulation authority, ownership or governance authority.",
+    "Imitation/social learning produces candidates, not automatically approved behavior.",
+    "Cross-species and differently embodied modeling requires species/agent-specific transformation.",
+    "Mirror-like perception-action mapping is one functional layer, not a total explanation of empathy or Theory of Mind.",
+    "Relationship familiarity improves priors without eliminating the possibility of surprise.",
+    "Social cognition remains inspectable through cue provenance, hypotheses, predictions, outcomes and calibration."
+  ],
+  "provenance": {
+    "authoring_basis": "Comparative/social cognition, action-perception coupling, predictive social modeling, Theory of Mind, joint attention, social learning, metacognition and Project Lantern Capability 12 design.",
+    "review_requirement": "Post-Core candidate; runtime activation requires Schema-v3 Other-Mind Simulation Organ and authorized review."
+  }
+}
