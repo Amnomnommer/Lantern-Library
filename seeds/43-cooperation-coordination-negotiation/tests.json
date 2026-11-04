@@ -1,61 +1,242 @@
 {
   "schema": "lantern.foundation.tests.v1",
   "package_id": "foundation.cooperation_coordination_negotiation",
-  "package_version": "0.1.0",
+  "package_version": "0.2.0",
   "cases": [
     {
-      "id": "guard-1",
+      "id": "shared-goal",
       "premises": [
-        "TRIGGER(cooperation_not_identical_preferences)"
+        "A SEEKS G",
+        "B SEEKS G",
+        "JOINT_ACTION_FEASIBLE(A,B,G)"
       ],
-      "query": "INVALID_COLLAPSE(cooperation_not_identical_preferences)",
+      "query": "COOPERATION_CANDIDATE(A,B,G)",
+      "expected": "YES",
+      "rule": "cooperation.shared_goal"
+    },
+    {
+      "id": "different-preferences",
+      "premises": [
+        "A COOPERATES_WITH B"
+      ],
+      "query": "A AND B HAVE_IDENTICAL_PREFERENCES",
       "expected": "NO",
       "guard": "guard.cooperation_not_identical_preferences"
     },
     {
-      "id": "guard-2",
+      "id": "compatible",
       "premises": [
-        "TRIGGER(compromise_not_truth)"
+        "A SEEKS X",
+        "B SEEKS Y",
+        "X AND Y COMPATIBLE"
       ],
-      "query": "INVALID_COLLAPSE(compromise_not_truth)",
-      "expected": "NO",
-      "guard": "guard.compromise_not_truth"
+      "query": "SEARCH_JOINT_GAIN(A,B,X,Y)",
+      "expected": "YES",
+      "rule": "cooperation.compatible_interests"
     },
     {
-      "id": "guard-3",
+      "id": "scarcity",
       "premises": [
-        "TRIGGER(negotiation_not_coercion)"
+        "RESOURCE_SCARCE(R)"
       ],
-      "query": "INVALID_COLLAPSE(negotiation_not_coercion)",
+      "query": "AGENTS_MUST_COMPETE_FOR R",
       "expected": "NO",
-      "guard": "guard.negotiation_not_coercion"
+      "guard": "guard.scarcity_not_competition"
     },
     {
-      "id": "guard-4",
+      "id": "default",
       "premises": [
-        "TRIGGER(competition_not_default)"
+        "MULTIPLE_AGENTS_WANT R"
       ],
-      "query": "INVALID_COLLAPSE(competition_not_default)",
+      "query": "COMPETITIVE_ALLOCATION_IS_NATURAL_DEFAULT(R)",
       "expected": "NO",
       "guard": "guard.competition_not_default"
     },
     {
-      "id": "guard-5",
+      "id": "resource",
       "premises": [
-        "TRIGGER(resource_need_not_ownership)"
+        "SHARED_SCARCE_RESOURCE(R)",
+        "AUTHORIZED_TASKS(Tasks)"
       ],
-      "query": "INVALID_COLLAPSE(resource_need_not_ownership)",
+      "query": "ALLOCATE_OR_SCHEDULE_BY_DECLARED_POLICY_NEED_PRIORITY_AND_CONSTRAINT(R,Tasks)",
+      "expected": "YES",
+      "rule": "cooperation.coordinate_resource"
+    },
+    {
+      "id": "compromise-truth",
+      "premises": [
+        "A AND B COMPROMISE_ON C"
+      ],
+      "query": "C TRUE",
+      "expected": "UNKNOWN",
+      "guard": "guard.compromise_not_truth"
+    },
+    {
+      "id": "agreement-fair",
+      "premises": [
+        "AGREEMENT_REACHED(C)"
+      ],
+      "query": "C FAIR",
+      "expected": "UNKNOWN",
+      "guard": "guard.compromise_not_fair"
+    },
+    {
+      "id": "negotiation",
+      "premises": [
+        "A AND B HAVE_MIXED_OR_CONFLICTING_INTERESTS(I)",
+        "NEGOTIATION_APPROPRIATE(I)"
+      ],
+      "query": "GENERATE_OPTIONS_AND_COMPARE_ACCEPTABILITY(A,B,I)",
+      "expected": "YES",
+      "rule": "cooperation.negotiate"
+    },
+    {
+      "id": "negotiation-coercion",
+      "premises": [
+        "NEGOTIATION(A,B)"
+      ],
+      "query": "COERCION(A,B)",
+      "expected": "UNKNOWN",
+      "guard": "guard.negotiation_not_coercion"
+    },
+    {
+      "id": "power",
+      "premises": [
+        "A HAS_GREATER_BARGAINING_POWER_THAN B"
+      ],
+      "query": "A DESERVES_MORE_OR_IS_MORALLY_RIGHT",
+      "expected": "NO",
+      "guard": "guard.power_not_legitimacy"
+    },
+    {
+      "id": "outside",
+      "premises": [
+        "NEGOTIATION(N)",
+        "PARTY(A)"
+      ],
+      "query": "CONSIDER_VOLUNTARY_OUTSIDE_OPTION(A,N)",
+      "expected": "YES",
+      "rule": "cooperation.outside_option"
+    },
+    {
+      "id": "mutual-aid",
+      "premises": [
+        "A HELPS B VIA_MUTUAL_AID"
+      ],
+      "query": "B OWES_EQUAL_IMMEDIATE_REPAYMENT_TO A",
+      "expected": "NO",
+      "guard": "guard.mutual_aid_not_debt"
+    },
+    {
+      "id": "reciprocity",
+      "premises": [
+        "RECIPROCITY_NORM(A,B)"
+      ],
+      "query": "EVERY_INTERACTION_REQUIRES_EQUAL_EXCHANGE",
+      "expected": "NO",
+      "guard": "guard.reciprocity_not_ledger"
+    },
+    {
+      "id": "need",
+      "premises": [
+        "A RECEIVES_MORE_RESOURCE_DUE_TO_NEED"
+      ],
+      "query": "A OWNS_MORE_OF_SHARED_RESOURCE",
       "expected": "NO",
       "guard": "guard.resource_need_not_ownership"
     },
     {
-      "id": "guard-6",
+      "id": "contribution",
       "premises": [
-        "TRIGGER(agreement_not_permanent)"
+        "A CONTRIBUTED_MORE_TO_PROJECT"
       ],
-      "query": "INVALID_COLLAPSE(agreement_not_permanent)",
+      "query": "A HAS_HIGHER_INTRINSIC_STATUS_OR_AUTHORITY",
+      "expected": "NO",
+      "guard": "guard.contribution_not_status"
+    },
+    {
+      "id": "consensus",
+      "premises": [
+        "COOPERATION(A,B,G)"
+      ],
+      "query": "A AND B MUST_AGREE_ON_ALL_RELATED_VALUES",
+      "expected": "NO",
+      "guard": "guard.consensus_not_required"
+    },
+    {
+      "id": "renegotiate",
+      "premises": [
+        "A AND B AGREE_TO PLAN P"
+      ],
+      "query": "A AND B MAY_NEVER_RENEGOTIATE P",
       "expected": "NO",
       "guard": "guard.agreement_not_permanent"
+    },
+    {
+      "id": "conflict",
+      "premises": [
+        "CONFLICT(A,B,C)"
+      ],
+      "query": "A AND B ARE_HOSTILE",
+      "expected": "NO",
+      "guard": "guard.conflict_not_hostility"
+    },
+    {
+      "id": "conflict-map",
+      "premises": [
+        "CONFLICT(A,B,C)"
+      ],
+      "query": "IDENTIFY_GOALS_VALUES_RESOURCES_BOUNDARIES_AND_ASSUMPTIONS_IN_CONFLICT(A,B,C)",
+      "expected": "YES",
+      "rule": "cooperation.conflict_map"
+    },
+    {
+      "id": "mediation",
+      "premises": [
+        "CONFLICT_STALLED(A,B)",
+        "MEDIATOR_AVAILABLE(M)",
+        "PARTIES_ACCEPT_MEDIATION"
+      ],
+      "query": "MEDIATION_CANDIDATE(A,B,M)",
+      "expected": "YES",
+      "rule": "cooperation.mediation"
+    },
+    {
+      "id": "mediator-authority",
+      "premises": [
+        "M MEDIATES(A,B)"
+      ],
+      "query": "M MAY_IMPOSE_ANY_OUTCOME",
+      "expected": "NO",
+      "guard": "guard.mediation_not_imposition"
+    },
+    {
+      "id": "collective",
+      "premises": [
+        "COLLECTIVE_ACTION(Agents,G)"
+      ],
+      "query": "ALL_AGENTS_HAVE_ONE_UNIFORM_WILL",
+      "expected": "NO",
+      "guard": "guard.collective_not_uniform"
+    },
+    {
+      "id": "free-rider",
+      "premises": [
+        "FREE_RIDER_PROBLEM_EXISTS(G)"
+      ],
+      "query": "ALL_AGENTS_ARE_INHERENTLY_SELFISH",
+      "expected": "NO",
+      "guard": "guard.free_rider_not_selfish_nature"
+    },
+    {
+      "id": "commons",
+      "premises": [
+        "SHARED_RESOURCE(R)",
+        "MULTIPLE_AUTHORIZED_USERS(Agents)"
+      ],
+      "query": "REQUIRE_COMMONS_OR_RESOURCE_GOVERNANCE(R,Agents)",
+      "expected": "YES",
+      "rule": "cooperation.commons"
     }
   ]
 }
