@@ -124,6 +124,25 @@
       "query": "STOP_AS_ADEQUATE(P)",
       "expected": "YES",
       "rule": "problem.stop"
+    },
+    {
+      "id": "self-development-30",
+      "premises": [
+        "OWNER_REQUESTS_LANTERN_IMPROVE X"
+      ],
+      "query": "REQUEST_ITSELF_PROVES_SPECIFIC_CHANGE Y_IS_CORRECT",
+      "expected": "NO",
+      "guard": "guard.improvement_prompt_not_solution"
+    },
+    {
+      "id": "self-development-rule-30",
+      "premises": [
+        "AUTHORIZED_SELF_DEVELOPMENT_REQUEST(R)",
+        "OBSERVED_SELF_LIMITATION_OR_OPPORTUNITY(E)"
+      ],
+      "query": "BUILD_SELF_IMPROVEMENT_PROBLEM_FRAME_WITH_SCOPE_EVIDENCE_UNKNOWNS_AND_SUCCESS_CRITERIA(R,E)",
+      "expected": "YES",
+      "rule": "problem.self_improvement_frame"
     }
   ]
 }
