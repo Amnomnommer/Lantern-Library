@@ -125,6 +125,24 @@
       "query": "TASK_COMPLETE(P)",
       "expected": "NO",
       "guard": "guard_checkpoint_not_complete"
+    },
+    {
+      "id": "self-development-31",
+      "premises": [
+        "IMPROVEMENT_PROPOSAL(P)"
+      ],
+      "query": "P ALREADY_IMPLEMENTED_OR_AUTHORIZED",
+      "expected": "NO",
+      "guard": "guard.proposal_not_implementation"
+    },
+    {
+      "id": "self-development-rule-31",
+      "premises": [
+        "IMPROVEMENT_PROPOSAL_APPROVED_FOR_IMPLEMENTATION(P)"
+      ],
+      "query": "BUILD_CHECKPOINTED_IMPLEMENTATION_TEST_AND_ROLLBACK_PLAN(P)",
+      "expected": "YES",
+      "rule": "planning.improvement_plan"
     }
   ]
 }
