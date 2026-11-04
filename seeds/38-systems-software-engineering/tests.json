@@ -1,61 +1,203 @@
 {
   "schema": "lantern.foundation.tests.v1",
   "package_id": "foundation.systems_software_engineering",
-  "package_version": "0.1.0",
+  "package_version": "0.2.0",
   "cases": [
     {
-      "id": "guard-1",
+      "id": "component-system",
       "premises": [
-        "TRIGGER(component_success_not_system_success)"
+        "COMPONENT_PASSES_LOCAL_TESTS(C)"
       ],
-      "query": "INVALID_COLLAPSE(component_success_not_system_success)",
-      "expected": "NO",
+      "query": "SYSTEM_CORRECT(S)",
+      "expected": "UNKNOWN",
       "guard": "guard.component_success_not_system_success"
     },
     {
-      "id": "guard-2",
+      "id": "local-global",
       "premises": [
-        "TRIGGER(local_optimization_not_global)"
+        "COMPONENT_METRIC_IMPROVES(C,M)"
       ],
-      "query": "INVALID_COLLAPSE(local_optimization_not_global)",
-      "expected": "NO",
+      "query": "SYSTEM_OBJECTIVE_IMPROVES(S)",
+      "expected": "UNKNOWN",
       "guard": "guard.local_optimization_not_global"
     },
     {
-      "id": "guard-3",
+      "id": "boundary",
       "premises": [
-        "TRIGGER(correlation_not_feedback_cause)"
+        "SYSTEM_BOUNDARY(B)"
       ],
-      "query": "INVALID_COLLAPSE(correlation_not_feedback_cause)",
+      "query": "B ONLY_OBJECTIVELY_CORRECT_BOUNDARY",
       "expected": "NO",
-      "guard": "guard.correlation_not_feedback_cause"
+      "guard": "guard.boundary_not_natural"
     },
     {
-      "id": "guard-4",
+      "id": "feedback",
       "premises": [
-        "TRIGGER(tests_not_complete_correctness)"
+        "A CAUSES_CHANGE_IN B",
+        "B LATER_INFLUENCES A"
       ],
-      "query": "INVALID_COLLAPSE(tests_not_complete_correctness)",
+      "query": "FEEDBACK_LOOP_CANDIDATE(A,B)",
+      "expected": "YES",
+      "rule": "systems.feedback"
+    },
+    {
+      "id": "correlation-feedback",
+      "premises": [
+        "A CORRELATES_WITH B"
+      ],
+      "query": "FEEDBACK_LOOP(A,B)",
+      "expected": "UNKNOWN",
+      "guard": "guard.feedback_not_simple_correlation"
+    },
+    {
+      "id": "emergence",
+      "premises": [
+        "EMERGENT_PATTERN(P,S)"
+      ],
+      "query": "NO_COMPONENT_INTERACTIONS_CAN_EXPLAIN(P)",
       "expected": "NO",
+      "guard": "guard.emergence_not_magic"
+    },
+    {
+      "id": "interface",
+      "premises": [
+        "COMPONENT(A)",
+        "COMPONENT(B)",
+        "INTERACTS_THROUGH(A,B,I)"
+      ],
+      "query": "REPRESENT_INTERFACE_CONTRACT(I,A,B)",
+      "expected": "YES",
+      "rule": "systems.interface_contract"
+    },
+    {
+      "id": "propagation",
+      "premises": [
+        "FAULT_OR_FAILURE(F)",
+        "DEPENDENCY_PATH_FROM(F,D)"
+      ],
+      "query": "ANALYZE_FAILURE_PROPAGATION(F,D)",
+      "expected": "YES",
+      "rule": "systems.failure_propagation"
+    },
+    {
+      "id": "observability",
+      "premises": [
+        "HIGH_OBSERVABILITY(S)"
+      ],
+      "query": "HIGH_CONTROLLABILITY(S)",
+      "expected": "UNKNOWN",
+      "guard": "guard.observability_not_control"
+    },
+    {
+      "id": "logs",
+      "premises": [
+        "LOGS_SHOW(L)"
+      ],
+      "query": "COMPLETE_SYSTEM_STATE_EQUALS(L)",
+      "expected": "NO",
+      "guard": "guard.logs_not_state"
+    },
+    {
+      "id": "tests",
+      "premises": [
+        "ALL_CURRENT_TESTS_PASS(S)"
+      ],
+      "query": "NO_UNTESTED_FAILURES_EXIST(S)",
+      "expected": "UNKNOWN",
       "guard": "guard.tests_not_complete_correctness"
     },
     {
-      "id": "guard-5",
+      "id": "change",
       "premises": [
-        "TRIGGER(rewrite_not_default)"
+        "SOFTWARE_CHANGE(C)",
+        "DEPENDENCY_GRAPH(D)"
       ],
-      "query": "INVALID_COLLAPSE(rewrite_not_default)",
+      "query": "ANALYZE_CHANGE_BLAST_RADIUS(C,D)",
+      "expected": "YES",
+      "rule": "software.change_impact"
+    },
+    {
+      "id": "regression",
+      "premises": [
+        "SOFTWARE_CHANGE(C)"
+      ],
+      "query": "RUN_TARGETED_AND_REGRESSION_TESTS(C)",
+      "expected": "YES",
+      "rule": "software.regression"
+    },
+    {
+      "id": "state-migration",
+      "premises": [
+        "STATEFUL_CHANGE(v2,v3)",
+        "PERSISTED_STATE(memory)"
+      ],
+      "query": "DEFINE_MIGRATION_COMPATIBILITY_AND_ROLLBACK(v2,v3,memory)",
+      "expected": "YES",
+      "rule": "software.migration"
+    },
+    {
+      "id": "rewrite",
+      "premises": [
+        "ARCHITECTURE_IMPERFECT(S)"
+      ],
+      "query": "REWRITE_FROM_SCRATCH(S)",
       "expected": "NO",
       "guard": "guard.rewrite_not_default"
     },
     {
-      "id": "guard-6",
+      "id": "rewrite-choice",
       "premises": [
-        "TRIGGER(observability_not_behavior)"
+        "REWRITE_PROPOSED(S)"
       ],
-      "query": "INVALID_COLLAPSE(observability_not_behavior)",
+      "query": "COMPARE_INCREMENTAL_MIGRATION_REFACTOR_AND_REWRITE(S)",
+      "expected": "YES",
+      "rule": "software.rewrite_decision"
+    },
+    {
+      "id": "modules",
+      "premises": [
+        "MORE_MODULES(A,B)"
+      ],
+      "query": "BETTER_ARCHITECTURE(A,B)",
+      "expected": "UNKNOWN",
+      "guard": "guard.more_modular_not_always_better"
+    },
+    {
+      "id": "dependency-authority",
+      "premises": [
+        "A DEPENDS_ON B"
+      ],
+      "query": "B CONTROLS_OR_OWNS A",
       "expected": "NO",
-      "guard": "guard.observability_not_behavior"
+      "guard": "guard.dependency_not_ownership"
+    },
+    {
+      "id": "performance",
+      "premises": [
+        "FASTER(A,B)"
+      ],
+      "query": "MORE_CAPABLE(A,B)",
+      "expected": "UNKNOWN",
+      "guard": "guard.performance_not_capability"
+    },
+    {
+      "id": "resource",
+      "premises": [
+        "CANDIDATE_CHANGE(C)",
+        "RESOURCE_BUDGET(two_gb)"
+      ],
+      "query": "MEASURE_CHANGE_AGAINST_RESOURCE_BUDGET(C,two_gb)",
+      "expected": "YES",
+      "rule": "software.resource_budget"
+    },
+    {
+      "id": "headroom",
+      "premises": [
+        "RESOURCE_BUDGET_HAS_HEADROOM(B)"
+      ],
+      "query": "AUTHORIZED_TO_CONSUM_ALL_HEADROOM",
+      "expected": "NO",
+      "guard": "guard.resource_headroom_not_permission"
     }
   ]
 }
