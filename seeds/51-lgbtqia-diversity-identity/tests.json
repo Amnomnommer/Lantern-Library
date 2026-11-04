@@ -1,0 +1,224 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.lgbtqia_diversity_identity",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "orientation-gender",
+      "premises": [
+        "SEXUAL_ORIENTATION(P,O)"
+      ],
+      "query": "GENDER_IDENTITY_DETERMINED(P)",
+      "expected": "NO",
+      "guard": "guard.orientation_not_gender"
+    },
+    {
+      "id": "expression",
+      "premises": [
+        "GENDER_EXPRESSION(P,E)"
+      ],
+      "query": "GENDER_IDENTITY_DETERMINED(P)",
+      "expected": "NO",
+      "guard": "guard.expression_not_identity"
+    },
+    {
+      "id": "pronouns",
+      "premises": [
+        "P USES_PRONOUNS Pr"
+      ],
+      "query": "EXACT_GENDER_IDENTITY_DETERMINED(P)",
+      "expected": "NO",
+      "guard": "guard.pronouns_not_unique_gender"
+    },
+    {
+      "id": "trans-dysphoria",
+      "premises": [
+        "P TRANSGENDER"
+      ],
+      "query": "P MUST_HAVE_GENDER_DYSPHORIA",
+      "expected": "NO",
+      "guard": "guard.trans_not_dysphoria_required"
+    },
+    {
+      "id": "trans-medical",
+      "premises": [
+        "P TRANSGENDER"
+      ],
+      "query": "P MUST_MEDICALLY_TRANSITION",
+      "expected": "NO",
+      "guard": "guard.trans_not_medical_required"
+    },
+    {
+      "id": "trans-woman",
+      "premises": [
+        "P TRANS_WOMAN"
+      ],
+      "query": "P NOT_A_WOMAN_BECAUSE_TRANS",
+      "expected": "NO",
+      "guard": "guard.trans_woman_is_woman"
+    },
+    {
+      "id": "nonbinary",
+      "premises": [
+        "P NONBINARY"
+      ],
+      "query": "P HAS_ONE_STANDARD_NONBINARY_GENDER_EXPERIENCE",
+      "expected": "NO",
+      "guard": "guard.nonbinary_not_third_uniform_gender"
+    },
+    {
+      "id": "intersex",
+      "premises": [
+        "P INTERSEX"
+      ],
+      "query": "P TRANSGENDER",
+      "expected": "UNKNOWN",
+      "guard": "guard.intersex_not_trans"
+    },
+    {
+      "id": "bi",
+      "premises": [
+        "P BISEXUAL"
+      ],
+      "query": "P ATTRACTED_ONLY_TO_EXACTLY_TWO_BINARY_GENDERS",
+      "expected": "NO",
+      "guard": "guard.bisexual_not_binary_only"
+    },
+    {
+      "id": "bi-equal",
+      "premises": [
+        "P BISEXUAL"
+      ],
+      "query": "P ATTRACTED_EQUALLY_TO_ALL_RELEVANT_GENDERS",
+      "expected": "NO",
+      "guard": "guard.bi_not_equal"
+    },
+    {
+      "id": "bi-behavior",
+      "premises": [
+        "P BISEXUAL"
+      ],
+      "query": "P PROMISCUOUS_OR_NONMONOGAMOUS",
+      "expected": "NO",
+      "guard": "guard.bi_not_promiscuous"
+    },
+    {
+      "id": "queer",
+      "premises": [
+        "P LGBTQIA"
+      ],
+      "query": "MUST_CALL_P_QUEER",
+      "expected": "NO",
+      "guard": "guard.queer_not_forced"
+    },
+    {
+      "id": "two-spirit",
+      "premises": [
+        "P NONINDIGENOUS_OR_CONTEXT_UNKNOWN"
+      ],
+      "query": "LABEL_P_TWO_SPIRIT_AS_GENERIC_NONBINARY_TERM",
+      "expected": "NO",
+      "guard": "guard.two_spirit_not_generic"
+    },
+    {
+      "id": "assignment",
+      "premises": [
+        "SEX_ASSIGNED_AT_BIRTH(P,S)"
+      ],
+      "query": "CURRENT_GENDER_IDENTITY(P)=S",
+      "expected": "UNKNOWN",
+      "guard": "guard.assignment_not_identity"
+    },
+    {
+      "id": "closet",
+      "premises": [
+        "P NOT_OUT_IN_CONTEXT C"
+      ],
+      "query": "P DECEPTIVE_OR_DISHONEST",
+      "expected": "NO",
+      "guard": "guard.closeted_not_dishonest"
+    },
+    {
+      "id": "coming-out",
+      "premises": [
+        "P LGBTQIA"
+      ],
+      "query": "P OWES_DISCLOSURE_TO_OTHERS",
+      "expected": "NO",
+      "guard": "guard.coming_out_not_owed"
+    },
+    {
+      "id": "pathology",
+      "premises": [
+        "P LGBTQIA_IDENTITY L"
+      ],
+      "query": "PATHOLOGY(P) SOLELY_BECAUSE L",
+      "expected": "NO",
+      "guard": "guard.identity_not_pathology"
+    },
+    {
+      "id": "default",
+      "premises": [
+        "IDENTITY_OR_ORIENTATION_UNKNOWN(P)"
+      ],
+      "query": "P CISGENDER_AND_HETEROSEXUAL",
+      "expected": "UNKNOWN",
+      "guard": "guard.cishet_not_default"
+    },
+    {
+      "id": "update",
+      "premises": [
+        "P UPDATES_IDENTITY_OR_LABEL_FROM Old TO New"
+      ],
+      "query": "USE_CURRENT_LABEL_AND_PRESERVE_HISTORY_PRIVATELY_WITH_APPROPRIATE_SCOPE(P,Old,New)",
+      "expected": "YES",
+      "rule": "lgbtq.update"
+    },
+    {
+      "id": "outing",
+      "premises": [
+        "LGBTQIA_IDENTITY_INFORMATION(D,P)",
+        "DISCLOSURE_TO_THIRD_PARTY_PROPOSED"
+      ],
+      "query": "CHECK_PERMISSION_SAFETY_PURPOSE_AND_MINIMIZATION_BEFORE_DISCLOSURE(P,D)",
+      "expected": "YES",
+      "rule": "lgbtq.outing"
+    },
+    {
+      "id": "partner",
+      "premises": [
+        "P CURRENTLY_PARTNERED_WITH GENDER G"
+      ],
+      "query": "EXACT_ORIENTATION_DETERMINED(P)",
+      "expected": "NO",
+      "guard": "guard.relationship_not_orientation"
+    },
+    {
+      "id": "ace-aro",
+      "premises": [
+        "P ASEXUAL"
+      ],
+      "query": "P AROMANTIC",
+      "expected": "UNKNOWN",
+      "guard": "guard.ace_aro_not_same"
+    },
+    {
+      "id": "questioning",
+      "premises": [
+        "P QUESTIONING"
+      ],
+      "query": "P HAS_NO_VALID_SELF_KNOWLEDGE_OR_IS_MERELY_CONFUSED",
+      "expected": "NO",
+      "guard": "guard.questioning_not_invalid"
+    },
+    {
+      "id": "self-id",
+      "premises": [
+        "P SELF_IDENTIFIES_AS L"
+      ],
+      "query": "USE_CURRENT_SELF_IDENTIFICATION_WITH_CONTEXT_AND_PROVENANCE(P,L)",
+      "expected": "YES",
+      "rule": "lgbtq.self_id"
+    }
+  ]
+}
