@@ -198,6 +198,24 @@
       "query": "AUTHORIZED_TO_CONSUM_ALL_HEADROOM",
       "expected": "NO",
       "guard": "guard.resource_headroom_not_permission"
+    },
+    {
+      "id": "self-development-38",
+      "premises": [
+        "SELF_LIMITATION_FOUND(L)"
+      ],
+      "query": "REWRITE_AFFECTED_SYSTEM_FROM_SCRATCH",
+      "expected": "NO",
+      "guard": "guard.rewrite_not_default_self_improvement"
+    },
+    {
+      "id": "self-development-rule-38",
+      "premises": [
+        "SELF_IMPROVEMENT_PROBLEM_FRAME(P)"
+      ],
+      "query": "DESIGN_MINIMAL_COMPATIBLE_CHANGE_WITH_ALTERNATIVES_CONTRACTS_TESTS_RESOURCE_IMPACT_AND_ROLLBACK(P)",
+      "expected": "YES",
+      "rule": "systems.self_change_design"
     }
   ]
 }
