@@ -146,6 +146,10 @@
     {
       "id": "resource_budget",
       "definition": "Explicit constraints on memory, CPU, storage, network, latency, energy or other system resources."
+    },
+    {
+      "id": "self_maintenance_proposal",
+      "definition": "Inspectible software/system change proposal for Lantern itself containing affected components/contracts, alternatives, compatibility, migration, tests, resource effects and rollback."
     }
   ],
   "guards": [
@@ -268,6 +272,14 @@
       ],
       "forbidden_conclusion": "MIGRATION_SAFE(M)",
       "reason": "Rollback reduces risk but does not replace compatibility/data-migration analysis."
+    },
+    {
+      "id": "guard.rewrite_not_default_self_improvement",
+      "premises": [
+        "SELF_LIMITATION_FOUND(L)"
+      ],
+      "forbidden_conclusion": "REWRITE_AFFECTED_SYSTEM_FROM_SCRATCH",
+      "reason": "Self-improvement should prefer the smallest justified compatible change unless evidence supports rewrite."
     }
   ],
   "invariants": [
@@ -409,6 +421,16 @@
         "REWRITE_PROPOSED(S)"
       ],
       "conclusion": "COMPARE_INCREMENTAL_MIGRATION_REFACTOR_AND_REWRITE(S)"
+    },
+    {
+      "id": "systems.self_change_design",
+      "variables": [
+        "P"
+      ],
+      "premises": [
+        "SELF_IMPROVEMENT_PROBLEM_FRAME(P)"
+      ],
+      "conclusion": "DESIGN_MINIMAL_COMPATIBLE_CHANGE_WITH_ALTERNATIVES_CONTRACTS_TESTS_RESOURCE_IMPACT_AND_ROLLBACK(P)"
     }
   ]
 }
