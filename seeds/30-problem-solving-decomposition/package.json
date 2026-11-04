@@ -118,6 +118,10 @@
     {
       "id": "problem_reframing",
       "definition": "Revising the representation of the problem when evidence shows the original framing is incomplete, misleading or unnecessarily difficult."
+    },
+    {
+      "id": "self_improvement_problem_frame",
+      "definition": "Problem frame for a prompted Lantern self-development request, separating observed limitation, requested scope, evidence, unknowns, assumptions and success criteria before proposing a change."
     }
   ],
   "rules": [
@@ -214,6 +218,18 @@
         "NO_HIGH_VALUE_UNRESOLVED_RISK(P)"
       ],
       "conclusion": "STOP_AS_ADEQUATE(P)"
+    },
+    {
+      "id": "problem.self_improvement_frame",
+      "variables": [
+        "R",
+        "E"
+      ],
+      "premises": [
+        "AUTHORIZED_SELF_DEVELOPMENT_REQUEST(R)",
+        "OBSERVED_SELF_LIMITATION_OR_OPPORTUNITY(E)"
+      ],
+      "conclusion": "BUILD_SELF_IMPROVEMENT_PROBLEM_FRAME_WITH_SCOPE_EVIDENCE_UNKNOWNS_AND_SUCCESS_CRITERIA(R,E)"
     }
   ],
   "guards": [
@@ -313,6 +329,14 @@
       ],
       "forbidden_conclusion": "REPLACE_OWNER_GOAL_WITH_DIFFERENT_GOAL(P2)",
       "reason": "Reframing may alter representation/means but must preserve authorized intent unless goal change is explicitly approved."
+    },
+    {
+      "id": "guard.improvement_prompt_not_solution",
+      "premises": [
+        "OWNER_REQUESTS_LANTERN_IMPROVE X"
+      ],
+      "forbidden_conclusion": "REQUEST_ITSELF_PROVES_SPECIFIC_CHANGE Y_IS_CORRECT",
+      "reason": "A mandate to investigate improvement does not predetermine the correct implementation."
     }
   ],
   "invariants": [
