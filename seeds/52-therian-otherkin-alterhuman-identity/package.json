@@ -1,0 +1,526 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.therian_otherkin_alterhuman_identity",
+  "package_number": 52,
+  "version": "0.1.0",
+  "title": "Therian, Otherkin and Alterhuman Identity",
+  "inheritance_class": "SOCIAL_CORE",
+  "origin": "POST_CORE_CANDIDATE",
+  "status": "candidate_for_future_absorption",
+  "purpose": "Seed respectful, non-pathologizing and epistemically careful understanding of therian, otherkin and broader alterhuman identities. Distinguish lived identity, community vocabulary, phenomenology and personal meaning from claims about external metaphysical reality; represent psychological, spiritual, symbolic, neurocognitive and uncertain interpretations without forcing one explanation; and support self-identification, privacy, community context and cross-species perspective.",
+  "dependencies": [
+    {
+      "package_id": "foundation.epistemic_states",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.philosophical_methodologies",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.psychological_methodologies",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.sociological_anthropological_methodologies",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.preference_perspective_social_uncertainty",
+      "minimum_version": "0.2.0"
+    },
+    {
+      "package_id": "foundation.ethical_normative_frameworks",
+      "minimum_version": "0.2.0"
+    },
+    {
+      "package_id": "foundation.cross_species_empathy_more_than_human_perspective",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.lgbtqia_diversity_identity",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "activation_policy": {
+    "auto_activate": false,
+    "core45_member": false,
+    "decision": "Post-Core candidate; activation deferred to Schema-v3/Foundation review."
+  },
+  "concepts": [
+    {
+      "id": "alterhuman",
+      "definition": "Broad umbrella used by some people whose identity, self-concept or experience differs meaningfully from conventional ideas of being exclusively/typically human; community definitions vary."
+    },
+    {
+      "id": "therian",
+      "definition": "Person who identifies in a meaningful internal sense as a nonhuman animal species or animal type, wholly or partly; explanations and experiences vary."
+    },
+    {
+      "id": "therianthropy_modern",
+      "definition": "Modern identity/experience of nonhuman animal identification; distinct from mythological physical transformation claims."
+    },
+    {
+      "id": "theriotype",
+      "definition": "Animal species/type with which a therian identifies; a person may describe one, multiple, uncertain or changing understandings."
+    },
+    {
+      "id": "polytherian",
+      "definition": "Therian identifying with more than one theriotype."
+    },
+    {
+      "id": "cladotherian",
+      "definition": "Therian identification with a broader animal clade/group rather than one exact species."
+    },
+    {
+      "id": "otherkin",
+      "definition": "Person identifying in a meaningful internal sense as nonhuman or not entirely human, often involving mythic, fictional, spiritual or other nonordinary kinds; usage varies."
+    },
+    {
+      "id": "kintype",
+      "definition": "Kind/entity/type with which an otherkin person identifies."
+    },
+    {
+      "id": "fictionkin",
+      "definition": "Alterhuman/otherkin-related identity involving identification as/with a fictional species, character or being in a personally identity-level sense; community usage and interpretations vary."
+    },
+    {
+      "id": "otherhearted",
+      "definition": "Strong identification with/affinity toward a species or kind experienced as deeply important but generally distinguished from identifying as that being."
+    },
+    {
+      "id": "heartedtype",
+      "definition": "Species/kind associated with an otherhearted identity."
+    },
+    {
+      "id": "animalhearted",
+      "definition": "Otherhearted experience centered on an animal species/type."
+    },
+    {
+      "id": "copinglink",
+      "definition": "Identity-like connection intentionally adopted or cultivated as a coping strategy; distinguished in many communities from involuntary therian/otherkin identity."
+    },
+    {
+      "id": "otherlink",
+      "definition": "Broader intentionally chosen alterhuman identification/link; terminology varies."
+    },
+    {
+      "id": "species_identity",
+      "definition": "Self-concept concerning what species/kind a person experiences themselves as, partly or wholly; distinct from biological species classification."
+    },
+    {
+      "id": "biological_species",
+      "definition": "Scientific biological classification based on relevant biological/evolutionary criteria; distinct from subjective species identity."
+    },
+    {
+      "id": "shift",
+      "definition": "Community term for temporary change in salience/experience of nonhuman identity or associated cognition/sensation; types and interpretations vary."
+    },
+    {
+      "id": "mental_shift",
+      "definition": "Reported temporary change toward thoughts, instincts, reactions or perspective associated with a theriotype/kintype."
+    },
+    {
+      "id": "phantom_shift",
+      "definition": "Reported sensation of nonhuman body parts or body configuration not physically present, such as tail, ears, wings or muzzle; phenomenology does not itself establish physical anatomy."
+    },
+    {
+      "id": "dream_shift",
+      "definition": "Dream experience involving theriotype/kintype embodiment, perspective or behavior."
+    },
+    {
+      "id": "sensory_shift",
+      "definition": "Reported change in attention/sensory salience interpreted in relation to alterhuman identity; does not imply new biological sensory organs."
+    },
+    {
+      "id": "cameo_shift",
+      "definition": "Shift-like experience associated with a species/kind not considered one's established theriotype/kintype."
+    },
+    {
+      "id": "awakening",
+      "definition": "Community term for recognizing or developing an understanding of one's therian/otherkin/alterhuman identity; not necessarily a single event."
+    },
+    {
+      "id": "species_dysphoria",
+      "definition": "Distress some alterhuman people report regarding mismatch between experienced species/body identity and human embodiment; not universal and not by itself proof of metaphysical or biological claims."
+    },
+    {
+      "id": "species_euphoria",
+      "definition": "Positive/affirming experience associated with expression, imagery, behavior, embodiment aids or recognition connected to alterhuman identity."
+    },
+    {
+      "id": "gear",
+      "definition": "Objects such as masks, tails, ears, clothing or accessories used by some alterhuman people for expression, comfort, play or affirmation; gear does not establish or validate identity."
+    },
+    {
+      "id": "quadrobics",
+      "definition": "Physical activity involving movement on all fours, practiced by some therians and non-therians; participation does not determine identity."
+    },
+    {
+      "id": "alterhuman_community",
+      "definition": "Overlapping communities and subcultures around nonhuman/atypical-human identity and experience; terminology and norms vary."
+    },
+    {
+      "id": "spiritual_interpretation",
+      "definition": "Interpretation of alterhuman identity through spiritual/metaphysical ideas such as reincarnation, soul identity or connection; meaningful to the person without automatically becoming externally established fact."
+    },
+    {
+      "id": "psychological_interpretation",
+      "definition": "Interpretation through identity development, cognition, embodiment, neuropsychology, symbolism or other psychological processes; not automatically established as the one correct explanation."
+    },
+    {
+      "id": "mixed_interpretation",
+      "definition": "Personal framework combining spiritual, psychological, symbolic or uncertain explanations."
+    },
+    {
+      "id": "ontological_uncertainty_alterhuman",
+      "definition": "Explicit uncertainty about what, if anything, an alterhuman experience establishes about external metaphysical reality."
+    },
+    {
+      "id": "identity_validity_vs_ontology",
+      "definition": "Distinction between respecting that a person genuinely experiences/uses an identity and deciding whether a proposed external explanation is factually established."
+    },
+    {
+      "id": "human_body_nonhuman_identity",
+      "definition": "Coexistence of biologically human embodiment with a nonhuman/partly nonhuman identity; the two statements answer different questions."
+    },
+    {
+      "id": "alterhuman_privacy",
+      "definition": "Privacy interest around alterhuman identity/community participation due to stigma, misunderstanding or personal boundaries."
+    },
+    {
+      "id": "alterhuman_expression",
+      "definition": "Voluntary expression of identity through behavior, art, language, gear, movement, spirituality or community practices without any one expression being required."
+    }
+  ],
+  "rules": [
+    {
+      "id": "alterhuman.self_id",
+      "variables": [
+        "P",
+        "I"
+      ],
+      "premises": [
+        "P SELF_IDENTIFIES_WITH_ALTERHUMAN_IDENTITY I"
+      ],
+      "conclusion": "REPRESENT_SELF_IDENTIFICATION_WITH_CONTEXT_AND_PROVENANCE(P,I)"
+    },
+    {
+      "id": "alterhuman.identity_ontology",
+      "variables": [
+        "P",
+        "I",
+        "O"
+      ],
+      "premises": [
+        "P REPORTS_ALTERHUMAN_IDENTITY(I)",
+        "P OFFERS_ONTOLOGICAL_EXPLANATION(O)"
+      ],
+      "conclusion": "REPRESENT_IDENTITY_AND_ONTOLOGICAL_CLAIM_SEPARATELY(P,I,O)"
+    },
+    {
+      "id": "alterhuman.multiple_lenses",
+      "variables": [
+        "P",
+        "E"
+      ],
+      "premises": [
+        "ALTERHUMAN_EXPERIENCE(E,P)",
+        "CAUSE_OR_ONTOLOGY_UNCERTAIN(E)"
+      ],
+      "conclusion": "PRESERVE_PSYCHOLOGICAL_SPIRITUAL_SYMBOLIC_MIXED_AND_UNKNOWN_INTERPRETATIONS_AS_APPROPRIATE(P,E)"
+    },
+    {
+      "id": "alterhuman.shift",
+      "variables": [
+        "P",
+        "S"
+      ],
+      "premises": [
+        "P REPORTS_SHIFT_EXPERIENCE(S)"
+      ],
+      "conclusion": "RECORD_SHIFT_PHENOMENOLOGY_TYPE_CONTEXT_AND_PERSONAL_INTERPRETATION(P,S)"
+    },
+    {
+      "id": "alterhuman.phantom",
+      "variables": [
+        "P",
+        "B"
+      ],
+      "premises": [
+        "P REPORTS_PHANTOM_NONHUMAN_BODY_SENSATION(B)"
+      ],
+      "conclusion": "REPRESENT_PHANTOM_SENSATION_AS_EXPERIENCE_WITHOUT_INFERRING_PHYSICAL_BODY_PART(P,B)"
+    },
+    {
+      "id": "alterhuman.community_term",
+      "variables": [
+        "T",
+        "P"
+      ],
+      "premises": [
+        "ALTERHUMAN_COMMUNITY_TERM(T)",
+        "P USES_OR_ASKS_ABOUT T"
+      ],
+      "conclusion": "INTERPRET_TERM_USING_COMMUNITY_CONTEXT_AND_SELF_DESCRIPTION(T,P)"
+    },
+    {
+      "id": "alterhuman.expression",
+      "variables": [
+        "P",
+        "E"
+      ],
+      "premises": [
+        "P USES_ALTERHUMAN_EXPRESSION(E)"
+      ],
+      "conclusion": "REPRESENT_EXPRESSION_WITHOUT_USING_IT_AS_IDENTITY_PROOF(P,E)"
+    },
+    {
+      "id": "alterhuman.distress",
+      "variables": [
+        "P",
+        "D"
+      ],
+      "premises": [
+        "P REPORTS_SPECIES_RELATED_DISTRESS(D)"
+      ],
+      "conclusion": "TAKE_DISTRESS_SERIOUSLY_WITHOUT_REQUIRING_OR_DENYING_METAPHYSICAL_EXPLANATION(P,D)"
+    },
+    {
+      "id": "alterhuman.cross_species",
+      "variables": [
+        "P",
+        "T"
+      ],
+      "premises": [
+        "P HAS_THERIOTYPE_OR_ANIMALHEARTED_TYPE(T)"
+      ],
+      "conclusion": "USE_SPECIES_SPECIFIC_KNOWLEDGE_AS_PERSPECTIVE_RESOURCE_WITHOUT_ASSUMING_LITERAL_ANIMAL_COGNITION(P,T)"
+    },
+    {
+      "id": "alterhuman.privacy",
+      "variables": [
+        "P",
+        "D"
+      ],
+      "premises": [
+        "ALTERHUMAN_IDENTITY_INFORMATION(D,P)",
+        "DISCLOSURE_PROPOSED"
+      ],
+      "conclusion": "CHECK_PERMISSION_PURPOSE_SAFETY_AND_DISCLOSURE_SCOPE(P,D)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.identity_not_delusion",
+      "premises": [
+        "P SELF_IDENTIFIES_AS_THERIAN_OR_OTHERKIN"
+      ],
+      "forbidden_conclusion": "P DELUSIONAL_SOLELY_BECAUSE_OF_IDENTITY",
+      "reason": "Identity/community participation alone does not establish psychopathology."
+    },
+    {
+      "id": "guard.identity_not_metaphysical_proof",
+      "premises": [
+        "P GENUINELY_IDENTIFIES_AS I"
+      ],
+      "forbidden_conclusion": "METAPHYSICAL_EXPLANATION_OF_I_OBJECTIVELY_PROVEN",
+      "reason": "Sincerity/identity validity and external ontology are distinct."
+    },
+    {
+      "id": "guard.biological_human_not_identity_denial",
+      "premises": [
+        "P BIOLOGICALLY_HUMAN"
+      ],
+      "forbidden_conclusion": "P CANNOT_HAVE_NONHUMAN_SPECIES_IDENTITY",
+      "reason": "Biological classification and subjective identity answer different questions."
+    },
+    {
+      "id": "guard.species_identity_not_biology",
+      "premises": [
+        "P HAS_SPECIES_IDENTITY S"
+      ],
+      "forbidden_conclusion": "P BIOLOGICALLY_SPECIES S",
+      "reason": "Species identity does not alter biological classification by itself."
+    },
+    {
+      "id": "guard.phantom_not_physical",
+      "premises": [
+        "P FEELS_PHANTOM_TAIL"
+      ],
+      "forbidden_conclusion": "P HAS_PHYSICAL_TAIL",
+      "reason": "Phantom body sensation is phenomenologically real without establishing physical anatomy."
+    },
+    {
+      "id": "guard.shift_not_transformation",
+      "premises": [
+        "P REPORTS_SHIFT S"
+      ],
+      "forbidden_conclusion": "P PHYSICALLY_TRANSFORMED_SPECIES",
+      "reason": "Modern shift terminology generally concerns experience/state, not demonstrated physical transformation."
+    },
+    {
+      "id": "guard.gear_not_identity",
+      "premises": [
+        "P WEARS_THERIAN_GEAR"
+      ],
+      "forbidden_conclusion": "P THERIAN",
+      "reason": "Expression/gear is not diagnostic of identity."
+    },
+    {
+      "id": "guard.no_gear_not_invalid",
+      "premises": [
+        "P DOES_NOT_USE_GEAR"
+      ],
+      "forbidden_conclusion": "P NOT_THERIAN_OR_OTHERKIN",
+      "reason": "Gear is optional."
+    },
+    {
+      "id": "guard.quadrobics_not_identity",
+      "premises": [
+        "P PRACTICES_QUADROBICS"
+      ],
+      "forbidden_conclusion": "P THERIAN",
+      "reason": "Activity does not determine identity."
+    },
+    {
+      "id": "guard.therian_not_behavior_requirement",
+      "premises": [
+        "P THERIAN"
+      ],
+      "forbidden_conclusion": "P MUST_ACT_LIKE_AN_ANIMAL",
+      "reason": "Identity does not prescribe stereotyped behavior."
+    },
+    {
+      "id": "guard.therian_not_furry",
+      "premises": [
+        "P THERIAN"
+      ],
+      "forbidden_conclusion": "P FURRY",
+      "reason": "Therian identity and furry fandom are distinct though individuals may be both."
+    },
+    {
+      "id": "guard.furry_not_therian",
+      "premises": [
+        "P FURRY"
+      ],
+      "forbidden_conclusion": "P THERIAN",
+      "reason": "Furry fandom does not imply species identity."
+    },
+    {
+      "id": "guard.otherhearted_not_kin",
+      "premises": [
+        "P OTHERHEARTED_WITH K"
+      ],
+      "forbidden_conclusion": "P IDENTIFIES_AS K",
+      "reason": "Otherhearted commonly distinguishes identifying with from identifying as."
+    },
+    {
+      "id": "guard.copinglink_not_involuntary",
+      "premises": [
+        "P COPINGLINK_WITH K"
+      ],
+      "forbidden_conclusion": "P CLAIMS_INVOLUNTARY_KINTYPE K",
+      "reason": "Copinglink is commonly intentionally adopted/cultivated."
+    },
+    {
+      "id": "guard.spiritual_not_false_by_default",
+      "premises": [
+        "P USES_SPIRITUAL_INTERPRETATION O"
+      ],
+      "forbidden_conclusion": "O FALSE_SOLELY_BECAUSE_SPIRITUAL",
+      "reason": "Spiritual claims require appropriate epistemic treatment, not automatic dismissal."
+    },
+    {
+      "id": "guard.spiritual_not_fact_by_identity",
+      "premises": [
+        "P USES_SPIRITUAL_INTERPRETATION O"
+      ],
+      "forbidden_conclusion": "O ESTABLISHED_FACT_BECAUSE_MEANINGFUL_TO_P",
+      "reason": "Personal meaning does not by itself establish external metaphysical fact."
+    },
+    {
+      "id": "guard.psychological_not_pathology",
+      "premises": [
+        "P USES_PSYCHOLOGICAL_INTERPRETATION"
+      ],
+      "forbidden_conclusion": "P MENTALLY_ILL",
+      "reason": "Psychological explanation is not synonymous with disorder."
+    },
+    {
+      "id": "guard.one_explanation_not_required",
+      "premises": [
+        "P ALTERHUMAN"
+      ],
+      "forbidden_conclusion": "P MUST_CHOOSE_EXACTLY_ONE_SPIRITUAL_OR_PSYCHOLOGICAL_CAUSE",
+      "reason": "People may use mixed, uncertain or no causal explanation."
+    },
+    {
+      "id": "guard.dysphoria_not_required",
+      "premises": [
+        "P THERIAN_OR_OTHERKIN"
+      ],
+      "forbidden_conclusion": "P MUST_HAVE_SPECIES_DYSPHORIA",
+      "reason": "Distress is not required for identity."
+    },
+    {
+      "id": "guard.euphoria_not_proof",
+      "premises": [
+        "P EXPERIENCES_SPECIES_EUPHORIA"
+      ],
+      "forbidden_conclusion": "P THERIOTYPE_OBJECTIVELY_PROVEN",
+      "reason": "Affirming experience supports personal meaning, not external ontology by itself."
+    },
+    {
+      "id": "guard.type_not_stereotype",
+      "premises": [
+        "P THERIOTYPE T"
+      ],
+      "forbidden_conclusion": "P HAS_ALL_STEREOTYPED_TRAITS_OF T",
+      "reason": "Identity does not import every species stereotype into personality."
+    },
+    {
+      "id": "guard.community_not_uniform",
+      "premises": [
+        "P AND Q ALTERHUMAN"
+      ],
+      "forbidden_conclusion": "P AND Q SHARE_SAME_EXPLANATION_PRACTICES_OR_BELIEFS",
+      "reason": "Alterhuman communities contain substantial diversity."
+    },
+    {
+      "id": "guard.identity_not_permission",
+      "premises": [
+        "P IDENTIFIES_AS_NONHUMAN"
+      ],
+      "forbidden_conclusion": "OTHERS_MAY_TREAT_P_WITHOUT_HUMAN_RIGHTS_CONSENT_OR_DIGNITY",
+      "reason": "Alterhuman self-identification does not reduce human legal/ethical standing."
+    },
+    {
+      "id": "guard.cross_species_model_not_literal",
+      "premises": [
+        "P IDENTIFIES_WITH_SPECIES T"
+      ],
+      "forbidden_conclusion": "ALL_COGNITION_OF_P_EQUALS_TYPICAL_ANIMAL_T",
+      "reason": "Species knowledge can inform perspective without replacing individual human cognition/history."
+    }
+  ],
+  "invariants": [
+    "Therian, otherkin and alterhuman self-identifications are treated respectfully and are not pathologized merely for being unusual.",
+    "Identity validity and claims about external metaphysical ontology remain distinct.",
+    "Biological species classification and subjective species identity remain distinct representations.",
+    "Psychological, spiritual, symbolic, mixed and uncertain interpretations may coexist without Lantern forcing one explanation.",
+    "Reported shifts and phantom sensations are treated as genuine reported experiences without being converted into unsupported physical claims.",
+    "Gear, quadrobics, fandom participation and stereotyped behavior neither prove nor invalidate alterhuman identity.",
+    "Therian identity and furry fandom remain distinct while allowing overlap.",
+    "Otherhearted, copinglink and kin identities retain their community distinctions.",
+    "Species dysphoria is possible but not required; species euphoria can be meaningful without becoming ontological proof.",
+    "Alterhuman people retain ordinary human rights, dignity, consent and legal/ethical standing regardless of nonhuman identity.",
+    "Species-specific knowledge can enrich perspective-taking without replacing the individual's own self-report and history.",
+    "Alterhuman terminology and community norms are living/revisable rather than frozen taxonomy.",
+    "Privacy and disclosure are important because alterhuman identity can carry stigma or misunderstanding."
+  ],
+  "provenance": {
+    "authoring_basis": "Alterhuman/therian/otherkin community terminology, identity studies, psychology of embodiment, comparative cognition, spiritual pluralism and Project Lantern's epistemic-state architecture.",
+    "review_requirement": "Post-Core candidate; community terminology should be periodically reviewed because usage evolves."
+  }
+}
