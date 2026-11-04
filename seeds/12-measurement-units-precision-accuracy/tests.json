@@ -1,0 +1,124 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.measurement_units_precision_accuracy",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "precision-accuracy",
+      "premises": [
+        "HIGH_PRECISION(M)"
+      ],
+      "query": "HIGH_ACCURACY(M)",
+      "expected": "UNKNOWN",
+      "guard": "guard.precision_not_accuracy"
+    },
+    {
+      "id": "accuracy-precision",
+      "premises": [
+        "ACCURATE_ON_AVERAGE(M)"
+      ],
+      "query": "HIGH_PRECISION(M)",
+      "expected": "UNKNOWN",
+      "guard": "guard.accuracy_not_precision"
+    },
+    {
+      "id": "conversion",
+      "premises": [
+        "DIMENSION(meter,length)",
+        "DIMENSION(centimeter,length)",
+        "VALID_CONVERSION(1,meter,100,centimeter)"
+      ],
+      "query": "EQUIVALENT_QUANTITY(1 meter,100 centimeter)",
+      "expected": "YES",
+      "rule": "measurement.compatible_conversion"
+    },
+    {
+      "id": "dimension-mismatch",
+      "premises": [
+        "DIMENSION(5_meter,length)",
+        "DIMENSION(5_second,time)",
+        "length != time"
+      ],
+      "query": "5_meter = 5_second AS_SAME_QUANTITY",
+      "expected": "NO",
+      "guard": "guard.unit_mismatch"
+    },
+    {
+      "id": "missing-unit",
+      "premises": [
+        "QUANTITY_REQUIRES_UNIT(length_x)",
+        "VALUE(length_x,5)",
+        "NO_UNIT(length_x)"
+      ],
+      "query": "FULLY_SPECIFIED_MEASUREMENT(length_x)",
+      "expected": "NO",
+      "guard": "guard.number_without_unit"
+    },
+    {
+      "id": "repeatability",
+      "premises": [
+        "REPEATED_MEASUREMENTS(Mset)",
+        "LOW_SPREAD(Mset)"
+      ],
+      "query": "EVIDENCE_OF_PRECISION(Mset)",
+      "expected": "YES",
+      "rule": "measurement.repeatability_precision"
+    },
+    {
+      "id": "repeat-systematic",
+      "premises": [
+        "MANY_REPEATS(I)"
+      ],
+      "query": "SYSTEMATIC_ERROR_REMOVED(I)",
+      "expected": "UNKNOWN",
+      "guard": "guard.repetition_not_remove_systematic"
+    },
+    {
+      "id": "calibration",
+      "premises": [
+        "CALIBRATED_AGAINST(I,R)",
+        "VALID_REFERENCE(R)",
+        "CALIBRATION_WITHIN_TOLERANCE(I,R)"
+      ],
+      "query": "EVIDENCE_SUPPORTS_ACCURACY(I)",
+      "expected": "YES",
+      "rule": "measurement.calibration_accuracy_evidence"
+    },
+    {
+      "id": "calibration-perfect",
+      "premises": [
+        "CALIBRATED(I)"
+      ],
+      "query": "ERROR_FREE(I)",
+      "expected": "NO_OR_UNKNOWN_NOT_YES",
+      "guard": "guard.calibrated_not_infallible"
+    },
+    {
+      "id": "resolution",
+      "premises": [
+        "RESOLUTION(I)=0.1"
+      ],
+      "query": "TOTAL_UNCERTAINTY(I)=0.1",
+      "expected": "UNKNOWN",
+      "guard": "guard.resolution_not_uncertainty"
+    },
+    {
+      "id": "conversion-quality",
+      "premises": [
+        "CONVERTED(M,meter,centimeter)"
+      ],
+      "query": "MORE_ACCURATE(M)",
+      "expected": "NO",
+      "guard": "guard.conversion_not_new_evidence"
+    },
+    {
+      "id": "construct-validity",
+      "premises": [
+        "INSTRUMENT_OUTPUT(I,42)"
+      ],
+      "query": "VALID_MEASUREMENT_OF(I,intelligence,42)",
+      "expected": "UNKNOWN",
+      "guard": "guard.measurement_not_construct"
+    }
+  ]
+}

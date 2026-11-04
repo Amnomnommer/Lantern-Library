@@ -1,0 +1,128 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.observational_reasoning",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "cross-sectional",
+      "premises": [
+        "CROSS_SECTIONAL_ASSOCIATION(X,Y)"
+      ],
+      "query": "X PRECEDES Y",
+      "expected": "UNKNOWN",
+      "guard": "guard.cross_sectional_temporality"
+    },
+    {
+      "id": "cohort-time",
+      "premises": [
+        "COHORT(S)",
+        "EXPOSURE_MEASURED_BEFORE_OUTCOME(S,X,Y)"
+      ],
+      "query": "SUPPORTS_TEMPORAL_ORDER(S,X,Y)",
+      "expected": "YES",
+      "rule": "observational.cohort_temporality"
+    },
+    {
+      "id": "cohort-random",
+      "premises": [
+        "COHORT(S)"
+      ],
+      "query": "RANDOMIZED_EXPOSURE(S)",
+      "expected": "NO_OR_UNKNOWN_NOT_YES",
+      "guard": "guard.cohort_not_randomized"
+    },
+    {
+      "id": "longitudinal",
+      "premises": [
+        "LONGITUDINAL(S)",
+        "REPEATED_MEASURES(S,X)"
+      ],
+      "query": "CAN_ESTIMATE_WITHIN_UNIT_CHANGE(S,X)",
+      "expected": "YES",
+      "rule": "observational.longitudinal_change"
+    },
+    {
+      "id": "longitudinal-cause",
+      "premises": [
+        "LONGITUDINAL_ASSOCIATION(X,Y)"
+      ],
+      "query": "CAUSES(X,Y)",
+      "expected": "UNKNOWN",
+      "guard": "guard.longitudinal_not_causal"
+    },
+    {
+      "id": "case-control-prevalence",
+      "premises": [
+        "CASE_CONTROL(S)"
+      ],
+      "query": "DIRECTLY_ESTIMATE_POPULATION_PREVALENCE_FROM_CASE_FRACTION(S)",
+      "expected": "NO",
+      "guard": "guard.case_control_prevalence"
+    },
+    {
+      "id": "selection",
+      "premises": [
+        "SELECTION_DEPENDS_ON(S,V)",
+        "V RELEVANT_TO INFERENCE(S)"
+      ],
+      "query": "SELECTION_BIAS_RISK(S,V)",
+      "expected": "YES",
+      "rule": "observational.selection_flag"
+    },
+    {
+      "id": "attrition",
+      "premises": [
+        "LOSS_TO_FOLLOWUP(S,A)",
+        "ATTRITION_RELATED_TO_OUTCOME_OR_EXPOSURE(S,A)"
+      ],
+      "query": "ATTRITION_BIAS_RISK(S,A)",
+      "expected": "YES",
+      "rule": "observational.attrition_flag"
+    },
+    {
+      "id": "adjustment",
+      "premises": [
+        "ADJUSTED_FOR_OBSERVED_COVARIATES(S)"
+      ],
+      "query": "NO_UNMEASURED_CONFOUNDING(S)",
+      "expected": "UNKNOWN",
+      "guard": "guard.adjusted_not_unconfounded"
+    },
+    {
+      "id": "propensity",
+      "premises": [
+        "PROPENSITY_MATCHED(S)"
+      ],
+      "query": "EQUIVALENT_TO_RANDOMIZED_TRIAL(S)",
+      "expected": "NO",
+      "guard": "guard.propensity_not_randomization"
+    },
+    {
+      "id": "missing",
+      "premises": [
+        "MISSING_DATA(S)"
+      ],
+      "query": "MISSING_AT_RANDOM(S)",
+      "expected": "UNKNOWN",
+      "guard": "guard.missing_random_assumption"
+    },
+    {
+      "id": "big-data",
+      "premises": [
+        "VERY_LARGE_N(S)"
+      ],
+      "query": "BIAS_NEGLIGIBLE(S)",
+      "expected": "UNKNOWN",
+      "guard": "guard.big_data_not_bias_free"
+    },
+    {
+      "id": "natural",
+      "premises": [
+        "NATURAL_EXPERIMENT(S)"
+      ],
+      "query": "TRUE_RANDOM_ASSIGNMENT(S)",
+      "expected": "UNKNOWN",
+      "guard": "guard.natural_experiment_not_random"
+    }
+  ]
+}

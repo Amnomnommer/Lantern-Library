@@ -1,0 +1,133 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.replication_review_freshness",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "citation",
+      "premises": [
+        "MANY_CITATIONS(C)"
+      ],
+      "query": "MANY_REPLICATIONS(C)",
+      "expected": "UNKNOWN",
+      "guard": "guard.citation_not_replication"
+    },
+    {
+      "id": "same-data",
+      "premises": [
+        "SAME_DATA_REANALYZED(D)"
+      ],
+      "query": "INDEPENDENT_REPLICATION(C)",
+      "expected": "NO",
+      "guard": "guard.reanalysis_not_replication"
+    },
+    {
+      "id": "replication",
+      "premises": [
+        "STUDY(s1) SUPPORTS C",
+        "STUDY(s2) SUPPORTS C",
+        "INDEPENDENT_EVIDENCE_CHAIN(s1,s2)",
+        "REPLICATION_INTENT(s2,C)"
+      ],
+      "query": "REPLICATION_SUPPORT(C,s2)",
+      "expected": "YES",
+      "rule": "review.independent_replication"
+    },
+    {
+      "id": "failed",
+      "premises": [
+        "REPLICATION_INTENT(s,C)",
+        "ADEQUATE_TEST_OF(s,C)",
+        "RESULT_INCONSISTENT_WITH_TARGET(s,C)"
+      ],
+      "query": "FAILED_REPLICATION_EVIDENCE(s,C)",
+      "expected": "YES",
+      "rule": "review.failed_replication_flag"
+    },
+    {
+      "id": "failed-not-false",
+      "premises": [
+        "FAILED_REPLICATION_EVIDENCE(s,C)"
+      ],
+      "query": "FALSE(C)",
+      "expected": "UNKNOWN",
+      "guard": "guard.failed_replication_not_false"
+    },
+    {
+      "id": "old",
+      "premises": [
+        "OLD(K)"
+      ],
+      "query": "FALSE(K)",
+      "expected": "UNKNOWN",
+      "guard": "guard.age_not_false"
+    },
+    {
+      "id": "stale",
+      "premises": [
+        "STALE(K)"
+      ],
+      "query": "FALSE(K)",
+      "expected": "UNKNOWN",
+      "guard": "guard.stale_not_false"
+    },
+    {
+      "id": "stale-confidence",
+      "premises": [
+        "STALE(K)"
+      ],
+      "query": "AUTOMATICALLY_LOWER_TRUTH_CONFIDENCE(K)",
+      "expected": "NO",
+      "guard": "guard.stale_not_confidence_decay"
+    },
+    {
+      "id": "pressure",
+      "premises": [
+        "KNOWLEDGE_OBJECT(K)",
+        "REVIEW_FACTORS_AVAILABLE(K)"
+      ],
+      "query": "COMPUTE_REVIEW_PRESSURE(K)",
+      "expected": "YES",
+      "rule": "review.review_pressure"
+    },
+    {
+      "id": "reconfirm",
+      "premises": [
+        "MEANINGFUL_REVIEW(r,K)",
+        "CURRENT_EVIDENCE_SUPPORTS(r,K)",
+        "NO_UNRESOLVED_SCOPE_FAILURE(r,K)"
+      ],
+      "query": "RECONFIRMED(K)",
+      "expected": "YES",
+      "rule": "review.reconfirm"
+    },
+    {
+      "id": "scope-limit",
+      "premises": [
+        "REVIEW_SUPPORTS_IN_SCOPE(K,S)",
+        "REVIEW_CHALLENGES_OUTSIDE_SCOPE(K,S)"
+      ],
+      "query": "SCOPE_LIMITED_AFTER_REVIEW(K,S)",
+      "expected": "YES",
+      "rule": "review.scope_limit"
+    },
+    {
+      "id": "meta",
+      "premises": [
+        "META_ANALYSIS(M,C)"
+      ],
+      "query": "DEFINITIVE_TRUTH(C)",
+      "expected": "NO",
+      "guard": "guard.meta_analysis_not_magic"
+    },
+    {
+      "id": "consensus",
+      "premises": [
+        "STRONG_CONSENSUS(K)"
+      ],
+      "query": "NEVER_REVIEW(K)",
+      "expected": "NO",
+      "guard": "guard.consensus_not_no_review"
+    }
+  ]
+}

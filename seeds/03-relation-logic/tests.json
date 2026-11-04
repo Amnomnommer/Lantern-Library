@@ -1,0 +1,131 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.relation_logic",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "symmetric",
+      "premises": [
+        "SYMMETRIC(sibling_of)",
+        "sibling_of(alex,bea)"
+      ],
+      "query": "sibling_of(bea,alex)",
+      "expected": "YES",
+      "rule": "relation.symmetric_application"
+    },
+    {
+      "id": "role-reversal",
+      "premises": [
+        "parent_of(alex,bea)"
+      ],
+      "query": "parent_of(bea,alex)",
+      "expected": "UNKNOWN",
+      "guard": "guard.role_reversal"
+    },
+    {
+      "id": "inverse",
+      "premises": [
+        "INVERSE(parent_of,child_of)",
+        "parent_of(alex,bea)"
+      ],
+      "query": "child_of(bea,alex)",
+      "expected": "YES",
+      "rule": "relation.inverse_application"
+    },
+    {
+      "id": "inverse-not-symmetry",
+      "premises": [
+        "INVERSE(parent_of,child_of)",
+        "parent_of(alex,bea)"
+      ],
+      "query": "parent_of(bea,alex)",
+      "expected": "UNKNOWN",
+      "guard": "guard.inverse_not_same_relation"
+    },
+    {
+      "id": "transitive",
+      "premises": [
+        "TRANSITIVE(ancestor_of)",
+        "ancestor_of(a,b)",
+        "ancestor_of(b,c)"
+      ],
+      "query": "ancestor_of(a,c)",
+      "expected": "YES",
+      "rule": "relation.transitive_application"
+    },
+    {
+      "id": "likes-not-transitive",
+      "premises": [
+        "likes(a,b)",
+        "likes(b,c)"
+      ],
+      "query": "likes(a,c)",
+      "expected": "UNKNOWN",
+      "guard": "guard.undeclared_transitivity"
+    },
+    {
+      "id": "path-not-claim",
+      "premises": [
+        "owns(a,b)",
+        "located_in(b,c)"
+      ],
+      "query": "located_in(a,c)",
+      "expected": "UNKNOWN",
+      "guard": "guard.path_is_not_claim"
+    },
+    {
+      "id": "declared-composition",
+      "premises": [
+        "COMPOSES(parent_of,parent_of,grandparent_of)",
+        "parent_of(a,b)",
+        "parent_of(b,c)"
+      ],
+      "query": "grandparent_of(a,c)",
+      "expected": "YES",
+      "rule": "relation.declared_composition"
+    },
+    {
+      "id": "asymmetric",
+      "premises": [
+        "ASYMMETRIC(parent_of)",
+        "parent_of(a,b)"
+      ],
+      "query": "NOT parent_of(b,a)",
+      "expected": "YES",
+      "rule": "relation.asymmetric_application"
+    },
+    {
+      "id": "antisymmetric",
+      "premises": [
+        "ANTISYMMETRIC(subset_of)",
+        "subset_of(A,B)",
+        "subset_of(B,A)"
+      ],
+      "query": "A = B",
+      "expected": "YES",
+      "rule": "relation.antisymmetric_identity"
+    },
+    {
+      "id": "functional-conflict",
+      "premises": [
+        "FUNCTIONAL(birth_date)",
+        "birth_date(a,d1)",
+        "birth_date(a,d2)",
+        "NOT (d1 = d2)"
+      ],
+      "query": "FUNCTIONAL_CONSISTENT(birth_date)",
+      "expected": "CONFLICT",
+      "rule": "relation.functional_conflict"
+    },
+    {
+      "id": "examples-dont-seed-property",
+      "premises": [
+        "knows(a,b)",
+        "knows(b,a)"
+      ],
+      "query": "SYMMETRIC(knows)",
+      "expected": "UNKNOWN",
+      "guard": "guard.no_relation_property_from_examples"
+    }
+  ]
+}

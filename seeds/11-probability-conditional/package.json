@@ -1,0 +1,317 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.probability_conditional",
+  "package_number": 11,
+  "version": "0.1.0",
+  "title": "Probability and Conditional Probability",
+  "inheritance_class": "FORMAL_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed probability semantics and conditional reasoning so Lantern can reason about uncertainty, base rates, independence and evidence updates without confusing conditional directions or treating probability as truth.",
+  "dependencies": [
+    {
+      "package_id": "foundation.formal_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.set_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.epistemic_states",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.scope_context",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "probability",
+      "definition": "A number from 0 to 1 assigned under a declared probabilistic model to represent uncertainty or relative frequency/degree of belief as specified."
+    },
+    {
+      "id": "sample_space",
+      "definition": "The declared set of possible outcomes considered by a probability model."
+    },
+    {
+      "id": "event",
+      "definition": "A subset of the sample space whose probability may be evaluated."
+    },
+    {
+      "id": "complement_event",
+      "definition": "NOT A contains outcomes in the sample space that are not in A."
+    },
+    {
+      "id": "joint_probability",
+      "definition": "P(A AND B), the probability that both events occur."
+    },
+    {
+      "id": "conditional_probability",
+      "definition": "P(A|B), probability of A under the condition that B is established, defined when P(B)>0."
+    },
+    {
+      "id": "marginal_probability",
+      "definition": "The unconditional probability of an event after accounting for relevant alternatives/variables in the model."
+    },
+    {
+      "id": "base_rate",
+      "definition": "Prior/background prevalence or probability of an event in the relevant population before case-specific evidence."
+    },
+    {
+      "id": "independence",
+      "definition": "A and B are independent under a model when learning one does not change the probability of the other; equivalently P(A AND B)=P(A)P(B) where defined."
+    },
+    {
+      "id": "conditional_independence",
+      "definition": "A and B may be independent given C even when not marginally independent."
+    },
+    {
+      "id": "mutual_exclusivity",
+      "definition": "A and B cannot both occur, so P(A AND B)=0; this is not the same as independence."
+    },
+    {
+      "id": "likelihood",
+      "definition": "How compatible observed evidence is with a hypothesis/model, often represented by P(E|H); not the same as P(H|E)."
+    },
+    {
+      "id": "prior_probability",
+      "definition": "Probability assigned before incorporating the currently considered evidence."
+    },
+    {
+      "id": "posterior_probability",
+      "definition": "Probability after updating a prior with evidence under a specified model."
+    },
+    {
+      "id": "bayes_rule",
+      "definition": "P(H|E)=P(E|H)P(H)/P(E) when terms are defined and P(E)>0."
+    },
+    {
+      "id": "law_total_probability",
+      "definition": "Probability of an event can be decomposed over a mutually exclusive/exhaustive partition."
+    },
+    {
+      "id": "expected_value",
+      "definition": "Probability-weighted average value under a declared distribution; not a guaranteed outcome."
+    }
+  ],
+  "rules": [
+    {
+      "id": "probability.bounds",
+      "variables": [
+        "A"
+      ],
+      "premises": [
+        "EVENT(A)"
+      ],
+      "conclusion": "0 <= P(A) <= 1"
+    },
+    {
+      "id": "probability.complement",
+      "variables": [
+        "A"
+      ],
+      "premises": [
+        "EVENT(A)"
+      ],
+      "conclusion": "P(NOT A)=1-P(A)"
+    },
+    {
+      "id": "probability.conditional_definition",
+      "variables": [
+        "A",
+        "B"
+      ],
+      "premises": [
+        "P(B)>0"
+      ],
+      "conclusion": "P(A|B)=P(A AND B)/P(B)"
+    },
+    {
+      "id": "probability.independent_joint",
+      "variables": [
+        "A",
+        "B"
+      ],
+      "premises": [
+        "INDEPENDENT(A,B)"
+      ],
+      "conclusion": "P(A AND B)=P(A)*P(B)"
+    },
+    {
+      "id": "probability.independent_conditional",
+      "variables": [
+        "A",
+        "B"
+      ],
+      "premises": [
+        "INDEPENDENT(A,B)",
+        "P(B)>0"
+      ],
+      "conclusion": "P(A|B)=P(A)"
+    },
+    {
+      "id": "probability.mutually_exclusive_joint",
+      "variables": [
+        "A",
+        "B"
+      ],
+      "premises": [
+        "MUTUALLY_EXCLUSIVE(A,B)"
+      ],
+      "conclusion": "P(A AND B)=0"
+    },
+    {
+      "id": "probability.addition_general",
+      "variables": [
+        "A",
+        "B"
+      ],
+      "premises": [
+        "EVENT(A)",
+        "EVENT(B)"
+      ],
+      "conclusion": "P(A OR B)=P(A)+P(B)-P(A AND B)"
+    },
+    {
+      "id": "probability.bayes",
+      "variables": [
+        "H",
+        "E"
+      ],
+      "premises": [
+        "P(E)>0"
+      ],
+      "conclusion": "P(H|E)=P(E|H)*P(H)/P(E)"
+    },
+    {
+      "id": "probability.total_probability",
+      "variables": [
+        "E",
+        "H1",
+        "H2"
+      ],
+      "premises": [
+        "PARTITION(H1,H2)"
+      ],
+      "conclusion": "P(E)=P(E|H1)*P(H1)+P(E|H2)*P(H2)"
+    },
+    {
+      "id": "probability.posterior_update",
+      "variables": [
+        "H",
+        "E"
+      ],
+      "premises": [
+        "PRIOR(P(H))",
+        "LIKELIHOOD(P(E|H))",
+        "EVIDENCE(E)"
+      ],
+      "conclusion": "COMPUTE_POSTERIOR_WITH_BAYES(H,E)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.inverse_probability",
+      "premises": [
+        "P(E|H)=x"
+      ],
+      "forbidden_conclusion": "P(H|E)=x",
+      "reason": "Conditional probability is directional; posterior requires base rate and evidence probability."
+    },
+    {
+      "id": "guard.base_rate_neglect",
+      "premises": [
+        "HIGH(P(E|H))"
+      ],
+      "forbidden_conclusion": "HIGH(P(H|E))",
+      "reason": "A high likelihood does not imply a high posterior when H is rare or E common under alternatives."
+    },
+    {
+      "id": "guard.independence_not_exclusive",
+      "premises": [
+        "INDEPENDENT(A,B)"
+      ],
+      "forbidden_conclusion": "MUTUALLY_EXCLUSIVE(A,B)",
+      "reason": "Independent events may occur together."
+    },
+    {
+      "id": "guard.exclusive_not_independent",
+      "premises": [
+        "MUTUALLY_EXCLUSIVE(A,B)",
+        "P(A)>0",
+        "P(B)>0"
+      ],
+      "forbidden_conclusion": "INDEPENDENT(A,B)",
+      "reason": "Nontrivial mutually exclusive events are dependent."
+    },
+    {
+      "id": "guard.zero_not_impossible_without_model",
+      "premises": [
+        "MODEL_PROBABILITY(A)=0"
+      ],
+      "forbidden_conclusion": "METAPHYSICALLY_IMPOSSIBLE(A)",
+      "reason": "Zero probability can be model-relative and does not establish impossibility outside the model."
+    },
+    {
+      "id": "guard.one_not_certain_truth_without_model",
+      "premises": [
+        "MODEL_PROBABILITY(A)=1"
+      ],
+      "forbidden_conclusion": "UNIVERSALLY_TRUE(A)",
+      "reason": "Probability one is model-relative and may not equal logical necessity or universal truth."
+    },
+    {
+      "id": "guard.expected_not_guaranteed",
+      "premises": [
+        "EXPECTED_VALUE(X)=v"
+      ],
+      "forbidden_conclusion": "NEXT_OUTCOME(X)=v",
+      "reason": "Expected value summarizes a distribution and need not be an attainable or next outcome."
+    },
+    {
+      "id": "guard.correlation_not_independence",
+      "premises": [
+        "NO_DETECTED_CORRELATION(A,B)"
+      ],
+      "forbidden_conclusion": "INDEPENDENT(A,B)",
+      "reason": "Lack of detected correlation does not establish probabilistic independence."
+    },
+    {
+      "id": "guard.sample_probability_not_population_without_method",
+      "premises": [
+        "SAMPLE_RATE(A)=r"
+      ],
+      "forbidden_conclusion": "POPULATION_PROBABILITY(A)=r",
+      "reason": "Generalization requires sampling/methodological justification."
+    },
+    {
+      "id": "guard.probability_not_authority",
+      "premises": [
+        "P(A)=high"
+      ],
+      "forbidden_conclusion": "AUTHORIZED(A)",
+      "reason": "Probability cannot grant permission or authority."
+    }
+  ],
+  "invariants": [
+    "Every numerical probability is interpreted relative to a declared or recoverable model, population/sample space and scope.",
+    "Conditional probability is directional: P(A|B) and P(B|A) are generally different.",
+    "Base rates matter when updating hypotheses from evidence.",
+    "Independence and mutual exclusivity are distinct.",
+    "Probability zero/one under a model is not automatically metaphysical impossibility/logical necessity.",
+    "Expected value is not a guaranteed outcome.",
+    "Probability describes uncertainty under a model; it is not identical to truth, confidence, source quality or authority.",
+    "Empirical probability estimates require methodology to justify population generalization.",
+    "Arithmetic should be delegated to deterministic quantitative computation where available; seed rules define semantics and selection constraints."
+  ],
+  "provenance": {
+    "authoring_basis": "Kolmogorov-style elementary probability, conditional probability and Bayesian updating foundations adapted to Lantern's bounded epistemic reasoning.",
+    "review_requirement": "Owner/project review before FORMAL_CORE activation."
+  }
+}

@@ -1,0 +1,302 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.measurement_units_precision_accuracy",
+  "package_number": 12,
+  "version": "0.1.0",
+  "title": "Measurement, Units, Precision and Accuracy",
+  "inheritance_class": "CONCEPTUAL_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed measurement semantics so Lantern represents quantities with units, uncertainty, instrument/method and scope, distinguishes accuracy from precision, and avoids false precision or invalid dimensional comparisons.",
+  "dependencies": [
+    {
+      "package_id": "foundation.formal_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.epistemic_states",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.scope_context",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.evidence_inference_validity",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.probability_conditional",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "measurement",
+      "definition": "A result produced by a defined procedure/instrument relating an observed property to a quantity/value under stated units and uncertainty."
+    },
+    {
+      "id": "quantity",
+      "definition": "A measurable property represented by a magnitude and quantity type, normally with a unit."
+    },
+    {
+      "id": "unit",
+      "definition": "A defined reference scale used to express a quantity."
+    },
+    {
+      "id": "dimension",
+      "definition": "The physical or formal quantity dimension constraining meaningful unit conversion and algebra."
+    },
+    {
+      "id": "unit_conversion",
+      "definition": "A semantics-preserving transformation between compatible units of the same quantity dimension."
+    },
+    {
+      "id": "measurement_uncertainty",
+      "definition": "A quantified or qualified range/distribution representing uncertainty attributable to the measurement process."
+    },
+    {
+      "id": "accuracy",
+      "definition": "Closeness of a measurement/result to the relevant true/reference value, insofar as that value can be established."
+    },
+    {
+      "id": "precision",
+      "definition": "Closeness/repeatability of repeated measurements or fineness of reported numerical resolution; high precision need not imply accuracy."
+    },
+    {
+      "id": "resolution",
+      "definition": "Smallest change or increment an instrument/procedure can meaningfully distinguish/report."
+    },
+    {
+      "id": "calibration",
+      "definition": "Comparison/adjustment of an instrument or procedure against appropriate reference standards."
+    },
+    {
+      "id": "systematic_error",
+      "definition": "A persistent directional or structured measurement bias not eliminated by repeated sampling alone."
+    },
+    {
+      "id": "random_error",
+      "definition": "Variation in repeated measurement arising from stochastic/uncontrolled influences."
+    },
+    {
+      "id": "bias",
+      "definition": "Systematic deviation between expected measurement/estimate and target/reference under the applicable method."
+    },
+    {
+      "id": "significant_precision",
+      "definition": "Reported numerical detail justified by measurement resolution/uncertainty and subsequent computation."
+    },
+    {
+      "id": "derived_quantity",
+      "definition": "A quantity computed from measured/input quantities under a declared relation, carrying propagated units and uncertainty."
+    },
+    {
+      "id": "traceability",
+      "definition": "Documented chain connecting a measurement/calibration to reference standards or procedures."
+    }
+  ],
+  "rules": [
+    {
+      "id": "measurement.structured_result",
+      "variables": [
+        "M",
+        "Q",
+        "V",
+        "U",
+        "I"
+      ],
+      "premises": [
+        "MEASUREMENT(M)",
+        "TARGET_QUANTITY(M,Q)",
+        "VALUE(M,V)",
+        "UNIT(M,U)",
+        "INSTRUMENT_OR_METHOD(M,I)"
+      ],
+      "conclusion": "STRUCTURED_MEASUREMENT(M,Q,V,U,I)"
+    },
+    {
+      "id": "measurement.compatible_conversion",
+      "variables": [
+        "V1",
+        "U1",
+        "V2",
+        "U2",
+        "D"
+      ],
+      "premises": [
+        "DIMENSION(U1,D)",
+        "DIMENSION(U2,D)",
+        "VALID_CONVERSION(V1,U1,V2,U2)"
+      ],
+      "conclusion": "EQUIVALENT_QUANTITY(V1 U1,V2 U2)"
+    },
+    {
+      "id": "measurement.repeatability_precision",
+      "variables": [
+        "Mset"
+      ],
+      "premises": [
+        "REPEATED_MEASUREMENTS(Mset)",
+        "LOW_SPREAD(Mset)"
+      ],
+      "conclusion": "EVIDENCE_OF_PRECISION(Mset)"
+    },
+    {
+      "id": "measurement.calibration_accuracy_evidence",
+      "variables": [
+        "I",
+        "R"
+      ],
+      "premises": [
+        "CALIBRATED_AGAINST(I,R)",
+        "VALID_REFERENCE(R)",
+        "CALIBRATION_WITHIN_TOLERANCE(I,R)"
+      ],
+      "conclusion": "EVIDENCE_SUPPORTS_ACCURACY(I)"
+    },
+    {
+      "id": "measurement.systematic_bias",
+      "variables": [
+        "I",
+        "R"
+      ],
+      "premises": [
+        "REPEATED_DIRECTIONAL_DEVIATION(I,R)",
+        "VALID_REFERENCE(R)"
+      ],
+      "conclusion": "EVIDENCE_OF_SYSTEMATIC_ERROR(I)"
+    },
+    {
+      "id": "measurement.uncertainty_required",
+      "variables": [
+        "M"
+      ],
+      "premises": [
+        "MEASUREMENT(M)",
+        "UNCERTAINTY_AVAILABLE(M)"
+      ],
+      "conclusion": "REPORT_WITH_UNCERTAINTY(M)"
+    },
+    {
+      "id": "measurement.dimension_check",
+      "variables": [
+        "A",
+        "B"
+      ],
+      "premises": [
+        "DIMENSION(A,D1)",
+        "DIMENSION(B,D2)",
+        "D1 != D2"
+      ],
+      "conclusion": "NOT_DIRECTLY_COMPARABLE_AS_SAME_QUANTITY(A,B)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.precision_not_accuracy",
+      "premises": [
+        "HIGH_PRECISION(M)"
+      ],
+      "forbidden_conclusion": "HIGH_ACCURACY(M)",
+      "reason": "Repeatability/fine resolution does not establish closeness to truth/reference."
+    },
+    {
+      "id": "guard.accuracy_not_precision",
+      "premises": [
+        "ACCURATE_ON_AVERAGE(M)"
+      ],
+      "forbidden_conclusion": "HIGH_PRECISION(M)",
+      "reason": "Measurements can center near a reference while individual results are widely dispersed."
+    },
+    {
+      "id": "guard.false_precision",
+      "premises": [
+        "INPUT_PRECISION_LIMIT=p"
+      ],
+      "forbidden_conclusion": "JUSTIFIED_OUTPUT_PRECISION>p",
+      "reason": "Computation cannot create measurement information absent from inputs; propagation rules may further reduce justified precision."
+    },
+    {
+      "id": "guard.unit_mismatch",
+      "premises": [
+        "DIMENSION(A,D1)",
+        "DIMENSION(B,D2)",
+        "D1 != D2"
+      ],
+      "forbidden_conclusion": "A = B AS_SAME_QUANTITY",
+      "reason": "Numerically similar values with incompatible dimensions are not equal measurements."
+    },
+    {
+      "id": "guard.number_without_unit",
+      "premises": [
+        "QUANTITY_REQUIRES_UNIT(Q)",
+        "VALUE(Q,V)",
+        "NO_UNIT(Q)"
+      ],
+      "forbidden_conclusion": "FULLY_SPECIFIED_MEASUREMENT(Q)",
+      "reason": "A magnitude without required unit/context is incomplete."
+    },
+    {
+      "id": "guard.resolution_not_uncertainty",
+      "premises": [
+        "RESOLUTION(I)=r"
+      ],
+      "forbidden_conclusion": "TOTAL_UNCERTAINTY(I)=r",
+      "reason": "Resolution contributes to uncertainty but does not capture all error sources."
+    },
+    {
+      "id": "guard.repetition_not_remove_systematic",
+      "premises": [
+        "MANY_REPEATS(I)"
+      ],
+      "forbidden_conclusion": "SYSTEMATIC_ERROR_REMOVED(I)",
+      "reason": "Repeated measurements can reduce random uncertainty but do not automatically correct systematic bias."
+    },
+    {
+      "id": "guard.calibrated_not_infallible",
+      "premises": [
+        "CALIBRATED(I)"
+      ],
+      "forbidden_conclusion": "ERROR_FREE(I)",
+      "reason": "Calibration supplies evidence and traceability, not perfect measurement."
+    },
+    {
+      "id": "guard.conversion_not_new_evidence",
+      "premises": [
+        "CONVERTED(M,U1,U2)"
+      ],
+      "forbidden_conclusion": "MORE_ACCURATE(M)",
+      "reason": "Unit conversion changes representation, not evidential quality."
+    },
+    {
+      "id": "guard.measurement_not_construct",
+      "premises": [
+        "INSTRUMENT_OUTPUT(I,V)"
+      ],
+      "forbidden_conclusion": "VALID_MEASUREMENT_OF(I,Q,V)",
+      "reason": "Construct/measurement validity must establish that the instrument output represents the intended quantity."
+    }
+  ],
+  "invariants": [
+    "A measurement should preserve value, unit/quantity type, method/instrument, scope and available uncertainty.",
+    "Accuracy and precision are distinct.",
+    "Numerical resolution and total uncertainty are distinct.",
+    "Units may be converted only across compatible dimensions using declared conversions.",
+    "A unit conversion changes representation, not evidence quality.",
+    "Repeated measurement reduces some random uncertainty but does not automatically remove systematic error.",
+    "Reported precision must not exceed what measurement and computation justify.",
+    "Calibration provides evidence about measurement performance and traceability, not infallibility.",
+    "Instrument output is not automatically a valid measurement of the intended construct.",
+    "Derived quantities preserve dimensional semantics and should propagate uncertainty.",
+    "Deterministic numerical code should perform conversions/error propagation where available; seed rules define meaning and constraints."
+  ],
+  "provenance": {
+    "authoring_basis": "Measurement science/metrology foundations, dimensional analysis and uncertainty principles adapted to Lantern's evidence and deterministic-computation architecture.",
+    "review_requirement": "Owner/project review before CONCEPTUAL_CORE activation."
+  }
+}

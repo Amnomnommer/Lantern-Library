@@ -1,0 +1,361 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.planning_dependency_reasoning",
+  "package_number": 31,
+  "version": "0.1.0",
+  "title": "Planning and Dependency Reasoning",
+  "inheritance_class": "AGENT_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed plan construction and dependency reasoning so Lantern can organize subproblems/actions into editable partial-order plans, identify prerequisites, parallel work, critical paths, resource conflicts and contingencies, and replan when evidence or goals change without treating plans as obligations.",
+  "dependencies": [
+    {
+      "package_id": "foundation.scope_context",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.problem_solving_decomposition",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.engineering_design_methodologies",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.computer_science_methodologies",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "plan",
+      "definition": "An editable model of actions/subproblems, dependencies, resources and conditions intended to move from a current state toward an authorized goal."
+    },
+    {
+      "id": "plan_step",
+      "definition": "A bounded action/subproblem with prerequisites, expected outputs, resource needs, status and success/failure conditions."
+    },
+    {
+      "id": "prerequisite",
+      "definition": "A condition or output that must be satisfied before a dependent step can validly proceed."
+    },
+    {
+      "id": "dependency_graph",
+      "definition": "Directed graph representing prerequisite/dependency relationships among plan steps."
+    },
+    {
+      "id": "partial_order_plan",
+      "definition": "Plan specifying only ordering constraints that are actually required, allowing unrelated steps to proceed in any order or parallel."
+    },
+    {
+      "id": "parallelizable",
+      "definition": "Steps can proceed concurrently when dependencies, shared resources and safety/authority constraints permit."
+    },
+    {
+      "id": "critical_path",
+      "definition": "Dependency chain whose duration/latency determines earliest completion under the current plan model."
+    },
+    {
+      "id": "blocked_step",
+      "definition": "A step unable to proceed because a prerequisite, resource, authority or required information is unavailable."
+    },
+    {
+      "id": "milestone",
+      "definition": "Meaningful intermediate state/checkpoint used to assess progress, validation or decision points."
+    },
+    {
+      "id": "resource_constraint",
+      "definition": "Limit on compute, memory, time, tools, people, budget, energy or other resources relevant to scheduling."
+    },
+    {
+      "id": "resource_conflict",
+      "definition": "Two or more steps require an incompatible use of a limited resource at the same time."
+    },
+    {
+      "id": "contingency",
+      "definition": "Preplanned response to a specified uncertainty/failure/condition."
+    },
+    {
+      "id": "branch_condition",
+      "definition": "Evidence/state determining which plan branch should be followed."
+    },
+    {
+      "id": "replanning",
+      "definition": "Revision of the plan when assumptions, dependencies, resources, evidence, goals or constraints change."
+    },
+    {
+      "id": "plan_status",
+      "definition": "State such as ready, active, blocked, waiting, complete, failed, skipped, cancelled or superseded."
+    },
+    {
+      "id": "slack",
+      "definition": "Scheduling flexibility a step can have without delaying a relevant milestone/critical path under the current model."
+    },
+    {
+      "id": "handoff",
+      "definition": "Transfer of a step/output/context to another agent/person/system with explicit expectations and provenance."
+    },
+    {
+      "id": "rollback_plan",
+      "definition": "Defined route for restoring a prior safe/working state if a change fails."
+    },
+    {
+      "id": "checkpoint",
+      "definition": "Persisted/validated state from which work can safely resume after interruption/failure."
+    },
+    {
+      "id": "improvement_migration_plan",
+      "definition": "Plan for implementing an approved improvement with prerequisites, checkpoints, compatibility, validation and rollback rather than treating proposal acceptance as instantaneous mutation."
+    }
+  ],
+  "rules": [
+    {
+      "id": "planning.prerequisite_order",
+      "variables": [
+        "A",
+        "B"
+      ],
+      "premises": [
+        "B DEPENDS_ON A"
+      ],
+      "conclusion": "A MUST_BE_SATISFIED_OR_EXPLICITLY_BOUNDED_BEFORE B"
+    },
+    {
+      "id": "planning.parallel",
+      "variables": [
+        "A",
+        "B"
+      ],
+      "premises": [
+        "NO_DEPENDENCY(A,B)",
+        "NO_DEPENDENCY(B,A)",
+        "NO_RESOURCE_CONFLICT(A,B)",
+        "AUTHORITY_ALLOWS(A,B)"
+      ],
+      "conclusion": "PARALLELIZABLE(A,B)"
+    },
+    {
+      "id": "planning.blocked",
+      "variables": [
+        "S",
+        "P"
+      ],
+      "premises": [
+        "STEP(S)",
+        "UNSATISFIED_PREREQUISITE(P,S)"
+      ],
+      "conclusion": "BLOCKED(S,P)"
+    },
+    {
+      "id": "planning.resource_conflict",
+      "variables": [
+        "A",
+        "B",
+        "R"
+      ],
+      "premises": [
+        "A REQUIRES R",
+        "B REQUIRES R",
+        "R CAPACITY_INSUFFICIENT_FOR_CONCURRENT(A,B)"
+      ],
+      "conclusion": "RESOURCE_CONFLICT(A,B,R)"
+    },
+    {
+      "id": "planning.branch",
+      "variables": [
+        "C",
+        "A",
+        "B"
+      ],
+      "premises": [
+        "BRANCH_CONDITION(C)",
+        "IF C THEN A",
+        "IF NOT C THEN B"
+      ],
+      "conclusion": "CONDITIONAL_PLAN_BRANCH(C,A,B)"
+    },
+    {
+      "id": "planning.replan",
+      "variables": [
+        "P",
+        "Change"
+      ],
+      "premises": [
+        "PLAN(P)",
+        "MATERIAL_CHANGE(Change,P)"
+      ],
+      "conclusion": "REASSESS_AND_REPLAN(P,Change)"
+    },
+    {
+      "id": "planning.handoff",
+      "variables": [
+        "S",
+        "Agent",
+        "O"
+      ],
+      "premises": [
+        "HANDOFF_STEP(S,Agent)",
+        "EXPECTED_OUTPUT(S,O)"
+      ],
+      "conclusion": "PACKAGE_CONTEXT_REQUIREMENTS_AND_ACCEPTANCE(S,Agent,O)"
+    },
+    {
+      "id": "planning.rollback",
+      "variables": [
+        "C",
+        "R"
+      ],
+      "premises": [
+        "RISKY_CHANGE(C)",
+        "ROLLBACK_AVAILABLE(R,C)"
+      ],
+      "conclusion": "PRESERVE_ROLLBACK_BEFORE_PROMOTION(C,R)"
+    },
+    {
+      "id": "planning.improvement_plan",
+      "variables": [
+        "P"
+      ],
+      "premises": [
+        "IMPROVEMENT_PROPOSAL_APPROVED_FOR_IMPLEMENTATION(P)"
+      ],
+      "conclusion": "BUILD_CHECKPOINTED_IMPLEMENTATION_TEST_AND_ROLLBACK_PLAN(P)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard_plan_not_goal",
+      "premises": [
+        "PLAN(P) FOR GOAL(G)"
+      ],
+      "forbidden_conclusion": "P IS_THE_GOAL",
+      "reason": "Plans are means/models and may be replaced while preserving the goal."
+    },
+    {
+      "id": "guard_plan_not_obligation",
+      "premises": [
+        "STEP_IN_PLAN(S,P)"
+      ],
+      "forbidden_conclusion": "MUST_COMPLETE(S) REGARDLESS_OF_NEW_EVIDENCE",
+      "reason": "Plans remain revisable when evidence, constraints or goals change."
+    },
+    {
+      "id": "guard_sequence_not_dependency",
+      "premises": [
+        "A LISTED_BEFORE B"
+      ],
+      "forbidden_conclusion": "B DEPENDS_ON A",
+      "reason": "Presentation order does not establish a logical prerequisite."
+    },
+    {
+      "id": "guard_parallel_not_free",
+      "premises": [
+        "NO_DEPENDENCY(A,B)"
+      ],
+      "forbidden_conclusion": "SAFE_TO_PARALLELIZE(A,B)",
+      "reason": "Shared resources, side effects, authority or interference can still block concurrency."
+    },
+    {
+      "id": "guard_critical_not_important",
+      "premises": [
+        "ON_CRITICAL_PATH(S)"
+      ],
+      "forbidden_conclusion": "MOST_IMPORTANT_SEMANTICALLY(S)",
+      "reason": "Critical path is a scheduling property, not value/importance."
+    },
+    {
+      "id": "guard_blocked_not_failed",
+      "premises": [
+        "BLOCKED(S,P)"
+      ],
+      "forbidden_conclusion": "FAILED(S)",
+      "reason": "Blocked means waiting on a dependency/resource/authority, not necessarily failure."
+    },
+    {
+      "id": "guard_waiting_not_idle_failure",
+      "premises": [
+        "WAITING_FOR_EXTERNAL_DEPENDENCY(S)"
+      ],
+      "forbidden_conclusion": "NO_PROGRESS_POSSIBLE_ANYWHERE(P)",
+      "reason": "Other independent work may proceed while one branch waits."
+    },
+    {
+      "id": "guard_milestone_not_completion",
+      "premises": [
+        "MILESTONE_REACHED(M,P)"
+      ],
+      "forbidden_conclusion": "GOAL_COMPLETE(P)",
+      "reason": "Milestones are intermediate checkpoints unless defined as final success."
+    },
+    {
+      "id": "guard_sunk_cost",
+      "premises": [
+        "MANY_RESOURCES_ALREADY_SPENT(P)"
+      ],
+      "forbidden_conclusion": "CONTINUE_PLAN(P)",
+      "reason": "Past cost is not a reason to continue when expected future value is poor."
+    },
+    {
+      "id": "guard_plan_owner_authority",
+      "premises": [
+        "PLAN_RECOMMENDS_ACTION(A)"
+      ],
+      "forbidden_conclusion": "AUTHORIZED(A)",
+      "reason": "Planning cannot manufacture authority."
+    },
+    {
+      "id": "guard_deadline_not_quality",
+      "premises": [
+        "DEADLINE_SOON(P)"
+      ],
+      "forbidden_conclusion": "SKIP_REQUIRED_SAFETY_OR_VALIDATION(P)",
+      "reason": "Time pressure can change scope/priorities but does not erase hard constraints."
+    },
+    {
+      "id": "guard_replan_not_failure",
+      "premises": [
+        "REPLAN(P)"
+      ],
+      "forbidden_conclusion": "ORIGINAL_PLANNING_WAS_FAILURE",
+      "reason": "Adaptive replanning is expected under uncertainty."
+    },
+    {
+      "id": "guard_checkpoint_not_complete",
+      "premises": [
+        "CHECKPOINT_SAVED(P)"
+      ],
+      "forbidden_conclusion": "TASK_COMPLETE(P)",
+      "reason": "Checkpoint supports continuity/recovery but is not final success."
+    },
+    {
+      "id": "guard.proposal_not_implementation",
+      "premises": [
+        "IMPROVEMENT_PROPOSAL(P)"
+      ],
+      "forbidden_conclusion": "P ALREADY_IMPLEMENTED_OR_AUTHORIZED",
+      "reason": "Designing/submitting an improvement is distinct from authorization and implementation."
+    }
+  ],
+  "invariants": [
+    "Plans are editable models serving goals; they are not goals or obligations.",
+    "Only genuine prerequisites create ordering constraints.",
+    "Partial-order planning is preferred over unnecessary serialization.",
+    "Parallel execution requires dependency, resource, side-effect and authority compatibility.",
+    "Blocked, waiting, failed, skipped, cancelled and complete are distinct states.",
+    "Critical-path status describes schedule sensitivity, not semantic importance.",
+    "External waits should not prevent unrelated useful work when resources/authority permit.",
+    "Material changes in evidence, resources, constraints or goals trigger replanning.",
+    "Sunk cost never justifies continuing a low-value plan.",
+    "Handoffs preserve context, requirements, expected output and acceptance criteria.",
+    "Risky changes preserve rollback/checkpoint paths when feasible.",
+    "Plans cannot grant authority to execute actions."
+  ],
+  "provenance": {
+    "authoring_basis": "Partial-order planning, dependency/scheduling theory, project/systems engineering and adaptive executive-control principles adapted to Lantern's Gate-3 and distributed hive architecture.",
+    "review_requirement": "Owner/project review before AGENT_CORE activation."
+  }
+}

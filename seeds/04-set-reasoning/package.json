@@ -1,0 +1,370 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.set_reasoning",
+  "package_number": 4,
+  "version": "0.1.0",
+  "title": "Set Reasoning",
+  "inheritance_class": "FORMAL_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed bounded formal set reasoning so Lantern can distinguish membership, containment, overlap, equality and set operations without conflating set structure with relation or empirical claims.",
+  "dependencies": [
+    {
+      "package_id": "foundation.formal_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.predicate_quantifier_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.relation_logic",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "set",
+      "definition": "A collection treated extensionally by which elements are members under the declared formal semantics."
+    },
+    {
+      "id": "element",
+      "definition": "An object that may be a member of a set."
+    },
+    {
+      "id": "membership",
+      "definition": "x IN A states that object x is an element of set A."
+    },
+    {
+      "id": "subset",
+      "definition": "A SUBSET_OF B means every member of A is also a member of B."
+    },
+    {
+      "id": "proper_subset",
+      "definition": "A PROPER_SUBSET_OF B means A is a subset of B and A is not equal to B."
+    },
+    {
+      "id": "superset",
+      "definition": "B SUPERSET_OF A is the inverse view of A SUBSET_OF B."
+    },
+    {
+      "id": "set_equality",
+      "definition": "Sets A and B are equal when they have exactly the same members."
+    },
+    {
+      "id": "empty_set",
+      "definition": "A set with no members. Its emptiness is a known formal property, not missing information."
+    },
+    {
+      "id": "universal_set_relative",
+      "definition": "A declared set containing every object under consideration in a specified universe/scope."
+    },
+    {
+      "id": "union",
+      "definition": "A UNION B contains exactly objects that are in A or B or both."
+    },
+    {
+      "id": "intersection",
+      "definition": "A INTERSECTION B contains exactly objects that are in both A and B."
+    },
+    {
+      "id": "set_difference",
+      "definition": "A DIFFERENCE B contains exactly objects in A that are not in B."
+    },
+    {
+      "id": "complement_relative",
+      "definition": "The complement of A relative to universe U contains objects in U that are not in A."
+    },
+    {
+      "id": "disjoint",
+      "definition": "A and B are disjoint when their intersection is empty."
+    },
+    {
+      "id": "overlap",
+      "definition": "A and B overlap when at least one object is a member of both."
+    },
+    {
+      "id": "cardinality",
+      "definition": "The number of distinct members of a finite set."
+    },
+    {
+      "id": "power_set",
+      "definition": "The set whose members are all subsets of A; included as a concept but not required for broad generation in v1."
+    }
+  ],
+  "rules": [
+    {
+      "id": "set.subset_membership",
+      "variables": [
+        "x",
+        "A",
+        "B"
+      ],
+      "premises": [
+        "A SUBSET_OF B",
+        "x IN A"
+      ],
+      "conclusion": "x IN B"
+    },
+    {
+      "id": "set.subset_transitivity",
+      "variables": [
+        "A",
+        "B",
+        "C"
+      ],
+      "premises": [
+        "A SUBSET_OF B",
+        "B SUBSET_OF C"
+      ],
+      "conclusion": "A SUBSET_OF C"
+    },
+    {
+      "id": "set.subset_reflexivity",
+      "variables": [
+        "A"
+      ],
+      "premises": [
+        "SET(A)"
+      ],
+      "conclusion": "A SUBSET_OF A"
+    },
+    {
+      "id": "set.antisymmetric_equality",
+      "variables": [
+        "A",
+        "B"
+      ],
+      "premises": [
+        "A SUBSET_OF B",
+        "B SUBSET_OF A"
+      ],
+      "conclusion": "A = B"
+    },
+    {
+      "id": "set.proper_subset",
+      "variables": [
+        "A",
+        "B"
+      ],
+      "premises": [
+        "A SUBSET_OF B",
+        "NOT (A = B)"
+      ],
+      "conclusion": "A PROPER_SUBSET_OF B"
+    },
+    {
+      "id": "set.union_left",
+      "variables": [
+        "x",
+        "A",
+        "B"
+      ],
+      "premises": [
+        "x IN A"
+      ],
+      "conclusion": "x IN (A UNION B)"
+    },
+    {
+      "id": "set.union_right",
+      "variables": [
+        "x",
+        "A",
+        "B"
+      ],
+      "premises": [
+        "x IN B"
+      ],
+      "conclusion": "x IN (A UNION B)"
+    },
+    {
+      "id": "set.intersection_membership",
+      "variables": [
+        "x",
+        "A",
+        "B"
+      ],
+      "premises": [
+        "x IN A",
+        "x IN B"
+      ],
+      "conclusion": "x IN (A INTERSECTION B)"
+    },
+    {
+      "id": "set.difference_membership",
+      "variables": [
+        "x",
+        "A",
+        "B"
+      ],
+      "premises": [
+        "x IN A",
+        "NOT (x IN B)"
+      ],
+      "conclusion": "x IN (A DIFFERENCE B)"
+    },
+    {
+      "id": "set.disjoint_no_shared_member",
+      "variables": [
+        "x",
+        "A",
+        "B"
+      ],
+      "premises": [
+        "DISJOINT(A,B)",
+        "x IN A"
+      ],
+      "conclusion": "NOT (x IN B)"
+    },
+    {
+      "id": "set.overlap_witness",
+      "variables": [
+        "x",
+        "A",
+        "B"
+      ],
+      "premises": [
+        "x IN A",
+        "x IN B"
+      ],
+      "conclusion": "OVERLAP(A,B)"
+    },
+    {
+      "id": "set.empty_no_members",
+      "variables": [
+        "x",
+        "A"
+      ],
+      "premises": [
+        "EMPTY(A)"
+      ],
+      "conclusion": "NOT (x IN A)",
+      "conditions": [
+        "x is a candidate term in the active universe"
+      ]
+    },
+    {
+      "id": "set.relative_complement",
+      "variables": [
+        "x",
+        "A",
+        "U"
+      ],
+      "premises": [
+        "x IN U",
+        "NOT (x IN A)"
+      ],
+      "conclusion": "x IN COMPLEMENT(A,U)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.membership_not_subset",
+      "premises": [
+        "x IN A"
+      ],
+      "forbidden_conclusion": "x SUBSET_OF A",
+      "reason": "Membership relates an element to a set; subset relates one set to another."
+    },
+    {
+      "id": "guard.subset_not_membership",
+      "premises": [
+        "A SUBSET_OF B"
+      ],
+      "forbidden_conclusion": "A IN B",
+      "reason": "A subset is not thereby an element of the containing set."
+    },
+    {
+      "id": "guard.overlap_not_subset",
+      "premises": [
+        "OVERLAP(A,B)"
+      ],
+      "forbidden_conclusion": "A SUBSET_OF B",
+      "reason": "Sharing at least one member does not establish containment."
+    },
+    {
+      "id": "guard.subset_not_proper",
+      "premises": [
+        "A SUBSET_OF B"
+      ],
+      "forbidden_conclusion": "A PROPER_SUBSET_OF B",
+      "reason": "A may equal B; proper subset additionally requires non-equality."
+    },
+    {
+      "id": "guard.member_of_subset_reverse",
+      "premises": [
+        "A SUBSET_OF B",
+        "x IN B"
+      ],
+      "forbidden_conclusion": "x IN A",
+      "reason": "Membership in a superset does not establish membership in a subset."
+    },
+    {
+      "id": "guard.union_member_origin",
+      "premises": [
+        "x IN (A UNION B)"
+      ],
+      "forbidden_conclusion": "x IN A",
+      "reason": "Union membership alone does not identify which operand contains x."
+    },
+    {
+      "id": "guard.intersection_from_single_membership",
+      "premises": [
+        "x IN A"
+      ],
+      "forbidden_conclusion": "x IN (A INTERSECTION B)",
+      "reason": "Intersection requires membership in both sets."
+    },
+    {
+      "id": "guard.empty_not_unknown",
+      "premises": [
+        "EMPTY(A)"
+      ],
+      "forbidden_conclusion": "MEMBERSHIP_UNKNOWN(A)",
+      "reason": "Known emptiness is information: the set has no members."
+    },
+    {
+      "id": "guard.disjoint_not_exhaustive",
+      "premises": [
+        "DISJOINT(A,B)"
+      ],
+      "forbidden_conclusion": "A UNION B = U",
+      "reason": "Disjoint sets need not cover the active universe."
+    },
+    {
+      "id": "guard.cardinality_not_identity",
+      "premises": [
+        "CARDINALITY(A)=CARDINALITY(B)"
+      ],
+      "forbidden_conclusion": "A = B",
+      "reason": "Different sets may have the same number of members."
+    },
+    {
+      "id": "guard.relative_complement_requires_universe",
+      "premises": [
+        "NOT (x IN A)"
+      ],
+      "forbidden_conclusion": "x IN COMPLEMENT(A,U)",
+      "reason": "Complement is relative to a declared universe; x must be established in U."
+    }
+  ],
+  "invariants": [
+    "Membership and subset are different relation types and are never silently interchanged.",
+    "Subset is reflexive, transitive and antisymmetric under extensional set semantics.",
+    "Set equality is extensional: equal sets have exactly the same members.",
+    "Known empty is not the same epistemic state as unknown contents.",
+    "Union uses inclusive OR; intersection uses AND.",
+    "Complement is always interpreted relative to an explicit universe/scope.",
+    "Equal cardinality does not imply equal membership.",
+    "Set operations do not establish empirical category membership unless the relevant memberships/premises are themselves supported.",
+    "Formal set derivations remain separate from factual authority and external permission."
+  ],
+  "provenance": {
+    "authoring_basis": "Elementary extensional set theory and set-algebra foundations, bounded for Lantern's inspectable formal reasoning.",
+    "review_requirement": "Owner/project review before CORE activation."
+  }
+}

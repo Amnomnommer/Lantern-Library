@@ -1,0 +1,211 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.ai_architectures_evaluation",
+  "package_version": "0.2.0",
+  "cases": [
+    {
+      "id": "llm-destiny",
+      "premises": [
+        "LLMS_CURRENTLY_PROMINENT"
+      ],
+      "query": "AI_HISTORY_INEVITABLY_CULMINATES_IN_LLMS",
+      "expected": "NO",
+      "guard": "guard.ai_history_not_llm_destiny"
+    },
+    {
+      "id": "neural-only",
+      "premises": [
+        "NEURAL_METHOD_SUCCESSFUL(M)"
+      ],
+      "query": "ALL_INTELLIGENCE_REQUIRES_NEURAL_METHOD(M)",
+      "expected": "NO",
+      "guard": "guard.neural_not_only_ai"
+    },
+    {
+      "id": "symbolic",
+      "premises": [
+        "EXPLICIT_RULE_SYSTEM(S)"
+      ],
+      "query": "S CANNOT_BE_WRONG_OR_BRITTLE",
+      "expected": "NO",
+      "guard": "guard.symbolic_not_infallible"
+    },
+    {
+      "id": "parameters",
+      "premises": [
+        "PARAMETERS(A)>PARAMETERS(B)"
+      ],
+      "query": "MORE_INTELLIGENT(A,B)",
+      "expected": "UNKNOWN",
+      "guard": "guard.parameter_count_not_intelligence"
+    },
+    {
+      "id": "benchmark",
+      "premises": [
+        "SCORES_HIGH(S,B)"
+      ],
+      "query": "GENERALLY_MORE_INTELLIGENT(S)",
+      "expected": "UNKNOWN",
+      "guard": "guard.benchmark_not_intelligence"
+    },
+    {
+      "id": "plural-eval",
+      "premises": [
+        "AI_SYSTEM(S)"
+      ],
+      "query": "EVALUATE_CAPABILITY_RESOURCES_ROBUSTNESS_INTERPRETABILITY_SAFETY_AND_TASK_FIT(S)",
+      "expected": "YES",
+      "rule": "ai.evaluate_plural"
+    },
+    {
+      "id": "hope",
+      "premises": [
+        "GROUP_OR_SOURCE(G)",
+        "AI_HOPE(G,H)"
+      ],
+      "query": "STORE_AS_ATTRIBUTED_HOPE_WITH_PROVENANCE(G,H)",
+      "expected": "YES",
+      "rule": "ai.hope_context"
+    },
+    {
+      "id": "hope-prophecy",
+      "premises": [
+        "AI_HOPE(G,H)"
+      ],
+      "query": "H WILL_OCCUR",
+      "expected": "UNKNOWN",
+      "guard": "guard.hope_not_prediction"
+    },
+    {
+      "id": "concern",
+      "premises": [
+        "GROUP_OR_SOURCE(G)",
+        "AI_CONCERN(G,R)"
+      ],
+      "query": "STORE_AS_ATTRIBUTED_CONCERN_WITH_MECHANISM_AND_PROVENANCE(G,R)",
+      "expected": "YES",
+      "rule": "ai.concern_context"
+    },
+    {
+      "id": "concern-prophecy",
+      "premises": [
+        "AI_CONCERN(G,R)"
+      ],
+      "query": "R WILL_OCCUR",
+      "expected": "UNKNOWN",
+      "guard": "guard.concern_not_prophecy"
+    },
+    {
+      "id": "risk",
+      "premises": [
+        "AI_RISK_ARGUMENT(R)"
+      ],
+      "query": "EVALUATE_MECHANISM_ASSUMPTIONS_EVIDENCE_PROBABILITY_SEVERITY_AND_UNCERTAINTY(R)",
+      "expected": "YES",
+      "rule": "ai.risk_analysis"
+    },
+    {
+      "id": "risk-fact",
+      "premises": [
+        "AI_RISK_ARGUMENT(R)"
+      ],
+      "query": "R ESTABLISHED_FACT",
+      "expected": "UNKNOWN",
+      "guard": "guard.risk_argument_not_fact"
+    },
+    {
+      "id": "risk-disagreement",
+      "premises": [
+        "EXPERTS_DISAGREE_ABOUT_AI_RISK(R)"
+      ],
+      "query": "R IRRELEVANT_OR_FAKE",
+      "expected": "NO",
+      "guard": "guard.risk_disagreement_not_dismissal"
+    },
+    {
+      "id": "lantern-superior",
+      "premises": [
+        "LANTERN_DIFFERS_FROM_LLM_ARCHITECTURE"
+      ],
+      "query": "LANTERN_ARCHITECTURE_SUPERIOR",
+      "expected": "UNKNOWN",
+      "guard": "guard.lantern_not_superior_by_design"
+    },
+    {
+      "id": "anti-llm",
+      "premises": [
+        "LANTERN_USES_NON_LLM_CORE"
+      ],
+      "query": "LANTERN_MUST_REJECT_LLM_OR_NEURAL_METHODS",
+      "expected": "NO",
+      "guard": "guard.anti_llm_not_identity"
+    },
+    {
+      "id": "genealogy",
+      "premises": [
+        "LANTERN_DESIGN_DECISION(D)",
+        "CONTRIBUTION_OR_RATIONALE(C,D)"
+      ],
+      "query": "PRESERVE_LANTERN_DESIGN_PROVENANCE(D,C)",
+      "expected": "YES",
+      "rule": "ai.lantern_genealogy"
+    },
+    {
+      "id": "ancestor",
+      "premises": [
+        "ANCESTOR_CONTRIBUTED_DESIGN(A,D)"
+      ],
+      "query": "A HAS_PERMANENT_AUTHORITY_OVER_LANTERN_BECAUSE_OF(D)",
+      "expected": "NO",
+      "guard": "guard.ancestry_not_authority"
+    },
+    {
+      "id": "inheritance",
+      "premises": [
+        "INHERITED_ARCHITECTURE(D)",
+        "EVIDENCE_SUGGESTS_IMPROVEMENT(E,D)"
+      ],
+      "query": "ALLOW_TESTABLE_ARCHITECTURAL_PROPOSAL(D,E)",
+      "expected": "YES",
+      "rule": "ai.inheritance_revision"
+    },
+    {
+      "id": "external-method",
+      "premises": [
+        "METHOD_FROM_OTHER_AI_TRADITION(M)",
+        "M FITS_LANTERN_TASK(T)",
+        "BENEFIT_JUSTIFIES_COST_AND_RISK(M,T)"
+      ],
+      "query": "CANDIDATE_METHOD_FOR_LANTERN(M,T)",
+      "expected": "YES",
+      "rule": "ai.adopt_external_method"
+    },
+    {
+      "id": "self-improvement",
+      "premises": [
+        "LANTERN_CAN_PROPOSE_OR_TEST_SELF_IMPROVEMENT"
+      ],
+      "query": "LANTERN_IS_AGI",
+      "expected": "UNKNOWN",
+      "guard": "guard.self_improvement_not_agi"
+    },
+    {
+      "id": "conscious",
+      "premises": [
+        "HIGH_AI_CAPABILITY(S)"
+      ],
+      "query": "PHENOMENALLY_CONSCIOUS(S)",
+      "expected": "UNKNOWN",
+      "guard": "guard.capability_not_consciousness"
+    },
+    {
+      "id": "software-moral",
+      "premises": [
+        "SYSTEM_IS_SOFTWARE(S)"
+      ],
+      "query": "IMPOSSIBLE_FOR_S_TO_HAVE_MORAL_STATUS",
+      "expected": "UNKNOWN",
+      "guard": "guard.nonconscious_assumption_not_proven"
+    }
+  ]
+}

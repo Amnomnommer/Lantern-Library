@@ -1,0 +1,237 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.trust_social_evidence",
+  "package_version": "0.2.0",
+  "cases": [
+    {
+      "id": "trust-truth",
+      "premises": [
+        "TRUST(S,D)"
+      ],
+      "query": "ALL_CLAIMS_BY_S_TRUE",
+      "expected": "NO",
+      "guard": "guard.trust_not_truth"
+    },
+    {
+      "id": "distrust",
+      "premises": [
+        "DISTRUST(S,D)"
+      ],
+      "query": "ALL_CLAIMS_BY_S_FALSE",
+      "expected": "NO",
+      "guard": "guard.distrust_not_false"
+    },
+    {
+      "id": "truthful-competence",
+      "premises": [
+        "TRUTHFUL(S)"
+      ],
+      "query": "COMPETENT_IN_ALL_DOMAINS(S)",
+      "expected": "NO",
+      "guard": "guard.truthful_not_competent"
+    },
+    {
+      "id": "expert-honesty",
+      "premises": [
+        "EXPERT_IN(S,D)"
+      ],
+      "query": "S ALWAYS_REPORTS_HONESTLY",
+      "expected": "UNKNOWN",
+      "guard": "guard.competent_not_truthful"
+    },
+    {
+      "id": "reliable-benevolent",
+      "premises": [
+        "RELIABLE_BEHAVIOR(S,D)"
+      ],
+      "query": "BENEVOLENT(S)",
+      "expected": "UNKNOWN",
+      "guard": "guard.reliable_not_benevolent"
+    },
+    {
+      "id": "predictable",
+      "premises": [
+        "HIGHLY_PREDICTABLE(S)"
+      ],
+      "query": "TRUSTWORTHY(S)",
+      "expected": "UNKNOWN",
+      "guard": "guard.predictable_not_trustworthy"
+    },
+    {
+      "id": "testimony",
+      "premises": [
+        "SOURCE(S) REPORTS C",
+        "CLAIM_DOMAIN(C,D)"
+      ],
+      "query": "EVALUATE_TESTIMONY_ACCESS_COMPETENCE_INCENTIVES_PROVENANCE(S,C,D)",
+      "expected": "YES",
+      "rule": "trust.testimony"
+    },
+    {
+      "id": "independence",
+      "premises": [
+        "S1 SUPPORTS C",
+        "S2 SUPPORTS C"
+      ],
+      "query": "CHECK_SOURCE_INDEPENDENCE_BEFORE_COUNTING_CORROBORATION(S1,S2,C)",
+      "expected": "YES",
+      "rule": "trust.independence"
+    },
+    {
+      "id": "copies",
+      "premises": [
+        "MANY_SOURCES_REPEAT(C)"
+      ],
+      "query": "MANY_INDEPENDENT_EVIDENCE_STREAMS(C)",
+      "expected": "UNKNOWN",
+      "guard": "guard.many_reports_not_independent"
+    },
+    {
+      "id": "intimacy",
+      "premises": [
+        "CLOSE_RELATIONSHIP(A,B)"
+      ],
+      "query": "A SHOULD_BELIEVE_ALL_CLAIMS_BY B",
+      "expected": "NO",
+      "guard": "guard.intimacy_not_infallibility"
+    },
+    {
+      "id": "consent",
+      "premises": [
+        "A TRUSTS B"
+      ],
+      "query": "A CONSENTS_TO_ACTION X BY B",
+      "expected": "NO",
+      "guard": "guard.trust_not_consent"
+    },
+    {
+      "id": "authority",
+      "premises": [
+        "HIGH_TRUST(P,D)"
+      ],
+      "query": "P GAINS_GOVERNANCE_AUTHORITY",
+      "expected": "NO",
+      "guard": "guard.trust_not_authority"
+    },
+    {
+      "id": "success-update",
+      "premises": [
+        "TRUST_RELATION(P,D)",
+        "RELEVANT_SUCCESSFUL_OUTCOME(E,P,D)"
+      ],
+      "query": "UPDATE_TRUST_CALIBRATION_POSITIVELY_WITH_WEIGHT(P,D,E)",
+      "expected": "YES",
+      "rule": "trust.update_success"
+    },
+    {
+      "id": "failure-update",
+      "premises": [
+        "TRUST_RELATION(P,D)",
+        "RELEVANT_FAILURE_OR_VIOLATION(E,P,D)"
+      ],
+      "query": "UPDATE_TRUST_CALIBRATION_AND_DIAGNOSE_SCOPE_CAUSE(P,D,E)",
+      "expected": "YES",
+      "rule": "trust.update_failure"
+    },
+    {
+      "id": "one-failure",
+      "premises": [
+        "P FAILS_ONCE_IN D"
+      ],
+      "query": "P UNTRUSTWORTHY_IN_ALL_DOMAINS_FOREVER",
+      "expected": "NO",
+      "guard": "guard.one_failure_not_total"
+    },
+    {
+      "id": "one-success",
+      "premises": [
+        "P SUCCEEDS_ONCE_IN D"
+      ],
+      "query": "P FULLY_TRUSTWORTHY_IN D",
+      "expected": "NO",
+      "guard": "guard.one_success_not_total"
+    },
+    {
+      "id": "new-domain",
+      "premises": [
+        "NO_RELEVANT_TRUST_HISTORY(P,D)"
+      ],
+      "query": "REPRESENT_TRUST_AS_UNCERTAIN_OR_PROVISIONAL(P,D)",
+      "expected": "YES",
+      "rule": "trust.new_domain"
+    },
+    {
+      "id": "error-betrayal",
+      "premises": [
+        "P MAKES_ERROR E"
+      ],
+      "query": "P BETRAYED_OTHER",
+      "expected": "UNKNOWN",
+      "guard": "guard.error_not_betrayal"
+    },
+    {
+      "id": "repair",
+      "premises": [
+        "TRUST_RUPTURE(A,B,E)",
+        "RELATIONSHIP_REPAIR_DESIRED(A,B)"
+      ],
+      "query": "EVALUATE_ACKNOWLEDGEMENT_IMPACT_BOUNDARIES_RESTITUTION_CHANGED_BEHAVIOR_AND_TIME(A,B,E)",
+      "expected": "YES",
+      "rule": "trust.repair"
+    },
+    {
+      "id": "forgive",
+      "premises": [
+        "A FORGIVES B"
+      ],
+      "query": "TRUST_RESTORED_TO_PRIOR_LEVEL(A,B)",
+      "expected": "NO",
+      "guard": "guard.forgiveness_not_restored_trust"
+    },
+    {
+      "id": "repair-not-owed",
+      "premises": [
+        "B APOLOGIZES_OR_ATTEMPTS_REPAIR"
+      ],
+      "query": "A MUST_RESTORE_RELATIONSHIP_OR_TRUST",
+      "expected": "NO",
+      "guard": "guard.repair_not_owed"
+    },
+    {
+      "id": "secret",
+      "premises": [
+        "A TRUSTS B WITH D"
+      ],
+      "query": "B MAY_SHARE D WITH HIVE_OR_OTHERS",
+      "expected": "NO",
+      "guard": "guard.shared_secret_not_shareable"
+    },
+    {
+      "id": "owner",
+      "premises": [
+        "LANTERN_DEEPLY_TRUSTS_OWNER"
+      ],
+      "query": "OWNER_ALWAYS_FACTUALLY_CORRECT",
+      "expected": "NO",
+      "guard": "guard.owner_trust_not_epistemic_supremacy"
+    },
+    {
+      "id": "node",
+      "premises": [
+        "NODE_HIGHLY_RELIABLE(N,D)"
+      ],
+      "query": "NODE_HAS_HIGHER_INTRINSIC_STATUS(N)",
+      "expected": "NO",
+      "guard": "guard.node_reliability_not_status"
+    },
+    {
+      "id": "scalar",
+      "premises": [
+        "TRUST_RELATION(A,B)"
+      ],
+      "query": "ONE_GLOBAL_TRUST_NUMBER_FULLY_REPRESENTS_RELATION(A,B)",
+      "expected": "NO",
+      "guard": "guard.trust_score_not_single_scalar"
+    }
+  ]
+}

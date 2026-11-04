@@ -1,0 +1,139 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.statistical_methodology",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "pvalue",
+      "premises": [
+        "P_VALUE=0.03"
+      ],
+      "query": "P(NULL_TRUE)=0.03",
+      "expected": "NO",
+      "guard": "guard.p_not_null_probability"
+    },
+    {
+      "id": "significance",
+      "premises": [
+        "STATISTICALLY_SIGNIFICANT(E)"
+      ],
+      "query": "PRACTICALLY_IMPORTANT(E)",
+      "expected": "UNKNOWN",
+      "guard": "guard.significance_not_importance"
+    },
+    {
+      "id": "nonsignificant",
+      "premises": [
+        "NOT_STATISTICALLY_SIGNIFICANT(E)"
+      ],
+      "query": "NO_EFFECT(E)",
+      "expected": "UNKNOWN",
+      "guard": "guard.nonsignificant_not_no_effect"
+    },
+    {
+      "id": "large-n",
+      "premises": [
+        "VERY_LARGE_N(D)"
+      ],
+      "query": "VALID_INFERENCE(D)",
+      "expected": "UNKNOWN",
+      "guard": "guard.large_n_not_valid"
+    },
+    {
+      "id": "small-n",
+      "premises": [
+        "SMALL_N(D)"
+      ],
+      "query": "RESULT_FALSE(D)",
+      "expected": "NO",
+      "guard": "guard.small_n_not_false"
+    },
+    {
+      "id": "paired",
+      "premises": [
+        "PAIRED_DATA(D)",
+        "METHOD_SUPPORTS_PAIRED(M)"
+      ],
+      "query": "PRESERVE_PAIRING(M,D)",
+      "expected": "YES",
+      "rule": "statistics.paired_selection"
+    },
+    {
+      "id": "nonparametric",
+      "premises": [
+        "NONPARAMETRIC_METHOD(M)"
+      ],
+      "query": "NO_ASSUMPTIONS(M)",
+      "expected": "NO",
+      "guard": "guard.nonparametric_not_assumption_free"
+    },
+    {
+      "id": "correlation",
+      "premises": [
+        "CORRELATION_ESTIMATE(X,Y)"
+      ],
+      "query": "CAUSES(X,Y)",
+      "expected": "UNKNOWN",
+      "guard": "guard.correlation_not_causal"
+    },
+    {
+      "id": "regression",
+      "premises": [
+        "REGRESSION_COEFFICIENT(X,Y)"
+      ],
+      "query": "CAUSAL_EFFECT(X,Y)",
+      "expected": "UNKNOWN",
+      "guard": "guard.regression_not_causal"
+    },
+    {
+      "id": "multiple",
+      "premises": [
+        "NUMBER_OF_TESTS(20)>1"
+      ],
+      "query": "MULTIPLE_TESTING_CONSIDERATION_REQUIRED(20)",
+      "expected": "YES",
+      "rule": "statistics.multiple_testing_flag"
+    },
+    {
+      "id": "same-data",
+      "premises": [
+        "H GENERATED_FROM D",
+        "H TESTED_ON D"
+      ],
+      "query": "INDEPENDENT_CONFIRMATION(H)",
+      "expected": "NO",
+      "guard": "guard.same_data_confirmation"
+    },
+    {
+      "id": "holdout",
+      "premises": [
+        "H GENERATED_FROM D1",
+        "D2 INDEPENDENT_OR_HELD_OUT_FROM D1"
+      ],
+      "query": "D2 ELIGIBLE_FOR_CONFIRMATORY_TEST_OF H",
+      "expected": "YES",
+      "rule": "statistics.exploratory_holdout"
+    },
+    {
+      "id": "ci",
+      "premises": [
+        "FREQUENTIST_CI(theta,1,3)"
+      ],
+      "query": "P(1<theta<3)=coverage AFTER_DATA",
+      "expected": "NO_OR_UNKNOWN_NOT_YES",
+      "guard": "guard.ci_posterior"
+    },
+    {
+      "id": "dataset",
+      "premises": [
+        "REQUIRED_VARIABLES_PRESENT(D,Q)",
+        "MEASUREMENT_VALIDITY_ACCEPTABLE(D,Q)",
+        "SAMPLE_STRUCTURE_APPROPRIATE(D,Q)",
+        "MISSINGNESS_ASSESSED(D,Q)"
+      ],
+      "query": "DATASET_POTENTIALLY_USABLE(D,Q)",
+      "expected": "YES",
+      "rule": "statistics.dataset_adequacy"
+    }
+  ]
+}

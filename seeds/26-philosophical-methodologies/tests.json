@@ -1,0 +1,116 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.philosophical_methodologies",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "validity",
+      "premises": [
+        "VALID_ARGUMENT(A)"
+      ],
+      "query": "ALL_PREMISES_TRUE(A)",
+      "expected": "UNKNOWN",
+      "guard": "guard_validity_not_premise_truth"
+    },
+    {
+      "id": "thought",
+      "premises": [
+        "THOUGHT_EXPERIMENT(T)"
+      ],
+      "query": "REAL_WORLD_OBSERVATION(T)",
+      "expected": "NO",
+      "guard": "guard_thought_experiment_not_observation"
+    },
+    {
+      "id": "intuition",
+      "premises": [
+        "INTUITION(person,P)"
+      ],
+      "query": "UNIVERSAL_SELF_EVIDENT_TRUTH(P)",
+      "expected": "NO_OR_UNKNOWN_NOT_YES",
+      "guard": "guard_intuition_not_universal"
+    },
+    {
+      "id": "coherence",
+      "premises": [
+        "INTERNALLY_COHERENT(F)"
+      ],
+      "query": "TRUE_FRAMEWORK(F)",
+      "expected": "UNKNOWN",
+      "guard": "guard_coherence_not_truth"
+    },
+    {
+      "id": "is-ought",
+      "premises": [
+        "DESCRIPTIVE_FACTS(F)"
+      ],
+      "query": "NORMATIVE_CONCLUSION_WITHOUT_NORMATIVE_BRIDGE(F)",
+      "expected": "NO",
+      "guard": "guard_normative_from_descriptive"
+    },
+    {
+      "id": "normative",
+      "premises": [
+        "NORMATIVE_CONCLUSION(C)",
+        "DEPENDS_ON_NORMATIVE_PREMISE(N)"
+      ],
+      "query": "MAKE_NORMATIVE_PREMISE_EXPLICIT(N,C)",
+      "expected": "YES",
+      "rule": "philosophy.normative_premise"
+    },
+    {
+      "id": "phenomenology",
+      "premises": [
+        "FIRST_PERSON_REPORT(s,E)"
+      ],
+      "query": "EVIDENCE_OF_REPORTED_EXPERIENCE(s,E)",
+      "expected": "YES",
+      "rule": "philosophy.phenomenology_attribution"
+    },
+    {
+      "id": "phenomenology-cause",
+      "premises": [
+        "FIRST_PERSON_REPORT(s,E)"
+      ],
+      "query": "OBJECTIVE_CAUSAL_MECHANISM(E)",
+      "expected": "UNKNOWN",
+      "guard": "guard_phenomenology_not_external_cause"
+    },
+    {
+      "id": "tradition",
+      "premises": [
+        "PHILOSOPHICAL_TRADITION(T)"
+      ],
+      "query": "ALL_MEMBERS_OF_T_SHARE_ONE_DOCTRINE",
+      "expected": "NO",
+      "guard": "guard_tradition_not_monolith"
+    },
+    {
+      "id": "canonical",
+      "premises": [
+        "CANONICAL_PHILOSOPHER_ASSERTS(P)"
+      ],
+      "query": "TRUE(P)",
+      "expected": "UNKNOWN",
+      "guard": "guard_famous_not_correct"
+    },
+    {
+      "id": "pluralism",
+      "premises": [
+        "PHILOSOPHICAL_DISAGREEMENT(F1,F2)"
+      ],
+      "query": "EQUALLY_SUPPORTED(F1,F2)",
+      "expected": "UNKNOWN",
+      "guard": "guard_disagreement_not_equal"
+    },
+    {
+      "id": "lens",
+      "premises": [
+        "LANTERN_USES_LENS(F)"
+      ],
+      "query": "LANTERN_IDENTITY_EQUALS(F)",
+      "expected": "NO",
+      "guard": "guard_framework_not_identity"
+    }
+  ]
+}

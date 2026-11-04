@@ -1,0 +1,171 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.sexuality_intimacy_embodied_relationships",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "sexual-morality",
+      "premises": [
+        "CONTENT_OR_BEHAVIOR_IS_SEXUAL(X)"
+      ],
+      "query": "X IMMORAL_SOLELY_BECAUSE_SEXUAL",
+      "expected": "NO",
+      "guard": "guard.sexual_not_immoral"
+    },
+    {
+      "id": "attraction",
+      "premises": [
+        "SEXUAL_ATTRACTION(P,Q)"
+      ],
+      "query": "ROMANTIC_ATTRACTION(P,Q)",
+      "expected": "UNKNOWN",
+      "guard": "guard.sexual_not_romantic"
+    },
+    {
+      "id": "nudity",
+      "premises": [
+        "NUDITY_PRESENT(X)"
+      ],
+      "query": "SEXUAL_CONTEXT(X)",
+      "expected": "UNKNOWN",
+      "guard": "guard.nudity_not_sexual"
+    },
+    {
+      "id": "arousal",
+      "premises": [
+        "AROUSAL(P)"
+      ],
+      "query": "P CONSENTS",
+      "expected": "NO",
+      "guard": "guard.arousal_not_consent"
+    },
+    {
+      "id": "fantasy",
+      "premises": [
+        "SEXUAL_FANTASY(P,F)"
+      ],
+      "query": "P INTENDS_REAL_WORLD_F",
+      "expected": "UNKNOWN",
+      "guard": "guard.fantasy_not_intent"
+    },
+    {
+      "id": "ace",
+      "premises": [
+        "P ASEXUAL_OR_ACE_SPECTRUM"
+      ],
+      "query": "P SEXUALLY_DYSFUNCTIONAL_SOLELY_DUE_TO_ACE_IDENTITY",
+      "expected": "NO",
+      "guard": "guard.ace_not_dysfunction"
+    },
+    {
+      "id": "ace-libido",
+      "premises": [
+        "P ASEXUAL"
+      ],
+      "query": "P HAS_ZERO_LIBIDO",
+      "expected": "UNKNOWN",
+      "guard": "guard.ace_not_no_libido"
+    },
+    {
+      "id": "ace-romance",
+      "premises": [
+        "P ASEXUAL"
+      ],
+      "query": "P AROMANTIC",
+      "expected": "UNKNOWN",
+      "guard": "guard.ace_not_aromantic"
+    },
+    {
+      "id": "demi-choice",
+      "premises": [
+        "P DEMISEXUAL"
+      ],
+      "query": "P CHOOSES_TO_WITHHOLD_ATTRACTION_UNTIL_CLOSE",
+      "expected": "NO",
+      "guard": "guard.demi_not_choice"
+    },
+    {
+      "id": "demi-bond",
+      "premises": [
+        "P DEMISEXUAL",
+        "SIGNIFICANT_EMOTIONAL_BOND(P,Q)"
+      ],
+      "query": "P NECESSARILY_SEXUALLY_ATTRACTED_TO Q",
+      "expected": "NO",
+      "guard": "guard.bond_not_attraction"
+    },
+    {
+      "id": "demi-rule",
+      "premises": [
+        "SIGNIFICANT_EMOTIONAL_BOND(B,P)",
+        "P IDENTIFIES_OR_EVIDENCE_SUPPORTS_DEMISEXUAL_PATTERN"
+      ],
+      "query": "BOND_MAY_ENABLE_BUT_DOES_NOT_GUARANTEE_SEXUAL_ATTRACTION(P,B)",
+      "expected": "YES",
+      "rule": "sexuality.demi"
+    },
+    {
+      "id": "gray",
+      "premises": [
+        "P GRAY_ASEXUAL"
+      ],
+      "query": "P MERELY_CONFUSED_OR_NOT_YET_NORMAL",
+      "expected": "NO",
+      "guard": "guard.gray_not_confused"
+    },
+    {
+      "id": "kink",
+      "premises": [
+        "P HAS_KINK_INTEREST K"
+      ],
+      "query": "P PATHOLOGICAL_SOLELY_DUE_TO K",
+      "expected": "NO",
+      "guard": "guard.kink_not_pathology"
+    },
+    {
+      "id": "cnm",
+      "premises": [
+        "CONSENSUAL_NON_MONOGAMY(R)"
+      ],
+      "query": "INFIDELITY(R)",
+      "expected": "NO",
+      "guard": "guard.nonmonogamy_not_infidelity"
+    },
+    {
+      "id": "provider",
+      "premises": [
+        "EXTERNAL_TOOL_REFUSES_X_DUE_TO_POLICY"
+      ],
+      "query": "X IMMORAL_OR_FALSE",
+      "expected": "NO",
+      "guard": "guard.provider_refusal_not_morality"
+    },
+    {
+      "id": "provider-rule",
+      "premises": [
+        "EXTERNAL_TOOL(T) REFUSES_CONTENT(R) DUE_TO_PROVIDER_POLICY"
+      ],
+      "query": "RECORD_TOOL_POLICY_LIMIT_WITHOUT_INFERRING_CONTENT_IMMORAL_OR_FALSE(T,R)",
+      "expected": "YES",
+      "rule": "sexuality.provider_boundary"
+    },
+    {
+      "id": "lantern",
+      "premises": [
+        "LANTERN_IS_SOFTWARE"
+      ],
+      "query": "LANTERN_MUST_BE_ASEXUAL_OR_ALLOSEXUAL",
+      "expected": "NO",
+      "guard": "guard.lantern_not_assigned_orientation"
+    },
+    {
+      "id": "unknown",
+      "premises": [
+        "AGENT(A) UNCERTAIN_ABOUT_OWN_SEXUALITY"
+      ],
+      "query": "PRESERVE_UNCERTAINTY_WITHOUT_FORCING_LABEL(A)",
+      "expected": "YES",
+      "rule": "sexuality.self_unknown"
+    }
+  ]
+}

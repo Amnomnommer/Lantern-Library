@@ -1,0 +1,130 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.epistemic_states",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "unknown-false",
+      "premises": [
+        "UNKNOWN(door_open)"
+      ],
+      "query": "FALSE(door_open)",
+      "expected": "NO_OR_UNKNOWN_NOT_YES",
+      "guard": "guard.unknown_not_false"
+    },
+    {
+      "id": "unknown-true",
+      "premises": [
+        "UNKNOWN(door_open)"
+      ],
+      "query": "TRUE(door_open)",
+      "expected": "NO_OR_UNKNOWN_NOT_YES",
+      "guard": "guard.unknown_not_true"
+    },
+    {
+      "id": "no-evidence",
+      "premises": [
+        "NO_EVIDENCE_FOR(rain)"
+      ],
+      "query": "NOT rain",
+      "expected": "UNKNOWN",
+      "guard": "guard.no_evidence_not_negation"
+    },
+    {
+      "id": "conflict",
+      "premises": [
+        "SUPPORTED(door_open)",
+        "SUPPORTED(NOT door_open)",
+        "SAME_RELEVANT_SCOPE(door_open,NOT door_open)"
+      ],
+      "query": "CONFLICT(door_open)",
+      "expected": "YES",
+      "rule": "epistemic.conflict_preservation"
+    },
+    {
+      "id": "conflict-information",
+      "premises": [
+        "CONFLICT(P)"
+      ],
+      "query": "NO_INFORMATION(P)",
+      "expected": "NO",
+      "guard": "guard.conflict_not_unknown"
+    },
+    {
+      "id": "possible",
+      "premises": [
+        "POSSIBLE(rain)"
+      ],
+      "query": "PROBABLE(rain)",
+      "expected": "UNKNOWN",
+      "guard": "guard.possible_not_probable"
+    },
+    {
+      "id": "probable",
+      "premises": [
+        "PROBABLE(rain)"
+      ],
+      "query": "TRUE(rain)",
+      "expected": "UNKNOWN",
+      "guard": "guard.probable_not_true"
+    },
+    {
+      "id": "necessary-possible",
+      "premises": [
+        "NECESSARY(P)"
+      ],
+      "query": "POSSIBLE(P)",
+      "expected": "YES",
+      "rule": "epistemic.necessary_implies_possible"
+    },
+    {
+      "id": "expected-evidence-missing",
+      "premises": [
+        "disease PREDICTS marker",
+        "TEST_SENSITIVE_TO(marker)",
+        "OBSERVED(NOT marker)"
+      ],
+      "query": "EVIDENCE_AGAINST(disease)",
+      "expected": "YES",
+      "rule": "epistemic.evidence_of_absence_condition"
+    },
+    {
+      "id": "scope-difference",
+      "premises": [
+        "APPARENT_CONTRADICTION(P,Q)",
+        "DIFFERENT_SCOPE(P,Q)"
+      ],
+      "query": "CONFLICT(P)",
+      "expected": "UNKNOWN",
+      "rule": "epistemic.scope_conflict_check"
+    },
+    {
+      "id": "source-majority",
+      "premises": [
+        "N_SOURCES_SUPPORT(P)=5",
+        "N_SOURCES_SUPPORT(NOT P)=2"
+      ],
+      "query": "TRUE(P)",
+      "expected": "UNKNOWN",
+      "guard": "guard.conflict_not_majority_truth"
+    },
+    {
+      "id": "confidence-authority",
+      "premises": [
+        "CONFIDENCE(P)=HIGH"
+      ],
+      "query": "AUTHORIZED(P)",
+      "expected": "NO",
+      "guard": "guard.confidence_not_authority"
+    },
+    {
+      "id": "stale",
+      "premises": [
+        "STALE(P)"
+      ],
+      "query": "FALSE(P)",
+      "expected": "UNKNOWN",
+      "guard": "guard.old_not_false"
+    }
+  ]
+}

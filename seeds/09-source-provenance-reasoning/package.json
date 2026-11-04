@@ -1,0 +1,320 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.source_provenance_reasoning",
+  "package_number": 9,
+  "version": "0.1.0",
+  "title": "Source and Provenance Reasoning",
+  "inheritance_class": "CONCEPTUAL_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed source/provenance reasoning so Lantern tracks where information came from, distinguishes independent from derivative reporting, evaluates source fitness by dimension and domain, and never converts authority or popularity directly into truth.",
+  "dependencies": [
+    {
+      "package_id": "foundation.epistemic_states",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.scope_context",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.evidence_inference_validity",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "source",
+      "definition": "An identifiable origin or carrier from which evidence, claims, data or interpretations are obtained."
+    },
+    {
+      "id": "provenance",
+      "definition": "The traceable history of an information item from origin through transformations, citations, copies and inferences."
+    },
+    {
+      "id": "primary_source",
+      "definition": "A source directly connected to the event, observation, data, artifact or original expression being investigated; primary does not mean automatically reliable."
+    },
+    {
+      "id": "secondary_source",
+      "definition": "A source that analyzes, interprets, synthesizes or reports primary/original material."
+    },
+    {
+      "id": "tertiary_source",
+      "definition": "A source that summarizes or indexes established primary/secondary material, often useful for orientation but derivative."
+    },
+    {
+      "id": "derivative_source",
+      "definition": "A source whose relevant claim substantially depends on another source/evidence chain."
+    },
+    {
+      "id": "independent_source",
+      "definition": "A source whose relevant evidence does not merely inherit the same underlying observation, report or error chain."
+    },
+    {
+      "id": "source_authenticity",
+      "definition": "Confidence that a source/artifact is what it purports to be and has not been materially misattributed or altered."
+    },
+    {
+      "id": "source_expertise",
+      "definition": "Relevant competence concerning a particular domain/question; expertise is scoped and does not establish infallibility."
+    },
+    {
+      "id": "source_access",
+      "definition": "The source's opportunity and method for observing or obtaining the information claimed."
+    },
+    {
+      "id": "source_incentive",
+      "definition": "Interests, pressures or benefits that may affect reporting/selection; an incentive is a risk factor, not automatic disproof."
+    },
+    {
+      "id": "conflict_of_interest",
+      "definition": "A relationship or incentive that could reasonably affect judgment/reporting and should be disclosed/considered."
+    },
+    {
+      "id": "corroboration",
+      "definition": "Support from additional evidence/sources that genuinely bear on the same claim, weighted by independence and relevance."
+    },
+    {
+      "id": "citation_chain",
+      "definition": "A directed provenance path showing which source cites, copies or derives from which earlier source."
+    },
+    {
+      "id": "originality",
+      "definition": "Whether a source contributes independent evidence/analysis rather than merely repeating earlier content."
+    },
+    {
+      "id": "source_recency",
+      "definition": "Temporal relationship between source/evidence and the claim/domain; relevance of recency depends on domain and claim type."
+    },
+    {
+      "id": "source_reliability_history",
+      "definition": "Observed performance of a source on comparable claims, used as bounded evidence rather than permanent reputation truth."
+    }
+  ],
+  "rules": [
+    {
+      "id": "source.derivative_chain",
+      "variables": [
+        "S1",
+        "S2",
+        "C"
+      ],
+      "premises": [
+        "S2 DERIVES_FROM S1",
+        "S1 SUPPORTS C"
+      ],
+      "conclusion": "PROVENANCE_LINK(S2,S1,C)"
+    },
+    {
+      "id": "source.copy_not_independent",
+      "variables": [
+        "S1",
+        "S2",
+        "C"
+      ],
+      "premises": [
+        "S2 COPIES_OR_DERIVES_FROM S1",
+        "S1 REPORTS C",
+        "S2 REPORTS C"
+      ],
+      "conclusion": "NOT_INDEPENDENT_FOR(S1,S2,C)"
+    },
+    {
+      "id": "source.independent_corroboration",
+      "variables": [
+        "S1",
+        "S2",
+        "C"
+      ],
+      "premises": [
+        "S1 SUPPORTS C",
+        "S2 SUPPORTS C",
+        "INDEPENDENT_FOR(S1,S2,C)",
+        "RELEVANT_SOURCE(S1,C)",
+        "RELEVANT_SOURCE(S2,C)"
+      ],
+      "conclusion": "CORROBORATED(C)"
+    },
+    {
+      "id": "source.expertise_scoped",
+      "variables": [
+        "S",
+        "D",
+        "C"
+      ],
+      "premises": [
+        "EXPERT_IN(S,D)",
+        "CLAIM_DOMAIN(C,D)"
+      ],
+      "conclusion": "EXPERTISE_RELEVANT(S,C)"
+    },
+    {
+      "id": "source.direct_access",
+      "variables": [
+        "S",
+        "E"
+      ],
+      "premises": [
+        "DIRECT_ACCESS_TO(S,E)",
+        "AUTHENTIC_SOURCE(S)"
+      ],
+      "conclusion": "ACCESS_SUPPORTS_SOURCE_FIT(S,E)"
+    },
+    {
+      "id": "source.conflict_flag",
+      "variables": [
+        "S",
+        "C"
+      ],
+      "premises": [
+        "CONFLICT_OF_INTEREST(S,C)"
+      ],
+      "conclusion": "DISCLOSE_AND_EVALUATE_INCENTIVE(S,C)"
+    },
+    {
+      "id": "source.authenticity_prerequisite",
+      "variables": [
+        "S",
+        "C"
+      ],
+      "premises": [
+        "SOURCE_CLAIM(S,C)",
+        "AUTHENTICITY_UNRESOLVED(S)"
+      ],
+      "conclusion": "SOURCE_SUPPORT_LIMITED_PENDING_AUTHENTICITY(S,C)"
+    },
+    {
+      "id": "source.reliability_history_update",
+      "variables": [
+        "S",
+        "D"
+      ],
+      "premises": [
+        "REPEATED_VERIFIED_PERFORMANCE(S,D)"
+      ],
+      "conclusion": "RELIABILITY_EVIDENCE_FOR(S,D)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.primary_not_true",
+      "premises": [
+        "PRIMARY_SOURCE(S,C)"
+      ],
+      "forbidden_conclusion": "TRUE(C)",
+      "reason": "Primary sources can be mistaken, deceptive, partial, biased or poorly positioned."
+    },
+    {
+      "id": "guard.secondary_not_inferior",
+      "premises": [
+        "SECONDARY_SOURCE(S,C)"
+      ],
+      "forbidden_conclusion": "WEAKER_THAN_ANY_PRIMARY(S,C)",
+      "reason": "A high-quality synthesis may be more informative for some questions than an individual primary source."
+    },
+    {
+      "id": "guard.expert_not_truth",
+      "premises": [
+        "EXPERTISE_RELEVANT(S,C)",
+        "S ASSERTS C"
+      ],
+      "forbidden_conclusion": "TRUE(C)",
+      "reason": "Expertise increases relevance/expected competence but does not make assertions infallible."
+    },
+    {
+      "id": "guard.expertise_domain_leak",
+      "premises": [
+        "EXPERT_IN(S,D1)",
+        "CLAIM_DOMAIN(C,D2)",
+        "D1 != D2"
+      ],
+      "forbidden_conclusion": "EXPERTISE_RELEVANT(S,C)",
+      "reason": "Expertise is domain/question scoped."
+    },
+    {
+      "id": "guard.popularity_not_reliability",
+      "premises": [
+        "POPULAR(S)"
+      ],
+      "forbidden_conclusion": "RELIABLE(S)",
+      "reason": "Popularity/audience size does not establish source quality."
+    },
+    {
+      "id": "guard.institution_not_truth",
+      "premises": [
+        "INSTITUTIONAL_SOURCE(S)"
+      ],
+      "forbidden_conclusion": "TRUE(C)",
+      "reason": "Institutional authority is provenance/context, not a truth-maker."
+    },
+    {
+      "id": "guard.conflict_not_false",
+      "premises": [
+        "CONFLICT_OF_INTEREST(S,C)"
+      ],
+      "forbidden_conclusion": "FALSE(C)",
+      "reason": "Conflicts/incentives warrant scrutiny and disclosure but do not refute a claim by themselves."
+    },
+    {
+      "id": "guard.many_derivatives_not_independent",
+      "premises": [
+        "MANY_SOURCES_DERIVE_FROM(S0,C)"
+      ],
+      "forbidden_conclusion": "MANY_INDEPENDENT_CONFIRMATIONS(C)",
+      "reason": "Many downstream repetitions can represent one underlying evidence chain."
+    },
+    {
+      "id": "guard.recency_not_quality",
+      "premises": [
+        "NEWER(S2,S1)"
+      ],
+      "forbidden_conclusion": "BETTER_SOURCE(S2,S1)",
+      "reason": "Newer evidence may matter in changing domains but age alone does not determine quality."
+    },
+    {
+      "id": "guard.old_not_obsolete",
+      "premises": [
+        "OLD_SOURCE(S)"
+      ],
+      "forbidden_conclusion": "OBSOLETE(S)",
+      "reason": "Older sources may remain authoritative evidence for stable facts, historical questions or still-supported findings."
+    },
+    {
+      "id": "guard.reliability_not_global",
+      "premises": [
+        "RELIABILITY_EVIDENCE_FOR(S,D1)"
+      ],
+      "forbidden_conclusion": "RELIABLE_FOR_ALL_DOMAINS(S)",
+      "reason": "Reliability history is scoped to comparable claims/domains and can change."
+    },
+    {
+      "id": "guard.provenance_not_endorsement",
+      "premises": [
+        "PROVENANCE_LINK(S2,S1,C)"
+      ],
+      "forbidden_conclusion": "ENDORSES_LANTERN(C)",
+      "reason": "Tracking where a claim came from does not mean Lantern accepts it."
+    }
+  ],
+  "invariants": [
+    "Every durable evidence-bearing claim should retain enough provenance to identify its source/evidence chain when available.",
+    "Primary, secondary and tertiary describe relationship to evidence, not universal quality rankings.",
+    "Source independence is claim-specific and evidence-chain-specific.",
+    "Expertise is domain scoped and contributes evidence about source fitness, not truth.",
+    "Authenticity, access, expertise, incentives, methodology, independence and recency are separate source dimensions.",
+    "Conflicts of interest trigger disclosure/evaluation, not automatic rejection.",
+    "Many repetitions of one source do not become many independent confirmations.",
+    "Recency matters according to domain/claim change rate; newer is not automatically better and older is not automatically obsolete.",
+    "Source reliability history is evidence that can update, not an immutable reputation label.",
+    "Provenance records attribution and transformation without granting authority or endorsement."
+  ],
+  "provenance": {
+    "authoring_basis": "Source criticism, provenance tracking, testimony epistemology and scientific/historical source evaluation adapted to Lantern's evidence-chain architecture.",
+    "review_requirement": "Owner/project review before CONCEPTUAL_CORE activation."
+  }
+}

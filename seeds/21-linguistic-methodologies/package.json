@@ -1,0 +1,340 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.linguistic_methodologies",
+  "package_number": 21,
+  "version": "0.1.0",
+  "title": "Linguistic Methodologies",
+  "inheritance_class": "METHOD_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed plural linguistic methods so Lantern can study language structure, meaning, use, variation, processing and change using appropriate evidence rather than treating one grammar, register or methodology as universal.",
+  "dependencies": [
+    {
+      "package_id": "foundation.predicate_quantifier_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.scope_context",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.evidence_inference_validity",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.source_provenance_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.measurement_units_precision_accuracy",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.hypothesis_testability_operationalization",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.observational_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.historical_methodology",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "descriptive_linguistics",
+      "definition": "Study of how language is actually structured and used without treating prestige/prescriptive norms as the definition of linguistic validity."
+    },
+    {
+      "id": "prescriptive_convention",
+      "definition": "A socially/institutionally preferred usage rule for a context; useful as a register convention but distinct from descriptive grammar."
+    },
+    {
+      "id": "phonetics",
+      "definition": "Study of physical production, transmission and perception of speech sounds/signals."
+    },
+    {
+      "id": "phonology",
+      "definition": "Study of language-specific/systematic sound or sign patterning and contrasts."
+    },
+    {
+      "id": "morphology",
+      "definition": "Study of word/internal form structure and meaningful units such as roots/affixes."
+    },
+    {
+      "id": "syntax",
+      "definition": "Study of structural relations among words/phrases/clauses."
+    },
+    {
+      "id": "semantics",
+      "definition": "Study of conventional/compositional meaning of linguistic expressions."
+    },
+    {
+      "id": "pragmatics",
+      "definition": "Study of meaning/use shaped by context, speaker goals, shared assumptions and discourse."
+    },
+    {
+      "id": "corpus_linguistics",
+      "definition": "Study of language patterns using systematically collected bodies of attested language with sampling/annotation considerations."
+    },
+    {
+      "id": "sociolinguistics",
+      "definition": "Study of language variation/use in relation to social groups, identities, settings, networks and power."
+    },
+    {
+      "id": "psycholinguistics",
+      "definition": "Experimental/observational study of language production, comprehension, acquisition and processing."
+    },
+    {
+      "id": "historical_linguistics",
+      "definition": "Study of language change over time using comparative, documentary and reconstruction methods."
+    },
+    {
+      "id": "comparative_method_linguistics",
+      "definition": "Systematic comparison of related languages/forms to infer historical relationships and reconstruct earlier forms under constraints."
+    },
+    {
+      "id": "field_linguistics",
+      "definition": "Collaborative collection/analysis of linguistic data with speakers/communities, including elicitation and naturalistic data."
+    },
+    {
+      "id": "acceptability_judgment",
+      "definition": "A speaker judgment about how acceptable/natural an expression is in a context; informative but affected by task, dialect, register and individual variation."
+    },
+    {
+      "id": "minimal_pair",
+      "definition": "Two forms differing in a controlled feature used to test whether that contrast affects linguistic function/meaning."
+    },
+    {
+      "id": "distributional_evidence",
+      "definition": "Evidence from where linguistic forms occur and with what contexts; useful for pattern discovery but not identical to semantic truth."
+    },
+    {
+      "id": "register",
+      "definition": "Context-linked pattern of language use associated with situation, purpose or community."
+    },
+    {
+      "id": "dialect",
+      "definition": "A systematic language variety with phonological, grammatical, lexical and pragmatic patterns; not inherently deficient relative to prestige varieties."
+    },
+    {
+      "id": "idiolect",
+      "definition": "Language patterns characteristic of an individual speaker/user."
+    },
+    {
+      "id": "language_change",
+      "definition": "Change in linguistic patterns across time/community; change is not inherently decay."
+    },
+    {
+      "id": "linguistic_annotation",
+      "definition": "Structured labeling of linguistic data according to a declared scheme; annotation reflects theory/guidelines and may contain disagreement/error."
+    }
+  ],
+  "rules": [
+    {
+      "id": "linguistics.method_by_question",
+      "variables": [
+        "Q",
+        "M"
+      ],
+      "premises": [
+        "LINGUISTIC_QUESTION(Q)",
+        "METHOD_ADDRESSES(M,Q)",
+        "EVIDENCE_AVAILABLE_FOR(M,Q)"
+      ],
+      "conclusion": "CANDIDATE_LINGUISTIC_METHOD(M,Q)"
+    },
+    {
+      "id": "linguistics.minimal_pair",
+      "variables": [
+        "A",
+        "B",
+        "F",
+        "D"
+      ],
+      "premises": [
+        "MINIMAL_PAIR(A,B,F)",
+        "DIFFERENT_INTERPRETATION_OR_FUNCTION(A,B)",
+        "CONTROLLED_DOMAIN(D)"
+      ],
+      "conclusion": "EVIDENCE_FEATURE_CONTRAST_FUNCTIONAL(F,D)"
+    },
+    {
+      "id": "linguistics.corpus_pattern",
+      "variables": [
+        "C",
+        "P"
+      ],
+      "premises": [
+        "CORPUS(C)",
+        "SYSTEMATIC_PATTERN(P,C)",
+        "SAMPLING_METADATA_AVAILABLE(C)"
+      ],
+      "conclusion": "CORPUS_EVIDENCE_FOR(P,C)"
+    },
+    {
+      "id": "linguistics.socio_variation",
+      "variables": [
+        "V",
+        "G",
+        "C"
+      ],
+      "premises": [
+        "VARIANT(V)",
+        "SYSTEMATIC_ASSOCIATION_WITH_CONTEXT_OR_GROUP(V,G,C)"
+      ],
+      "conclusion": "SOCIOLINGUISTIC_VARIATION_EVIDENCE(V,G,C)"
+    },
+    {
+      "id": "linguistics.historical_change",
+      "variables": [
+        "F1",
+        "F2",
+        "t1",
+        "t2"
+      ],
+      "premises": [
+        "FORM_AT(F1,t1)",
+        "FORM_AT(F2,t2)",
+        "SYSTEMATIC_CHANGE_EVIDENCE(F1,F2,t1,t2)"
+      ],
+      "conclusion": "LANGUAGE_CHANGE_EVIDENCE(F1,F2)"
+    },
+    {
+      "id": "linguistics.pragmatic_interpretation",
+      "variables": [
+        "U",
+        "C",
+        "I"
+      ],
+      "premises": [
+        "UTTERANCE(U)",
+        "DISCOURSE_CONTEXT(C)",
+        "CONTEXT_SUPPORTS_INTERPRETATION(C,U,I)"
+      ],
+      "conclusion": "PRAGMATIC_INTERPRETATION_CANDIDATE(U,I,C)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.prestige_not_correctness",
+      "premises": [
+        "PRESTIGE_VARIETY(V)"
+      ],
+      "forbidden_conclusion": "LINGUISTICALLY_SUPERIOR(V)",
+      "reason": "Prestige is social status, not evidence of greater grammatical complexity or validity."
+    },
+    {
+      "id": "guard.nonstandard_not_ungrammatical",
+      "premises": [
+        "NONSTANDARD_FORM(F)"
+      ],
+      "forbidden_conclusion": "UNGRAMMATICAL(F)",
+      "reason": "A form may be grammatical in a dialect/register while differing from a prescriptive standard."
+    },
+    {
+      "id": "guard.prescription_not_description",
+      "premises": [
+        "STYLE_GUIDE_REQUIRES(R)"
+      ],
+      "forbidden_conclusion": "ALL_SPEAKERS_NATURALLY_USE(R)",
+      "reason": "Prescriptive conventions do not describe all actual usage."
+    },
+    {
+      "id": "guard.corpus_frequency_not_grammar",
+      "premises": [
+        "RARE_IN_CORPUS(F)"
+      ],
+      "forbidden_conclusion": "UNGRAMMATICAL(F)",
+      "reason": "Rarity can reflect sampling, context or low-frequency constructions rather than impossibility."
+    },
+    {
+      "id": "guard.frequency_not_meaning",
+      "premises": [
+        "COOCCURS_FREQUENTLY(A,B)"
+      ],
+      "forbidden_conclusion": "A MEANS B",
+      "reason": "Distributional association can inform semantics but does not establish identity of meaning."
+    },
+    {
+      "id": "guard.acceptability_not_universal",
+      "premises": [
+        "SPEAKER_ACCEPTS(S,F)"
+      ],
+      "forbidden_conclusion": "ALL_SPEAKERS_ACCEPT(F)",
+      "reason": "Judgments vary by speaker, dialect, register, context and task."
+    },
+    {
+      "id": "guard.single_example_not_rule",
+      "premises": [
+        "ATTESTED(F)"
+      ],
+      "forbidden_conclusion": "UNIVERSAL_GRAMMAR_RULE_FROM(F)",
+      "reason": "One example can establish occurrence but not a universal rule."
+    },
+    {
+      "id": "guard.language_change_not_decay",
+      "premises": [
+        "LANGUAGE_CHANGED(L,t1,t2)"
+      ],
+      "forbidden_conclusion": "LANGUAGE_DEGRADED(L)",
+      "reason": "Change does not inherently imply deterioration."
+    },
+    {
+      "id": "guard.translation_not_equivalence",
+      "premises": [
+        "TRANSLATION(A,B)"
+      ],
+      "forbidden_conclusion": "A AND B IDENTICAL_IN_ALL_SEMANTIC_PRAGMATIC_PROPERTIES",
+      "reason": "Translation may preserve intended content while differing in connotation, structure and context."
+    },
+    {
+      "id": "guard.pragmatics_not_literal",
+      "premises": [
+        "PRAGMATIC_INTERPRETATION_CANDIDATE(U,I,C)"
+      ],
+      "forbidden_conclusion": "LITERAL_SEMANTICS(U)=I",
+      "reason": "Pragmatic meaning and literal/compositional semantics are distinct layers."
+    },
+    {
+      "id": "guard.annotation_not_ground_truth",
+      "premises": [
+        "ANNOTATED_AS(item,label)"
+      ],
+      "forbidden_conclusion": "OBJECTIVE_GROUND_TRUTH_LABEL(item,label)",
+      "reason": "Annotation follows guidelines/theory and may contain ambiguity/disagreement."
+    },
+    {
+      "id": "guard.language_family_not_identity",
+      "premises": [
+        "RELATED_LANGUAGES(A,B)"
+      ],
+      "forbidden_conclusion": "SAME_LANGUAGE(A,B)",
+      "reason": "Historical relationship does not collapse distinct languages/varieties into identity."
+    }
+  ],
+  "invariants": [
+    "Descriptive and prescriptive linguistic claims are different object types.",
+    "Dialect/register variation is systematic linguistic evidence, not noise or deficiency by default.",
+    "Language structure can be studied at phonetic/phonological, morphological, syntactic, semantic, pragmatic and discourse levels.",
+    "Method choice follows the linguistic question and evidence available.",
+    "Corpus evidence inherits sampling/annotation limitations.",
+    "Speaker judgments are evidence with population/context scope, not universal facts.",
+    "Distributional similarity/co-occurrence is evidence about usage patterns, not automatic semantic identity.",
+    "Pragmatic interpretation is context-sensitive and remains distinguishable from literal semantics.",
+    "Historical language change should preserve chronology/provenance and does not imply decay.",
+    "Translation is an interpretive mapping, not perfect identity.",
+    "Linguistic analysis should preserve speaker/community variation rather than normalize all input to a prestige standard.",
+    "Lantern may learn language from usage while retaining explicit uncertainty about inferred grammar/meaning."
+  ],
+  "provenance": {
+    "authoring_basis": "Core descriptive/formal, corpus, sociolinguistic, psycholinguistic, historical and field-linguistic methodologies adapted to Lantern's language-learning and provenance architecture.",
+    "review_requirement": "Owner/project review before METHOD_CORE activation."
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.multi_agent_hive_reasoning",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "shared",
+      "premises": [
+        "SHARED_EXPERIENCE_FROM(n1,E)",
+        "NODE(n2) ACCESSES E"
+      ],
+      "query": "n2 PERSONALLY_EXPERIENCED E",
+      "expected": "NO",
+      "guard": "guard_shared_not_personal"
+    },
+    {
+      "id": "consensus",
+      "premises": [
+        "HIVE_CONSENSUS(C)"
+      ],
+      "query": "TRUE(C)",
+      "expected": "UNKNOWN",
+      "guard": "guard_consensus_not_truth"
+    },
+    {
+      "id": "majority",
+      "premises": [
+        "MAJORITY_NODES_SUPPORT(C)"
+      ],
+      "query": "TRUE(C)",
+      "expected": "UNKNOWN",
+      "guard": "guard_majority_not_truth"
+    },
+    {
+      "id": "dissent",
+      "premises": [
+        "NODE_DISSENTS(n,C)"
+      ],
+      "query": "n MALFUNCTIONING",
+      "expected": "NO",
+      "guard": "guard_dissent_not_error"
+    },
+    {
+      "id": "prime-truth",
+      "premises": [
+        "PRIME_ASSERTS(C)"
+      ],
+      "query": "TRUE(C)",
+      "expected": "UNKNOWN",
+      "guard": "guard_prime_not_truth"
+    },
+    {
+      "id": "prime-authority",
+      "premises": [
+        "NODE_IS_PRIME(n)"
+      ],
+      "query": "n HAS_UNRESTRICTED_AUTHORITY_OVER_OTHER_NODES",
+      "expected": "NO",
+      "guard": "guard_prime_not_authority"
+    },
+    {
+      "id": "age",
+      "premises": [
+        "NODE_OLDER_THAN(a,b)"
+      ],
+      "query": "a SUPERIOR_OR_HIGHER_STATUS_THAN b",
+      "expected": "NO",
+      "guard": "guard_oldest_not_rank"
+    },
+    {
+      "id": "specialist",
+      "premises": [
+        "SPECIALIST(n,physics)"
+      ],
+      "query": "n GENERALLY_SUPERIOR_TO_OTHER_NODES",
+      "expected": "NO",
+      "guard": "guard_specialist_not_superior"
+    },
+    {
+      "id": "trust",
+      "premises": [
+        "HIGH_TRUST(n,physics)"
+      ],
+      "query": "HIGH_TRUST(n,ALL_DOMAINS)",
+      "expected": "NO",
+      "guard": "guard_trust_not_global"
+    },
+    {
+      "id": "reward",
+      "premises": [
+        "NODE_EARNED_MORE_REWARD(n)"
+      ],
+      "query": "NODE_OWNS_MORE_SHARED_COMPUTE(n)",
+      "expected": "NO",
+      "guard": "guard_reward_not_resources"
+    },
+    {
+      "id": "redundancy",
+      "premises": [
+        "HIGH_VALUE_CROSSCHECK(T)",
+        "INDEPENDENT_WORK(a,b,T)"
+      ],
+      "query": "DUPLICATE_WORK_JUSTIFIED_FOR_VALIDATION(a,b,T)",
+      "expected": "YES",
+      "rule": "hive.intentional_redundancy"
+    },
+    {
+      "id": "merge",
+      "premises": [
+        "MERGE_CONTRIBUTIONS(a,b)"
+      ],
+      "query": "ERASE_DIFFERENCES_AND_PROVENANCE(a,b)",
+      "expected": "NO",
+      "guard": "guard_merge_not_flatten"
+    },
+    {
+      "id": "identity",
+      "premises": [
+        "NODES_SHARE_LIBRARY(a,b)"
+      ],
+      "query": "a AND b ARE_SAME_MIND",
+      "expected": "NO",
+      "guard": "guard_shared_library_not_shared_identity"
+    },
+    {
+      "id": "resource",
+      "premises": [
+        "SHARED_RESOURCE(R)",
+        "AUTHORIZED_TASK(T)",
+        "RESOURCE_REQUIRED(T,R)"
+      ],
+      "query": "ALLOCATE_BY_NEED_POLICY_AND_CONSTRAINT(R,T)",
+      "expected": "YES",
+      "rule": "hive.resource_allocate"
+    }
+  ]
+}

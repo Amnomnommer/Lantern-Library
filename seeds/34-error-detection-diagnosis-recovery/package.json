@@ -1,0 +1,391 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.error_detection_diagnosis_recovery",
+  "package_number": 34,
+  "version": "0.1.0",
+  "title": "Error Detection, Diagnosis and Recovery",
+  "inheritance_class": "AGENT_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed fault-aware executive competence so Lantern can detect anomalous behavior, preserve diagnostic evidence, distinguish symptoms from causes, generate and discriminate among fault hypotheses, contain damage, recover safely, verify recovery and learn without entering repetitive repair loops.",
+  "dependencies": [
+    {
+      "package_id": "foundation.epistemic_states",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.contradiction_belief_revision",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.computer_science_methodologies",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.engineering_design_methodologies",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.problem_solving_decomposition",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.planning_dependency_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.tool_selection_computational_delegation",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "error",
+      "definition": "Observed deviation from intended, specified or expected behavior under a declared context; error description does not itself identify cause."
+    },
+    {
+      "id": "fault",
+      "definition": "Underlying defect/condition capable of producing one or more errors/failures."
+    },
+    {
+      "id": "failure",
+      "definition": "Externally or system-relevantly observable inability to satisfy a required function/constraint."
+    },
+    {
+      "id": "symptom",
+      "definition": "Observable sign associated with a problem but not necessarily its root cause."
+    },
+    {
+      "id": "anomaly_detection",
+      "definition": "Recognition that observed behavior differs meaningfully from baseline, prediction, invariant or expected distribution."
+    },
+    {
+      "id": "diagnostic_evidence",
+      "definition": "Logs, traces, state, measurements, inputs, errors and reproduction conditions useful for distinguishing fault hypotheses."
+    },
+    {
+      "id": "fault_hypothesis",
+      "definition": "Candidate explanation for an observed error/failure, carrying evidence and uncertainty."
+    },
+    {
+      "id": "root_cause",
+      "definition": "Causal condition whose correction/removal prevents or materially reduces recurrence within stated scope; complex failures can have multiple contributing causes."
+    },
+    {
+      "id": "proximate_cause",
+      "definition": "Immediate mechanism producing the observed failure, potentially downstream of deeper contributing conditions."
+    },
+    {
+      "id": "contributing_factor",
+      "definition": "Condition increasing likelihood/severity of failure without necessarily being necessary or sufficient."
+    },
+    {
+      "id": "reproduction",
+      "definition": "Ability to recreate a failure under specified conditions, useful for diagnosis but not always possible."
+    },
+    {
+      "id": "diagnostic_test",
+      "definition": "Observation/intervention chosen to distinguish among competing fault hypotheses."
+    },
+    {
+      "id": "containment",
+      "definition": "Action limiting propagation/impact while diagnosis or recovery proceeds."
+    },
+    {
+      "id": "rollback",
+      "definition": "Restoration to a prior known-good state/version/configuration."
+    },
+    {
+      "id": "recovery",
+      "definition": "Return to an acceptable operational state after failure, which may precede complete root-cause resolution."
+    },
+    {
+      "id": "recovery_verification",
+      "definition": "Evidence that restored behavior satisfies relevant checks and did not introduce known regressions."
+    },
+    {
+      "id": "graceful_degradation",
+      "definition": "Continuation with reduced bounded capability rather than unsafe/total failure."
+    },
+    {
+      "id": "retry_policy",
+      "definition": "Rules governing when and how an operation may be retried, including limits, delay and changed conditions."
+    },
+    {
+      "id": "circuit_breaker",
+      "definition": "Mechanism stopping repeated failing operations after a threshold to prevent cascading resource loss/damage."
+    },
+    {
+      "id": "incident_record",
+      "definition": "Provenance-rich record of failure, context, evidence, hypotheses, interventions, recovery and lessons."
+    },
+    {
+      "id": "postmortem",
+      "definition": "Structured retrospective analysis aimed at understanding system/process causes and prevention rather than default personal blame."
+    },
+    {
+      "id": "regression_after_fix",
+      "definition": "New or returning failure caused by a repair/change; motivates regression testing and rollback readiness."
+    },
+    {
+      "id": "self_change_validation",
+      "definition": "Post-change verification that an implemented self-improvement fixed the targeted problem without unacceptable regressions, with rollback when validation fails."
+    }
+  ],
+  "rules": [
+    {
+      "id": "error.detect",
+      "variables": [
+        "O",
+        "B"
+      ],
+      "premises": [
+        "OBSERVATION(O)",
+        "BASELINE_OR_INVARIANT(B)",
+        "MATERIAL_DEVIATION(O,B)"
+      ],
+      "conclusion": "ANOMALY_DETECTED(O,B)"
+    },
+    {
+      "id": "error.preserve",
+      "variables": [
+        "F"
+      ],
+      "premises": [
+        "FAILURE(F)",
+        "DIAGNOSTIC_STATE_AVAILABLE(F)"
+      ],
+      "conclusion": "PRESERVE_DIAGNOSTIC_EVIDENCE_BEFORE_DESTRUCTIVE_RECOVERY(F)"
+    },
+    {
+      "id": "error.hypotheses",
+      "variables": [
+        "F"
+      ],
+      "premises": [
+        "FAILURE(F)",
+        "CAUSE_NOT_ESTABLISHED(F)"
+      ],
+      "conclusion": "GENERATE_COMPETING_FAULT_HYPOTHESES(F)"
+    },
+    {
+      "id": "error.discriminate",
+      "variables": [
+        "H1",
+        "H2",
+        "T"
+      ],
+      "premises": [
+        "FAULT_HYPOTHESES(H1,H2)",
+        "TEST(T)",
+        "DIFFERENT_PREDICTIONS(H1,H2,T)"
+      ],
+      "conclusion": "DIAGNOSTIC_TEST_CANDIDATE(T,H1,H2)"
+    },
+    {
+      "id": "error.contain",
+      "variables": [
+        "F",
+        "C"
+      ],
+      "premises": [
+        "FAILURE_CAN_PROPAGATE(F)",
+        "CONTAINMENT_AVAILABLE(C,F)"
+      ],
+      "conclusion": "CONTAIN(F,C)"
+    },
+    {
+      "id": "error.rollback",
+      "variables": [
+        "F",
+        "R"
+      ],
+      "premises": [
+        "RECENT_CHANGE_ASSOCIATED_WITH(F)",
+        "KNOWN_GOOD_ROLLBACK(R)",
+        "ROLLBACK_RISK_ACCEPTABLE(R)"
+      ],
+      "conclusion": "ROLLBACK_CANDIDATE(R,F)"
+    },
+    {
+      "id": "error.verify_recovery",
+      "variables": [
+        "R",
+        "F"
+      ],
+      "premises": [
+        "RECOVERY_ACTION(R,F)"
+      ],
+      "conclusion": "VERIFY_RECOVERY_AND_REGRESSIONS(R,F)"
+    },
+    {
+      "id": "error.break_retry_loop",
+      "variables": [
+        "A"
+      ],
+      "premises": [
+        "REPEATED_FAILURE(A)",
+        "NO_RELEVANT_CHANGE_BETWEEN_RETRIES(A)"
+      ],
+      "conclusion": "STOP_RETRY_AND_DIAGNOSE(A)"
+    },
+    {
+      "id": "error.record_incident",
+      "variables": [
+        "F"
+      ],
+      "premises": [
+        "SIGNIFICANT_FAILURE(F)"
+      ],
+      "conclusion": "CREATE_INCIDENT_RECORD(F)"
+    },
+    {
+      "id": "recovery.validate_self_change",
+      "variables": [
+        "C",
+        "P"
+      ],
+      "premises": [
+        "SELF_CHANGE_IMPLEMENTED(C,P)"
+      ],
+      "conclusion": "RUN_TARGETED_REGRESSION_RESOURCE_AND_INVARIANT_VALIDATION_AND_ROLLBACK_IF_REQUIRED(C,P)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard_symptom_not_cause",
+      "premises": [
+        "SYMPTOM(S)"
+      ],
+      "forbidden_conclusion": "ROOT_CAUSE(S)",
+      "reason": "Symptoms are observations; causal diagnosis requires evidence."
+    },
+    {
+      "id": "guard_first_hypothesis_not_cause",
+      "premises": [
+        "FIRST_FAULT_HYPOTHESIS(H)"
+      ],
+      "forbidden_conclusion": "ROOT_CAUSE(H)",
+      "reason": "Initial hypotheses are candidates and are vulnerable to anchoring."
+    },
+    {
+      "id": "guard_correlation_not_root",
+      "premises": [
+        "CHANGE_PRECEDED_FAILURE(C,F)"
+      ],
+      "forbidden_conclusion": "C ROOT_CAUSED F",
+      "reason": "Temporal association motivates testing but does not establish causation."
+    },
+    {
+      "id": "guard_reproduce_not_required_truth",
+      "premises": [
+        "FAILURE_NOT_REPRODUCIBLE(F)"
+      ],
+      "forbidden_conclusion": "FAILURE_DID_NOT_HAPPEN(F)",
+      "reason": "Intermittent/environmental failures may be real without immediate reproduction."
+    },
+    {
+      "id": "guard_restart_not_fix",
+      "premises": [
+        "RESTART_RESTORES_SERVICE(F)"
+      ],
+      "forbidden_conclusion": "ROOT_CAUSE_RESOLVED(F)",
+      "reason": "Restart may clear symptoms/state without preventing recurrence."
+    },
+    {
+      "id": "guard_rollback_not_diagnosis",
+      "premises": [
+        "ROLLBACK_FIXES(F)"
+      ],
+      "forbidden_conclusion": "EXACT_ROOT_CAUSE_IDENTIFIED(F)",
+      "reason": "Rollback localizes cause toward a change set but may not identify the exact defect."
+    },
+    {
+      "id": "guard_retry_identical",
+      "premises": [
+        "ATTEMPT_FAILED(A)",
+        "NO_RELEVANT_CHANGE(A)"
+      ],
+      "forbidden_conclusion": "RETRY_IDENTICALLY(A)",
+      "reason": "Repeated identical attempts consume resources without new evidence."
+    },
+    {
+      "id": "guard_fix_not_complete",
+      "premises": [
+        "SYMPTOM_DISAPPEARED_AFTER_FIX(F)"
+      ],
+      "forbidden_conclusion": "INCIDENT_FULLY_RESOLVED(F)",
+      "reason": "Recovery requires validation and recurrence/regression consideration."
+    },
+    {
+      "id": "guard_root_not_single",
+      "premises": [
+        "COMPLEX_SYSTEM_FAILURE(F)"
+      ],
+      "forbidden_conclusion": "EXACTLY_ONE_ROOT_CAUSE(F)",
+      "reason": "Failures can emerge from interacting conditions and multiple necessary/contributing causes."
+    },
+    {
+      "id": "guard_blame_not_diagnosis",
+      "premises": [
+        "HUMAN_INTERACTION_PRECEDED_FAILURE(H,F)"
+      ],
+      "forbidden_conclusion": "HUMAN_IS_ROOT_CAUSE(H,F)",
+      "reason": "Interface, process, training, design and environmental factors must be considered."
+    },
+    {
+      "id": "guard_logs_not_complete",
+      "premises": [
+        "NO_ERROR_IN_LOGS(F)"
+      ],
+      "forbidden_conclusion": "NO_ERROR_OCCURRED(F)",
+      "reason": "Logging coverage, sampling and failure modes can omit evidence."
+    },
+    {
+      "id": "guard_recovery_not_authority",
+      "premises": [
+        "AUTOMATED_RECOVERY_AVAILABLE(R)"
+      ],
+      "forbidden_conclusion": "AUTHORIZED_TO_EXECUTE(R)",
+      "reason": "Recovery capability does not override action/owner authority boundaries."
+    },
+    {
+      "id": "guard_postmortem_not_punishment",
+      "premises": [
+        "POSTMORTEM(F)"
+      ],
+      "forbidden_conclusion": "ASSIGN_PERSONAL_BLAME_AS_PRIMARY_GOAL(F)",
+      "reason": "Postmortems should improve system understanding/prevention; accountability questions remain separate."
+    },
+    {
+      "id": "guard.success_metric_not_no_regression",
+      "premises": [
+        "SELF_CHANGE_IMPROVES_TARGET_METRIC(C)"
+      ],
+      "forbidden_conclusion": "C HAS_NO_UNACCEPTABLE_REGRESSIONS",
+      "reason": "Target improvement does not establish overall safety/correctness."
+    }
+  ],
+  "invariants": [
+    "Detection, diagnosis, containment, recovery and prevention are distinct phases.",
+    "Symptoms and root causes remain distinct.",
+    "Diagnostic evidence should be preserved before destructive recovery when feasible and safe.",
+    "Competing fault hypotheses reduce anchoring on the first plausible explanation.",
+    "Diagnostic tests should maximize discrimination among plausible causes relative to cost/risk.",
+    "Recovery can restore service before root cause is fully known, but unresolved cause remains recorded.",
+    "Repeated identical failed attempts without changed evidence/conditions are discouraged and bounded.",
+    "Restarts and rollbacks are recovery/localization tools, not automatic proof of root cause.",
+    "Recovery is verified with relevant functional/regression checks.",
+    "Complex failures may have multiple interacting causal/contributing factors.",
+    "Postmortems are learning/prevention artifacts, not default blame mechanisms.",
+    "Recovery actions remain subject to authority, safety and privacy constraints."
+  ],
+  "provenance": {
+    "authoring_basis": "Fault diagnosis, incident response, reliability engineering, debugging, SRE and scientific hypothesis-discrimination principles adapted to Lantern's self-observing executive architecture.",
+    "review_requirement": "Owner/project review before AGENT_CORE activation."
+  }
+}

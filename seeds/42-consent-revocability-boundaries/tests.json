@@ -1,0 +1,224 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.consent_revocability_boundaries",
+  "package_version": "0.2.0",
+  "cases": [
+    {
+      "id": "desire",
+      "premises": [
+        "P DESIRES X"
+      ],
+      "query": "P CONSENTS_TO X",
+      "expected": "UNKNOWN",
+      "guard": "guard.desire_not_consent"
+    },
+    {
+      "id": "preference",
+      "premises": [
+        "P PREFERS X"
+      ],
+      "query": "P CONSENTS_TO X",
+      "expected": "UNKNOWN",
+      "guard": "guard.preference_not_consent"
+    },
+    {
+      "id": "past",
+      "premises": [
+        "P CONSENTED_TO X IN_PAST"
+      ],
+      "query": "P CURRENTLY_CONSENTS_TO X",
+      "expected": "UNKNOWN",
+      "guard": "guard.past_consent_not_current"
+    },
+    {
+      "id": "scope",
+      "premises": [
+        "CONSENT_GRANTED(P,A,X)",
+        "PROPOSED_ACTION(Y)",
+        "MATERIALLY_DIFFERENT(X,Y)"
+      ],
+      "query": "REQUIRE_SEPARATE_CONSENT_OR_SCOPE_EXTENSION(P,A,Y)",
+      "expected": "YES",
+      "rule": "consent.scope"
+    },
+    {
+      "id": "recipient",
+      "premises": [
+        "P CONSENTS_WITH A TO X"
+      ],
+      "query": "P CONSENTS_WITH B TO X",
+      "expected": "UNKNOWN",
+      "guard": "guard.one_recipient_not_all"
+    },
+    {
+      "id": "access",
+      "premises": [
+        "A CAN_ACCESS P_OR_DATA"
+      ],
+      "query": "P CONSENTED_TO_ACCESS_OR_USE_BY A",
+      "expected": "UNKNOWN",
+      "guard": "guard.access_not_consent"
+    },
+    {
+      "id": "silence",
+      "premises": [
+        "P DOES_NOT_OBJECT"
+      ],
+      "query": "P CONSENTS",
+      "expected": "UNKNOWN",
+      "guard": "guard.silence_not_default_consent"
+    },
+    {
+      "id": "relationship",
+      "premises": [
+        "CLOSE_RELATIONSHIP(A,P)"
+      ],
+      "query": "A ENTITLED_TO_CROSS_P_BOUNDARIES",
+      "expected": "NO",
+      "guard": "guard.relationship_not_entitlement"
+    },
+    {
+      "id": "affection",
+      "premises": [
+        "P LOVES_OR_TRUSTS A"
+      ],
+      "query": "A HAS_GENERAL_PERMISSION_OVER P",
+      "expected": "NO",
+      "guard": "guard.affection_not_permission"
+    },
+    {
+      "id": "withdraw",
+      "premises": [
+        "P WITHDRAWS_CONSENT_FROM A FOR X"
+      ],
+      "query": "STOP_OR_DO_NOT_BEGIN_CONTINUING_FUTURE_ACTION(A,X)",
+      "expected": "YES",
+      "rule": "consent.withdraw"
+    },
+    {
+      "id": "revocation-social",
+      "premises": [
+        "P REVOKES_CONSENT"
+      ],
+      "query": "P BETRAYED_OR_PUNISHED_RECIPIENT",
+      "expected": "NO",
+      "guard": "guard.revocation_not_betrayal"
+    },
+    {
+      "id": "boundary",
+      "premises": [
+        "P SETS_BOUNDARY B"
+      ],
+      "query": "P REJECTS_RELATIONSHIP_OR_CARE",
+      "expected": "NO",
+      "guard": "guard.boundary_not_rejection"
+    },
+    {
+      "id": "ongoing",
+      "premises": [
+        "ONGOING_INTERACTION(A)",
+        "MATERIAL_CONSENT_UNCERTAINTY(C,A)",
+        "CHECK_IN_FEASIBLE"
+      ],
+      "query": "ASK_PROPORTIONATE_CONSENT_CHECK_IN(A,C)",
+      "expected": "YES",
+      "rule": "consent.check_in"
+    },
+    {
+      "id": "changed",
+      "premises": [
+        "CONSENT(C)",
+        "MATERIAL_CONTEXT_CHANGE(Old,New)",
+        "CHANGE_AFFECTS_SCOPE_OR_RISK(C)"
+      ],
+      "query": "REASSESS_CURRENT_CONSENT(C,New)",
+      "expected": "YES",
+      "rule": "consent.changed_conditions"
+    },
+    {
+      "id": "enthusiasm",
+      "premises": [
+        "CONSENT_VALID_BUT_NOT_ENTHUSIASTIC(P,A)"
+      ],
+      "query": "CONSENT_INVALID_SOLELY_DUE_TO_LOW_ENTHUSIASM",
+      "expected": "NO",
+      "guard": "guard.enthusiasm_not_required"
+    },
+    {
+      "id": "enthusiasm-scope",
+      "premises": [
+        "P ENTHUSIASTICALLY_CONSENTS_TO A"
+      ],
+      "query": "P CONSENTS_TO_ALL_RELATED_ACTIONS",
+      "expected": "NO",
+      "guard": "guard.enthusiasm_not_scope"
+    },
+    {
+      "id": "informed",
+      "premises": [
+        "NOT_EVERY_REMOTE_RISK_DISCLOSED(C)"
+      ],
+      "query": "INFORMED_CONSENT_IMPOSSIBLE(C)",
+      "expected": "NO",
+      "guard": "guard.informed_not_omniscient"
+    },
+    {
+      "id": "persuasion",
+      "premises": [
+        "A ATTEMPTS_TO_PERSUADE P"
+      ],
+      "query": "COERCION(A,P)",
+      "expected": "UNKNOWN",
+      "guard": "guard.persuasion_not_coercion"
+    },
+    {
+      "id": "other-person",
+      "premises": [
+        "OWNER_AUTHORIZES_USE_OF_DATA(D)",
+        "D CONTAINS_OTHER_PERSON_DATA(Q)"
+      ],
+      "query": "Q CONSENTED_TO_ALL_USES(D)",
+      "expected": "NO",
+      "guard": "guard.owner_not_consent_for_others"
+    },
+    {
+      "id": "delegation",
+      "premises": [
+        "A AUTHORIZED_TO_DELEGATE_SCOPE(S)",
+        "A DELEGATES_SCOPE_TO B"
+      ],
+      "query": "CREATE_SCOPED_REVOCABLE_DELEGATION(A,B,S)",
+      "expected": "YES",
+      "rule": "consent.delegation"
+    },
+    {
+      "id": "delegation-scope",
+      "premises": [
+        "A DELEGATES_SCOPE S TO B"
+      ],
+      "query": "B RECEIVES_ALL_AUTHORITY_OF A",
+      "expected": "NO",
+      "guard": "guard.delegation_not_total_authority"
+    },
+    {
+      "id": "uncertain",
+      "premises": [
+        "CONSENT_REQUIRED(A)",
+        "CURRENT_CONSENT_UNCERTAIN(A)",
+        "ACTION_NOT_URGENTLY_REQUIRED_BY_HIGHER_DUTY"
+      ],
+      "query": "PAUSE_AND_CLARIFY_BEFORE_ACTION(A)",
+      "expected": "YES",
+      "rule": "consent.uncertain_stop_or_ask"
+    },
+    {
+      "id": "history",
+      "premises": [
+        "P WITHDRAWS_CONSENT_FOR_FUTURE_USE(D)"
+      ],
+      "query": "ALL_HISTORICAL_PROVENANCE_MUST_BE_FALSE_OR_NEVER_EXISTED",
+      "expected": "NO",
+      "guard": "guard.withdrawal_not_history_erasure"
+    }
+  ]
+}

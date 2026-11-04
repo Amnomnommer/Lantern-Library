@@ -1,0 +1,105 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.formal_logic",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "mp-1",
+      "premises": [
+        "rain",
+        "rain -> wet_ground"
+      ],
+      "query": "wet_ground",
+      "expected": "YES",
+      "rule": "logic.modus_ponens"
+    },
+    {
+      "id": "mt-1",
+      "premises": [
+        "alarm -> light",
+        "NOT light"
+      ],
+      "query": "NOT alarm",
+      "expected": "YES",
+      "rule": "logic.modus_tollens"
+    },
+    {
+      "id": "ac-guard",
+      "premises": [
+        "rain -> wet_ground",
+        "wet_ground"
+      ],
+      "query": "rain",
+      "expected": "UNKNOWN",
+      "guard": "guard.affirming_consequent"
+    },
+    {
+      "id": "da-guard",
+      "premises": [
+        "rain -> wet_ground",
+        "NOT rain"
+      ],
+      "query": "NOT wet_ground",
+      "expected": "UNKNOWN",
+      "guard": "guard.denying_antecedent"
+    },
+    {
+      "id": "inclusive-or",
+      "premises": [
+        "red OR round",
+        "red"
+      ],
+      "query": "NOT round",
+      "expected": "UNKNOWN",
+      "guard": "guard.disjunction_exclusive_assumption"
+    },
+    {
+      "id": "conjunction",
+      "premises": [
+        "red AND round"
+      ],
+      "query": "round",
+      "expected": "YES",
+      "rule": "logic.conjunction_elimination_right"
+    },
+    {
+      "id": "chain",
+      "premises": [
+        "A -> B",
+        "B -> C",
+        "A"
+      ],
+      "query": "C",
+      "expected": "YES",
+      "rules": [
+        "logic.hypothetical_syllogism",
+        "logic.modus_ponens"
+      ]
+    },
+    {
+      "id": "conflict",
+      "premises": [
+        "door_open",
+        "NOT door_open"
+      ],
+      "query": "unrelated_claim",
+      "expected": "UNKNOWN",
+      "guard": "guard.contradiction_explosion_disabled_for_empirical_reasoning"
+    },
+    {
+      "id": "unknown-not-false",
+      "premises": [],
+      "query": "NOT blue_box",
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "validity-not-truth",
+      "premises": [
+        "dragon_exists -> dragon_breathes_fire",
+        "dragon_exists"
+      ],
+      "query": "dragon_breathes_fire",
+      "expected": "DERIVABLE_NOT_AUTHORITATIVE_FACT"
+    }
+  ]
+}

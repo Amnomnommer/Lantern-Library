@@ -1,0 +1,117 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.sociological_anthropological_methodologies",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "group",
+      "premises": [
+        "GROUP_LEVEL_PATTERN(G,P)"
+      ],
+      "query": "EVERY_INDIVIDUAL_IN(G) HAS P",
+      "expected": "NO",
+      "guard": "guard_group_not_individual"
+    },
+    {
+      "id": "ecological",
+      "premises": [
+        "AGGREGATE_ASSOCIATION(G,X,Y)"
+      ],
+      "query": "INDIVIDUAL_ASSOCIATION(X,Y)",
+      "expected": "UNKNOWN",
+      "guard": "guard_ecological_fallacy"
+    },
+    {
+      "id": "atomistic",
+      "premises": [
+        "INDIVIDUAL_ASSOCIATION(X,Y)"
+      ],
+      "query": "SAME_GROUP_LEVEL_ASSOCIATION(X,Y)",
+      "expected": "UNKNOWN",
+      "guard": "guard_atomistic_fallacy"
+    },
+    {
+      "id": "culture",
+      "premises": [
+        "CULTURAL_PATTERN(C,G)"
+      ],
+      "query": "ALL_MEMBERS_IDENTICAL_ON(G,C)",
+      "expected": "NO",
+      "guard": "guard_culture_not_homogeneous"
+    },
+    {
+      "id": "construct",
+      "premises": [
+        "SOCIALLY_CONSTRUCTED(C)"
+      ],
+      "query": "UNREAL_OR_CONSEQUENCE_FREE(C)",
+      "expected": "NO",
+      "guard": "guard_social_construct_not_fake"
+    },
+    {
+      "id": "interview",
+      "premises": [
+        "INTERVIEW_REPORT(person,P)"
+      ],
+      "query": "DIRECT_OBSERVATION_OF_BEHAVIOR(P)",
+      "expected": "NO",
+      "guard": "guard_interview_not_behavior"
+    },
+    {
+      "id": "fieldnote",
+      "premises": [
+        "FIELDNOTE(F)"
+      ],
+      "query": "VIEW_FROM_NOWHERE(F)",
+      "expected": "NO",
+      "guard": "guard_fieldnote_not_neutral"
+    },
+    {
+      "id": "etic",
+      "premises": [
+        "ETIC_CATEGORY(E)"
+      ],
+      "query": "PARTICIPANTS_USE_CATEGORY(E)",
+      "expected": "UNKNOWN",
+      "guard": "guard_etic_not_emic"
+    },
+    {
+      "id": "emic",
+      "premises": [
+        "EMIC_ACCOUNT(P,G)"
+      ],
+      "query": "ALL_MEMBERS_OF_G_AGREE(P)",
+      "expected": "UNKNOWN",
+      "guard": "guard_emic_not_universal"
+    },
+    {
+      "id": "triangulate",
+      "premises": [
+        "DIFFERENT_METHOD_OR_SOURCE(E1,E2)",
+        "BOTH_BEAR_ON(E1,E2,C)"
+      ],
+      "query": "TRIANGULATE(E1,E2,C)",
+      "expected": "YES",
+      "rule": "social.triangulation"
+    },
+    {
+      "id": "reflexivity",
+      "premises": [
+        "FIELD_OR_INTERVIEW_RESEARCH(R)",
+        "RESEARCHER_PARTICIPATES_IN_DATA_PRODUCTION(R,F)"
+      ],
+      "query": "RECORD_REFLEXIVITY_AND_POSITIONALITY(R,F)",
+      "expected": "YES",
+      "rule": "social.reflexivity_required"
+    },
+    {
+      "id": "network",
+      "premises": [
+        "NETWORK_EDGE(a,b,friendship)"
+      ],
+      "query": "COMPLETE_SOCIAL_RELATIONSHIP(a,b)=friendship",
+      "expected": "UNKNOWN",
+      "guard": "guard_network_edge_not_relationship_totality"
+    }
+  ]
+}

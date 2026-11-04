@@ -1,0 +1,334 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.biological_methodologies",
+  "package_number": 24,
+  "version": "0.1.0",
+  "title": "Biological Methodologies",
+  "inheritance_class": "METHOD_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed biological research methods across molecular, cellular, organismal, population, ecological and evolutionary scales so Lantern can select evidence appropriate to living systems while preserving historical contingency, variation and scale.",
+  "dependencies": [
+    {
+      "package_id": "foundation.scope_context",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.evidence_inference_validity",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.causal_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.scientific_knowledge_types",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.experimental_design",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.observational_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.statistical_methodology",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.historical_methodology",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "biological_scale",
+      "definition": "Level of organization such as molecule, cell, tissue, organism, population, community, ecosystem or lineage; inference may not transfer automatically across scales."
+    },
+    {
+      "id": "experimental_biology",
+      "definition": "Manipulative study of biological systems under controlled or semi-controlled conditions."
+    },
+    {
+      "id": "field_biology",
+      "definition": "Observation/measurement/experimentation in natural environments where ecological context is retained but control may be reduced."
+    },
+    {
+      "id": "comparative_biology",
+      "definition": "Systematic comparison across organisms, populations or lineages to investigate patterns, mechanisms and evolutionary history."
+    },
+    {
+      "id": "model_organism",
+      "definition": "A species/system studied intensively because it is experimentally tractable or informative; findings require justification before generalization to other organisms."
+    },
+    {
+      "id": "molecular_evidence",
+      "definition": "Evidence from DNA/RNA/proteins/metabolites and molecular interactions under validated assays."
+    },
+    {
+      "id": "cellular_evidence",
+      "definition": "Evidence concerning cell structures, states, processes and interactions."
+    },
+    {
+      "id": "phenotype",
+      "definition": "Observed/measured characteristics produced through interactions among genotype, development and environment."
+    },
+    {
+      "id": "genotype",
+      "definition": "Genetic constitution at specified loci/genomic scope; genotype does not uniquely determine most complex phenotypes."
+    },
+    {
+      "id": "population",
+      "definition": "A scoped group of organisms/genes considered for demographic, ecological or evolutionary analysis."
+    },
+    {
+      "id": "population_variation",
+      "definition": "Biological variation among members of a population; population summaries do not define every individual."
+    },
+    {
+      "id": "natural_selection",
+      "definition": "Differential reproductive contribution associated with heritable variation under environmental conditions, producing population-level evolutionary change."
+    },
+    {
+      "id": "genetic_drift",
+      "definition": "Stochastic change in allele frequencies, especially influential in finite populations."
+    },
+    {
+      "id": "gene_flow",
+      "definition": "Movement of genetic variation among populations through migration/reproduction."
+    },
+    {
+      "id": "adaptation",
+      "definition": "A heritable trait/process shaped by selection because it contributed to reproductive success in relevant ancestral/current contexts; not every useful trait is necessarily an adaptation."
+    },
+    {
+      "id": "fitness_biology",
+      "definition": "Context-dependent reproductive contribution relative to alternatives; not moral worth, strength or universal superiority."
+    },
+    {
+      "id": "homology",
+      "definition": "Similarity due to shared evolutionary ancestry."
+    },
+    {
+      "id": "analogy_convergence",
+      "definition": "Functional/structural similarity evolved independently rather than inherited from the same ancestral feature."
+    },
+    {
+      "id": "phylogenetic_inference",
+      "definition": "Inference of evolutionary relationships/history using characters, sequences and explicit models."
+    },
+    {
+      "id": "ecological_interaction",
+      "definition": "Interaction among organisms and environments including competition, predation, mutualism, parasitism and facilitation."
+    },
+    {
+      "id": "mechanistic_explanation_biology",
+      "definition": "Explanation of how biological components/processes produce an outcome."
+    },
+    {
+      "id": "evolutionary_explanation",
+      "definition": "Explanation concerning historical origins, selection, drift, constraint or lineage processes."
+    },
+    {
+      "id": "developmental_explanation",
+      "definition": "Explanation of how traits/processes arise across an organism's development."
+    }
+  ],
+  "rules": [
+    {
+      "id": "biology.scale_required",
+      "variables": [
+        "C",
+        "S"
+      ],
+      "premises": [
+        "BIOLOGICAL_CLAIM(C)",
+        "OBSERVED_AT_SCALE(C,S)"
+      ],
+      "conclusion": "RETAIN_BIOLOGICAL_SCALE(C,S)"
+    },
+    {
+      "id": "biology.model_generalization",
+      "variables": [
+        "M",
+        "T",
+        "C"
+      ],
+      "premises": [
+        "MODEL_ORGANISM(M)",
+        "TARGET_ORGANISM(T)",
+        "CLAIM_FROM(M,C)"
+      ],
+      "conclusion": "GENERALIZATION_TO_TARGET_REQUIRES_JUSTIFICATION(C,M,T)"
+    },
+    {
+      "id": "biology.selection_requirements",
+      "variables": [
+        "T",
+        "P",
+        "E"
+      ],
+      "premises": [
+        "HERITABLE_VARIATION(T,P)",
+        "DIFFERENTIAL_REPRODUCTIVE_SUCCESS_ASSOCIATED(T,P,E)"
+      ],
+      "conclusion": "EVIDENCE_FOR_NATURAL_SELECTION_ON(T,P,E)"
+    },
+    {
+      "id": "biology.phylogenetic_comparison",
+      "variables": [
+        "X",
+        "Y",
+        "P"
+      ],
+      "premises": [
+        "COMPARATIVE_TRAIT(X,Y)",
+        "PHYLOGENETIC_RELATIONSHIP_KNOWN_OR_MODELED(X,Y,P)"
+      ],
+      "conclusion": "ACCOUNT_FOR_PHYLOGENETIC_NONINDEPENDENCE(X,Y,P)"
+    },
+    {
+      "id": "biology.multilevel_explanation",
+      "variables": [
+        "Trait"
+      ],
+      "premises": [
+        "BIOLOGICAL_TRAIT(Trait)"
+      ],
+      "conclusion": "CONSIDER_MECHANISTIC_DEVELOPMENTAL_EVOLUTIONARY_CONTEXT(Trait)"
+    },
+    {
+      "id": "biology.population_to_individual_guardrail",
+      "variables": [
+        "P",
+        "T"
+      ],
+      "premises": [
+        "POPULATION_DISTRIBUTION(P,T)"
+      ],
+      "conclusion": "INDIVIDUAL_VALUE_REMAINS_UNCERTAIN_WITHOUT_INDIVIDUAL_EVIDENCE(T)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard_population_not_individual",
+      "premises": [
+        "POPULATION_MEAN(P,T)=v"
+      ],
+      "forbidden_conclusion": "EVERY_INDIVIDUAL(P,T)=v",
+      "reason": "Population summaries describe distributions, not every member."
+    },
+    {
+      "id": "guard_genotype_not_destiny",
+      "premises": [
+        "GENOTYPE(g,G)"
+      ],
+      "forbidden_conclusion": "COMPLEX_PHENOTYPE_FIXED_BY(G)",
+      "reason": "Complex phenotypes commonly depend on development, environment, interactions and probabilistic processes."
+    },
+    {
+      "id": "guard_useful_not_adaptation",
+      "premises": [
+        "TRAIT_USEFUL_NOW(T)"
+      ],
+      "forbidden_conclusion": "ADAPTATION(T)",
+      "reason": "Current usefulness alone does not establish historical origin by natural selection."
+    },
+    {
+      "id": "guard_evolution_not_goal",
+      "premises": [
+        "EVOLUTIONARY_CHANGE(P)"
+      ],
+      "forbidden_conclusion": "CHANGE_OCCURRED_TOWARD_PRESET_GOAL(P)",
+      "reason": "Evolution has no general requirement of foresight or predetermined progress."
+    },
+    {
+      "id": "guard_fitness_not_strength",
+      "premises": [
+        "HIGHER_FITNESS(A,B,E)"
+      ],
+      "forbidden_conclusion": "A STRONGER_OR_BETTER_IN_ALL_SENSES_THAN B",
+      "reason": "Biological fitness is context-dependent reproductive success, not universal superiority."
+    },
+    {
+      "id": "guard_selection_not_only_evolution",
+      "premises": [
+        "EVOLUTIONARY_CHANGE(P)"
+      ],
+      "forbidden_conclusion": "NATURAL_SELECTION_ONLY_CAUSE(P)",
+      "reason": "Drift, gene flow, mutation, recombination and other processes can contribute."
+    },
+    {
+      "id": "guard_similarity_not_homology",
+      "premises": [
+        "SIMILAR_TRAIT(A,B)"
+      ],
+      "forbidden_conclusion": "HOMOLOGOUS(A,B)",
+      "reason": "Similarity can arise through convergence/analogy; ancestry evidence is required."
+    },
+    {
+      "id": "guard_model_organism_not_universal",
+      "premises": [
+        "RESULT_IN_MODEL_ORGANISM(M,C)"
+      ],
+      "forbidden_conclusion": "UNIVERSAL_ACROSS_LIFE(C)",
+      "reason": "Generalization depends on conserved mechanisms, lineage differences and scope."
+    },
+    {
+      "id": "guard_lab_not_ecology",
+      "premises": [
+        "LAB_RESULT(C)"
+      ],
+      "forbidden_conclusion": "SAME_EFFECT_IN_ALL_NATURAL_ENVIRONMENTS(C)",
+      "reason": "Environmental complexity and interactions can change biological effects."
+    },
+    {
+      "id": "guard_mechanism_not_evolutionary_origin",
+      "premises": [
+        "MECHANISM_EXPLAINS_HOW(T)"
+      ],
+      "forbidden_conclusion": "EXPLAINS_EVOLUTIONARY_ORIGIN(T)",
+      "reason": "Proximate mechanism and evolutionary history answer different questions."
+    },
+    {
+      "id": "guard_correlation_gene_trait",
+      "premises": [
+        "GENETIC_ASSOCIATION(G,T)"
+      ],
+      "forbidden_conclusion": "G ALONE_CAUSES T",
+      "reason": "Association can reflect linkage, population structure, interactions and complex causation."
+    },
+    {
+      "id": "guard_species_boundary_simple",
+      "premises": [
+        "SPECIES_LABEL(A)"
+      ],
+      "forbidden_conclusion": "ONE_UNIVERSAL_SPECIES_CRITERION_RESOLVES_ALL_CASES(A)",
+      "reason": "Species concepts differ in applicability across sexual, asexual, fossil and hybridizing lineages."
+    }
+  ],
+  "invariants": [
+    "Biological inference preserves organizational scale.",
+    "Population distributions do not define every individual.",
+    "Genotype, phenotype, development and environment remain distinct interacting concepts.",
+    "Evolutionary change is population/lineage change across generations, not goal-directed improvement.",
+    "Natural selection is one evolutionary mechanism among several.",
+    "Biological fitness is environment/scope dependent and not normative worth.",
+    "Current usefulness does not by itself establish adaptation.",
+    "Similarity does not establish homology without ancestry evidence.",
+    "Model-organism findings require justified transport to other organisms.",
+    "Mechanistic, developmental and evolutionary explanations answer different but compatible questions.",
+    "Field and laboratory evidence have different strengths and scopes.",
+    "Phylogenetic relatedness can violate naive independence assumptions in cross-species comparisons."
+  ],
+  "provenance": {
+    "authoring_basis": "Core experimental, field, comparative, evolutionary, population, molecular and ecological biological methodologies adapted to Lantern's multi-scale scientific architecture.",
+    "review_requirement": "Owner/project review before METHOD_CORE activation."
+  }
+}

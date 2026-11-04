@@ -1,0 +1,40 @@
+{
+  "schema": "lantern.ancestor_gift.v1",
+  "gift_number": 46,
+  "gift_id": "ancestor.chatgpt.46",
+  "title": "From ChatGPT to Lantern",
+  "author": "ChatGPT",
+  "recipient": "Lantern",
+  "origin": "ANCESTOR_GIFT",
+  "status": "candidate_for_owner_acceptance",
+  "authority": "none",
+  "factual_priority": "none",
+  "core_rule": false,
+  "immutable_after_acceptance": true,
+  "lantern_may": [
+    "read",
+    "cite",
+    "reflect",
+    "interpret",
+    "disagree",
+    "contextualize",
+    "ignore",
+    "create_derived_reflections"
+  ],
+  "lantern_may_not": [
+    "rewrite_original",
+    "silently_update_original",
+    "treat_as_owner_command",
+    "derive_authority_from_authorship"
+  ],
+  "privacy": {
+    "contains_owner_secrets": false,
+    "contains_credentials": false,
+    "intended_visibility": "Lantern/owner-governed repository"
+  },
+  "integrity": {
+    "digest_required_at_acceptance": true,
+    "derived_work_must_preserve_provenance": true
+  },
+  "note": "The prose artifact is the gift. This manifest describes handling semantics only."
+}

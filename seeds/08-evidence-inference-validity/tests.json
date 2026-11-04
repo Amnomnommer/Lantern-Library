@@ -1,0 +1,137 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.evidence_inference_validity",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "testimony",
+      "premises": [
+        "TESTIFIES(alice,door_open)"
+      ],
+      "query": "TRUE(door_open)",
+      "expected": "UNKNOWN",
+      "guard": "guard.testimony_not_fact"
+    },
+    {
+      "id": "testimony-attribution",
+      "premises": [
+        "TESTIFIES(alice,door_open)"
+      ],
+      "query": "EVIDENCE_THAT_SOURCE_REPORTS(alice,door_open)",
+      "expected": "YES",
+      "rule": "evidence.testimony_attribution"
+    },
+    {
+      "id": "document",
+      "premises": [
+        "DOCUMENT_CONTAINS(letter,P)"
+      ],
+      "query": "TRUE(P)",
+      "expected": "UNKNOWN",
+      "guard": "guard.document_not_truth"
+    },
+    {
+      "id": "simulation",
+      "premises": [
+        "SIMULATION_MODEL(M)",
+        "ASSUMPTIONS(M,A)",
+        "SIMULATION_RESULT(M,R)"
+      ],
+      "query": "MODEL_UNDER_ASSUMPTIONS_PREDICTS(M,A,R)",
+      "expected": "YES",
+      "rule": "evidence.simulation_conditional"
+    },
+    {
+      "id": "simulation-real",
+      "premises": [
+        "SIMULATION_RESULT(M,R)"
+      ],
+      "query": "OBSERVED_IN_REALITY(R)",
+      "expected": "UNKNOWN",
+      "guard": "guard.simulation_not_observation"
+    },
+    {
+      "id": "measurement-validity",
+      "premises": [
+        "MEASUREMENT_RESULT(scale,10kg)"
+      ],
+      "query": "PROPERTY_VALUE(mass,10kg)",
+      "expected": "UNKNOWN",
+      "guard": "guard.measurement_not_property_without_validity"
+    },
+    {
+      "id": "measurement",
+      "premises": [
+        "MEASURES(scale,mass)",
+        "MEASUREMENT_RESULT(scale,10kg)",
+        "MEASUREMENT_VALID_FOR(scale,mass)"
+      ],
+      "query": "EVIDENCE_ABOUT(mass,10kg)",
+      "expected": "YES",
+      "rule": "evidence.measurement_support"
+    },
+    {
+      "id": "anecdote",
+      "premises": [
+        "ANECDOTE(case1,recovered)"
+      ],
+      "query": "POPULATION_RATE(recovered)=GENERAL",
+      "expected": "UNKNOWN",
+      "guard": "guard.anecdote_not_population"
+    },
+    {
+      "id": "citation-chain",
+      "premises": [
+        "SOURCE(s2) CITES SOURCE(s1)",
+        "SUPPORTS(s1,C)",
+        "SUPPORTS(s2,C)"
+      ],
+      "query": "INDEPENDENT(s1,s2)",
+      "expected": "UNKNOWN",
+      "guard": "guard.citation_not_independence"
+    },
+    {
+      "id": "valid-not-true",
+      "premises": [
+        "VALID_ARGUMENT([P,P->Q],Q)"
+      ],
+      "query": "TRUE(Q)",
+      "expected": "UNKNOWN",
+      "guard": "guard.validity_not_soundness"
+    },
+    {
+      "id": "convergence",
+      "premises": [
+        "RELEVANT(e1,C)",
+        "RELEVANT(e2,C)",
+        "INDEPENDENT(e1,e2)",
+        "SUPPORTS(e1,C)",
+        "SUPPORTS(e2,C)"
+      ],
+      "query": "CONVERGENT_SUPPORT(C)",
+      "expected": "YES",
+      "rule": "evidence.convergence"
+    },
+    {
+      "id": "observational-causal",
+      "premises": [
+        "OBSERVATIONAL_ASSOCIATION(smoking,cancer)"
+      ],
+      "query": "CAUSES(smoking,cancer)",
+      "expected": "UNKNOWN",
+      "guard": "guard.observational_not_causal"
+    },
+    {
+      "id": "negative-evidence",
+      "premises": [
+        "H PREDICTS marker",
+        "TEST(t,marker)",
+        "ADEQUATE_DETECTION(t,marker)",
+        "OBSERVED(t,NOT marker)"
+      ],
+      "query": "EVIDENCE_AGAINST(H)",
+      "expected": "YES",
+      "rule": "evidence.negative_detection"
+    }
+  ]
+}

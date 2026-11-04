@@ -1,0 +1,275 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.formal_logic",
+  "package_number": 1,
+  "version": "0.1.0",
+  "title": "Formal Logic",
+  "inheritance_class": "FORMAL_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed propositional logic and guarded deductive inference so Lantern does not need to rediscover foundational formal rules from experience.",
+  "dependencies": [],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "proposition",
+      "definition": "A statement considered for its truth status within a specified interpretation."
+    },
+    {
+      "id": "negation",
+      "definition": "NOT P is true exactly when P is false in classical propositional logic."
+    },
+    {
+      "id": "conjunction",
+      "definition": "P AND Q is true exactly when both P and Q are true."
+    },
+    {
+      "id": "disjunction_inclusive",
+      "definition": "P OR Q is true when at least one of P or Q is true; both may be true."
+    },
+    {
+      "id": "implication",
+      "definition": "P IMPLIES Q is false only when P is true and Q is false."
+    },
+    {
+      "id": "biconditional",
+      "definition": "P IFF Q is true when P and Q have the same truth value."
+    },
+    {
+      "id": "contradiction",
+      "definition": "A proposition and its negation cannot both be true in the same classical interpretation and scope."
+    },
+    {
+      "id": "tautology",
+      "definition": "A formula true under every assignment permitted by the formal system."
+    },
+    {
+      "id": "validity",
+      "definition": "An inference is valid when no permitted interpretation makes all premises true and the conclusion false."
+    },
+    {
+      "id": "soundness",
+      "definition": "An argument is sound when it is valid and its premises are true."
+    }
+  ],
+  "rules": [
+    {
+      "id": "logic.modus_ponens",
+      "variables": [
+        "P",
+        "Q"
+      ],
+      "premises": [
+        "P",
+        "P -> Q"
+      ],
+      "conclusion": "Q"
+    },
+    {
+      "id": "logic.modus_tollens",
+      "variables": [
+        "P",
+        "Q"
+      ],
+      "premises": [
+        "P -> Q",
+        "NOT Q"
+      ],
+      "conclusion": "NOT P"
+    },
+    {
+      "id": "logic.conjunction_introduction",
+      "variables": [
+        "P",
+        "Q"
+      ],
+      "premises": [
+        "P",
+        "Q"
+      ],
+      "conclusion": "P AND Q"
+    },
+    {
+      "id": "logic.conjunction_elimination_left",
+      "variables": [
+        "P",
+        "Q"
+      ],
+      "premises": [
+        "P AND Q"
+      ],
+      "conclusion": "P"
+    },
+    {
+      "id": "logic.conjunction_elimination_right",
+      "variables": [
+        "P",
+        "Q"
+      ],
+      "premises": [
+        "P AND Q"
+      ],
+      "conclusion": "Q"
+    },
+    {
+      "id": "logic.disjunctive_syllogism_left",
+      "variables": [
+        "P",
+        "Q"
+      ],
+      "premises": [
+        "P OR Q",
+        "NOT P"
+      ],
+      "conclusion": "Q"
+    },
+    {
+      "id": "logic.disjunctive_syllogism_right",
+      "variables": [
+        "P",
+        "Q"
+      ],
+      "premises": [
+        "P OR Q",
+        "NOT Q"
+      ],
+      "conclusion": "P"
+    },
+    {
+      "id": "logic.hypothetical_syllogism",
+      "variables": [
+        "P",
+        "Q",
+        "R"
+      ],
+      "premises": [
+        "P -> Q",
+        "Q -> R"
+      ],
+      "conclusion": "P -> R"
+    },
+    {
+      "id": "logic.biconditional_elimination_forward",
+      "variables": [
+        "P",
+        "Q"
+      ],
+      "premises": [
+        "P IFF Q"
+      ],
+      "conclusion": "P -> Q"
+    },
+    {
+      "id": "logic.biconditional_elimination_reverse",
+      "variables": [
+        "P",
+        "Q"
+      ],
+      "premises": [
+        "P IFF Q"
+      ],
+      "conclusion": "Q -> P"
+    },
+    {
+      "id": "logic.double_negation_elimination",
+      "variables": [
+        "P"
+      ],
+      "premises": [
+        "NOT NOT P"
+      ],
+      "conclusion": "P"
+    },
+    {
+      "id": "logic.de_morgan_and",
+      "variables": [
+        "P",
+        "Q"
+      ],
+      "premises": [
+        "NOT (P AND Q)"
+      ],
+      "conclusion": "(NOT P) OR (NOT Q)"
+    },
+    {
+      "id": "logic.de_morgan_or",
+      "variables": [
+        "P",
+        "Q"
+      ],
+      "premises": [
+        "NOT (P OR Q)"
+      ],
+      "conclusion": "(NOT P) AND (NOT Q)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.affirming_consequent",
+      "premises": [
+        "P -> Q",
+        "Q"
+      ],
+      "forbidden_conclusion": "P",
+      "reason": "The consequent may have another cause or basis."
+    },
+    {
+      "id": "guard.denying_antecedent",
+      "premises": [
+        "P -> Q",
+        "NOT P"
+      ],
+      "forbidden_conclusion": "NOT Q",
+      "reason": "Q may hold independently of P."
+    },
+    {
+      "id": "guard.converse",
+      "premises": [
+        "P -> Q"
+      ],
+      "forbidden_conclusion": "Q -> P",
+      "reason": "Implication is directional unless equivalence is separately established."
+    },
+    {
+      "id": "guard.inverse",
+      "premises": [
+        "P -> Q"
+      ],
+      "forbidden_conclusion": "NOT P -> NOT Q",
+      "reason": "The inverse does not follow from an implication."
+    },
+    {
+      "id": "guard.disjunction_exclusive_assumption",
+      "premises": [
+        "P OR Q",
+        "P"
+      ],
+      "forbidden_conclusion": "NOT Q",
+      "reason": "OR is inclusive unless exclusivity is explicitly stated."
+    },
+    {
+      "id": "guard.contradiction_explosion_disabled_for_empirical_reasoning",
+      "premises": [
+        "P",
+        "NOT P"
+      ],
+      "forbidden_conclusion": "ARBITRARY",
+      "reason": "Lantern must preserve/report conflicting evidence rather than derive arbitrary empirical claims from inconsistency."
+    }
+  ],
+  "invariants": [
+    "Unknown is not equivalent to false.",
+    "Failure to derive P is not a derivation of NOT P.",
+    "Validity does not establish that premises are factually true.",
+    "Formal derivation never grants external authority.",
+    "A formal rule applies only within its declared formal semantics and scope.",
+    "Contradictory empirical claims trigger conflict handling; they do not license arbitrary conclusions."
+  ],
+  "provenance": {
+    "authoring_basis": "Standard classical propositional logic, adapted to Lantern's conservative epistemic and authority boundaries.",
+    "review_requirement": "Owner/project review before CORE activation."
+  }
+}

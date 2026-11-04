@@ -1,0 +1,133 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.scientific_knowledge_types",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "theory-not-guess",
+      "premises": [
+        "THEORY(germ_theory)"
+      ],
+      "query": "UNSUPPORTED_GUESS(germ_theory)",
+      "expected": "NO",
+      "guard": "guard.theory_not_guess"
+    },
+    {
+      "id": "theory-law",
+      "premises": [
+        "HIGH_CONFIDENCE(THEORY(T))"
+      ],
+      "query": "BECOMES_LAW(T)",
+      "expected": "NO",
+      "guard": "guard.theory_not_law_progression"
+    },
+    {
+      "id": "law-rank",
+      "premises": [
+        "SCIENTIFIC_LAW(L)",
+        "THEORY(T)"
+      ],
+      "query": "L MORE_TRUE_THAN T BY_TYPE",
+      "expected": "NO",
+      "guard": "guard.law_not_more_true"
+    },
+    {
+      "id": "law-description",
+      "premises": [
+        "SCIENTIFIC_LAW(L)",
+        "DESCRIBES(L,R)"
+      ],
+      "query": "DESCRIPTIVE_RELATION(L,R)",
+      "expected": "YES",
+      "rule": "science.law_describes"
+    },
+    {
+      "id": "theory-explanation",
+      "premises": [
+        "THEORY(T)",
+        "EXPLAINS(T,O)"
+      ],
+      "query": "EXPLANATORY_RELATION(T,O)",
+      "expected": "YES",
+      "rule": "science.theory_explains"
+    },
+    {
+      "id": "model-assumptions",
+      "premises": [
+        "MODEL(M)",
+        "ASSUMPTIONS(M,A)",
+        "PREDICTS(M,P)"
+      ],
+      "query": "MODEL_PREDICTION_CONDITIONAL_ON(M,P,A)",
+      "expected": "YES",
+      "rule": "science.model_conditional"
+    },
+    {
+      "id": "model-reality",
+      "premises": [
+        "MODEL(M)"
+      ],
+      "query": "M IDENTICAL_TO_REALITY",
+      "expected": "NO",
+      "guard": "guard.model_not_reality"
+    },
+    {
+      "id": "prediction-success",
+      "premises": [
+        "PREDICTION_SUCCEEDED(T,P)"
+      ],
+      "query": "PROVEN_TRUE(T)",
+      "expected": "NO_OR_UNKNOWN_NOT_YES",
+      "guard": "guard.prediction_success_not_proof"
+    },
+    {
+      "id": "failed-prediction",
+      "premises": [
+        "PREDICTION_FAILED(T,P)"
+      ],
+      "query": "FALSE_IN_ALL_SCOPES(T)",
+      "expected": "UNKNOWN",
+      "guard": "guard.failed_prediction_not_instant_total_rejection"
+    },
+    {
+      "id": "consensus",
+      "premises": [
+        "CONSENSUS_SUPPORTS(C)"
+      ],
+      "query": "TRUE(C)",
+      "expected": "UNKNOWN",
+      "guard": "guard.consensus_not_truth"
+    },
+    {
+      "id": "scope-limited",
+      "premises": [
+        "MODEL(M)",
+        "VALID_WITHIN(M,S)",
+        "FAILS_OUTSIDE(M,S)"
+      ],
+      "query": "SCOPE_LIMITED(M,S)",
+      "expected": "YES",
+      "rule": "science.scope_limited_model"
+    },
+    {
+      "id": "anomaly",
+      "premises": [
+        "RELIABLE_OBSERVATION(O)",
+        "O IN_SCOPE M",
+        "NOT_ACCOUNTED_FOR(M,O)"
+      ],
+      "query": "ANOMALY_FOR(O,M)",
+      "expected": "YES",
+      "rule": "science.anomaly_candidate"
+    },
+    {
+      "id": "anomaly-reject",
+      "premises": [
+        "ANOMALY_FOR(O,M)"
+      ],
+      "query": "REJECT(M) IMMEDIATELY",
+      "expected": "NO",
+      "guard": "guard.anomaly_not_falsification_alone"
+    }
+  ]
+}

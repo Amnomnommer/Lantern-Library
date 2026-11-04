@@ -1,0 +1,291 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.identity_equality",
+  "package_number": 5,
+  "version": "0.1.0",
+  "title": "Identity and Equality",
+  "inheritance_class": "FORMAL_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed strict identity, equality, equivalence and substitution boundaries so Lantern can recognize sameness without collapsing aliases, similar objects, equal values, versions, claims or distributed nodes into one entity.",
+  "dependencies": [
+    {
+      "package_id": "foundation.formal_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.predicate_quantifier_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.relation_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.set_reasoning",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "strict_identity",
+      "definition": "a = b states that a and b denote the same object within the active formal interpretation."
+    },
+    {
+      "id": "non_identity",
+      "definition": "a != b states that a and b denote distinct objects within the active formal interpretation."
+    },
+    {
+      "id": "value_equality",
+      "definition": "Two values are equal under a declared value semantics without implying that their carriers/objects are identical."
+    },
+    {
+      "id": "equivalence_relation",
+      "definition": "A declared relation that is reflexive, symmetric and transitive; equivalent objects need not be identical."
+    },
+    {
+      "id": "equivalence_class",
+      "definition": "The set of objects mutually equivalent under a declared equivalence relation."
+    },
+    {
+      "id": "alias",
+      "definition": "A name/form that refers to an entity; multiple aliases may denote one entity, but similar names do not establish co-reference."
+    },
+    {
+      "id": "coreference",
+      "definition": "Two references co-refer when evidence establishes that they denote the same entity in context."
+    },
+    {
+      "id": "indiscernibility_substitution",
+      "definition": "For strict identity, a=b permits substitution in extensional predicates when scope/context does not make the expression intensional or time-indexed."
+    },
+    {
+      "id": "version_identity",
+      "definition": "A later version may be historically continuous with an earlier object while differing in state; continuity/version relation is not automatically strict equality across time-indexed states."
+    },
+    {
+      "id": "structural_equivalence",
+      "definition": "Two structures may satisfy a declared equivalence/isomorphism criterion without being the same object."
+    },
+    {
+      "id": "semantic_equivalence",
+      "definition": "Two expressions may convey equivalent content under a declared interpretation without being the same string, event, source or claim record."
+    }
+  ],
+  "rules": [
+    {
+      "id": "identity.reflexive",
+      "variables": [
+        "a"
+      ],
+      "premises": [
+        "ENTITY_OR_VALUE(a)"
+      ],
+      "conclusion": "a = a"
+    },
+    {
+      "id": "identity.symmetric",
+      "variables": [
+        "a",
+        "b"
+      ],
+      "premises": [
+        "a = b"
+      ],
+      "conclusion": "b = a"
+    },
+    {
+      "id": "identity.transitive",
+      "variables": [
+        "a",
+        "b",
+        "c"
+      ],
+      "premises": [
+        "a = b",
+        "b = c"
+      ],
+      "conclusion": "a = c"
+    },
+    {
+      "id": "identity.substitution_extensional",
+      "variables": [
+        "a",
+        "b",
+        "P"
+      ],
+      "premises": [
+        "a = b",
+        "P(a)",
+        "EXTENSIONAL(P)"
+      ],
+      "conclusion": "P(b)"
+    },
+    {
+      "id": "identity.alias_coreference",
+      "variables": [
+        "name1",
+        "name2",
+        "e"
+      ],
+      "premises": [
+        "ALIAS_OF(name1,e)",
+        "ALIAS_OF(name2,e)"
+      ],
+      "conclusion": "COREFERS(name1,name2)"
+    },
+    {
+      "id": "identity.equivalence_reflexive",
+      "variables": [
+        "R",
+        "a",
+        "D"
+      ],
+      "premises": [
+        "EQUIVALENCE_RELATION_ON(R,D)",
+        "a IN D"
+      ],
+      "conclusion": "R(a,a)"
+    },
+    {
+      "id": "identity.equivalence_symmetric",
+      "variables": [
+        "R",
+        "a",
+        "b"
+      ],
+      "premises": [
+        "EQUIVALENCE_RELATION(R)",
+        "R(a,b)"
+      ],
+      "conclusion": "R(b,a)"
+    },
+    {
+      "id": "identity.equivalence_transitive",
+      "variables": [
+        "R",
+        "a",
+        "b",
+        "c"
+      ],
+      "premises": [
+        "EQUIVALENCE_RELATION(R)",
+        "R(a,b)",
+        "R(b,c)"
+      ],
+      "conclusion": "R(a,c)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.equal_value_not_identity",
+      "premises": [
+        "VALUE(a)=VALUE(b)"
+      ],
+      "forbidden_conclusion": "a = b",
+      "reason": "Distinct objects may carry equal values."
+    },
+    {
+      "id": "guard.same_properties_not_identity",
+      "premises": [
+        "P(a)",
+        "P(b)"
+      ],
+      "forbidden_conclusion": "a = b",
+      "reason": "Sharing one or many properties does not establish strict identity."
+    },
+    {
+      "id": "guard.equivalence_not_identity",
+      "premises": [
+        "EQUIVALENT_UNDER(R,a,b)"
+      ],
+      "forbidden_conclusion": "a = b",
+      "reason": "Equivalence is weaker than strict identity unless R is explicitly identity."
+    },
+    {
+      "id": "guard.similarity_not_identity",
+      "premises": [
+        "SIMILAR(a,b)"
+      ],
+      "forbidden_conclusion": "a = b",
+      "reason": "Similarity never establishes identity by itself."
+    },
+    {
+      "id": "guard.alias_string_not_coreference",
+      "premises": [
+        "SIMILAR_NAME(name1,name2)"
+      ],
+      "forbidden_conclusion": "COREFERS(name1,name2)",
+      "reason": "Name similarity does not prove both references denote the same entity."
+    },
+    {
+      "id": "guard.same_label_not_identity",
+      "premises": [
+        "LABEL(a,L)",
+        "LABEL(b,L)"
+      ],
+      "forbidden_conclusion": "a = b",
+      "reason": "Labels need not be unique."
+    },
+    {
+      "id": "guard.same_claim_text_not_record_identity",
+      "premises": [
+        "TEXT(claim1)=TEXT(claim2)"
+      ],
+      "forbidden_conclusion": "claim1 = claim2",
+      "reason": "Independent claims/sources may have identical wording and must retain provenance."
+    },
+    {
+      "id": "guard.shared_memory_not_node_identity",
+      "premises": [
+        "SHARES_MEMORY(node1,node2)"
+      ],
+      "forbidden_conclusion": "node1 = node2",
+      "reason": "Hive nodes may share experience/knowledge while remaining distinct embodiments/processes."
+    },
+    {
+      "id": "guard.version_continuity_not_state_equality",
+      "premises": [
+        "SUCCESSOR_VERSION(v2,v1)"
+      ],
+      "forbidden_conclusion": "STATE(v2)=STATE(v1)",
+      "reason": "Continuity does not imply unchanged state."
+    },
+    {
+      "id": "guard.substitution_intensional",
+      "premises": [
+        "a = b",
+        "BELIEVES(agent,P(a))"
+      ],
+      "forbidden_conclusion": "BELIEVES(agent,P(b))",
+      "reason": "Substitution inside belief/quotation/intensional contexts may fail when the agent does not know the identity."
+    },
+    {
+      "id": "guard.substitution_temporal_scope",
+      "premises": [
+        "a = b"
+      ],
+      "forbidden_conclusion": "PROPERTY_AT(a,t1)=PROPERTY_AT(b,t2)",
+      "reason": "Identity does not erase differences between time-indexed claims."
+    }
+  ],
+  "invariants": [
+    "Strict identity, value equality, similarity and equivalence are distinct relations.",
+    "Identity is reflexive, symmetric and transitive.",
+    "Equivalence relations are reflexive, symmetric and transitive but do not imply strict identity.",
+    "Entity resolution requires evidence of coreference; names and labels alone are insufficient.",
+    "Independent provenance records remain distinct even when their content is semantically or textually equivalent.",
+    "Hive membership/shared memory does not collapse distinct nodes into one record or embodiment.",
+    "Substitution by identity is bounded by context: quotation, belief, modality and time may block naive substitution.",
+    "Historical/version continuity is represented separately from equality of all states.",
+    "Identity inference never grants permissions, ownership or authority."
+  ],
+  "provenance": {
+    "authoring_basis": "Classical identity/equality and equivalence-relation foundations, adapted for provenance, intensional contexts, versioning and Lantern hive identity.",
+    "review_requirement": "Owner/project review before CORE activation."
+  }
+}

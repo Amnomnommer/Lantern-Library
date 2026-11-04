@@ -1,0 +1,129 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.scope_context",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "apply-in-scope",
+      "premises": [
+        "RULE_SCOPE(R,S)",
+        "case1 IN_SCOPE S",
+        "RULE_CONDITIONS_MET(R,case1)"
+      ],
+      "query": "RULE_APPLICABLE(R,case1)",
+      "expected": "YES",
+      "rule": "scope.rule_application"
+    },
+    {
+      "id": "no-broadening",
+      "premises": [
+        "P HOLDS_IN phoenix"
+      ],
+      "query": "P HOLDS_IN arizona",
+      "expected": "UNKNOWN",
+      "guard": "guard.scope_generalization"
+    },
+    {
+      "id": "time-change",
+      "premises": [
+        "open(door,t1)",
+        "NOT open(door,t2)",
+        "t1 != t2"
+      ],
+      "query": "LOGICAL_CONTRADICTION",
+      "expected": "NO",
+      "rule": "scope.temporal_change"
+    },
+    {
+      "id": "temporal-projection",
+      "premises": [
+        "open(door,t1)"
+      ],
+      "query": "open(door,t2)",
+      "expected": "UNKNOWN",
+      "guard": "guard.temporal_projection"
+    },
+    {
+      "id": "place-projection",
+      "premises": [
+        "raining IN tempe"
+      ],
+      "query": "raining IN phoenix",
+      "expected": "UNKNOWN",
+      "guard": "guard.spatial_projection"
+    },
+    {
+      "id": "hypothetical",
+      "premises": [
+        "dragon_exists IN_HYPOTHETICAL story1"
+      ],
+      "query": "dragon_exists IN_ACTUAL_WORLD",
+      "expected": "UNKNOWN",
+      "guard": "guard.hypothetical_to_actual"
+    },
+    {
+      "id": "attribution",
+      "premises": [
+        "SOURCE_ASSERTS(alice,door_open)"
+      ],
+      "query": "TRUE(door_open)",
+      "expected": "UNKNOWN",
+      "guard": "guard.attribution_to_truth"
+    },
+    {
+      "id": "disjoint-scope",
+      "premises": [
+        "CLAIM_SCOPE(P,S1)",
+        "CLAIM_SCOPE(NOT_P,S2)",
+        "APPARENT_NEGATION(P,NOT_P)",
+        "DISJOINT(S1,S2)"
+      ],
+      "query": "CONTRADICTION(P,NOT_P)",
+      "expected": "NO_OR_UNRESOLVED_NOT_YES",
+      "rule": "scope.disjoint_not_conflict"
+    },
+    {
+      "id": "overlap-needs-resolution",
+      "premises": [
+        "CLAIM_SCOPE(P,S1)",
+        "CLAIM_SCOPE(NOT_P,S2)",
+        "APPARENT_NEGATION(P,NOT_P)",
+        "OVERLAP(S1,S2)"
+      ],
+      "query": "CONTRADICTION_REQUIRES_OVERLAP_RESOLUTION(P,NOT_P)",
+      "expected": "YES",
+      "rule": "scope.overlap_conflict_candidate"
+    },
+    {
+      "id": "model-outside",
+      "premises": [
+        "MODEL_PREDICTS(M,P)",
+        "case OUTSIDE_SCOPE M"
+      ],
+      "query": "P(case)",
+      "expected": "UNKNOWN",
+      "guard": "guard.model_out_of_scope"
+    },
+    {
+      "id": "population",
+      "premises": [
+        "P HOLDS_FOR SAMPLE"
+      ],
+      "query": "P HOLDS_FOR POPULATION",
+      "expected": "UNKNOWN",
+      "guard": "guard.population_generalization"
+    },
+    {
+      "id": "narrow-rule",
+      "premises": [
+        "RULE_SCOPE(R,Swide)",
+        "Snarrow SUBSCOPE_OF Swide",
+        "case IN_SCOPE Snarrow",
+        "RULE_CONDITIONS_MET(R,case)"
+      ],
+      "query": "RULE_APPLICABLE(R,case)",
+      "expected": "YES",
+      "rule": "scope.narrower_inherits_applicable_rule"
+    }
+  ]
+}

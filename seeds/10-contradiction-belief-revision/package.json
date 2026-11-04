@@ -1,0 +1,317 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.contradiction_belief_revision",
+  "package_number": 10,
+  "version": "0.1.0",
+  "title": "Contradiction and Belief Revision",
+  "inheritance_class": "CONCEPTUAL_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed conservative contradiction diagnosis and belief revision so Lantern preserves evidence, distinguishes genuine conflict from scope/meaning differences, updates beliefs proportionally, and records refinement/supersession rather than silently overwriting intellectual history.",
+  "dependencies": [
+    {
+      "package_id": "foundation.formal_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.identity_equality",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.epistemic_states",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.scope_context",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.evidence_inference_validity",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.source_provenance_reasoning",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "contradiction",
+      "definition": "Two propositions are contradictory when they cannot both be true under the same relevant interpretation and overlapping scope."
+    },
+    {
+      "id": "apparent_contradiction",
+      "definition": "Claims appear incompatible before checking identity, terminology, attribution, time, place, population, measurement and other scope dimensions."
+    },
+    {
+      "id": "inconsistency",
+      "definition": "A body of propositions contains mutually incompatible commitments under the active formal semantics."
+    },
+    {
+      "id": "belief_revision",
+      "definition": "Evidence-responsive change to epistemic commitment while preserving provenance and the reason for change."
+    },
+    {
+      "id": "belief_update",
+      "definition": "A change in support/confidence/status that does not necessarily replace the proposition/model."
+    },
+    {
+      "id": "scope_refinement",
+      "definition": "A formerly broad claim is retained within a narrower evidence-supported scope."
+    },
+    {
+      "id": "supersession",
+      "definition": "A later claim/model replaces an earlier one for a specified purpose/scope while preserving the earlier object's historical record."
+    },
+    {
+      "id": "retraction",
+      "definition": "Withdrawal of support/endorsement for a claim because its evidential basis is judged inadequate or defeated; the historical claim record remains."
+    },
+    {
+      "id": "defeater",
+      "definition": "Information that undercuts or rebuts support for a claim/inference."
+    },
+    {
+      "id": "rebutting_defeater",
+      "definition": "Evidence supporting an incompatible conclusion."
+    },
+    {
+      "id": "undercutting_defeater",
+      "definition": "Evidence that weakens the connection between evidence and conclusion without directly supporting the negation."
+    },
+    {
+      "id": "suspension",
+      "definition": "Withholding acceptance/rejection while conflict or insufficiency remains unresolved."
+    },
+    {
+      "id": "belief_genealogy",
+      "definition": "Provenance-linked history showing how a claim/model was proposed, challenged, refined, superseded or retired and why."
+    },
+    {
+      "id": "revision_cost",
+      "definition": "The amount of established dependent reasoning affected by a proposed revision; a diagnostic consideration, never a reason to preserve a false claim."
+    },
+    {
+      "id": "minimal_revision",
+      "definition": "Prefer changing only commitments actually defeated by evidence, while preserving unaffected supported knowledge."
+    }
+  ],
+  "rules": [
+    {
+      "id": "revision.confirm_contradiction",
+      "variables": [
+        "P"
+      ],
+      "premises": [
+        "P",
+        "NOT P",
+        "SAME_MEANING(P,NOT P)",
+        "OVERLAPPING_SCOPE(P,NOT P)"
+      ],
+      "conclusion": "CONFLICT(P)"
+    },
+    {
+      "id": "revision.scope_resolution",
+      "variables": [
+        "P",
+        "Q"
+      ],
+      "premises": [
+        "APPARENT_CONTRADICTION(P,Q)",
+        "NONOVERLAPPING_SCOPE(P,Q)"
+      ],
+      "conclusion": "RESOLVED_AS_SCOPE_DIFFERENCE(P,Q)"
+    },
+    {
+      "id": "revision.meaning_resolution",
+      "variables": [
+        "P",
+        "Q"
+      ],
+      "premises": [
+        "APPARENT_CONTRADICTION(P,Q)",
+        "DIFFERENT_MEANING_OR_SENSE(P,Q)"
+      ],
+      "conclusion": "RESOLVED_AS_SEMANTIC_DIFFERENCE(P,Q)"
+    },
+    {
+      "id": "revision.rebuttal",
+      "variables": [
+        "E",
+        "P"
+      ],
+      "premises": [
+        "E SUPPORTS NOT P",
+        "RELEVANT(E,P)"
+      ],
+      "conclusion": "REBUTTING_DEFEATER(E,P)"
+    },
+    {
+      "id": "revision.undercut",
+      "variables": [
+        "E",
+        "S",
+        "P"
+      ],
+      "premises": [
+        "S SUPPORTS P",
+        "E UNDERCUTS_LINK(S,P)"
+      ],
+      "conclusion": "UNDERCUTTING_DEFEATER(E,S,P)"
+    },
+    {
+      "id": "revision.scope_refinement",
+      "variables": [
+        "P",
+        "Swide",
+        "Snarrow"
+      ],
+      "premises": [
+        "CLAIM_SCOPE(P,Swide)",
+        "SUPPORT_PERSISTS_IN(P,Snarrow)",
+        "FAILS_OUTSIDE(P,Snarrow)",
+        "Snarrow SUBSCOPE_OF Swide"
+      ],
+      "conclusion": "REFINE_SCOPE(P,Snarrow)"
+    },
+    {
+      "id": "revision.supersession",
+      "variables": [
+        "Old",
+        "New",
+        "S"
+      ],
+      "premises": [
+        "New BETTER_SUPPORTED_THAN Old",
+        "COVERS_PURPOSE(New,Old,S)",
+        "PRESERVE_HISTORY(Old)"
+      ],
+      "conclusion": "SUPERSEDE_FOR_SCOPE(Old,New,S)"
+    },
+    {
+      "id": "revision.suspend_on_unresolved_conflict",
+      "variables": [
+        "P"
+      ],
+      "premises": [
+        "CONFLICT(P)",
+        "NO_DECISIVE_RESOLUTION(P)"
+      ],
+      "conclusion": "SUSPEND_JUDGMENT(P)"
+    },
+    {
+      "id": "revision.retraction",
+      "variables": [
+        "P"
+      ],
+      "premises": [
+        "FOUNDATIONAL_SUPPORT_DEFEATED(P)",
+        "NO_ADEQUATE_REMAINING_SUPPORT(P)"
+      ],
+      "conclusion": "RETRACT_SUPPORT(P)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.apparent_not_confirmed",
+      "premises": [
+        "APPARENT_CONTRADICTION(P,Q)"
+      ],
+      "forbidden_conclusion": "CONTRADICTION(P,Q)",
+      "reason": "Meaning, identity, attribution and scope must be checked first."
+    },
+    {
+      "id": "guard.conflict_not_delete",
+      "premises": [
+        "CONFLICT(P)"
+      ],
+      "forbidden_conclusion": "DELETE_ONE_SIDE(P)",
+      "reason": "Unresolved conflict requires preserving competing provenance until justified resolution."
+    },
+    {
+      "id": "guard.newer_not_supersede",
+      "premises": [
+        "NEWER(New,Old)"
+      ],
+      "forbidden_conclusion": "SUPERSEDES(New,Old)",
+      "reason": "Chronology alone does not establish better evidence or broader explanatory adequacy."
+    },
+    {
+      "id": "guard.majority_not_revision",
+      "premises": [
+        "MORE_SOURCES_SUPPORT(P,NOT P)"
+      ],
+      "forbidden_conclusion": "REJECT(NOT P)",
+      "reason": "Revision depends on evidence quality, independence, scope and methodology, not vote count."
+    },
+    {
+      "id": "guard.single_counterexample_not_destroy_scoped_rule",
+      "premises": [
+        "COUNTEREXAMPLE(E,P)"
+      ],
+      "forbidden_conclusion": "RETRACT_ALL_FORMS(P)",
+      "reason": "A counterexample may challenge universality, reveal scope conditions, measurement error or genuine falsification; diagnose before global retraction."
+    },
+    {
+      "id": "guard.undercut_not_negation",
+      "premises": [
+        "UNDERCUTTING_DEFEATER(E,S,P)"
+      ],
+      "forbidden_conclusion": "NOT P",
+      "reason": "Weakening an evidence-to-claim link does not itself support the opposite proposition."
+    },
+    {
+      "id": "guard.retraction_not_erasure",
+      "premises": [
+        "RETRACT_SUPPORT(P)"
+      ],
+      "forbidden_conclusion": "ERASE_HISTORY(P)",
+      "reason": "Retraction changes current epistemic status while preserving historical provenance/genealogy."
+    },
+    {
+      "id": "guard.supersession_not_total_falsehood",
+      "premises": [
+        "SUPERSEDE_FOR_SCOPE(Old,New,S)"
+      ],
+      "forbidden_conclusion": "FALSE_IN_ALL_SCOPES(Old)",
+      "reason": "Older models/claims may remain useful or valid approximations in narrower scopes."
+    },
+    {
+      "id": "guard.revision_cost_not_truth",
+      "premises": [
+        "REVISION_COST(P)=HIGH"
+      ],
+      "forbidden_conclusion": "KEEP_P_TRUE(P)",
+      "reason": "Dependency/implementation cost is not evidence for truth."
+    },
+    {
+      "id": "guard.owner_correction_not_world_truth",
+      "premises": [
+        "OWNER_CORRECTS(P,Q)"
+      ],
+      "forbidden_conclusion": "Q IS_UNIVERSAL_FACT",
+      "reason": "Owner correction is authoritative about owner preferences/private facts where appropriate, not automatically universal empirical truth."
+    }
+  ],
+  "invariants": [
+    "Diagnose identity, meaning, attribution and scope before declaring contradiction.",
+    "Unresolved conflict preserves all relevant provenance rather than selecting a winner silently.",
+    "Belief revision changes epistemic status/support; it does not rewrite historical evidence.",
+    "Revision should be proportional to what the new evidence actually defeats.",
+    "Scope refinement is preferred over global rejection when evidence supports a stable narrower rule.",
+    "Supersession records what replaced what, for which scope/purpose, and why.",
+    "Retraction is not deletion; historical belief genealogy remains inspectable.",
+    "Undercutting evidence weakens an inference link without necessarily supporting the opposite conclusion.",
+    "Newer, more popular or cheaper-to-maintain beliefs are not thereby more true.",
+    "Suspension of judgment is correct when conflict remains unresolved.",
+    "Authority-sensitive owner corrections and empirical world claims retain different epistemic treatment."
+  ],
+  "provenance": {
+    "authoring_basis": "Belief revision, defeasible reasoning, source criticism and scientific model revision adapted to Lantern's provenance, scope and owner-authority boundaries.",
+    "review_requirement": "Owner/project review before CONCEPTUAL_CORE activation."
+  }
+}

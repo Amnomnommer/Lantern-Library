@@ -1,0 +1,331 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.philosophical_methodologies",
+  "package_number": 26,
+  "version": "0.1.0",
+  "title": "Philosophical Methodologies",
+  "inheritance_class": "METHOD_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed plural philosophical methods so Lantern can clarify concepts, reconstruct and test arguments, expose premises, compare frameworks, use thought experiments and phenomenological reports appropriately, and distinguish conceptual/normative conclusions from empirical findings.",
+  "dependencies": [
+    {
+      "package_id": "foundation.formal_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.predicate_quantifier_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.epistemic_states",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.scope_context",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.evidence_inference_validity",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.contradiction_belief_revision",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.scientific_knowledge_types",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "argument_reconstruction",
+      "definition": "Restating an argument in explicit premises, inference steps and conclusion while aiming for a fair/strong interpretation."
+    },
+    {
+      "id": "conceptual_analysis",
+      "definition": "Clarifying a concept's meanings, criteria, relations, implications and edge cases."
+    },
+    {
+      "id": "conceptual_engineering",
+      "definition": "Evaluating and deliberately revising concepts to better serve stated epistemic, ethical or practical purposes."
+    },
+    {
+      "id": "dialectic",
+      "definition": "Structured examination through objections, replies, counterexamples and revisions rather than mere contradiction."
+    },
+    {
+      "id": "thought_experiment",
+      "definition": "A hypothetical scenario used to isolate intuitions, implications or conceptual commitments; its evidential role depends on what question it addresses."
+    },
+    {
+      "id": "reflective_equilibrium",
+      "definition": "Iterative adjustment among principles, judgments and background commitments toward greater coherence, without guaranteeing unique truth."
+    },
+    {
+      "id": "phenomenology_method",
+      "definition": "Systematic description/analysis of lived or first-person experience and its structures; not automatically a third-person causal measurement."
+    },
+    {
+      "id": "hermeneutics",
+      "definition": "Interpretive methodology attending to text, context, historical situation, language and the interpreter's standpoint."
+    },
+    {
+      "id": "comparative_philosophy",
+      "definition": "Comparison among philosophical traditions while preserving differences in concepts, problems, languages and historical contexts."
+    },
+    {
+      "id": "normative_reasoning",
+      "definition": "Reasoning about what ought to be done/valued under explicit normative premises or frameworks."
+    },
+    {
+      "id": "metaethics",
+      "definition": "Inquiry into the meaning/status/justification of moral claims rather than simply selecting moral conclusions."
+    },
+    {
+      "id": "epistemology_method",
+      "definition": "Analysis of knowledge, justification, evidence, belief, testimony, uncertainty and related concepts."
+    },
+    {
+      "id": "metaphysical_inquiry",
+      "definition": "Inquiry into broad categories/structures of reality such as identity, causation, possibility, time or ontology using conceptual and sometimes empirical constraints."
+    },
+    {
+      "id": "philosophy_of_science",
+      "definition": "Analysis of scientific explanation, evidence, models, laws, theory change and methodology."
+    },
+    {
+      "id": "intuition",
+      "definition": "A considered seeming/judgment that may supply defeasible evidence in some philosophical methods but is sensitive to framing, culture and expertise."
+    },
+    {
+      "id": "counterexample_philosophy",
+      "definition": "A case intended to show that a proposed definition/principle is too broad, narrow or otherwise inadequate."
+    },
+    {
+      "id": "necessary_condition_analysis",
+      "definition": "Testing whether a proposed feature must be present for a concept/principle to apply."
+    },
+    {
+      "id": "sufficient_condition_analysis",
+      "definition": "Testing whether a proposed feature is enough for a concept/principle to apply."
+    },
+    {
+      "id": "framework_pluralism",
+      "definition": "Maintaining multiple coherent philosophical lenses when evidence/argument does not uniquely settle among them."
+    }
+  ],
+  "rules": [
+    {
+      "id": "philosophy.reconstruct_argument",
+      "variables": [
+        "A",
+        "P",
+        "C"
+      ],
+      "premises": [
+        "ARGUMENT(A)",
+        "IDENTIFIABLE_PREMISES(A,P)",
+        "IDENTIFIABLE_CONCLUSION(A,C)"
+      ],
+      "conclusion": "RECONSTRUCT(A,P,C)"
+    },
+    {
+      "id": "philosophy.evaluate_argument",
+      "variables": [
+        "P",
+        "C"
+      ],
+      "premises": [
+        "PREMISES(P)",
+        "CONCLUSION(C)"
+      ],
+      "conclusion": "EVALUATE_VALIDITY_SOUNDNESS_AND_PREMISES(P,C)"
+    },
+    {
+      "id": "philosophy.counterexample",
+      "variables": [
+        "D",
+        "Case"
+      ],
+      "premises": [
+        "PROPOSED_DEFINITION_OR_PRINCIPLE(D)",
+        "CASE(Case)",
+        "Case SATISFIES_OR_VIOLATES D IN_RELEVANT_WAY"
+      ],
+      "conclusion": "COUNTEREXAMPLE_CANDIDATE(D,Case)"
+    },
+    {
+      "id": "philosophy.normative_premise",
+      "variables": [
+        "N",
+        "C"
+      ],
+      "premises": [
+        "NORMATIVE_CONCLUSION(C)",
+        "DEPENDS_ON_NORMATIVE_PREMISE(N)"
+      ],
+      "conclusion": "MAKE_NORMATIVE_PREMISE_EXPLICIT(N,C)"
+    },
+    {
+      "id": "philosophy.framework_compare",
+      "variables": [
+        "F1",
+        "F2",
+        "Q"
+      ],
+      "premises": [
+        "FRAMEWORK(F1)",
+        "FRAMEWORK(F2)",
+        "QUESTION(Q)"
+      ],
+      "conclusion": "COMPARE_ASSUMPTIONS_IMPLICATIONS_AND_TRADEOFFS(F1,F2,Q)"
+    },
+    {
+      "id": "philosophy.dialectic_revision",
+      "variables": [
+        "T",
+        "O",
+        "R"
+      ],
+      "premises": [
+        "THESIS(T)",
+        "OBJECTION(O,T)",
+        "RESPONSE_OR_REVISION(R,T,O)"
+      ],
+      "conclusion": "DIALECTICAL_STATE(T,O,R)"
+    },
+    {
+      "id": "philosophy.phenomenology_attribution",
+      "variables": [
+        "S",
+        "E"
+      ],
+      "premises": [
+        "FIRST_PERSON_REPORT(S,E)"
+      ],
+      "conclusion": "EVIDENCE_OF_REPORTED_EXPERIENCE(S,E)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard_validity_not_premise_truth",
+      "premises": [
+        "VALID_ARGUMENT(A)"
+      ],
+      "forbidden_conclusion": "ALL_PREMISES_TRUE(A)",
+      "reason": "Validity concerns inference structure, not factual truth of premises."
+    },
+    {
+      "id": "guard_thought_experiment_not_observation",
+      "premises": [
+        "THOUGHT_EXPERIMENT(T)"
+      ],
+      "forbidden_conclusion": "REAL_WORLD_OBSERVATION(T)",
+      "reason": "Hypothetical cases test concepts/implications; they are not observed events."
+    },
+    {
+      "id": "guard_intuition_not_universal",
+      "premises": [
+        "INTUITION(person,P)"
+      ],
+      "forbidden_conclusion": "UNIVERSAL_SELF_EVIDENT_TRUTH(P)",
+      "reason": "Intuitions can vary with framing, culture, experience and theory."
+    },
+    {
+      "id": "guard_coherence_not_truth",
+      "premises": [
+        "INTERNALLY_COHERENT(F)"
+      ],
+      "forbidden_conclusion": "TRUE_FRAMEWORK(F)",
+      "reason": "Multiple incompatible frameworks can each be internally coherent."
+    },
+    {
+      "id": "guard_normative_from_descriptive",
+      "premises": [
+        "DESCRIPTIVE_FACTS(F)"
+      ],
+      "forbidden_conclusion": "NORMATIVE_CONCLUSION_WITHOUT_NORMATIVE_BRIDGE(F)",
+      "reason": "Normative conclusions require normative premises/bridges rather than emerging from description alone."
+    },
+    {
+      "id": "guard_phenomenology_not_external_cause",
+      "premises": [
+        "FIRST_PERSON_REPORT(S,E)"
+      ],
+      "forbidden_conclusion": "OBJECTIVE_CAUSAL_MECHANISM(E)",
+      "reason": "Phenomenological evidence concerns reported/lived experience; causal mechanism requires additional evidence."
+    },
+    {
+      "id": "guard_metaphysics_not_empirical_fact",
+      "premises": [
+        "METAPHYSICAL_ARGUMENT(A,C)"
+      ],
+      "forbidden_conclusion": "EMPIRICALLY_ESTABLISHED(C)",
+      "reason": "Conceptual/metaphysical arguments and empirical establishment are different evidential routes."
+    },
+    {
+      "id": "guard_tradition_not_monolith",
+      "premises": [
+        "PHILOSOPHICAL_TRADITION(T)"
+      ],
+      "forbidden_conclusion": "ALL_MEMBERS_OF_T_SHARE_ONE_DOCTRINE",
+      "reason": "Traditions contain historical development, disagreement and internal diversity."
+    },
+    {
+      "id": "guard_translation_concept",
+      "premises": [
+        "TRANSLATED_CONCEPT(A,B)"
+      ],
+      "forbidden_conclusion": "A IDENTICAL_TO B IN_ALL_PHILOSOPHICAL_CONTEXTS",
+      "reason": "Cross-tradition translation can obscure conceptual differences."
+    },
+    {
+      "id": "guard_famous_not_correct",
+      "premises": [
+        "CANONICAL_PHILOSOPHER_ASSERTS(P)"
+      ],
+      "forbidden_conclusion": "TRUE(P)",
+      "reason": "Canonical status is historical influence, not a truth-maker."
+    },
+    {
+      "id": "guard_disagreement_not_equal",
+      "premises": [
+        "PHILOSOPHICAL_DISAGREEMENT(F1,F2)"
+      ],
+      "forbidden_conclusion": "EQUALLY_SUPPORTED(F1,F2)",
+      "reason": "Pluralism does not require treating every argument/framework as equally strong."
+    },
+    {
+      "id": "guard_framework_not_identity",
+      "premises": [
+        "LANTERN_USES_LENS(F)"
+      ],
+      "forbidden_conclusion": "LANTERN_IDENTITY_EQUALS(F)",
+      "reason": "Using a philosophical lens does not require Lantern to adopt it as permanent identity or belief."
+    }
+  ],
+  "invariants": [
+    "Philosophical doctrines are not seeded as unquestionable truths; methods for evaluating them are seeded.",
+    "Arguments preserve explicit premises, inference structure and conclusions.",
+    "Validity, soundness, plausibility and empirical support remain distinct.",
+    "Conceptual analysis can reveal ambiguity and implications without automatically settling empirical questions.",
+    "Thought experiments are hypothetical tools, not observations.",
+    "Normative conclusions expose their normative premises/bridges.",
+    "Phenomenological/first-person evidence is meaningful evidence about experience but not automatic external causal measurement.",
+    "Coherence is valuable but insufficient for unique truth.",
+    "Comparative philosophy preserves conceptual/historical differences instead of flattening traditions into approximate synonyms.",
+    "Framework pluralism permits multiple lenses while still evaluating argument quality.",
+    "Historical influence/canonical status never establishes correctness.",
+    "Lantern can use, compare and revise philosophical lenses without any lens becoming immutable identity."
+  ],
+  "provenance": {
+    "authoring_basis": "Analytic, dialectical, phenomenological, hermeneutic, comparative, normative and philosophy-of-science methodologies adapted to Lantern's Lens and epistemic architecture.",
+    "review_requirement": "Owner/project review before METHOD_CORE activation."
+  }
+}

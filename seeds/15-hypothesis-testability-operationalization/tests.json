@@ -1,0 +1,128 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.hypothesis_testability_operationalization",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "testable",
+      "premises": [
+        "STRUCTURED_HYPOTHESIS(H)",
+        "PREDICTS(H,P)",
+        "OBSERVABLE_OR_MEASURABLE(P)",
+        "POSSIBLE_OUTCOME(O)",
+        "O WOULD_CHALLENGE H"
+      ],
+      "query": "TESTABLE(H)",
+      "expected": "YES",
+      "rule": "hypothesis.testable"
+    },
+    {
+      "id": "vague",
+      "premises": [
+        "VAGUE_UNDEFINED_CONSTRUCT(H)"
+      ],
+      "query": "TESTABLE(H)",
+      "expected": "UNKNOWN_OR_NO",
+      "guard": "guard.vague_not_testable"
+    },
+    {
+      "id": "operationalize",
+      "premises": [
+        "HYPOTHESIS(H)",
+        "USES_CONSTRUCT(H,stress)",
+        "NOT_OPERATIONALLY_DEFINED(stress)"
+      ],
+      "query": "OPERATIONALIZATION_REQUIRED(H,stress)",
+      "expected": "YES",
+      "rule": "hypothesis.needs_operationalization"
+    },
+    {
+      "id": "construct-not-measure",
+      "premises": [
+        "OPERATIONAL_DEFINITION(stress,cortisol)"
+      ],
+      "query": "stress = cortisol",
+      "expected": "NO_OR_UNKNOWN_NOT_YES",
+      "guard": "guard.measure_not_construct_identity"
+    },
+    {
+      "id": "iv-cause",
+      "premises": [
+        "INDEPENDENT_VARIABLE(X)",
+        "DEPENDENT_VARIABLE(Y)"
+      ],
+      "query": "CAUSES(X,Y)",
+      "expected": "UNKNOWN",
+      "guard": "guard.iv_not_cause"
+    },
+    {
+      "id": "discriminating",
+      "premises": [
+        "TEST(T)",
+        "H1 PREDICTS red UNDER T",
+        "H2 PREDICTS blue UNDER T",
+        "red != blue"
+      ],
+      "query": "DISCRIMINATES(T,H1,H2)",
+      "expected": "YES",
+      "rule": "hypothesis.discriminating_test"
+    },
+    {
+      "id": "same-prediction",
+      "premises": [
+        "H1 PREDICTS red UNDER T",
+        "H2 PREDICTS red UNDER T"
+      ],
+      "query": "T DISTINGUISHES H1 FROM H2",
+      "expected": "NO",
+      "guard": "guard.same_prediction_not_discriminate"
+    },
+    {
+      "id": "auxiliary",
+      "premises": [
+        "H PLUS A PREDICTS P",
+        "NOT P OBSERVED"
+      ],
+      "query": "CHALLENGES_JOINT_SYSTEM(H,A)",
+      "expected": "YES",
+      "rule": "hypothesis.auxiliary_failure_check"
+    },
+    {
+      "id": "failed-not-alone",
+      "premises": [
+        "H PLUS A PREDICTS P",
+        "NOT P OBSERVED"
+      ],
+      "query": "FALSE(H) BY_ITSELF",
+      "expected": "UNKNOWN",
+      "guard": "guard.failed_prediction_not_hypothesis_alone"
+    },
+    {
+      "id": "posthoc",
+      "premises": [
+        "H FORMULATED_AFTER SEEING D"
+      ],
+      "query": "PRESPECIFIED_CONFIRMATORY_TEST(H,D)",
+      "expected": "NO",
+      "guard": "guard.posthoc_not_prespecified"
+    },
+    {
+      "id": "untestable",
+      "premises": [
+        "NOT_CURRENTLY_TESTABLE(H)"
+      ],
+      "query": "FALSE(H)",
+      "expected": "UNKNOWN",
+      "guard": "guard.untestable_not_false"
+    },
+    {
+      "id": "null",
+      "premises": [
+        "REJECT_NULL_STATISTICALLY(H0)"
+      ],
+      "query": "TRUE(H1)",
+      "expected": "UNKNOWN",
+      "guard": "guard.statistical_rejection_not_substantive_truth"
+    }
+  ]
+}

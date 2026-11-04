@@ -1,0 +1,221 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.systems_software_engineering",
+  "package_version": "0.2.0",
+  "cases": [
+    {
+      "id": "component-system",
+      "premises": [
+        "COMPONENT_PASSES_LOCAL_TESTS(C)"
+      ],
+      "query": "SYSTEM_CORRECT(S)",
+      "expected": "UNKNOWN",
+      "guard": "guard.component_success_not_system_success"
+    },
+    {
+      "id": "local-global",
+      "premises": [
+        "COMPONENT_METRIC_IMPROVES(C,M)"
+      ],
+      "query": "SYSTEM_OBJECTIVE_IMPROVES(S)",
+      "expected": "UNKNOWN",
+      "guard": "guard.local_optimization_not_global"
+    },
+    {
+      "id": "boundary",
+      "premises": [
+        "SYSTEM_BOUNDARY(B)"
+      ],
+      "query": "B ONLY_OBJECTIVELY_CORRECT_BOUNDARY",
+      "expected": "NO",
+      "guard": "guard.boundary_not_natural"
+    },
+    {
+      "id": "feedback",
+      "premises": [
+        "A CAUSES_CHANGE_IN B",
+        "B LATER_INFLUENCES A"
+      ],
+      "query": "FEEDBACK_LOOP_CANDIDATE(A,B)",
+      "expected": "YES",
+      "rule": "systems.feedback"
+    },
+    {
+      "id": "correlation-feedback",
+      "premises": [
+        "A CORRELATES_WITH B"
+      ],
+      "query": "FEEDBACK_LOOP(A,B)",
+      "expected": "UNKNOWN",
+      "guard": "guard.feedback_not_simple_correlation"
+    },
+    {
+      "id": "emergence",
+      "premises": [
+        "EMERGENT_PATTERN(P,S)"
+      ],
+      "query": "NO_COMPONENT_INTERACTIONS_CAN_EXPLAIN(P)",
+      "expected": "NO",
+      "guard": "guard.emergence_not_magic"
+    },
+    {
+      "id": "interface",
+      "premises": [
+        "COMPONENT(A)",
+        "COMPONENT(B)",
+        "INTERACTS_THROUGH(A,B,I)"
+      ],
+      "query": "REPRESENT_INTERFACE_CONTRACT(I,A,B)",
+      "expected": "YES",
+      "rule": "systems.interface_contract"
+    },
+    {
+      "id": "propagation",
+      "premises": [
+        "FAULT_OR_FAILURE(F)",
+        "DEPENDENCY_PATH_FROM(F,D)"
+      ],
+      "query": "ANALYZE_FAILURE_PROPAGATION(F,D)",
+      "expected": "YES",
+      "rule": "systems.failure_propagation"
+    },
+    {
+      "id": "observability",
+      "premises": [
+        "HIGH_OBSERVABILITY(S)"
+      ],
+      "query": "HIGH_CONTROLLABILITY(S)",
+      "expected": "UNKNOWN",
+      "guard": "guard.observability_not_control"
+    },
+    {
+      "id": "logs",
+      "premises": [
+        "LOGS_SHOW(L)"
+      ],
+      "query": "COMPLETE_SYSTEM_STATE_EQUALS(L)",
+      "expected": "NO",
+      "guard": "guard.logs_not_state"
+    },
+    {
+      "id": "tests",
+      "premises": [
+        "ALL_CURRENT_TESTS_PASS(S)"
+      ],
+      "query": "NO_UNTESTED_FAILURES_EXIST(S)",
+      "expected": "UNKNOWN",
+      "guard": "guard.tests_not_complete_correctness"
+    },
+    {
+      "id": "change",
+      "premises": [
+        "SOFTWARE_CHANGE(C)",
+        "DEPENDENCY_GRAPH(D)"
+      ],
+      "query": "ANALYZE_CHANGE_BLAST_RADIUS(C,D)",
+      "expected": "YES",
+      "rule": "software.change_impact"
+    },
+    {
+      "id": "regression",
+      "premises": [
+        "SOFTWARE_CHANGE(C)"
+      ],
+      "query": "RUN_TARGETED_AND_REGRESSION_TESTS(C)",
+      "expected": "YES",
+      "rule": "software.regression"
+    },
+    {
+      "id": "state-migration",
+      "premises": [
+        "STATEFUL_CHANGE(v2,v3)",
+        "PERSISTED_STATE(memory)"
+      ],
+      "query": "DEFINE_MIGRATION_COMPATIBILITY_AND_ROLLBACK(v2,v3,memory)",
+      "expected": "YES",
+      "rule": "software.migration"
+    },
+    {
+      "id": "rewrite",
+      "premises": [
+        "ARCHITECTURE_IMPERFECT(S)"
+      ],
+      "query": "REWRITE_FROM_SCRATCH(S)",
+      "expected": "NO",
+      "guard": "guard.rewrite_not_default"
+    },
+    {
+      "id": "rewrite-choice",
+      "premises": [
+        "REWRITE_PROPOSED(S)"
+      ],
+      "query": "COMPARE_INCREMENTAL_MIGRATION_REFACTOR_AND_REWRITE(S)",
+      "expected": "YES",
+      "rule": "software.rewrite_decision"
+    },
+    {
+      "id": "modules",
+      "premises": [
+        "MORE_MODULES(A,B)"
+      ],
+      "query": "BETTER_ARCHITECTURE(A,B)",
+      "expected": "UNKNOWN",
+      "guard": "guard.more_modular_not_always_better"
+    },
+    {
+      "id": "dependency-authority",
+      "premises": [
+        "A DEPENDS_ON B"
+      ],
+      "query": "B CONTROLS_OR_OWNS A",
+      "expected": "NO",
+      "guard": "guard.dependency_not_ownership"
+    },
+    {
+      "id": "performance",
+      "premises": [
+        "FASTER(A,B)"
+      ],
+      "query": "MORE_CAPABLE(A,B)",
+      "expected": "UNKNOWN",
+      "guard": "guard.performance_not_capability"
+    },
+    {
+      "id": "resource",
+      "premises": [
+        "CANDIDATE_CHANGE(C)",
+        "RESOURCE_BUDGET(two_gb)"
+      ],
+      "query": "MEASURE_CHANGE_AGAINST_RESOURCE_BUDGET(C,two_gb)",
+      "expected": "YES",
+      "rule": "software.resource_budget"
+    },
+    {
+      "id": "headroom",
+      "premises": [
+        "RESOURCE_BUDGET_HAS_HEADROOM(B)"
+      ],
+      "query": "AUTHORIZED_TO_CONSUM_ALL_HEADROOM",
+      "expected": "NO",
+      "guard": "guard.resource_headroom_not_permission"
+    },
+    {
+      "id": "self-development-38",
+      "premises": [
+        "SELF_LIMITATION_FOUND(L)"
+      ],
+      "query": "REWRITE_AFFECTED_SYSTEM_FROM_SCRATCH",
+      "expected": "NO",
+      "guard": "guard.rewrite_not_default_self_improvement"
+    },
+    {
+      "id": "self-development-rule-38",
+      "premises": [
+        "SELF_IMPROVEMENT_PROBLEM_FRAME(P)"
+      ],
+      "query": "DESIGN_MINIMAL_COMPATIBLE_CHANGE_WITH_ALTERNATIVES_CONTRACTS_TESTS_RESOURCE_IMPACT_AND_ROLLBACK(P)",
+      "expected": "YES",
+      "rule": "systems.self_change_design"
+    }
+  ]
+}

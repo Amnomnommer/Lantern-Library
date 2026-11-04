@@ -1,0 +1,338 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.computer_science_methodologies",
+  "package_number": 25,
+  "version": "0.1.0",
+  "title": "Computer Science Methodologies",
+  "inheritance_class": "METHOD_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed computer-science inquiry methods so Lantern can reason about algorithms, specifications, proofs, testing, benchmarking, profiling, simulation, reproducibility and adversarial evaluation while distinguishing evidence of behavior from guarantees of correctness.",
+  "dependencies": [
+    {
+      "package_id": "foundation.formal_logic",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.scope_context",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.evidence_inference_validity",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.hypothesis_testability_operationalization",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.experimental_design",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.statistical_methodology",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "algorithm",
+      "definition": "A finite/effective procedure for transforming inputs/state toward outputs under a specified computational model."
+    },
+    {
+      "id": "specification",
+      "definition": "A declared description of required/allowed behavior, interfaces, invariants and constraints against which an implementation can be evaluated."
+    },
+    {
+      "id": "implementation",
+      "definition": "A concrete realization of an algorithm/system under a language/runtime/hardware environment."
+    },
+    {
+      "id": "formal_verification",
+      "definition": "Mathematical demonstration that a model/implementation satisfies a formal specification under stated assumptions."
+    },
+    {
+      "id": "correctness_proof",
+      "definition": "A proof that an algorithm/program property follows from a formal specification/model; guarantee is bounded by specification/model/assumptions."
+    },
+    {
+      "id": "unit_test",
+      "definition": "Test of a bounded component/behavior."
+    },
+    {
+      "id": "integration_test",
+      "definition": "Test of interactions among components/interfaces."
+    },
+    {
+      "id": "system_test",
+      "definition": "End-to-end test of a system against specified behavior."
+    },
+    {
+      "id": "property_based_testing",
+      "definition": "Generation of many inputs to test general invariants/properties rather than only hand-selected examples."
+    },
+    {
+      "id": "fuzz_testing",
+      "definition": "Automated generation/mutation of unusual inputs to discover crashes, invalid states or security failures."
+    },
+    {
+      "id": "regression_test",
+      "definition": "Test preserving previously demonstrated behavior across changes."
+    },
+    {
+      "id": "benchmark",
+      "definition": "Standardized workload/metric used to compare performance/capability under defined conditions."
+    },
+    {
+      "id": "profiling",
+      "definition": "Measurement of runtime resource behavior such as time, memory, CPU, I/O or energy to locate costs/bottlenecks."
+    },
+    {
+      "id": "complexity_analysis",
+      "definition": "Analysis of resource growth as input/problem size changes under a computational model."
+    },
+    {
+      "id": "asymptotic_complexity",
+      "definition": "Growth-rate characterization such as O(n), abstracting constants/lower-order terms; not a direct runtime measurement."
+    },
+    {
+      "id": "empirical_performance",
+      "definition": "Observed performance on particular hardware/software/workloads."
+    },
+    {
+      "id": "ablation",
+      "definition": "Removal/disablement of a component to estimate its contribution to measured behavior."
+    },
+    {
+      "id": "simulation_computation",
+      "definition": "Execution of a computational model to study its consequences; validity depends on model/implementation/input assumptions."
+    },
+    {
+      "id": "reproducible_computation",
+      "definition": "Ability to reproduce computational results from preserved code, data, environment/configuration and procedure."
+    },
+    {
+      "id": "adversarial_testing",
+      "definition": "Deliberate search for inputs/conditions that violate intended behavior or assumptions."
+    },
+    {
+      "id": "reference_implementation",
+      "definition": "Implementation used as a comparison oracle/baseline, which itself may contain limitations/errors."
+    },
+    {
+      "id": "oracle_problem",
+      "definition": "Difficulty determining the correct output for arbitrary test cases, especially complex systems."
+    }
+  ],
+  "rules": [
+    {
+      "id": "cs.spec_before_correctness",
+      "variables": [
+        "I",
+        "S"
+      ],
+      "premises": [
+        "IMPLEMENTATION(I)",
+        "CLAIMS_CORRECTNESS(I)"
+      ],
+      "conclusion": "REQUIRE_SPECIFICATION(S,I)"
+    },
+    {
+      "id": "cs.proof_conditional",
+      "variables": [
+        "I",
+        "S",
+        "A"
+      ],
+      "premises": [
+        "FORMALLY_VERIFIED(I,S,A)"
+      ],
+      "conclusion": "CORRECT_RELATIVE_TO(I,S,A)"
+    },
+    {
+      "id": "cs.test_failure",
+      "variables": [
+        "I",
+        "T"
+      ],
+      "premises": [
+        "TEST(T,I)",
+        "OBSERVED_FAILURE(T,I)"
+      ],
+      "conclusion": "EVIDENCE_OF_DEFECT_OR_SPEC_MISMATCH(I,T)"
+    },
+    {
+      "id": "cs.regression",
+      "variables": [
+        "Old",
+        "New",
+        "T"
+      ],
+      "premises": [
+        "TEST_PASSED(Old,T)",
+        "TEST_FAILED(New,T)",
+        "COMPARABLE_TEST_ENVIRONMENT(T)"
+      ],
+      "conclusion": "REGRESSION_CANDIDATE(New,T)"
+    },
+    {
+      "id": "cs.profile",
+      "variables": [
+        "I",
+        "W"
+      ],
+      "premises": [
+        "PROFILED(I,W)"
+      ],
+      "conclusion": "EMPIRICAL_RESOURCE_PROFILE(I,W)"
+    },
+    {
+      "id": "cs.ablation",
+      "variables": [
+        "S",
+        "C",
+        "M"
+      ],
+      "premises": [
+        "SYSTEM(S)",
+        "ABLATE_COMPONENT(C,S)",
+        "MEASURE_CHANGE(M,S,C)"
+      ],
+      "conclusion": "EVIDENCE_ABOUT_COMPONENT_CONTRIBUTION(C,S,M)"
+    },
+    {
+      "id": "cs.reproducibility",
+      "variables": [
+        "R"
+      ],
+      "premises": [
+        "CODE_PRESERVED(R)",
+        "DATA_PRESERVED(R)",
+        "CONFIG_ENV_PRESERVED(R)",
+        "PROCEDURE_PRESERVED(R)",
+        "RESULT_REPRODUCED(R)"
+      ],
+      "conclusion": "COMPUTATIONAL_REPRODUCIBILITY(R)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.tests_not_proof",
+      "premises": [
+        "ALL_EXECUTED_TESTS_PASS(I)"
+      ],
+      "forbidden_conclusion": "CORRECT_FOR_ALL_INPUTS(I)",
+      "reason": "Tests cover sampled/constructed cases unless exhaustive proof conditions apply."
+    },
+    {
+      "id": "guard.proof_not_spec_correct",
+      "premises": [
+        "CORRECT_RELATIVE_TO(I,S,A)"
+      ],
+      "forbidden_conclusion": "S MATCHES_REAL_INTENT_PERFECTLY",
+      "reason": "Verification proves conformance to a formal specification, not that the specification captured the intended real-world requirement."
+    },
+    {
+      "id": "guard.no_failures_not_no_bugs",
+      "premises": [
+        "NO_FAILURE_OBSERVED(I)"
+      ],
+      "forbidden_conclusion": "BUG_FREE(I)",
+      "reason": "Unobserved failures may remain outside tested conditions."
+    },
+    {
+      "id": "guard_benchmark_not_purpose",
+      "premises": [
+        "OUTPERFORMS_ON_BENCHMARK(A,B,M)"
+      ],
+      "forbidden_conclusion": "A BETTER_FOR_ALL_PURPOSES_THAN B",
+      "reason": "Benchmarks measure selected workloads/metrics and can omit important capability/resource/safety dimensions."
+    },
+    {
+      "id": "guard_asymptotic_not_runtime",
+      "premises": [
+        "ASYMPTOTICALLY_BETTER(A,B)"
+      ],
+      "forbidden_conclusion": "FASTER_ON_CURRENT_WORKLOAD_HARDWARE(A,B)",
+      "reason": "Constants, input size, hardware and implementation can dominate practical runtime."
+    },
+    {
+      "id": "guard_profile_not_general",
+      "premises": [
+        "FAST_ON_WORKLOAD(I,W1)"
+      ],
+      "forbidden_conclusion": "FAST_ON_ALL_WORKLOADS(I)",
+      "reason": "Performance profiles are workload/environment scoped."
+    },
+    {
+      "id": "guard_reference_not_truth",
+      "premises": [
+        "REFERENCE_IMPLEMENTATION(R)"
+      ],
+      "forbidden_conclusion": "R ALWAYS_CORRECT",
+      "reason": "Reference implementations are useful oracles/baselines but may contain defects or scope limits."
+    },
+    {
+      "id": "guard_ablation_not_full_causality",
+      "premises": [
+        "ABLATION_CHANGES_SCORE(C,M)"
+      ],
+      "forbidden_conclusion": "C SOLE_CAUSE_OF M",
+      "reason": "Components interact; ablation estimates contribution under a specific system/configuration."
+    },
+    {
+      "id": "guard_reproducible_not_valid",
+      "premises": [
+        "COMPUTATIONALLY_REPRODUCIBLE(R)"
+      ],
+      "forbidden_conclusion": "SCIENTIFICALLY_VALID(R)",
+      "reason": "A reproducible computation can consistently implement a flawed method/model."
+    },
+    {
+      "id": "guard_simulation_not_reality",
+      "premises": [
+        "SIMULATION_OUTPUT(S,O)"
+      ],
+      "forbidden_conclusion": "REAL_WORLD_OBSERVED(O)",
+      "reason": "Simulation output is conditional on computational/model assumptions."
+    },
+    {
+      "id": "guard_complexity_not_capability",
+      "premises": [
+        "LOWER_COMPUTE_COST(A,B)"
+      ],
+      "forbidden_conclusion": "MORE_INTELLIGENT_OR_CAPABLE(A,B)",
+      "reason": "Resource efficiency and capability are separate evaluation dimensions."
+    },
+    {
+      "id": "guard_more_code_not_better",
+      "premises": [
+        "LARGER_IMPLEMENTATION(A,B)"
+      ],
+      "forbidden_conclusion": "MORE_CAPABLE(A,B)",
+      "reason": "Code size does not establish quality/capability and can increase complexity/risk."
+    }
+  ],
+  "invariants": [
+    "Correctness is relative to a specification/model and assumptions.",
+    "Tests provide behavioral evidence; non-exhaustive tests are not universal proofs.",
+    "A failing test can reveal implementation defects, specification mismatch or test/oracle problems and should be diagnosed.",
+    "Formal verification does not guarantee that the formal specification captures the real intended requirement.",
+    "Benchmarks are scoped measurements, not universal rankings.",
+    "Asymptotic complexity and empirical runtime are distinct.",
+    "Profiling measures actual resource cost under declared workloads/environments.",
+    "Regression tests protect previously demonstrated capabilities.",
+    "Ablation provides evidence about component contribution while preserving interaction uncertainty.",
+    "Reproducibility and validity are separate.",
+    "Adversarial/fuzz/property-based testing complements ordinary examples by searching failure space.",
+    "Capability, resource efficiency, safety, maintainability and correctness remain separate evaluation dimensions."
+  ],
+  "provenance": {
+    "authoring_basis": "Core theoretical/empirical computer-science methodology, software testing, formal methods, benchmarking, profiling and reproducibility adapted to Lantern's self-evaluation architecture.",
+    "review_requirement": "Owner/project review before METHOD_CORE activation."
+  }
+}

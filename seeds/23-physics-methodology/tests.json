@@ -1,0 +1,120 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.physics_methodology",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "dimension-bad",
+      "premises": [
+        "PHYSICAL_EQUATION(Eq)",
+        "DIMENSIONALLY_INCONSISTENT(Eq)"
+      ],
+      "query": "INVALID_AS_STATED_PHYSICAL_EQUATION(Eq)",
+      "expected": "YES",
+      "rule": "physics.dimension_constraint"
+    },
+    {
+      "id": "dimension-good",
+      "premises": [
+        "DIMENSIONALLY_CONSISTENT(Eq)"
+      ],
+      "query": "PHYSICALLY_TRUE(Eq)",
+      "expected": "UNKNOWN",
+      "guard": "guard.dimension_consistency_not_truth"
+    },
+    {
+      "id": "math",
+      "premises": [
+        "MATHEMATICALLY_CONSISTENT(M)"
+      ],
+      "query": "REALIZED_IN_NATURE(M)",
+      "expected": "UNKNOWN",
+      "guard": "guard.math_consistency_not_reality"
+    },
+    {
+      "id": "ideal",
+      "premises": [
+        "IDEALIZATION(point_mass,A)"
+      ],
+      "query": "A LITERALLY_TRUE_OF_SYSTEM",
+      "expected": "UNKNOWN",
+      "guard": "guard_idealization_not_literal"
+    },
+    {
+      "id": "regime",
+      "premises": [
+        "APPROXIMATION_VALID_WITHIN(M,low_speed)"
+      ],
+      "query": "MODEL_VALID_ALL_REGIMES(M)",
+      "expected": "NO_OR_UNKNOWN_NOT_YES",
+      "guard": "guard_approximation_not_global"
+    },
+    {
+      "id": "simulation",
+      "premises": [
+        "COMPUTATIONAL_RESULT(S)"
+      ],
+      "query": "EXPERIMENTALLY_OBSERVED(S)",
+      "expected": "NO",
+      "guard": "guard_simulation_not_experiment"
+    },
+    {
+      "id": "null",
+      "premises": [
+        "PREDICTED_EFFECT(E)",
+        "TEST(T,E)",
+        "SENSITIVITY_LIMIT(T,S)",
+        "NOT_DETECTED(E,T)"
+      ],
+      "query": "CONSTRAIN_EFFECT_WITHIN(E,S)",
+      "expected": "YES",
+      "rule": "physics.null_bound"
+    },
+    {
+      "id": "null-zero",
+      "premises": [
+        "NOT_DETECTED(E,T)",
+        "SENSITIVITY_LIMIT(T,S)"
+      ],
+      "query": "EFFECT_EXACTLY_ZERO(E)",
+      "expected": "UNKNOWN",
+      "guard": "guard_null_not_zero"
+    },
+    {
+      "id": "precision",
+      "premises": [
+        "VERY_PRECISE_MEASUREMENT(O)"
+      ],
+      "query": "CORRECT_MODEL(M)",
+      "expected": "UNKNOWN",
+      "guard": "guard_precision_not_model_validity"
+    },
+    {
+      "id": "conservation",
+      "premises": [
+        "CONSERVATION_LAW(energy)"
+      ],
+      "query": "energy CONSERVED_IN_ANY_OPEN_OR_UNDEFINED_SYSTEM",
+      "expected": "UNKNOWN",
+      "guard": "guard_conservation_scope"
+    },
+    {
+      "id": "order",
+      "premises": [
+        "ORDER_OF_MAGNITUDE_ESTIMATE(x)=1000"
+      ],
+      "query": "EXACT_VALUE(x)=1000",
+      "expected": "UNKNOWN",
+      "guard": "guard_order_magnitude_not_exact"
+    },
+    {
+      "id": "fit",
+      "premises": [
+        "MODEL_FITS_DATA(M,D)"
+      ],
+      "query": "M IS_UNIQUE_TRUE_EXPLANATION(D)",
+      "expected": "UNKNOWN",
+      "guard": "guard_fit_not_explanation"
+    }
+  ]
+}

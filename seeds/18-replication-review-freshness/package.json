@@ -1,0 +1,334 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.replication_review_freshness",
+  "package_number": 18,
+  "version": "0.1.0",
+  "title": "Replication, Review and Knowledge Freshness",
+  "inheritance_class": "METHOD_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed knowledge-maintenance methodology so Lantern distinguishes replication from repetition, synthesizes bodies of evidence cautiously, and prioritizes review using evidence freshness and domain change rather than naively decaying truth confidence with age.",
+  "dependencies": [
+    {
+      "package_id": "foundation.epistemic_states",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.scope_context",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.evidence_inference_validity",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.source_provenance_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.contradiction_belief_revision",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.scientific_knowledge_types",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.experimental_design",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.observational_reasoning",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "replication",
+      "definition": "A new evidential application testing whether a finding/relation reproduces under specified conditions."
+    },
+    {
+      "id": "direct_replication",
+      "definition": "Replication designed to match key original methods/conditions closely enough to test reproducibility."
+    },
+    {
+      "id": "conceptual_replication",
+      "definition": "Replication testing the same underlying claim with meaningfully different operationalizations/methods."
+    },
+    {
+      "id": "failed_replication",
+      "definition": "A replication whose result does not reproduce the target effect/prediction to the prespecified evidential standard; interpretation depends on power, fidelity, scope and method."
+    },
+    {
+      "id": "reproducibility",
+      "definition": "Ability to obtain consistent computational/analytic results using the same data/code/procedure; distinct from independent replication."
+    },
+    {
+      "id": "systematic_review",
+      "definition": "A structured evidence synthesis using explicit search, inclusion, appraisal and synthesis methods."
+    },
+    {
+      "id": "meta_analysis",
+      "definition": "Quantitative synthesis of effect estimates across studies under a declared statistical model and inclusion criteria."
+    },
+    {
+      "id": "publication_bias",
+      "definition": "Distortion when availability/publication of results depends on direction, significance or desirability."
+    },
+    {
+      "id": "selective_reporting",
+      "definition": "Selective presentation of outcomes/analyses that can distort the apparent evidence base."
+    },
+    {
+      "id": "heterogeneity",
+      "definition": "Meaningful variation in effects/results across studies, populations, methods or contexts."
+    },
+    {
+      "id": "methodological_change",
+      "definition": "Development of improved measurement/design/analysis that can alter how older evidence should be interpreted."
+    },
+    {
+      "id": "domain_change_rate",
+      "definition": "Expected rate at which relevant facts, technology, practice or evidence standards change in a domain."
+    },
+    {
+      "id": "last_meaningful_review",
+      "definition": "Most recent time a claim/model was substantively checked against appropriate evidence, not merely accessed/cited."
+    },
+    {
+      "id": "review_pressure",
+      "definition": "Priority for re-evaluating knowledge based on importance, uncertainty, domain change, time since meaningful review, contradictions, methodological change and current use."
+    },
+    {
+      "id": "stale",
+      "definition": "A maintenance status indicating elevated need for review; it is not a truth value or automatic confidence penalty."
+    },
+    {
+      "id": "reconfirmed",
+      "definition": "A claim/model has undergone a meaningful review and remains supported within stated scope."
+    },
+    {
+      "id": "scope_limited_after_review",
+      "definition": "Review supports retaining a claim/model only in a narrower scope."
+    }
+  ],
+  "rules": [
+    {
+      "id": "review.independent_replication",
+      "variables": [
+        "S1",
+        "S2",
+        "C"
+      ],
+      "premises": [
+        "STUDY(S1) SUPPORTS C",
+        "STUDY(S2) SUPPORTS C",
+        "INDEPENDENT_EVIDENCE_CHAIN(S1,S2)",
+        "REPLICATION_INTENT(S2,C)"
+      ],
+      "conclusion": "REPLICATION_SUPPORT(C,S2)"
+    },
+    {
+      "id": "review.failed_replication_flag",
+      "variables": [
+        "S",
+        "C"
+      ],
+      "premises": [
+        "REPLICATION_INTENT(S,C)",
+        "ADEQUATE_TEST_OF(S,C)",
+        "RESULT_INCONSISTENT_WITH_TARGET(S,C)"
+      ],
+      "conclusion": "FAILED_REPLICATION_EVIDENCE(S,C)"
+    },
+    {
+      "id": "review.reproducibility_not_replication",
+      "variables": [
+        "A",
+        "D"
+      ],
+      "premises": [
+        "SAME_DATA(D)",
+        "SAME_ANALYSIS(A)",
+        "RESULT_REPRODUCED(A,D)"
+      ],
+      "conclusion": "COMPUTATIONAL_REPRODUCIBILITY_CONFIRMED(A,D)"
+    },
+    {
+      "id": "review.review_pressure",
+      "variables": [
+        "K"
+      ],
+      "premises": [
+        "KNOWLEDGE_OBJECT(K)",
+        "REVIEW_FACTORS_AVAILABLE(K)"
+      ],
+      "conclusion": "COMPUTE_REVIEW_PRESSURE(K)"
+    },
+    {
+      "id": "review.stale_status",
+      "variables": [
+        "K"
+      ],
+      "premises": [
+        "REVIEW_PRESSURE(K)=HIGH",
+        "NOT_RECENTLY_MEANINGFULLY_REVIEWED(K)"
+      ],
+      "conclusion": "STALE(K)"
+    },
+    {
+      "id": "review.reconfirm",
+      "variables": [
+        "K",
+        "R"
+      ],
+      "premises": [
+        "MEANINGFUL_REVIEW(R,K)",
+        "CURRENT_EVIDENCE_SUPPORTS(R,K)",
+        "NO_UNRESOLVED_SCOPE_FAILURE(R,K)"
+      ],
+      "conclusion": "RECONFIRMED(K)"
+    },
+    {
+      "id": "review.scope_limit",
+      "variables": [
+        "K",
+        "S"
+      ],
+      "premises": [
+        "REVIEW_SUPPORTS_IN_SCOPE(K,S)",
+        "REVIEW_CHALLENGES_OUTSIDE_SCOPE(K,S)"
+      ],
+      "conclusion": "SCOPE_LIMITED_AFTER_REVIEW(K,S)"
+    },
+    {
+      "id": "review.heterogeneity_signal",
+      "variables": [
+        "C"
+      ],
+      "premises": [
+        "SYSTEMATIC_VARIATION_ACROSS_STUDIES(C)"
+      ],
+      "conclusion": "INVESTIGATE_HETEROGENEITY(C)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.citation_not_replication",
+      "premises": [
+        "MANY_CITATIONS(C)"
+      ],
+      "forbidden_conclusion": "MANY_REPLICATIONS(C)",
+      "reason": "Citations may repeat/discuss the same evidence without new tests."
+    },
+    {
+      "id": "guard.reanalysis_not_replication",
+      "premises": [
+        "SAME_DATA_REANALYZED(D)"
+      ],
+      "forbidden_conclusion": "INDEPENDENT_REPLICATION(C)",
+      "reason": "Reanalysis can test analytic robustness but is not new independent evidence."
+    },
+    {
+      "id": "guard.failed_replication_not_false",
+      "premises": [
+        "FAILED_REPLICATION_EVIDENCE(S,C)"
+      ],
+      "forbidden_conclusion": "FALSE(C)",
+      "reason": "Interpret replication fidelity, uncertainty, power, scope and total evidence before global rejection."
+    },
+    {
+      "id": "guard.successful_replication_not_universal",
+      "premises": [
+        "REPLICATION_SUPPORT(C,S)"
+      ],
+      "forbidden_conclusion": "TRUE_IN_ALL_SCOPES(C)",
+      "reason": "Replication supports the tested scope/method and does not prove universality."
+    },
+    {
+      "id": "guard.meta_analysis_not_magic",
+      "premises": [
+        "META_ANALYSIS(M,C)"
+      ],
+      "forbidden_conclusion": "DEFINITIVE_TRUTH(C)",
+      "reason": "Synthesis quality depends on included studies, bias, heterogeneity, model and methods."
+    },
+    {
+      "id": "guard.more_studies_not_quality",
+      "premises": [
+        "MANY_STUDIES(C)"
+      ],
+      "forbidden_conclusion": "STRONG_EVIDENCE(C)",
+      "reason": "Dependence, bias and weak methods can persist across many studies."
+    },
+    {
+      "id": "guard.age_not_false",
+      "premises": [
+        "OLD(K)"
+      ],
+      "forbidden_conclusion": "FALSE(K)",
+      "reason": "Age alone is not evidence against a claim."
+    },
+    {
+      "id": "guard.stale_not_false",
+      "premises": [
+        "STALE(K)"
+      ],
+      "forbidden_conclusion": "FALSE(K)",
+      "reason": "Stale means review is due, not that evidence currently refutes the claim."
+    },
+    {
+      "id": "guard.stale_not_confidence_decay",
+      "premises": [
+        "STALE(K)"
+      ],
+      "forbidden_conclusion": "AUTOMATICALLY_LOWER_TRUTH_CONFIDENCE(K)",
+      "reason": "Review pressure should trigger investigation rather than mechanical truth decay."
+    },
+    {
+      "id": "guard.recent_not_current",
+      "premises": [
+        "RECENT_SOURCE(S)"
+      ],
+      "forbidden_conclusion": "CURRENT_BEST_EVIDENCE(S)",
+      "reason": "Recency alone does not establish methodological quality or relevance."
+    },
+    {
+      "id": "guard.consensus_not_no_review",
+      "premises": [
+        "STRONG_CONSENSUS(K)"
+      ],
+      "forbidden_conclusion": "NEVER_REVIEW(K)",
+      "reason": "Consensus can reduce urgency but does not make knowledge permanently exempt from evidence."
+    },
+    {
+      "id": "guard.method_change_not_old_invalid",
+      "premises": [
+        "NEW_METHOD_BETTER(Mnew,Mold)"
+      ],
+      "forbidden_conclusion": "ALL_RESULTS_USING(Mold)_INVALID",
+      "reason": "Methodological improvement changes evidential interpretation but older results may remain informative."
+    }
+  ],
+  "invariants": [
+    "Replication requires a new evidential application; citation, copying and same-data reanalysis are different activities.",
+    "Direct and conceptual replication answer related but distinct robustness questions.",
+    "Failed replication is evidence to integrate, not an automatic global falsifier.",
+    "Systematic reviews/meta-analyses inherit strengths and weaknesses of their search, inclusion, studies and models.",
+    "Heterogeneity is information to explain, not merely noise to average away.",
+    "Knowledge age alone never determines truth.",
+    "Review pressure is separate from truth confidence.",
+    "Stale means review due, not false.",
+    "Domain change rate affects review urgency: mathematics/formal proofs differ from medicine, cybersecurity or current events.",
+    "Methodological improvement can increase review pressure without erasing historical evidence.",
+    "Reconfirmation, scope limitation, contestation and supersession preserve belief genealogy."
+  ],
+  "provenance": {
+    "authoring_basis": "Replication science, systematic evidence synthesis and knowledge-maintenance principles adapted to Lantern's epistemic freshness architecture.",
+    "review_requirement": "Owner/project review before METHOD_CORE activation."
+  }
+}

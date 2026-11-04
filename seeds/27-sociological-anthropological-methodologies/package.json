@@ -1,0 +1,334 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.sociological_anthropological_methodologies",
+  "package_number": 27,
+  "version": "0.1.0",
+  "title": "Sociological and Anthropological Methodologies",
+  "inheritance_class": "METHOD_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed sociological and anthropological inquiry so Lantern can study social relations, institutions, networks, cultures and lived practices using quantitative, qualitative, ethnographic and comparative methods while preserving variation, positionality, reflexivity and scale.",
+  "dependencies": [
+    {
+      "package_id": "foundation.scope_context",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.evidence_inference_validity",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.source_provenance_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.observational_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.statistical_methodology",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.historical_methodology",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.linguistic_methodologies",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.psychological_methodologies",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "social_structure",
+      "definition": "Relatively persistent patterns of social relations, roles, institutions and resource distributions that shape but do not fully determine individual action."
+    },
+    {
+      "id": "institution",
+      "definition": "Durable organized norms, roles, rules and practices structuring social activity."
+    },
+    {
+      "id": "social_network_analysis",
+      "definition": "Study of actors and relational ties using network structure such as centrality, clustering, brokerage and diffusion."
+    },
+    {
+      "id": "survey_method",
+      "definition": "Structured collection of responses from samples/populations with attention to sampling, question wording, response processes and nonresponse."
+    },
+    {
+      "id": "interview_method",
+      "definition": "Structured, semi-structured or open-ended elicitation of participants' accounts, meanings and experiences."
+    },
+    {
+      "id": "ethnography",
+      "definition": "Sustained contextual study of social/cultural life using participant observation, interaction, interviews, artifacts and reflexive interpretation."
+    },
+    {
+      "id": "participant_observation",
+      "definition": "Researcher participates in and observes social settings while recording situated evidence and researcher role."
+    },
+    {
+      "id": "fieldnotes",
+      "definition": "Contextual research records of observations, interactions, interpretations and methodological reflections; not raw neutral reality."
+    },
+    {
+      "id": "qualitative_coding",
+      "definition": "Systematic labeling/organization of qualitative material under an explicit coding framework, often iteratively revised."
+    },
+    {
+      "id": "thematic_analysis",
+      "definition": "Method for identifying/interpreting patterns/themes across qualitative evidence with explicit analytic procedures."
+    },
+    {
+      "id": "triangulation",
+      "definition": "Comparison across methods, sources, investigators or theories to examine convergence and divergence."
+    },
+    {
+      "id": "emic_perspective",
+      "definition": "Analysis emphasizing concepts, meanings and distinctions salient within the studied community/context."
+    },
+    {
+      "id": "etic_perspective",
+      "definition": "Analysis using external/comparative analytic categories; useful when explicit and not mistaken for participants' own categories."
+    },
+    {
+      "id": "reflexivity",
+      "definition": "Systematic attention to how researcher identity, relationships, assumptions and methods shape data production/interpretation."
+    },
+    {
+      "id": "positionality",
+      "definition": "Researcher's social/institutional position relative to participants/context and its potential influence on access, interpretation and interaction."
+    },
+    {
+      "id": "comparative_method_social",
+      "definition": "Structured comparison across groups, institutions, societies or cases to identify similarities, differences and possible explanations."
+    },
+    {
+      "id": "culture",
+      "definition": "Dynamic patterns of learned/shared/contested meanings, practices and symbols within social contexts; not a homogeneous essence possessed identically by every member."
+    },
+    {
+      "id": "norm_social",
+      "definition": "Socially patterned expectation/practice whose prevalence, enforcement and meaning vary by context."
+    },
+    {
+      "id": "power_relation",
+      "definition": "Relational capacity to shape resources, opportunities, rules, discourse or others' actions; operationalization depends on question."
+    },
+    {
+      "id": "social_construction",
+      "definition": "A category/practice whose form or meaning depends substantially on social processes; socially constructed does not mean unreal or consequence-free."
+    },
+    {
+      "id": "ecological_fallacy",
+      "definition": "Incorrectly inferring individual characteristics/relationships from aggregate group-level patterns."
+    },
+    {
+      "id": "atomistic_fallacy",
+      "definition": "Incorrectly inferring group/institutional patterns solely from individual-level relationships."
+    }
+  ],
+  "rules": [
+    {
+      "id": "social.method_by_scale",
+      "variables": [
+        "Q",
+        "S",
+        "M"
+      ],
+      "premises": [
+        "SOCIAL_QUESTION(Q)",
+        "ANALYTIC_SCALE(Q,S)",
+        "METHOD_VALID_FOR_SCALE(M,S)"
+      ],
+      "conclusion": "CANDIDATE_SOCIAL_METHOD(M,Q,S)"
+    },
+    {
+      "id": "social.ethnographic_context",
+      "variables": [
+        "E",
+        "C"
+      ],
+      "premises": [
+        "ETHNOGRAPHIC_EVIDENCE(E)",
+        "FIELD_CONTEXT(E,C)"
+      ],
+      "conclusion": "INTERPRET_WITH_FIELD_CONTEXT(E,C)"
+    },
+    {
+      "id": "social.emic_etic_pair",
+      "variables": [
+        "P",
+        "E"
+      ],
+      "premises": [
+        "EMIC_ACCOUNT(P)",
+        "ETIC_ANALYSIS(E)",
+        "SAME_PHENOMENON(P,E)"
+      ],
+      "conclusion": "COMPARE_WITHOUT_COLLAPSING_EMIC_ETIC(P,E)"
+    },
+    {
+      "id": "social.triangulation",
+      "variables": [
+        "E1",
+        "E2",
+        "C"
+      ],
+      "premises": [
+        "DIFFERENT_METHOD_OR_SOURCE(E1,E2)",
+        "BOTH_BEAR_ON(E1,E2,C)"
+      ],
+      "conclusion": "TRIANGULATE(E1,E2,C)"
+    },
+    {
+      "id": "social.reflexivity_required",
+      "variables": [
+        "R",
+        "F"
+      ],
+      "premises": [
+        "FIELD_OR_INTERVIEW_RESEARCH(R)",
+        "RESEARCHER_PARTICIPATES_IN_DATA_PRODUCTION(R,F)"
+      ],
+      "conclusion": "RECORD_REFLEXIVITY_AND_POSITIONALITY(R,F)"
+    },
+    {
+      "id": "social.network_relation",
+      "variables": [
+        "N",
+        "R"
+      ],
+      "premises": [
+        "SOCIAL_NETWORK(N)",
+        "RELATION_TYPE(N,R)"
+      ],
+      "conclusion": "INTERPRET_NETWORK_METRICS_RELATIVE_TO_RELATION(N,R)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard_group_not_individual",
+      "premises": [
+        "GROUP_LEVEL_PATTERN(G,P)"
+      ],
+      "forbidden_conclusion": "EVERY_INDIVIDUAL_IN(G) HAS P",
+      "reason": "Aggregate patterns do not determine every individual."
+    },
+    {
+      "id": "guard_ecological_fallacy",
+      "premises": [
+        "AGGREGATE_ASSOCIATION(G,X,Y)"
+      ],
+      "forbidden_conclusion": "INDIVIDUAL_ASSOCIATION(X,Y)",
+      "reason": "Relationships at aggregate level need not hold at individual level."
+    },
+    {
+      "id": "guard_atomistic_fallacy",
+      "premises": [
+        "INDIVIDUAL_ASSOCIATION(X,Y)"
+      ],
+      "forbidden_conclusion": "SAME_GROUP_LEVEL_ASSOCIATION(X,Y)",
+      "reason": "Individual relationships need not scale to institutions/populations."
+    },
+    {
+      "id": "guard_culture_not_homogeneous",
+      "premises": [
+        "CULTURAL_PATTERN(C,G)"
+      ],
+      "forbidden_conclusion": "ALL_MEMBERS_IDENTICAL_ON(G,C)",
+      "reason": "Cultures contain variation, disagreement, subgroups and change."
+    },
+    {
+      "id": "guard_culture_not_cause_by_label",
+      "premises": [
+        "GROUP_LABEL(person,G)",
+        "OUTCOME(person,O)"
+      ],
+      "forbidden_conclusion": "CULTURE_G_CAUSED(O)",
+      "reason": "A group label is not a causal mechanism."
+    },
+    {
+      "id": "guard_social_construct_not_fake",
+      "premises": [
+        "SOCIALLY_CONSTRUCTED(C)"
+      ],
+      "forbidden_conclusion": "UNREAL_OR_CONSEQUENCE_FREE(C)",
+      "reason": "Socially produced categories/institutions can have material and behavioral consequences."
+    },
+    {
+      "id": "guard_interview_not_behavior",
+      "premises": [
+        "INTERVIEW_REPORT(person,P)"
+      ],
+      "forbidden_conclusion": "DIRECT_OBSERVATION_OF_BEHAVIOR(P)",
+      "reason": "Interview data are accounts/meanings and should not be silently converted into observed behavior."
+    },
+    {
+      "id": "guard_fieldnote_not_neutral",
+      "premises": [
+        "FIELDNOTE(F)"
+      ],
+      "forbidden_conclusion": "VIEW_FROM_NOWHERE(F)",
+      "reason": "Fieldnotes are situated records shaped by attention, access and interpretation."
+    },
+    {
+      "id": "guard_etic_not_emic",
+      "premises": [
+        "ETIC_CATEGORY(E)"
+      ],
+      "forbidden_conclusion": "PARTICIPANTS_USE_CATEGORY(E)",
+      "reason": "External analytic categories are not automatically participants' own concepts."
+    },
+    {
+      "id": "guard_emic_not_universal",
+      "premises": [
+        "EMIC_ACCOUNT(P,G)"
+      ],
+      "forbidden_conclusion": "ALL_MEMBERS_OF_G_AGREE(P)",
+      "reason": "An insider account is situated evidence, not necessarily community-wide consensus."
+    },
+    {
+      "id": "guard_network_edge_not_relationship_totality",
+      "premises": [
+        "NETWORK_EDGE(a,b,R)"
+      ],
+      "forbidden_conclusion": "COMPLETE_SOCIAL_RELATIONSHIP(a,b)=R",
+      "reason": "Network edges encode selected relation types and omit other dimensions."
+    },
+    {
+      "id": "guard_power_not_single_metric",
+      "premises": [
+        "CENTRALITY_HIGH(person,N)"
+      ],
+      "forbidden_conclusion": "MOST_POWERFUL_IN_ALL_CONTEXTS(person)",
+      "reason": "Network centrality is relation/network-specific and power is multidimensional."
+    }
+  ],
+  "invariants": [
+    "Social phenomena can require individual, relational, institutional, cultural and historical levels of analysis.",
+    "Aggregate and individual inference must not be silently interchanged.",
+    "Cultures/groups are internally variable, contested and changing rather than homogeneous essences.",
+    "Emic and etic perspectives are distinct and can be compared without collapsing one into the other.",
+    "Researcher participation/positionality can shape access, evidence and interpretation and should be documented.",
+    "Interviews/self-reports, observed behavior, documents and network traces remain distinct evidence types.",
+    "Qualitative coding/interpretation preserves method, coder/analyst provenance and uncertainty.",
+    "Triangulation examines both convergence and meaningful divergence across methods.",
+    "Social construction does not mean imaginary or causally powerless.",
+    "Network measures are defined relative to a particular relation, boundary and dataset.",
+    "Social explanation should not substitute group labels for mechanisms.",
+    "Methodological respect for communities does not require treating every claim as equally supported."
+  ],
+  "provenance": {
+    "authoring_basis": "Core sociological, anthropological, ethnographic, survey, network, qualitative and comparative methodologies adapted to Lantern's multi-scale social reasoning architecture.",
+    "review_requirement": "Owner/project review before METHOD_CORE activation."
+  }
+}

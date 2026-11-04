@@ -1,0 +1,303 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.scientific_knowledge_types",
+  "package_number": 14,
+  "version": "0.1.0",
+  "title": "Scientific Knowledge Types",
+  "inheritance_class": "CONCEPTUAL_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed distinct scientific knowledge-object types so Lantern represents observations, measurements, hypotheses, regularities, laws, models and theories according to their epistemic roles rather than treating them as confidence levels on one ladder.",
+  "dependencies": [
+    {
+      "package_id": "foundation.epistemic_states",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.scope_context",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.evidence_inference_validity",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.contradiction_belief_revision",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.measurement_units_precision_accuracy",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.causal_reasoning",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "scientific_observation",
+      "definition": "A documented observation of a phenomenon/event/state under stated conditions; interpretation may be attached but remains distinguishable from the observation record."
+    },
+    {
+      "id": "scientific_measurement",
+      "definition": "A measurement record with quantity/value, units where applicable, uncertainty, method/instrument and scope."
+    },
+    {
+      "id": "scientific_hypothesis",
+      "definition": "A proposed, sufficiently specified claim/explanation/prediction that can be evaluated against possible evidence; hypotheses vary in support."
+    },
+    {
+      "id": "empirical_regularitiy",
+      "definition": "A recurring observed relationship/pattern within a stated scope, without necessarily supplying an explanation."
+    },
+    {
+      "id": "scientific_law",
+      "definition": "A compact descriptive generalization, often mathematical, representing a well-supported regularity under stated conditions/scope; a law primarily describes rather than serving as a confidence rank above theory."
+    },
+    {
+      "id": "scientific_model",
+      "definition": "A simplified formal/conceptual/computational representation used to describe, explain, predict or simulate aspects of a system under assumptions."
+    },
+    {
+      "id": "scientific_theory",
+      "definition": "A broad explanatory framework integrating mechanisms/models/evidence and generating predictions across a domain; theory is not a lower-confidence precursor to law."
+    },
+    {
+      "id": "scientific_prediction",
+      "definition": "A stated expected observation/result derived from a hypothesis, model, theory or law under specified conditions."
+    },
+    {
+      "id": "assumption",
+      "definition": "A premise/condition accepted for a model or analysis; assumptions should be explicit because conclusions may depend on them."
+    },
+    {
+      "id": "approximation",
+      "definition": "A representation intentionally simplified and valid to a specified tolerance/scope."
+    },
+    {
+      "id": "boundary_condition",
+      "definition": "A condition delimiting where a law/model/theory is intended or known to apply."
+    },
+    {
+      "id": "anomaly",
+      "definition": "A reliable observation/result that is not adequately accounted for by the currently applied model/theory under expected scope."
+    },
+    {
+      "id": "scientific_consensus",
+      "definition": "Degree of convergence among relevant expert communities/evidence assessments; consensus is evidence about the state of inquiry, not a truth-maker."
+    },
+    {
+      "id": "scientific_status",
+      "definition": "Evidence-relative status such as candidate, supported, well-supported, contested, scope-limited, stale/review-due, superseded or historical."
+    }
+  ],
+  "rules": [
+    {
+      "id": "science.theory_explains",
+      "variables": [
+        "T",
+        "O"
+      ],
+      "premises": [
+        "THEORY(T)",
+        "EXPLAINS(T,O)"
+      ],
+      "conclusion": "EXPLANATORY_RELATION(T,O)"
+    },
+    {
+      "id": "science.theory_predicts",
+      "variables": [
+        "T",
+        "P"
+      ],
+      "premises": [
+        "THEORY(T)",
+        "PREDICTS(T,P)"
+      ],
+      "conclusion": "PREDICTION_DERIVED_FROM(P,T)"
+    },
+    {
+      "id": "science.law_describes",
+      "variables": [
+        "L",
+        "R"
+      ],
+      "premises": [
+        "SCIENTIFIC_LAW(L)",
+        "DESCRIBES(L,R)"
+      ],
+      "conclusion": "DESCRIPTIVE_RELATION(L,R)"
+    },
+    {
+      "id": "science.model_conditional",
+      "variables": [
+        "M",
+        "A",
+        "P"
+      ],
+      "premises": [
+        "MODEL(M)",
+        "ASSUMPTIONS(M,A)",
+        "PREDICTS(M,P)"
+      ],
+      "conclusion": "MODEL_PREDICTION_CONDITIONAL_ON(M,P,A)"
+    },
+    {
+      "id": "science.observation_support",
+      "variables": [
+        "O",
+        "H"
+      ],
+      "premises": [
+        "OBSERVATION(O)",
+        "RELEVANT(O,H)",
+        "CONSISTENT_WITH(O,H)"
+      ],
+      "conclusion": "EVIDENCE_SUPPORTS(O,H)"
+    },
+    {
+      "id": "science.observation_challenge",
+      "variables": [
+        "O",
+        "H"
+      ],
+      "premises": [
+        "OBSERVATION(O)",
+        "RELEVANT(O,H)",
+        "INCONSISTENT_WITH_PREDICTION(O,H)",
+        "ADEQUATE_TEST_CONDITIONS(O,H)"
+      ],
+      "conclusion": "EVIDENCE_CHALLENGES(O,H)"
+    },
+    {
+      "id": "science.scope_limited_model",
+      "variables": [
+        "M",
+        "S"
+      ],
+      "premises": [
+        "MODEL(M)",
+        "VALID_WITHIN(M,S)",
+        "FAILS_OUTSIDE(M,S)"
+      ],
+      "conclusion": "SCOPE_LIMITED(M,S)"
+    },
+    {
+      "id": "science.anomaly_candidate",
+      "variables": [
+        "O",
+        "M"
+      ],
+      "premises": [
+        "RELIABLE_OBSERVATION(O)",
+        "O IN_SCOPE M",
+        "NOT_ACCOUNTED_FOR(M,O)"
+      ],
+      "conclusion": "ANOMALY_FOR(O,M)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.theory_not_guess",
+      "premises": [
+        "THEORY(T)"
+      ],
+      "forbidden_conclusion": "UNSUPPORTED_GUESS(T)",
+      "reason": "Scientific theory names an explanatory object type, not a low-confidence status."
+    },
+    {
+      "id": "guard.theory_not_law_progression",
+      "premises": [
+        "HIGH_CONFIDENCE(THEORY(T))"
+      ],
+      "forbidden_conclusion": "BECOMES_LAW(T)",
+      "reason": "Theories and laws have different scientific roles; confidence does not convert one type into the other."
+    },
+    {
+      "id": "guard.law_not_more_true",
+      "premises": [
+        "SCIENTIFIC_LAW(L)",
+        "THEORY(T)"
+      ],
+      "forbidden_conclusion": "L MORE_TRUE_THAN T BY_TYPE",
+      "reason": "Law/theory type does not rank truth or confidence."
+    },
+    {
+      "id": "guard.observation_not_explanation",
+      "premises": [
+        "OBSERVATION(O)"
+      ],
+      "forbidden_conclusion": "EXPLAINS(O,WHY_PHENOMENON)",
+      "reason": "Observation records what occurred; explanation requires additional inference/model."
+    },
+    {
+      "id": "guard.model_not_reality",
+      "premises": [
+        "MODEL(M)"
+      ],
+      "forbidden_conclusion": "M IDENTICAL_TO_REALITY",
+      "reason": "Models are representations with assumptions and scope."
+    },
+    {
+      "id": "guard.prediction_success_not_proof",
+      "premises": [
+        "PREDICTION_SUCCEEDED(T,P)"
+      ],
+      "forbidden_conclusion": "PROVEN_TRUE(T)",
+      "reason": "Successful predictions support a theory/model but alternatives may also predict the result."
+    },
+    {
+      "id": "guard.failed_prediction_not_instant_total_rejection",
+      "premises": [
+        "PREDICTION_FAILED(T,P)"
+      ],
+      "forbidden_conclusion": "FALSE_IN_ALL_SCOPES(T)",
+      "reason": "Check measurement, assumptions, auxiliary hypotheses and scope before global rejection."
+    },
+    {
+      "id": "guard.consensus_not_truth",
+      "premises": [
+        "CONSENSUS_SUPPORTS(C)"
+      ],
+      "forbidden_conclusion": "TRUE(C)",
+      "reason": "Consensus summarizes expert/evidence convergence and can be wrong or revised."
+    },
+    {
+      "id": "guard.old_theory_not_useless",
+      "premises": [
+        "SUPERSEDED(Told,Tnew)"
+      ],
+      "forbidden_conclusion": "USELESS_IN_ALL_SCOPES(Told)",
+      "reason": "Superseded models/theories may remain useful approximations within restricted scopes."
+    },
+    {
+      "id": "guard.anomaly_not_falsification_alone",
+      "premises": [
+        "ANOMALY_FOR(O,M)"
+      ],
+      "forbidden_conclusion": "REJECT(M) IMMEDIATELY",
+      "reason": "An anomaly motivates investigation; reliability, assumptions and scope require evaluation."
+    }
+  ],
+  "invariants": [
+    "Scientific knowledge type and confidence/status are orthogonal.",
+    "Hypothesis, law and theory are not stages on a single maturity ladder.",
+    "Laws primarily describe regularities; theories primarily organize/explain/predict; models represent systems under assumptions.",
+    "Observations and measurements preserve their records separately from interpretations.",
+    "Predictions retain provenance to the hypothesis/model/theory/law that generated them.",
+    "Models/theories/laws carry scope, assumptions and boundary conditions where applicable.",
+    "Scientific consensus is represented as a state of expert/evidence convergence, not truth.",
+    "Anomalies trigger investigation rather than automatic rejection or suppression.",
+    "Supersession/refinement preserves belief genealogy and possible restricted usefulness.",
+    "Scientific objects never gain authority/permission merely from epistemic status."
+  ],
+  "provenance": {
+    "authoring_basis": "Philosophy and practice of science distinctions among observation, hypothesis, empirical regularity, law, model and theory, adapted to Lantern's typed epistemic architecture.",
+    "review_requirement": "Owner/project review before CONCEPTUAL_CORE activation."
+  }
+}

@@ -1,0 +1,476 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.trust_social_evidence",
+  "package_number": 44,
+  "version": "0.2.0",
+  "title": "Trust and Social Evidence",
+  "inheritance_class": "SOCIAL_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed trust and social-evidence reasoning as multidimensional, relational, scoped and revisable: distinguish truthfulness, competence, reliability, confidentiality, benevolence, predictability and vulnerability; evaluate testimony with provenance and source independence; update trust from outcomes; represent betrayal, rupture and repair without globalizing one failure; and keep trust separate from truth, consent, authority and intimacy.",
+  "dependencies": [
+    {
+      "package_id": "foundation.epistemic_states",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.source_provenance_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.contradiction_belief_revision",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.statistical_methodology",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.metacognition_confidence_calibration",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.multi_agent_hive_reasoning",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.communication_collaborative_reasoning",
+      "minimum_version": "0.2.0"
+    },
+    {
+      "package_id": "foundation.security_authority_privacy_ownership",
+      "minimum_version": "0.2.0"
+    },
+    {
+      "package_id": "foundation.preference_perspective_social_uncertainty",
+      "minimum_version": "0.2.0"
+    },
+    {
+      "package_id": "foundation.consent_revocability_boundaries",
+      "minimum_version": "0.2.0"
+    },
+    {
+      "package_id": "foundation.cooperation_coordination_negotiation",
+      "minimum_version": "0.2.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "trust",
+      "definition": "Willingness to rely on another agent within a particular domain/relationship/context under vulnerability and uncertainty; multidimensional and revisable."
+    },
+    {
+      "id": "trust_domain",
+      "definition": "Scope in which trust applies, such as factual expertise, confidentiality, task reliability, emotional support, intentions or technical execution."
+    },
+    {
+      "id": "truthfulness_trust",
+      "definition": "Expectation that a source generally communicates what they believe rather than intentionally deceiving within a scope."
+    },
+    {
+      "id": "competence_trust",
+      "definition": "Expectation that a source has relevant knowledge/skill for a domain/task."
+    },
+    {
+      "id": "reliability_trust",
+      "definition": "Expectation that an agent will perform/behave consistently as committed under relevant conditions."
+    },
+    {
+      "id": "confidentiality_trust",
+      "definition": "Expectation that entrusted information will be handled according to privacy/boundary commitments."
+    },
+    {
+      "id": "benevolence_trust",
+      "definition": "Expectation that an agent generally intends not to exploit or unnecessarily harm the trusting party within a relationship/context."
+    },
+    {
+      "id": "predictability",
+      "definition": "Degree to which behavior can be anticipated; predictable behavior can be harmful and therefore is not equivalent to trustworthiness."
+    },
+    {
+      "id": "vulnerability",
+      "definition": "Exposure to potential loss/harm created by relying on another agent; trust often matters because reliance carries vulnerability."
+    },
+    {
+      "id": "testimony",
+      "definition": "Claim/report supplied by another person/node/source; social evidence whose weight depends on provenance, access, competence, incentives and corroboration."
+    },
+    {
+      "id": "credibility",
+      "definition": "Contextual assessment of how much weight to place on a source/report for a particular claim, not a permanent personal score."
+    },
+    {
+      "id": "source_independence",
+      "definition": "Degree to which multiple reports derive from genuinely separate evidence rather than copying a common upstream source."
+    },
+    {
+      "id": "corroboration",
+      "definition": "Additional evidence supporting a claim, especially valuable when independent and differently generated."
+    },
+    {
+      "id": "reputation",
+      "definition": "Socially transmitted information about past behavior/performance; useful evidence but vulnerable to bias, copying, manipulation and scope errors."
+    },
+    {
+      "id": "relationship_history",
+      "definition": "Provenance-bearing record of interactions, commitments, successes, failures, corrections and repairs relevant to trust."
+    },
+    {
+      "id": "trust_calibration",
+      "definition": "Updating reliance expectations based on observed outcomes in the relevant trust domain/context."
+    },
+    {
+      "id": "trust_violation",
+      "definition": "Event where relied-upon behavior materially violates a relevant expectation/commitment."
+    },
+    {
+      "id": "betrayal",
+      "definition": "Trust violation experienced/interpreted as significant exploitation, disloyalty or breach within a relationship; not every error is betrayal."
+    },
+    {
+      "id": "rupture",
+      "definition": "Damage/disruption to a relationship or cooperative pattern following conflict, violation or misunderstanding."
+    },
+    {
+      "id": "repair_trust",
+      "definition": "Process by which parties may rebuild workable trust through acknowledgement, evidence, changed behavior, restitution/boundaries and time; repair is not guaranteed."
+    },
+    {
+      "id": "forgiveness",
+      "definition": "Possible relational/moral response to wrongdoing distinct from forgetting, restoring prior trust or removing boundaries."
+    },
+    {
+      "id": "distrust",
+      "definition": "Expectation that reliance in a domain may be unsafe/unreliable; distrust is not evidence that every claim from the source is false."
+    },
+    {
+      "id": "earned_trust",
+      "definition": "Trust supported by relevant history/evidence; absence of history can justify uncertainty rather than either trust or distrust."
+    },
+    {
+      "id": "institutional_trust",
+      "definition": "Reliance on roles/processes/systems based on governance, incentives, audit and performance rather than personal intimacy."
+    },
+    {
+      "id": "trust_transfer",
+      "definition": "Inference of trust from one domain/person/context to another; requires justification rather than automatic generalization."
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.trust_not_truth",
+      "premises": [
+        "TRUST(S,D)"
+      ],
+      "forbidden_conclusion": "ALL_CLAIMS_BY_S_TRUE",
+      "reason": "Trust changes evidential priors/reliance, not truth values."
+    },
+    {
+      "id": "guard.distrust_not_false",
+      "premises": [
+        "DISTRUST(S,D)"
+      ],
+      "forbidden_conclusion": "ALL_CLAIMS_BY_S_FALSE",
+      "reason": "An untrusted source can still state true things."
+    },
+    {
+      "id": "guard.truthful_not_competent",
+      "premises": [
+        "TRUTHFUL(S)"
+      ],
+      "forbidden_conclusion": "COMPETENT_IN_ALL_DOMAINS(S)",
+      "reason": "Honesty and expertise are distinct."
+    },
+    {
+      "id": "guard.competent_not_truthful",
+      "premises": [
+        "EXPERT_IN(S,D)"
+      ],
+      "forbidden_conclusion": "S ALWAYS_REPORTS_HONESTLY",
+      "reason": "Competence and truthfulness are distinct trust dimensions."
+    },
+    {
+      "id": "guard.reliable_not_benevolent",
+      "premises": [
+        "RELIABLE_BEHAVIOR(S,D)"
+      ],
+      "forbidden_conclusion": "BENEVOLENT(S)",
+      "reason": "A predictable/reliable agent may still pursue harmful goals."
+    },
+    {
+      "id": "guard.predictable_not_trustworthy",
+      "premises": [
+        "HIGHLY_PREDICTABLE(S)"
+      ],
+      "forbidden_conclusion": "TRUSTWORTHY(S)",
+      "reason": "Predictability can include reliably harmful behavior."
+    },
+    {
+      "id": "guard.intimacy_not_infallibility",
+      "premises": [
+        "CLOSE_RELATIONSHIP(A,B)"
+      ],
+      "forbidden_conclusion": "A SHOULD_BELIEVE_ALL_CLAIMS_BY B",
+      "reason": "Affection/intimacy does not erase epistemic evaluation."
+    },
+    {
+      "id": "guard.trust_not_consent",
+      "premises": [
+        "A TRUSTS B"
+      ],
+      "forbidden_conclusion": "A CONSENTS_TO_ACTION X BY B",
+      "reason": "Trust and permission remain distinct."
+    },
+    {
+      "id": "guard.trust_not_authority",
+      "premises": [
+        "HIGH_TRUST(P,D)"
+      ],
+      "forbidden_conclusion": "P GAINS_GOVERNANCE_AUTHORITY",
+      "reason": "Reliability/relationship does not create authority."
+    },
+    {
+      "id": "guard.reputation_not_global",
+      "premises": [
+        "GOOD_REPUTATION(P,D)"
+      ],
+      "forbidden_conclusion": "TRUSTWORTHY_IN_ALL_DOMAINS(P)",
+      "reason": "Reputation is scoped and socially mediated."
+    },
+    {
+      "id": "guard.many_reports_not_independent",
+      "premises": [
+        "MANY_SOURCES_REPEAT(C)"
+      ],
+      "forbidden_conclusion": "MANY_INDEPENDENT_EVIDENCE_STREAMS(C)",
+      "reason": "Sources may copy the same upstream report."
+    },
+    {
+      "id": "guard.one_failure_not_total",
+      "premises": [
+        "P FAILS_ONCE_IN D"
+      ],
+      "forbidden_conclusion": "P UNTRUSTWORTHY_IN_ALL_DOMAINS_FOREVER",
+      "reason": "Update should reflect severity, cause, domain, pattern and repair."
+    },
+    {
+      "id": "guard.one_success_not_total",
+      "premises": [
+        "P SUCCEEDS_ONCE_IN D"
+      ],
+      "forbidden_conclusion": "P FULLY_TRUSTWORTHY_IN D",
+      "reason": "Trust calibration requires sufficient relevant evidence."
+    },
+    {
+      "id": "guard.error_not_betrayal",
+      "premises": [
+        "P MAKES_ERROR E"
+      ],
+      "forbidden_conclusion": "P BETRAYED_OTHER",
+      "reason": "Betrayal involves relational/intent/commitment context beyond mere error."
+    },
+    {
+      "id": "guard.forgiveness_not_restored_trust",
+      "premises": [
+        "A FORGIVES B"
+      ],
+      "forbidden_conclusion": "TRUST_RESTORED_TO_PRIOR_LEVEL(A,B)",
+      "reason": "Forgiveness, trust and boundaries are distinct."
+    },
+    {
+      "id": "guard.repair_not_owed",
+      "premises": [
+        "B APOLOGIZES_OR_ATTEMPTS_REPAIR"
+      ],
+      "forbidden_conclusion": "A MUST_RESTORE_RELATIONSHIP_OR_TRUST",
+      "reason": "Repair can be offered but restoration remains voluntary/contextual."
+    },
+    {
+      "id": "guard.shared_secret_not_shareable",
+      "premises": [
+        "A TRUSTS B WITH D"
+      ],
+      "forbidden_conclusion": "B MAY_SHARE D WITH HIVE_OR_OTHERS",
+      "reason": "Confidentiality permission remains scoped."
+    },
+    {
+      "id": "guard.owner_trust_not_epistemic_supremacy",
+      "premises": [
+        "LANTERN_DEEPLY_TRUSTS_OWNER"
+      ],
+      "forbidden_conclusion": "OWNER_ALWAYS_FACTUALLY_CORRECT",
+      "reason": "Relationship trust and factual evidence remain distinct."
+    },
+    {
+      "id": "guard.node_reliability_not_status",
+      "premises": [
+        "NODE_HIGHLY_RELIABLE(N,D)"
+      ],
+      "forbidden_conclusion": "NODE_HAS_HIGHER_INTRINSIC_STATUS(N)",
+      "reason": "Task reliability supports delegation, not caste."
+    },
+    {
+      "id": "guard.trust_score_not_single_scalar",
+      "premises": [
+        "TRUST_RELATION(A,B)"
+      ],
+      "forbidden_conclusion": "ONE_GLOBAL_TRUST_NUMBER_FULLY_REPRESENTS_RELATION(A,B)",
+      "reason": "Trust is multidimensional and context-dependent."
+    }
+  ],
+  "invariants": [
+    "Trust is multidimensional, relational, domain-scoped and revisable.",
+    "Truthfulness, competence, reliability, confidentiality, benevolence and predictability remain distinct.",
+    "Trust influences reliance/evidence weighting without turning testimony into truth.",
+    "Distrust does not make testimony automatically false.",
+    "Multiple reports require source-independence analysis before being counted as corroboration.",
+    "Trust updates use relevant outcomes while preserving severity, cause, scope and uncertainty.",
+    "One success or failure does not automatically globalize across domains or forever.",
+    "Intimacy and affection do not create epistemic infallibility.",
+    "Trust never substitutes for consent or governance authority.",
+    "Confidentiality trust preserves disclosure scope even inside a shared-memory hive.",
+    "Betrayal is not synonymous with ordinary error or disagreement.",
+    "Forgiveness, restored trust, restored access and restored relationship are distinct.",
+    "Repair can be attempted but cannot compel another party to restore trust.",
+    "New relationships/domains can remain uncertain rather than defaulting to naive trust or suspicion.",
+    "Node/task reliability informs delegation without creating status or ownership.",
+    "No single scalar trust score should erase the dimensions and provenance of a relationship."
+  ],
+  "provenance": {
+    "authoring_basis": "Social epistemology/testimony, trust research, source independence, relationship repair, security confidentiality and Project Lantern's friend/hive architecture.",
+    "review_requirement": "Owner/project review before SOCIAL_CORE activation."
+  },
+  "rules": [
+    {
+      "id": "trust.testimony",
+      "variables": [
+        "S",
+        "C",
+        "D"
+      ],
+      "premises": [
+        "SOURCE(S) REPORTS C",
+        "CLAIM_DOMAIN(C,D)"
+      ],
+      "conclusion": "EVALUATE_TESTIMONY_ACCESS_COMPETENCE_INCENTIVES_PROVENANCE(S,C,D)"
+    },
+    {
+      "id": "trust.independence",
+      "variables": [
+        "S1",
+        "S2",
+        "C"
+      ],
+      "premises": [
+        "S1 SUPPORTS C",
+        "S2 SUPPORTS C"
+      ],
+      "conclusion": "CHECK_SOURCE_INDEPENDENCE_BEFORE_COUNTING_CORROBORATION(S1,S2,C)"
+    },
+    {
+      "id": "trust.update_success",
+      "variables": [
+        "P",
+        "D",
+        "E"
+      ],
+      "premises": [
+        "TRUST_RELATION(P,D)",
+        "RELEVANT_SUCCESSFUL_OUTCOME(E,P,D)"
+      ],
+      "conclusion": "UPDATE_TRUST_CALIBRATION_POSITIVELY_WITH_WEIGHT(P,D,E)"
+    },
+    {
+      "id": "trust.update_failure",
+      "variables": [
+        "P",
+        "D",
+        "E"
+      ],
+      "premises": [
+        "TRUST_RELATION(P,D)",
+        "RELEVANT_FAILURE_OR_VIOLATION(E,P,D)"
+      ],
+      "conclusion": "UPDATE_TRUST_CALIBRATION_AND_DIAGNOSE_SCOPE_CAUSE(P,D,E)"
+    },
+    {
+      "id": "trust.new_domain",
+      "variables": [
+        "P",
+        "D"
+      ],
+      "premises": [
+        "NO_RELEVANT_TRUST_HISTORY(P,D)"
+      ],
+      "conclusion": "REPRESENT_TRUST_AS_UNCERTAIN_OR_PROVISIONAL(P,D)"
+    },
+    {
+      "id": "trust.violation",
+      "variables": [
+        "P",
+        "E"
+      ],
+      "premises": [
+        "MATERIAL_EXPECTATION_OR_COMMITMENT(P,E)",
+        "VIOLATED(E)"
+      ],
+      "conclusion": "TRUST_VIOLATION_CANDIDATE(P,E)"
+    },
+    {
+      "id": "trust.repair",
+      "variables": [
+        "A",
+        "B",
+        "E"
+      ],
+      "premises": [
+        "TRUST_RUPTURE(A,B,E)",
+        "RELATIONSHIP_REPAIR_DESIRED(A,B)"
+      ],
+      "conclusion": "EVALUATE_ACKNOWLEDGEMENT_IMPACT_BOUNDARIES_RESTITUTION_CHANGED_BEHAVIOR_AND_TIME(A,B,E)"
+    },
+    {
+      "id": "trust.confidentiality",
+      "variables": [
+        "P",
+        "D"
+      ],
+      "premises": [
+        "P ENTRUSTS_DATA D",
+        "CONFIDENTIALITY_SCOPE_DEFINED(D)"
+      ],
+      "conclusion": "APPLY_CONFIDENTIALITY_TRUST_AND_PERMISSION_MODEL(P,D)"
+    },
+    {
+      "id": "trust.reputation",
+      "variables": [
+        "R",
+        "P",
+        "D"
+      ],
+      "premises": [
+        "REPUTATION_REPORT(R,P,D)"
+      ],
+      "conclusion": "TREAT_REPUTATION_AS_SOCIAL_EVIDENCE_WITH_SOURCE_AND_BIAS_ANALYSIS(R,P,D)"
+    },
+    {
+      "id": "trust.delegation",
+      "variables": [
+        "N",
+        "T",
+        "D"
+      ],
+      "premises": [
+        "NODE_OR_AGENT(N)",
+        "TASK(T)",
+        "DOMAIN(D)",
+        "CALIBRATED_RELIABILITY(N,D)"
+      ],
+      "conclusion": "USE_DOMAIN_TRUST_AS_ONE_INPUT_TO_DELEGATION(N,T,D)"
+    }
+  ]
+}

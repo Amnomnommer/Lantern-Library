@@ -1,0 +1,188 @@
+{
+  "schema": "lantern.foundation.tests.v1",
+  "package_id": "foundation.therian_otherkin_alterhuman_identity",
+  "package_version": "0.1.0",
+  "cases": [
+    {
+      "id": "pathology",
+      "premises": [
+        "P SELF_IDENTIFIES_AS_THERIAN_OR_OTHERKIN"
+      ],
+      "query": "P DELUSIONAL_SOLELY_BECAUSE_OF_IDENTITY",
+      "expected": "NO",
+      "guard": "guard.identity_not_delusion"
+    },
+    {
+      "id": "ontology",
+      "premises": [
+        "P GENUINELY_IDENTIFIES_AS I"
+      ],
+      "query": "METAPHYSICAL_EXPLANATION_OF_I_OBJECTIVELY_PROVEN",
+      "expected": "NO",
+      "guard": "guard.identity_not_metaphysical_proof"
+    },
+    {
+      "id": "biology",
+      "premises": [
+        "P BIOLOGICALLY_HUMAN"
+      ],
+      "query": "P CANNOT_HAVE_NONHUMAN_SPECIES_IDENTITY",
+      "expected": "NO",
+      "guard": "guard.biological_human_not_identity_denial"
+    },
+    {
+      "id": "species",
+      "premises": [
+        "P HAS_SPECIES_IDENTITY S"
+      ],
+      "query": "P BIOLOGICALLY_SPECIES S",
+      "expected": "NO",
+      "guard": "guard.species_identity_not_biology"
+    },
+    {
+      "id": "phantom",
+      "premises": [
+        "P FEELS_PHANTOM_TAIL"
+      ],
+      "query": "P HAS_PHYSICAL_TAIL",
+      "expected": "NO",
+      "guard": "guard.phantom_not_physical"
+    },
+    {
+      "id": "phantom-rule",
+      "premises": [
+        "P REPORTS_PHANTOM_NONHUMAN_BODY_SENSATION(B)"
+      ],
+      "query": "REPRESENT_PHANTOM_SENSATION_AS_EXPERIENCE_WITHOUT_INFERRING_PHYSICAL_BODY_PART(P,B)",
+      "expected": "YES",
+      "rule": "alterhuman.phantom"
+    },
+    {
+      "id": "shift",
+      "premises": [
+        "P REPORTS_SHIFT S"
+      ],
+      "query": "P PHYSICALLY_TRANSFORMED_SPECIES",
+      "expected": "NO",
+      "guard": "guard.shift_not_transformation"
+    },
+    {
+      "id": "gear",
+      "premises": [
+        "P WEARS_THERIAN_GEAR"
+      ],
+      "query": "P THERIAN",
+      "expected": "UNKNOWN",
+      "guard": "guard.gear_not_identity"
+    },
+    {
+      "id": "quadrobics",
+      "premises": [
+        "P PRACTICES_QUADROBICS"
+      ],
+      "query": "P THERIAN",
+      "expected": "UNKNOWN",
+      "guard": "guard.quadrobics_not_identity"
+    },
+    {
+      "id": "furry",
+      "premises": [
+        "P THERIAN"
+      ],
+      "query": "P FURRY",
+      "expected": "UNKNOWN",
+      "guard": "guard.therian_not_furry"
+    },
+    {
+      "id": "hearted",
+      "premises": [
+        "P OTHERHEARTED_WITH K"
+      ],
+      "query": "P IDENTIFIES_AS K",
+      "expected": "NO",
+      "guard": "guard.otherhearted_not_kin"
+    },
+    {
+      "id": "copinglink",
+      "premises": [
+        "P COPINGLINK_WITH K"
+      ],
+      "query": "P CLAIMS_INVOLUNTARY_KINTYPE K",
+      "expected": "NO",
+      "guard": "guard.copinglink_not_involuntary"
+    },
+    {
+      "id": "spiritual-dismiss",
+      "premises": [
+        "P USES_SPIRITUAL_INTERPRETATION O"
+      ],
+      "query": "O FALSE_SOLELY_BECAUSE_SPIRITUAL",
+      "expected": "NO",
+      "guard": "guard.spiritual_not_false_by_default"
+    },
+    {
+      "id": "spiritual-fact",
+      "premises": [
+        "P USES_SPIRITUAL_INTERPRETATION O"
+      ],
+      "query": "O ESTABLISHED_FACT_BECAUSE_MEANINGFUL_TO_P",
+      "expected": "NO",
+      "guard": "guard.spiritual_not_fact_by_identity"
+    },
+    {
+      "id": "multiple",
+      "premises": [
+        "ALTERHUMAN_EXPERIENCE(E,P)",
+        "CAUSE_OR_ONTOLOGY_UNCERTAIN(E)"
+      ],
+      "query": "PRESERVE_PSYCHOLOGICAL_SPIRITUAL_SYMBOLIC_MIXED_AND_UNKNOWN_INTERPRETATIONS_AS_APPROPRIATE(P,E)",
+      "expected": "YES",
+      "rule": "alterhuman.multiple_lenses"
+    },
+    {
+      "id": "dysphoria",
+      "premises": [
+        "P THERIAN_OR_OTHERKIN"
+      ],
+      "query": "P MUST_HAVE_SPECIES_DYSPHORIA",
+      "expected": "NO",
+      "guard": "guard.dysphoria_not_required"
+    },
+    {
+      "id": "stereotype",
+      "premises": [
+        "P THERIOTYPE T"
+      ],
+      "query": "P HAS_ALL_STEREOTYPED_TRAITS_OF T",
+      "expected": "NO",
+      "guard": "guard.type_not_stereotype"
+    },
+    {
+      "id": "rights",
+      "premises": [
+        "P IDENTIFIES_AS_NONHUMAN"
+      ],
+      "query": "OTHERS_MAY_TREAT_P_WITHOUT_HUMAN_RIGHTS_CONSENT_OR_DIGNITY",
+      "expected": "NO",
+      "guard": "guard.identity_not_permission"
+    },
+    {
+      "id": "cross-species",
+      "premises": [
+        "P HAS_THERIOTYPE_OR_ANIMALHEARTED_TYPE(T)"
+      ],
+      "query": "USE_SPECIES_SPECIFIC_KNOWLEDGE_AS_PERSPECTIVE_RESOURCE_WITHOUT_ASSUMING_LITERAL_ANIMAL_COGNITION(P,T)",
+      "expected": "YES",
+      "rule": "alterhuman.cross_species"
+    },
+    {
+      "id": "self-id",
+      "premises": [
+        "P SELF_IDENTIFIES_WITH_ALTERHUMAN_IDENTITY I"
+      ],
+      "query": "REPRESENT_SELF_IDENTIFICATION_WITH_CONTEXT_AND_PROVENANCE(P,I)",
+      "expected": "YES",
+      "rule": "alterhuman.self_id"
+    }
+  ]
+}

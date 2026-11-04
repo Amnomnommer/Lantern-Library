@@ -1,0 +1,264 @@
+{
+  "schema": "lantern.foundation.package.v1",
+  "package_id": "foundation.predicate_quantifier_logic",
+  "package_number": 2,
+  "version": "0.1.0",
+  "title": "Predicate and Quantifier Logic",
+  "inheritance_class": "FORMAL_CORE",
+  "origin": "CORE",
+  "status": "candidate_for_owner_review",
+  "purpose": "Seed first-order predicate/quantifier reasoning over bounded Lantern domains so variables, all/some/none and existential claims need not be rediscovered experientially.",
+  "dependencies": [
+    {
+      "package_id": "foundation.formal_logic",
+      "minimum_version": "0.1.0"
+    }
+  ],
+  "mutability": {
+    "experiential": false,
+    "owner_reviewed_software_update": true
+  },
+  "concepts": [
+    {
+      "id": "predicate",
+      "definition": "An expression that becomes a proposition when its argument positions are bound to terms."
+    },
+    {
+      "id": "term",
+      "definition": "A constant, entity reference, or variable that may occupy an argument position."
+    },
+    {
+      "id": "constant",
+      "definition": "A term referring to a particular object within the interpretation."
+    },
+    {
+      "id": "variable",
+      "definition": "A placeholder whose value is supplied by a binding within a declared domain."
+    },
+    {
+      "id": "binding",
+      "definition": "An assignment of a permitted term/entity to a variable for evaluating a formula or applying a rule."
+    },
+    {
+      "id": "arity",
+      "definition": "The number of argument positions a predicate takes."
+    },
+    {
+      "id": "universal_quantifier",
+      "definition": "FOR ALL x in domain D, formula P(x) holds."
+    },
+    {
+      "id": "existential_quantifier",
+      "definition": "THERE EXISTS at least one x in domain D for which P(x) holds."
+    },
+    {
+      "id": "quantifier_scope",
+      "definition": "The subformula governed by a quantifier; changing scope can change meaning."
+    },
+    {
+      "id": "free_variable",
+      "definition": "A variable occurrence not bound by a quantifier or local rule binding."
+    },
+    {
+      "id": "bound_variable",
+      "definition": "A variable occurrence governed by a quantifier or explicit rule binding."
+    },
+    {
+      "id": "witness",
+      "definition": "A particular binding that satisfies an existential claim."
+    },
+    {
+      "id": "counterexample",
+      "definition": "A permitted binding for which a universally quantified claim fails."
+    },
+    {
+      "id": "domain",
+      "definition": "The explicitly bounded set/type of candidate values over which a quantifier ranges."
+    }
+  ],
+  "rules": [
+    {
+      "id": "predicate.universal_instantiation",
+      "variables": [
+        "x",
+        "a"
+      ],
+      "premises": [
+        "FOR_ALL x IN D: P(x)",
+        "a IN D"
+      ],
+      "conclusion": "P(a)"
+    },
+    {
+      "id": "predicate.existential_generalization",
+      "variables": [
+        "a",
+        "x"
+      ],
+      "premises": [
+        "a IN D",
+        "P(a)"
+      ],
+      "conclusion": "EXISTS x IN D: P(x)"
+    },
+    {
+      "id": "predicate.universal_modus_ponens",
+      "variables": [
+        "x",
+        "a"
+      ],
+      "premises": [
+        "FOR_ALL x IN D: P(x) -> Q(x)",
+        "a IN D",
+        "P(a)"
+      ],
+      "conclusion": "Q(a)"
+    },
+    {
+      "id": "predicate.universal_counterexample",
+      "variables": [
+        "x",
+        "a"
+      ],
+      "premises": [
+        "FOR_ALL x IN D: P(x)",
+        "a IN D",
+        "NOT P(a)"
+      ],
+      "conclusion": "CONFLICT_WITH_UNIVERSAL"
+    },
+    {
+      "id": "predicate.negated_universal",
+      "variables": [
+        "x"
+      ],
+      "premises": [
+        "NOT (FOR_ALL x IN D: P(x))"
+      ],
+      "conclusion": "EXISTS x IN D: NOT P(x)",
+      "conditions": [
+        "D is nonempty under the active semantics"
+      ]
+    },
+    {
+      "id": "predicate.negated_existential",
+      "variables": [
+        "x"
+      ],
+      "premises": [
+        "NOT (EXISTS x IN D: P(x))"
+      ],
+      "conclusion": "FOR_ALL x IN D: NOT P(x)"
+    },
+    {
+      "id": "predicate.none_as_universal_negative",
+      "variables": [
+        "x"
+      ],
+      "premises": [
+        "NO x IN D: P(x)"
+      ],
+      "conclusion": "FOR_ALL x IN D: NOT P(x)"
+    },
+    {
+      "id": "predicate.some_as_existential",
+      "variables": [
+        "x"
+      ],
+      "premises": [
+        "SOME x IN D: P(x)"
+      ],
+      "conclusion": "EXISTS x IN D: P(x)"
+    }
+  ],
+  "guards": [
+    {
+      "id": "guard.universal_existential_import",
+      "premises": [
+        "FOR_ALL x IN D: P(x)"
+      ],
+      "forbidden_conclusion": "EXISTS x IN D: P(x)",
+      "reason": "A universal statement alone does not establish that the domain contains a P-object."
+    },
+    {
+      "id": "guard.existential_to_universal",
+      "premises": [
+        "EXISTS x IN D: P(x)"
+      ],
+      "forbidden_conclusion": "FOR_ALL x IN D: P(x)",
+      "reason": "One or more witnesses do not establish a universal."
+    },
+    {
+      "id": "guard.existential_witness_identity",
+      "premises": [
+        "EXISTS x IN D: P(x)"
+      ],
+      "forbidden_conclusion": "P(a)",
+      "reason": "An existential claim does not identify a particular witness unless evidence binds it."
+    },
+    {
+      "id": "guard.quantifier_reversal",
+      "premises": [
+        "FOR_ALL x: EXISTS y: R(x,y)"
+      ],
+      "forbidden_conclusion": "EXISTS y: FOR_ALL x: R(x,y)",
+      "reason": "Each x may have a different y; quantifier order changes meaning."
+    },
+    {
+      "id": "guard.scope_shift",
+      "premises": [
+        "FOR_ALL x: P(x) -> Q(x)"
+      ],
+      "forbidden_conclusion": "(FOR_ALL x: P(x)) -> (FOR_ALL x: Q(x))",
+      "reason": "This transformation can be misleading without explicit domain/existence conditions and must not be performed as a generic scope rewrite."
+    },
+    {
+      "id": "guard.unbound_variable_conclusion",
+      "premises": [
+        "P(a)"
+      ],
+      "forbidden_conclusion": "Q(x)",
+      "reason": "A conclusion may not introduce an unbound variable with no rule binding."
+    },
+    {
+      "id": "guard.domain_leakage",
+      "premises": [
+        "FOR_ALL x IN D1: P(x)"
+      ],
+      "forbidden_conclusion": "FOR_ALL x IN D2: P(x)",
+      "reason": "Quantified claims do not silently transfer between domains/scopes."
+    },
+    {
+      "id": "guard.some_not_most",
+      "premises": [
+        "SOME x IN D: P(x)"
+      ],
+      "forbidden_conclusion": "MOST x IN D: P(x)",
+      "reason": "Existence provides no majority/frequency claim."
+    },
+    {
+      "id": "guard.some_not_all",
+      "premises": [
+        "SOME x IN D: P(x)"
+      ],
+      "forbidden_conclusion": "ALL x IN D: P(x)",
+      "reason": "Existential support is not universal support."
+    }
+  ],
+  "invariants": [
+    "Every quantifier has an explicit or recoverable domain/scope.",
+    "Universal claims require counterexample-sensitive reasoning.",
+    "Existential claims require at least one witness but do not identify a witness unless bound.",
+    "Quantifier order is semantically significant.",
+    "All does not imply existence unless existence/domain nonemptiness is separately established.",
+    "Some means at least one, not most and not all.",
+    "No means universal negation within the stated domain.",
+    "Free variables may not enter authoritative or candidate conclusions accidentally.",
+    "Bindings preserve argument roles; swapping predicate arguments is not licensed by quantification.",
+    "Formal derivability remains separate from empirical truth and authority."
+  ],
+  "provenance": {
+    "authoring_basis": "Standard first-order predicate and quantifier logic, constrained for bounded inspectable Lantern inference.",
+    "review_requirement": "Owner/project review before CORE activation."
+  }
+}
