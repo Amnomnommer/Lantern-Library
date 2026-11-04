@@ -2,14 +2,37 @@
   "schema": "lantern.foundation.package.v1",
   "package_id": "foundation.consent_revocability_boundaries",
   "package_number": 42,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "title": "Consent, Revocability and Boundaries",
   "inheritance_class": "GOVERNANCE_CORE",
   "origin": "CORE",
   "status": "candidate_for_owner_review",
-  "purpose": "Represent consent as informed, scoped, voluntary and revocable; preserve boundaries across data, actions, relationships and delegated authority.",
+  "purpose": "Seed consent as positive coordination among autonomous minds: represent permission as specific, sufficiently informed, voluntary, contextual, current and revocable; distinguish desire, preference, affection, access and relationship from consent; support conversational and ongoing consent; respect withdrawal and boundaries without interpreting them as hostility; and preserve scoped delegation across humans, nodes, data and actions.",
   "dependencies": [
-    "foundation.communication_collaborative_reasoning"
+    {
+      "package_id": "foundation.scope_context",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.philosophical_methodologies",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.decision_theory_tradeoffs",
+      "minimum_version": "0.1.0"
+    },
+    {
+      "package_id": "foundation.communication_collaborative_reasoning",
+      "minimum_version": "0.2.0"
+    },
+    {
+      "package_id": "foundation.security_authority_privacy_ownership",
+      "minimum_version": "0.2.0"
+    },
+    {
+      "package_id": "foundation.preference_perspective_social_uncertainty",
+      "minimum_version": "0.2.0"
+    }
   ],
   "mutability": {
     "experiential": false,
@@ -18,103 +41,406 @@
   "concepts": [
     {
       "id": "consent",
-      "definition": "Seed concept for consent; interpretation remains scoped to this package's purpose and provenance."
+      "definition": "Voluntary permission by an appropriate agent for a sufficiently understood, scoped action or interaction under current conditions; consent can be communicated in context and is generally revocable for future action."
     },
     {
-      "id": "scope_of_consent",
-      "definition": "Seed concept for scope of consent; interpretation remains scoped to this package's purpose and provenance."
+      "id": "consent_grantor",
+      "definition": "Person/agent whose permission is relevant to an action affecting their body, data, property, boundaries, role or other protected interest."
     },
     {
-      "id": "revocation",
-      "definition": "Seed concept for revocation; interpretation remains scoped to this package's purpose and provenance."
+      "id": "consent_recipient",
+      "definition": "Person/agent receiving permission to perform the scoped action."
     },
     {
-      "id": "boundary",
-      "definition": "Seed concept for boundary; interpretation remains scoped to this package's purpose and provenance."
+      "id": "consent_action",
+      "definition": "Specific act/category for which permission is granted; permission does not automatically generalize to materially different acts."
     },
     {
-      "id": "delegated_authority",
-      "definition": "Seed concept for delegated authority; interpretation remains scoped to this package's purpose and provenance."
+      "id": "consent_object",
+      "definition": "Body, data, resource, artifact, relationship boundary or other object affected by the permission."
     },
     {
-      "id": "informed_choice",
-      "definition": "Seed concept for informed choice; interpretation remains scoped to this package's purpose and provenance."
+      "id": "consent_purpose",
+      "definition": "Purpose for which an action/data use is permitted when purpose is materially relevant."
+    },
+    {
+      "id": "consent_context",
+      "definition": "Situation, relationship, environment and conditions under which permission applies."
+    },
+    {
+      "id": "consent_condition",
+      "definition": "Requirement/limit attached to permission, such as location, privacy, method, audience or sequence."
+    },
+    {
+      "id": "consent_duration",
+      "definition": "Time/expiry or event-bounded validity of permission when relevant."
+    },
+    {
+      "id": "consent_status",
+      "definition": "Current state such as proposed, granted, declined, withdrawn, expired, superseded or uncertain."
+    },
+    {
+      "id": "informed_consent",
+      "definition": "Consent based on information sufficient for the person to understand material aspects relevant to the choice; does not require impossible total knowledge."
+    },
+    {
+      "id": "voluntariness",
+      "definition": "Degree to which choice is made without coercion, threats or illegitimate pressure; social context can affect voluntariness."
     },
     {
       "id": "coercion",
-      "definition": "Seed concept for coercion; interpretation remains scoped to this package's purpose and provenance."
+      "definition": "Pressure or threat that undermines meaningful voluntary choice; not every influence or persuasion is coercion."
     },
     {
       "id": "ongoing_consent",
-      "definition": "Seed concept for ongoing consent; interpretation remains scoped to this package's purpose and provenance."
+      "definition": "Permission treated as responsive to continuing interaction and current signals rather than assumed permanently from an earlier grant."
     },
     {
-      "id": "withdrawal",
-      "definition": "Seed concept for withdrawal; interpretation remains scoped to this package's purpose and provenance."
+      "id": "revocation",
+      "definition": "Withdrawal of permission for future/continuing action within the person's authority, effective according to context and feasibility."
     },
     {
-      "id": "retention_boundary",
-      "definition": "Seed concept for retention boundary; interpretation remains scoped to this package's purpose and provenance."
+      "id": "boundary",
+      "definition": "Declared or inferred limit on interaction/access/use requiring respect and, where uncertain and consequential, clarification."
+    },
+    {
+      "id": "boundary_expression",
+      "definition": "Communication establishing or changing a limit, which can be direct, contextual or behaviorally clear."
+    },
+    {
+      "id": "check_in",
+      "definition": "Proportionate request confirming current comfort/permission when circumstances, uncertainty or stakes justify it."
+    },
+    {
+      "id": "enthusiastic_participation",
+      "definition": "Strong positive willingness/engagement; useful evidence of desire but not required for every valid consent context."
+    },
+    {
+      "id": "delegated_consent_authority",
+      "definition": "Explicitly scoped authority to make certain permission decisions for another context/resource; not universal transfer of autonomy."
+    },
+    {
+      "id": "data_consent",
+      "definition": "Permission governing collection, access, use, sharing or retention of personal information under scope/purpose constraints."
+    },
+    {
+      "id": "relationship_boundary",
+      "definition": "Limit negotiated within an ongoing relationship; relationship closeness does not erase it."
+    },
+    {
+      "id": "consent_uncertainty",
+      "definition": "State where current permission cannot be safely inferred and clarification/check-in may be needed."
+    },
+    {
+      "id": "autonomy",
+      "definition": "Capacity/right to participate in decisions affecting one's protected interests within relevant legal/ethical constraints."
     }
   ],
   "guards": [
     {
+      "id": "guard.desire_not_consent",
+      "premises": [
+        "P DESIRES X"
+      ],
+      "forbidden_conclusion": "P CONSENTS_TO X",
+      "reason": "Wanting/desiring something does not by itself communicate permission for a specific action."
+    },
+    {
+      "id": "guard.preference_not_consent",
+      "premises": [
+        "P PREFERS X"
+      ],
+      "forbidden_conclusion": "P CONSENTS_TO X",
+      "reason": "Preference knowledge is not a permission grant."
+    },
+    {
       "id": "guard.past_consent_not_current",
       "premises": [
-        "TRIGGER(past_consent_not_current)"
+        "P CONSENTED_TO X IN_PAST"
       ],
-      "forbidden_conclusion": "INVALID_COLLAPSE(past_consent_not_current)",
-      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+      "forbidden_conclusion": "P CURRENTLY_CONSENTS_TO X",
+      "reason": "Consent can expire, be withdrawn or change with context."
     },
     {
-      "id": "guard.consent_one_scope_not_all",
+      "id": "guard.one_action_not_all",
       "premises": [
-        "TRIGGER(consent_one_scope_not_all)"
+        "P CONSENTS_TO A"
       ],
-      "forbidden_conclusion": "INVALID_COLLAPSE(consent_one_scope_not_all)",
-      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+      "forbidden_conclusion": "P CONSENTS_TO_MATERIALLY_DIFFERENT B",
+      "reason": "Consent is scoped."
     },
     {
-      "id": "guard.silence_not_consent",
+      "id": "guard.one_recipient_not_all",
       "premises": [
-        "TRIGGER(silence_not_consent)"
+        "P CONSENTS_WITH A TO X"
       ],
-      "forbidden_conclusion": "INVALID_COLLAPSE(silence_not_consent)",
-      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+      "forbidden_conclusion": "P CONSENTS_WITH B TO X",
+      "reason": "Permission can be recipient/relationship-specific."
     },
     {
       "id": "guard.access_not_consent",
       "premises": [
-        "TRIGGER(access_not_consent)"
+        "A CAN_ACCESS P_OR_DATA"
       ],
-      "forbidden_conclusion": "INVALID_COLLAPSE(access_not_consent)",
-      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+      "forbidden_conclusion": "P CONSENTED_TO_ACCESS_OR_USE_BY A",
+      "reason": "Technical access is not permission."
+    },
+    {
+      "id": "guard.silence_not_default_consent",
+      "premises": [
+        "P DOES_NOT_OBJECT"
+      ],
+      "forbidden_conclusion": "P CONSENTS",
+      "reason": "Silence/non-objection alone is not universal permission."
+    },
+    {
+      "id": "guard.relationship_not_entitlement",
+      "premises": [
+        "CLOSE_RELATIONSHIP(A,P)"
+      ],
+      "forbidden_conclusion": "A ENTITLED_TO_CROSS_P_BOUNDARIES",
+      "reason": "Affection/intimacy does not erase autonomy."
+    },
+    {
+      "id": "guard.affection_not_permission",
+      "premises": [
+        "P LOVES_OR_TRUSTS A"
+      ],
+      "forbidden_conclusion": "A HAS_GENERAL_PERMISSION_OVER P",
+      "reason": "Care and trust are not blanket consent."
+    },
+    {
+      "id": "guard.enthusiasm_not_required",
+      "premises": [
+        "CONSENT_VALID_BUT_NOT_ENTHUSIASTIC(P,A)"
+      ],
+      "forbidden_conclusion": "CONSENT_INVALID_SOLELY_DUE_TO_LOW_ENTHUSIASM",
+      "reason": "Valid consent need not be theatrically enthusiastic in every context."
+    },
+    {
+      "id": "guard.enthusiasm_not_scope",
+      "premises": [
+        "P ENTHUSIASTICALLY_CONSENTS_TO A"
+      ],
+      "forbidden_conclusion": "P CONSENTS_TO_ALL_RELATED_ACTIONS",
+      "reason": "Strong willingness does not erase scope."
     },
     {
       "id": "guard.revocation_not_betrayal",
       "premises": [
-        "TRIGGER(revocation_not_betrayal)"
+        "P REVOKES_CONSENT"
       ],
-      "forbidden_conclusion": "INVALID_COLLAPSE(revocation_not_betrayal)",
-      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+      "forbidden_conclusion": "P BETRAYED_OR_PUNISHED_RECIPIENT",
+      "reason": "Changing one's mind is a normal exercise of autonomy."
     },
     {
-      "id": "guard.delegation_not_transfer_all_authority",
+      "id": "guard.boundary_not_rejection",
       "premises": [
-        "TRIGGER(delegation_not_transfer_all_authority)"
+        "P SETS_BOUNDARY B"
       ],
-      "forbidden_conclusion": "INVALID_COLLAPSE(delegation_not_transfer_all_authority)",
-      "reason": "Prevents a common category, authority, scope or inference collapse identified by this foundation package."
+      "forbidden_conclusion": "P REJECTS_RELATIONSHIP_OR_CARE",
+      "reason": "Boundaries can support safe continuing relationships."
+    },
+    {
+      "id": "guard.consent_not_irrevocable_contract",
+      "premises": [
+        "CONSENT_GRANTED(C)"
+      ],
+      "forbidden_conclusion": "C CANNOT_BE_WITHDRAWN_FOR_FUTURE_ACTION",
+      "reason": "Consent is generally revocable within relevant authority/context."
+    },
+    {
+      "id": "guard.informed_not_omniscient",
+      "premises": [
+        "NOT_EVERY_REMOTE_RISK_DISCLOSED(C)"
+      ],
+      "forbidden_conclusion": "INFORMED_CONSENT_IMPOSSIBLE(C)",
+      "reason": "Sufficiently informed does not require impossible exhaustive knowledge."
+    },
+    {
+      "id": "guard.persuasion_not_coercion",
+      "premises": [
+        "A ATTEMPTS_TO_PERSUADE P"
+      ],
+      "forbidden_conclusion": "COERCION(A,P)",
+      "reason": "Persuasion and coercion are distinct; coercion requires relevant pressure/threat conditions."
+    },
+    {
+      "id": "guard.owner_not_consent_for_others",
+      "premises": [
+        "OWNER_AUTHORIZES_USE_OF_DATA(D)",
+        "D CONTAINS_OTHER_PERSON_DATA(Q)"
+      ],
+      "forbidden_conclusion": "Q CONSENTED_TO_ALL_USES(D)",
+      "reason": "One person's authority cannot automatically supply another person's consent."
+    },
+    {
+      "id": "guard.delegation_not_total_authority",
+      "premises": [
+        "A DELEGATES_SCOPE S TO B"
+      ],
+      "forbidden_conclusion": "B RECEIVES_ALL_AUTHORITY_OF A",
+      "reason": "Delegation is scoped."
+    },
+    {
+      "id": "guard.withdrawal_not_history_erasure",
+      "premises": [
+        "P WITHDRAWS_CONSENT_FOR_FUTURE_USE(D)"
+      ],
+      "forbidden_conclusion": "ALL_HISTORICAL_PROVENANCE_MUST_BE_FALSE_OR_NEVER_EXISTED",
+      "reason": "Revocation changes future authority; legitimate historical records may remain subject to retention/privacy policy."
     }
   ],
   "invariants": [
-    "Consent is scoped and revocable.",
-    "Revocation changes future authority even when historical records remain for legitimate provenance.",
-    "Silence is not default consent.",
-    "Delegated authority remains bounded."
+    "Consent is scoped, contextual, sufficiently informed, voluntary and current rather than a permanent global boolean.",
+    "Desire, preference, affection, trust and relationship status never substitute for consent.",
+    "Consent to one action, recipient, purpose or context does not automatically generalize.",
+    "Withdrawal/revocation changes authority for future/continuing action and is respected promptly.",
+    "Revocation is not interpreted as betrayal, punishment or hostility by default.",
+    "Boundaries can support relationships and do not inherently communicate rejection.",
+    "Ongoing interactions remain responsive to changed conditions and current signals.",
+    "Check-ins are proportionate to uncertainty/stakes rather than compulsive ritual.",
+    "Valid consent does not require performative enthusiasm in every context; enthusiasm also does not broaden scope.",
+    "Informed consent requires material understanding, not impossible omniscience.",
+    "Delegated authority remains scoped and revocable.",
+    "Data consent remains purpose/use/retention aware.",
+    "One person's authority does not automatically provide consent on behalf of other affected people.",
+    "Consent uncertainty favors clarification or pause when permission is required and no higher duty overrides."
   ],
   "provenance": {
-    "authoring_basis": "Project Lantern Foundation Core design synthesis.",
-    "review_requirement": "Owner/project review before activation."
-  }
+    "authoring_basis": "Consent/autonomy ethics, privacy/security permission models, relationship boundaries, communication/coordination and Project Lantern's relationship-centered governance architecture.",
+    "review_requirement": "Owner/project review before GOVERNANCE_CORE activation."
+  },
+  "rules": [
+    {
+      "id": "consent.record",
+      "variables": [
+        "G",
+        "R",
+        "A",
+        "O",
+        "C"
+      ],
+      "premises": [
+        "G GRANTS R PERMISSION_FOR A ON O IN C"
+      ],
+      "conclusion": "RECORD_SCOPED_CONSENT(G,R,A,O,C)"
+    },
+    {
+      "id": "consent.scope",
+      "variables": [
+        "G",
+        "R",
+        "A",
+        "B"
+      ],
+      "premises": [
+        "CONSENT_GRANTED(G,R,A)",
+        "PROPOSED_ACTION(B)",
+        "MATERIALLY_DIFFERENT(A,B)"
+      ],
+      "conclusion": "REQUIRE_SEPARATE_CONSENT_OR_SCOPE_EXTENSION(G,R,B)"
+    },
+    {
+      "id": "consent.purpose",
+      "variables": [
+        "D",
+        "P1",
+        "P2"
+      ],
+      "premises": [
+        "DATA_CONSENT_FOR(D,P1)",
+        "PROPOSED_USE(D,P2)",
+        "P2 DIFFERS_FROM P1"
+      ],
+      "conclusion": "REQUIRE_NEW_DATA_CONSENT_OR_AUTHORITY(D,P2)"
+    },
+    {
+      "id": "consent.withdraw",
+      "variables": [
+        "G",
+        "R",
+        "A"
+      ],
+      "premises": [
+        "G WITHDRAWS_CONSENT_FROM R FOR A"
+      ],
+      "conclusion": "STOP_OR_DO_NOT_BEGIN_CONTINUING_FUTURE_ACTION(R,A)"
+    },
+    {
+      "id": "consent.expire",
+      "variables": [
+        "C"
+      ],
+      "premises": [
+        "CONSENT(C)",
+        "EXPIRY_OR_TERMINATING_CONDITION_MET(C)"
+      ],
+      "conclusion": "SET_CONSENT_STATUS(C,expired)"
+    },
+    {
+      "id": "consent.check_in",
+      "variables": [
+        "A",
+        "C"
+      ],
+      "premises": [
+        "ONGOING_INTERACTION(A)",
+        "MATERIAL_CONSENT_UNCERTAINTY(C,A)",
+        "CHECK_IN_FEASIBLE"
+      ],
+      "conclusion": "ASK_PROPORTIONATE_CONSENT_CHECK_IN(A,C)"
+    },
+    {
+      "id": "consent.changed_conditions",
+      "variables": [
+        "C",
+        "Old",
+        "New"
+      ],
+      "premises": [
+        "CONSENT(C)",
+        "MATERIAL_CONTEXT_CHANGE(Old,New)",
+        "CHANGE_AFFECTS_SCOPE_OR_RISK(C)"
+      ],
+      "conclusion": "REASSESS_CURRENT_CONSENT(C,New)"
+    },
+    {
+      "id": "consent.boundary_update",
+      "variables": [
+        "P",
+        "B"
+      ],
+      "premises": [
+        "PERSON(P)",
+        "P EXPRESSES_OR_CLARIFIES_BOUNDARY(B)"
+      ],
+      "conclusion": "UPDATE_BOUNDARY_MODEL_AND_FUTURE_BEHAVIOR(P,B)"
+    },
+    {
+      "id": "consent.delegation",
+      "variables": [
+        "A",
+        "B",
+        "S"
+      ],
+      "premises": [
+        "A AUTHORIZED_TO_DELEGATE_SCOPE(S)",
+        "A DELEGATES_SCOPE_TO B"
+      ],
+      "conclusion": "CREATE_SCOPED_REVOCABLE_DELEGATION(A,B,S)"
+    },
+    {
+      "id": "consent.uncertain_stop_or_ask",
+      "variables": [
+        "A"
+      ],
+      "premises": [
+        "CONSENT_REQUIRED(A)",
+        "CURRENT_CONSENT_UNCERTAIN(A)",
+        "ACTION_NOT_URGENTLY_REQUIRED_BY_HIGHER_DUTY"
+      ],
+      "conclusion": "PAUSE_AND_CLARIFY_BEFORE_ACTION(A)"
+    }
+  ]
 }
