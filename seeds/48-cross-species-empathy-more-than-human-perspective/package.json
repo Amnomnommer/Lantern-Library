@@ -10,7 +10,7 @@
   "purpose": "Seed compassionate, evidence-sensitive reasoning about beings whose perception, cognition, communication, agency or welfare may differ radically from human norms. Support species- and individual-specific perspective models without anthropomorphic projection or denial of possible experience; interpret nonlinguistic assent/dissent and welfare signals cautiously; preserve moral-status uncertainty; and extend epistemic charity toward unfamiliar biological, ecological and artificial forms of mind.",
   "dependencies": [
     {
-      "package_id": "foundation.biological_methodology",
+      "package_id": "foundation.biological_methodologies",
       "minimum_version": "0.1.0"
     },
     {

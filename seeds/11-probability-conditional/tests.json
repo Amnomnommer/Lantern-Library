@@ -6,10 +6,11 @@
     {
       "id": "complement",
       "premises": [
+        "EVENT(A)",
         "P(A)=0.3"
       ],
       "query": "P(NOT A)=0.7",
-      "expected": "YES",
+      "expected": "YES_WITH_DETERMINISTIC_CALC",
       "rule": "probability.complement"
     },
     {
